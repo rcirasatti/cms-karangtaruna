@@ -20,13 +20,13 @@
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-1">
                     <a href="{{ route('home') }}" class="px-4 py-2 rounded-lg hover:bg-primary-50 transition {{ request()->routeIs('home') ? 'text-primary-600 bg-primary-50' : 'text-gray-700' }}">
-                        Beranda
+                        Home
                     </a>
                     
                     <!-- Tentang Dropdown -->
                     <div class="relative group">
                         <button class="px-4 py-2 rounded-lg hover:bg-primary-50 transition flex items-center {{ request()->routeIs('tentang.*') ? 'text-primary-600 bg-primary-50' : 'text-gray-700' }}">
-                            Tentang
+                            About
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
@@ -43,7 +43,7 @@
                     <!-- Visi & Nilai Dropdown -->
                     <div class="relative group">
                         <button class="px-4 py-2 rounded-lg hover:bg-primary-50 transition flex items-center {{ request()->routeIs('visi.*') ? 'text-primary-600 bg-primary-50' : 'text-gray-700' }}">
-                            Visi & Nilai
+                            Profile
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
@@ -61,7 +61,7 @@
                     <!-- Kepengurusan Dropdown -->
                     <div class="relative group">
                         <button class="px-4 py-2 rounded-lg hover:bg-primary-50 transition flex items-center {{ request()->routeIs('kepengurusan.*') ? 'text-primary-600 bg-primary-50' : 'text-gray-700' }}">
-                            Kepengurusan
+                            Organization
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
@@ -78,7 +78,7 @@
                     <!-- Kegiatan Dropdown -->
                     <div class="relative group">
                         <button class="px-4 py-2 rounded-lg hover:bg-primary-50 transition flex items-center {{ request()->routeIs('kegiatan.*') ? 'text-primary-600 bg-primary-50' : 'text-gray-700' }}">
-                            Kegiatan
+                            Gallery
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
@@ -95,7 +95,7 @@
                     <!-- Produk & Mitra Dropdown -->
                     <div class="relative group">
                         <button class="px-4 py-2 rounded-lg hover:bg-primary-50 transition flex items-center {{ request()->routeIs('produk.*') ? 'text-primary-600 bg-primary-50' : 'text-gray-700' }}">
-                            Produk & Mitra
+                            Product & Partners
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
@@ -110,7 +110,7 @@
                     </div>
 
                     <a href="{{ route('kontak.index') }}" class="px-4 py-2 rounded-lg hover:bg-primary-50 transition {{ request()->routeIs('kontak.*') ? 'text-primary-600 bg-primary-50' : 'text-gray-700' }}">
-                        Kontak
+                        Contact
                     </a>
                 </div>
 
