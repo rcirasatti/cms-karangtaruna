@@ -1,30 +1,22 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./resources/**/*.blade.php",
-    "./resources/**/*.js",
-    "./resources/**/*.vue",
-  ],
-  theme: {
-    extend: {
-      colors: {
-        primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
+    content: [
+        "./resources/**/*.blade.php",
+        "./resources/**/*.js",
+        "./resources/**/*.vue",
+    ],
+    theme: {
+        extend: {
+            colors: {
+                primary: "#134686",
+                secondary: "#EBCB90",
+                accent: "#FFF0CE",
+                color_bg: "#F3F2EC",
+            },
         },
-      },
     },
-  },
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/typography'),
-  ],
-}
+    plugins: [
+        require("@tailwindcss/forms"),
+        require("@tailwindcss/typography"),
+    ],
+};
