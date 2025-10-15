@@ -10,7 +10,7 @@
 
 <body class="bg-gray-50">
     <!-- Navbar -->
-    <nav class="bg-primary-600 shadow-lg sticky top-0 z-50">
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
                 <!-- Logo -->
@@ -20,21 +20,21 @@
                     <div class="text-left">
                         <span class="text-xl font-Montserrat font-bold text-white">Karang Taruna</span>
                         <br>
-                        <span class="text-sm text-primary-100">Kelurahan Tembalang</span>
+                        <span class="font-italic text-sm text-[#EBCB90]">Kelurahan Tembalang</span>
                     </div>
                 </div>
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-1">
                     <a href="{{ route('home') }}"
-                        class="px-4 py-2 rounded-lg hover:bg-primary-700 transition {{ request()->routeIs('home') ? 'text-white bg-primary-700 font-semibold' : 'text-white' }}">
+                        class="px-4 py-2 rounded-lg hover:text-primary-800 transition {{ request()->routeIs('home') ? 'text-white bg-primary-700 font-semibold' : 'text-white' }}">
                         Home
                     </a>
 
                     <!-- Tentang Dropdown -->
                     <div class="relative group">
                         <button
-                            class="px-4 py-2 rounded-lg hover:bg-primary-700 transition flex items-center {{ request()->routeIs('tentang.*') ? 'text-white bg-primary-700 font-semibold' : 'text-white' }}">
+                            class="px-4 py-2 rounded-lg hover:text-primary-800 transition flex items-center {{ request()->routeIs('tentang.*') ? 'text-white bg-primary-700 font-semibold' : 'text-white' }}">
                             About
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -60,7 +60,7 @@
                     <!-- Visi & Nilai Dropdown -->
                     <div class="relative group">
                         <button
-                            class="px-4 py-2 rounded-lg hover:bg-primary-700 transition flex items-center {{ request()->routeIs('visi.*') ? 'text-white bg-primary-700 font-semibold' : 'text-white' }}">
+                            class="px-4 py-2 rounded-lg hover:text-primary-800 transition flex items-center {{ request()->routeIs('visi.*') ? 'text-white bg-primary-700 font-semibold' : 'text-white' }}">
                             Profile
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -87,7 +87,7 @@
                     <!-- Kepengurusan Dropdown -->
                     <div class="relative group">
                         <button
-                            class="px-4 py-2 rounded-lg hover:bg-primary-700 transition flex items-center {{ request()->routeIs('kepengurusan.*') ? 'text-white bg-primary-700 font-semibold' : 'text-white' }}">
+                            class="px-4 py-2 rounded-lg hover:text-primary-800 transition flex items-center {{ request()->routeIs('kepengurusan.*') ? 'text-white bg-primary-700 font-semibold' : 'text-white' }}">
                             Organization
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -113,7 +113,7 @@
                     <!-- Kegiatan Dropdown -->
                     <div class="relative group">
                         <button
-                            class="px-4 py-2 rounded-lg hover:bg-primary-700 transition flex items-center {{ request()->routeIs('kegiatan.*') ? 'text-white bg-primary-700 font-semibold' : 'text-white' }}">
+                            class="px-4 py-2 rounded-lg hover:text-primary-800 transition flex items-center {{ request()->routeIs('kegiatan.*') ? 'text-white bg-primary-700 font-semibold' : 'text-white' }}">
                             Gallery
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -138,7 +138,7 @@
                     <!-- Produk & Mitra Dropdown -->
                     <div class="relative group">
                         <button
-                            class="px-4 py-2 rounded-lg hover:bg-primary-700 transition flex items-center {{ request()->routeIs('produk.*') ? 'text-white bg-primary-700 font-semibold' : 'text-white' }}">
+                            class="px-4 py-2 rounded-lg hover:text-primary-800 transition flex items-center {{ request()->routeIs('produk.*') ? 'text-white bg-primary-700 font-semibold' : 'text-white' }}">
                             Product & Partners
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -160,7 +160,7 @@
                     </div>
 
                     <a href="{{ route('kontak.index') }}"
-                        class="px-4 py-2 rounded-lg hover:bg-primary-700 transition {{ request()->routeIs('kontak.*') ? 'text-white bg-primary-700 font-semibold' : 'text-white' }}">
+                        class="px-4 py-2 rounded-lg hover:text-primary-800 transition {{ request()->routeIs('kontak.*') ? 'text-white bg-primary-700 font-semibold' : 'text-white' }}">
                         Contact
                     </a>
                 </div>
@@ -193,7 +193,8 @@
                             class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Logo Karang
                             Taruna</a>
                         <a href="{{ route('tentang.filosofi') }}"
-                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Filosofi Logo</a>
+                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Filosofi
+                            Logo</a>
                         <a href="{{ route('tentang.profil') }}"
                             class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Profil
                             Organisasi</a>
@@ -237,9 +238,11 @@
                             class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Struktur
                             Pengurus</a>
                         <a href="{{ route('kepengurusan.tugas') }}"
-                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Tugas Pengurus</a>
+                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Tugas
+                            Pengurus</a>
                         <a href="{{ route('kepengurusan.tokoh') }}"
-                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Tokoh Utama</a>
+                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Tokoh
+                            Utama</a>
                     </div>
                 </div>
 
@@ -254,11 +257,13 @@
                     </button>
                     <div class="mobile-dropdown-content hidden pl-4">
                         <a href="{{ route('kegiatan.galeri') }}"
-                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Galeri Foto</a>
+                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Galeri
+                            Foto</a>
                         <a href="{{ route('kegiatan.video') }}"
                             class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Video/Dokumenter</a>
                         <a href="{{ route('kegiatan.berita') }}"
-                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Arsip Berita</a>
+                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Arsip
+                            Berita</a>
                     </div>
                 </div>
 
@@ -273,7 +278,8 @@
                     </button>
                     <div class="mobile-dropdown-content hidden pl-4">
                         <a href="{{ route('produk.list') }}"
-                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Daftar Produk</a>
+                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Daftar
+                            Produk</a>
                         <a href="{{ route('produk.mitra') }}"
                             class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Mitra/UMKM</a>
                         <a href="{{ route('produk.testimoni') }}"
@@ -330,7 +336,26 @@
     </footer>
 
     <script>
-        // Mobile Menu Toggle
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 50) {
+                // Navbar dengan background saat scroll
+                navbar.classList.add('bg-primary-600', 'shadow-lg');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                // Navbar transparan di atas
+                navbar.classList.remove('bg-primary-600', 'shadow-lg');
+                navbar.classList.add('bg-transparent');
+            }
+        });
+
+        // Set initial state
+        if (window.scrollY > 50) {
+            navbar.classList.add('bg-primary-600', 'shadow-lg');
+        } else {
+            navbar.classList.add('bg-transparent');
+        }
         document.getElementById('mobile-menu-button').addEventListener('click', function () {
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
