@@ -53,7 +53,7 @@
                         <div class="flex items-center gap-4 mb-4">
                             <div class="w-1.5 h-16 bg-gradient-to-b from-primary-500 to-primary-700 rounded-full"></div>
                             <div>
-                                <p class="text-primary-800 font-semibold uppercase tracking-wider text-sm mb-1">Philosophy</p>
+                                <p class="text-primary-100 font-semibold uppercase tracking-wider text-sm mb-1">Philosophy</p>
                                 <h2 class="text-4xl lg:text-5xl font-bold text-white">Filosofi Logo</h2>
                             </div>
                         </div>
@@ -101,33 +101,33 @@
                                     <div class="flex-shrink-0">
                                         @switch($item->icon)
                                             @case('fire')
-                                                <svg class="w-20 h-20 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+                                                <svg class="w-20 h-20 text-secondary" fill="currentColor" viewBox="0 0 24 24">
                                                     <path d="M12 2c1.5 2 4 4.5 4 7.5 0 2.5-1.5 4.5-4 4.5s-4-2-4-4.5c0-3 2.5-5.5 4-7.5zm-1 11c-.8 0-1.5.7-1.5 1.5S10.2 16 11 16s1.5-.7 1.5-1.5S11.8 13 11 13zm6-3c0-1.8-.9-3.5-2.4-4.5.3.8.4 1.6.4 2.5 0 3.3-2.7 6-6 6s-6-2.7-6-6c0-.9.1-1.7.4-2.5C2.9 6.5 2 8.2 2 10c0 4.4 3.6 8 8 8s8-3.6 8-8c0-1-.2-2-.6-2.9.4.9.6 1.9.6 2.9z"/>
                                                 </svg>
                                                 @break
                                             @case('sun')
-                                                <svg class="w-20 h-20 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+                                                <svg class="w-20 h-20 text-secondary" fill="currentColor" viewBox="0 0 24 24">
                                                     <path d="M12 18a6 6 0 100-12 6 6 0 000 12zm0-2a4 4 0 110-8 4 4 0 010 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/>
                                                 </svg>
                                                 @break
                                             @case('leaf')
-                                                <svg class="w-20 h-20 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+                                                <svg class="w-20 h-20 text-secondary" fill="currentColor" viewBox="0 0 24 24">
                                                     <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.66-1.89C6 20 6 20 7 19c1-1 4-4 4-6 0-1.66 1.34-3 3-3s3 1.34 3 3c0 2-3 5-4 6-1 1-1 1-1.11 1.11l.66 1.89 1.89-.66C19.1 16.17 17 10 8 8c2.82 0 5.11 2.29 5.11 5.11 0 .39-.06.79-.18 1.16C15.05 14.1 17 12.19 17 10c0-2.21-1.79-4-4-4zm-3 8.5c.28 0 .5.22.5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5z"/>
                                                 </svg>
                                                 @break
                                             @case('circle')
-                                                <svg class="w-20 h-20 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+                                                <svg class="w-20 h-20 text-secondary" fill="currentColor" viewBox="0 0 24 24">
                                                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7z"/>
                                                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
                                                 </svg>
                                                 @break
                                             @case('flower')
-                                                <svg class="w-20 h-20 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+                                                <svg class="w-20 h-20 text-secondary" fill="currentColor" viewBox="0 0 24 24">
                                                     <path d="M12 2C9.24 2 7 4.24 7 7c0 1.28.48 2.44 1.27 3.32C7.48 11.2 7 12.36 7 13.64c0 2.76 2.24 5 5 5s5-2.24 5-5c0-1.28-.48-2.44-1.27-3.32C16.52 9.44 17 8.28 17 7c0-2.76-2.24-5-5-5zm0 14c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm0-10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
                                                 </svg>
                                                 @break
                                             @default
-                                                <svg class="w-20 h-20 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+                                                <svg class="w-20 h-20 text-secondary" fill="currentColor" viewBox="0 0 24 24">
                                                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                                                 </svg>
                                         @endswitch
@@ -135,7 +135,7 @@
                                     
                                     <!-- Right: Title and Description -->
                                     <div class="flex-1">
-                                        <h3 class="text-xl font-bold text-gray-900 mb-3 uppercase tracking-wide">
+                                        <h3 class="text-xl font-bold text-primary-600 mb-3 uppercase tracking-wide">
                                             {{ $item->title }}
                                         </h3>
                                         <p class="text-gray-600 leading-relaxed text-justify">
