@@ -6,14 +6,14 @@
 
     @if($profile)
         <!-- Logo Section with Modern Design -->
-        <div class="mx-auto px-20 py-20 bg-primary-600 w-full">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <!-- Logo Display -->
+        <div class="mx-auto px-20 py-20 bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 w-full">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -mr-32 -mt-32"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-white opacity-5 rounded-full -ml-48 -mb-48"></div>
+            <div class="grid lg:grid-cols-2 gap-16 items-center mt-16">
                 <div class="relative">
                     <div class="absolute">
                     </div>
-                    <div
-                        class="relative bg-white rounded-3xl shadow-2xl p-12 flex items-center justify-center min-h-[500px] mt-16">
+                    
                         @if($profile->logo_path)
                             <div class="transform hover:scale-105 transition duration-500">
                                 <img src="{{ asset('storage/' . $profile->logo_path) }}" alt="Logo {{ $profile->nama_organisasi }}"
@@ -36,7 +36,6 @@
                                 <p class="text-gray-300 text-sm mt-2">Segera hadir</p>
                             </div>
                         @endif
-                    </div>
 
                     <!-- Decorative Elements -->
                     <div
@@ -92,7 +91,7 @@
 
         <!-- Additional Info Section - Horizontal Layout with Icon Left -->
         <div class="bg-white py-16">
-            <div class="container mx-auto px-4">
+            <div class="mx-auto px-4">
                 <div class="max-w-5xl mx-auto">
                     @if($filosofiItems && $filosofiItems->count() > 0)
                         <div class="space-y-6">

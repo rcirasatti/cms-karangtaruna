@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -7,9 +7,10 @@
 
 @theme {
     /* Fonts */
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
-    
+    --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
+
     /* Custom Colors */
     --color-primary-50: #f0f9ff;
     --color-primary-100: #e0f2fe;
@@ -21,117 +22,24 @@
     --color-primary-700: #0e3461;
     --color-primary-800: #0a2645;
     --color-primary-900: #071a30;
-    
-    --color-secondary: #EBCB90;
-    --color-accent: #FFF0CE;
-    --color-bg: #F3F2EC;
+
+    --color-secondary: #ebcb90;
+    --color-accent: #fff0ce;
+    --color-bg: #f3f2ec;
 }
 
 @layer utilities {
     /* Utility: translucent primary background with blur */
     .bg-primary-trans {
-        /* fallback using explicit rgba matching --color-primary-500 (tweak as needed) */
-        background-color: rgba(14, 165, 233, 0.9); /* Sesuaikan dengan --color-primary-600 */
-        /* If you prefer to use the CSS custom property, uncomment below and adjust alpha as needed */
-        /* background-color: color-mix(in srgb, var(--color-primary-600) 90%, transparent); */
+       
+        background-color: rgba(
+            14,
+            165,
+            233,
+            0.9
+        ); 
         -webkit-backdrop-filter: blur(8px);
         backdrop-filter: blur(8px);
-    }
-}
-
-@layer components {
-    /* Modern Pagination Design (moved from produk view) */
-    nav[role="navigation"] {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 0.375rem;
-        margin-top: 2rem;
-        margin-bottom: 3rem;
-    }
-
-    nav[role="navigation"] a,
-    nav[role="navigation"] span {
-        min-width: 2.75rem;
-        height: 2.75rem;
-        padding: 0 0.75rem;
-        border-radius: 0.75rem;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 600;
-        font-size: 0.9375rem;
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        text-decoration: none;
-    }
-
-    /* Default state */
-    nav[role="navigation"] a {
-        background: white;
-        color: #374151;
-        border: 2px solid #e5e7eb;
-        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    }
-
-    /* Hover state */
-    nav[role="navigation"] a:hover {
-        background: linear-gradient(135deg, #134686 0%, #1a5a9e 100%);
-        color: white;
-        border-color: #134686;
-        box-shadow: 0 4px 12px rgba(19, 70, 134, 0.25);
-        transform: translateY(-2px) scale(1.05);
-    }
-
-    /* Active page */
-    nav[role="navigation"] span[aria-current="page"] {
-        background: linear-gradient(135deg, #134686 0%, #1a5a9e 100%);
-        color: white;
-        border: 2px solid #134686;
-        box-shadow: 0 4px 16px rgba(19, 70, 134, 0.3), 0 0 0 4px rgba(19, 70, 134, 0.1);
-        font-weight: 700;
-    }
-
-    /* Disabled buttons */
-    nav[role="navigation"] span[aria-disabled="true"] {
-        background: #f9fafb;
-        color: #d1d5db;
-        border: 2px solid #f3f4f6;
-        cursor: not-allowed;
-        opacity: 0.5;
-    }
-
-    /* Previous/Next buttons */
-    nav[role="navigation"] a[rel="prev"],
-    nav[role="navigation"] a[rel="next"] {
-        padding: 0 1rem;
-        font-weight: 700;
-    }
-
-    nav[role="navigation"] a[rel="prev"]:hover,
-    nav[role="navigation"] a[rel="next"]:hover {
-        padding-left: 1.125rem;
-        padding-right: 1.125rem;
-    }
-
-    /* Mobile responsiveness */
-    @media (max-width: 640px) {
-        nav[role="navigation"] {
-            gap: 0.25rem;
-            padding: 0.75rem;
-        }
-
-        nav[role="navigation"] a,
-        nav[role="navigation"] span {
-            min-width: 2.75rem;
-            height: 2.75rem;
-            font-size: 0.875rem;
-            padding: 0 0.75rem;
-        }
-
-        nav[role="navigation"] a[rel="prev"],
-        nav[role="navigation"] a[rel="next"] {
-            padding: 0 0.5rem;
-        }
     }
 }
 

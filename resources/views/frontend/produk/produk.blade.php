@@ -262,7 +262,7 @@
             </div>
 
             <!-- Pagination -->
-            <div class="flex justify-center mt-8 pagination-wrapper">
+            <div class="justify-center mt-8 pagination-wrapper">
                 {{ $produk->appends(['kategori' => request('kategori')])->links() }}
             </div>
         @else
