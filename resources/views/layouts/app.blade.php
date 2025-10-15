@@ -12,8 +12,7 @@
     <!-- Navbar -->
     <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
         @php
-            // If a page defines @section('navbar_transparent'), use white-friendly nav styles
-            $navTransparent = View::hasSection('navbar_transparent');
+            $navTransparent = true;
             $hoverLink = $navTransparent ? 'hover:text-white/90' : 'hover:text-primary-800';
             $activeClass = $navTransparent ? 'text-white bg-white/10 font-semibold' : 'text-white bg-primary-700 font-semibold';
             $mobileHoverBg = $navTransparent ? 'hover:bg-white/10' : 'hover:bg-primary-700';
