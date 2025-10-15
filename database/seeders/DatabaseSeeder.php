@@ -10,6 +10,7 @@ use App\Models\Kegiatan;
 use App\Models\Produk;
 use App\Models\Mitra;
 use App\Models\Kontak;
+use App\Models\FilosofiLogoItem;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -33,7 +34,7 @@ class DatabaseSeeder extends Seeder
             'legalitas' => 'SK Gubernur No. 123/2010',
             'sejarah' => 'Karang Taruna Maju Bersama didirikan pada tahun 2010 dengan tujuan memberdayakan pemuda di wilayah Jakarta Selatan. Organisasi ini lahir dari kesadaran para pemuda untuk berkontribusi dalam pembangunan masyarakat.',
             'profil_singkat' => 'Karang Taruna Maju Bersama adalah organisasi kepemudaan yang fokus pada pengembangan karakter, keterampilan, dan pemberdayaan masyarakat. Kami berkomitmen untuk menciptakan generasi muda yang berkarakter dan berprestasi.',
-            'filosofi_logo' => 'Logo Karang Taruna menggambarkan semangat pemuda yang dinamis. Warna merah melambangkan keberanian, kuning melambangkan kemakmuran, dan hijau melambangkan pertumbuhan. Lingkaran melambangkan persatuan dan kesatuan.'
+            'filosofi_logo' => 'Logo Karang Taruna menggambarkan semangat pemuda yang dinamis dan penuh makna. Warna merah melambangkan keberanian dan semangat juang para pemuda dalam menghadapi tantangan. Warna kuning melambangkan kemakmuran dan harapan cerah untuk masa depan generasi muda. Warna hijau melambangkan pertumbuhan, kesegaran, dan kehidupan yang terus berkembang. Lingkaran melambangkan persatuan, kesatuan, dan kebersamaan dalam organisasi.'
         ]);
 
         // Create Visi Misi
@@ -164,6 +165,49 @@ class DatabaseSeeder extends Seeder
             'twitter' => '@ktmajubersama',
             'youtube' => 'Karang Taruna Channel'
         ]);
+
+        // Create Filosofi Logo Items
+        $filosofiItems = [
+            [
+                'title' => 'Warna Merah',
+                'description' => 'Melambangkan keberanian, semangat juang, dan dedikasi para pemuda dalam menghadapi tantangan serta berkontribusi untuk masyarakat.',
+                'icon' => 'fire',
+                'urutan' => 1,
+                'is_active' => true
+            ],
+            [
+                'title' => 'Warna Kuning',
+                'description' => 'Melambangkan kemakmuran, harapan cerah, dan optimisme untuk masa depan generasi muda yang gemilang dan penuh prestasi.',
+                'icon' => 'sun',
+                'urutan' => 2,
+                'is_active' => true
+            ],
+            [
+                'title' => 'Warna Hijau',
+                'description' => 'Melambangkan pertumbuhan, kesegaran, kehidupan yang dinamis, serta kesinambungan pembangunan karakter pemuda yang terus berkembang.',
+                'icon' => 'leaf',
+                'urutan' => 3,
+                'is_active' => true
+            ],
+            [
+                'title' => 'Bentuk Lingkaran',
+                'description' => 'Melambangkan persatuan, kesatuan, kebersamaan, dan kekompakan dalam organisasi yang tidak terputus dan terus bersinergi.',
+                'icon' => 'circle',
+                'urutan' => 4,
+                'is_active' => true
+            ],
+            [
+                'title' => 'Simbol Bunga Teratai',
+                'description' => 'Melambangkan kesucian, ketahanan, dan kemampuan tumbuh di berbagai kondisi, mencerminkan kekuatan pemuda dalam menghadapi situasi apapun.',
+                'icon' => 'flower',
+                'urutan' => 5,
+                'is_active' => false
+            ]
+        ];
+
+        foreach ($filosofiItems as $item) {
+            FilosofiLogoItem::create($item);
+        }
     }
 }
 

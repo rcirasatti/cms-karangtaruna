@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Profile;
+use App\Models\FilosofiLogoItem;
 use Illuminate\Http\Request;
 
 class TentangController extends Controller
@@ -17,7 +18,8 @@ class TentangController extends Controller
     public function logo()
     {
         $profile = Profile::first();
-        return view('frontend.tentang.logo', compact('profile'));
+        $filosofiItems = FilosofiLogoItem::active()->ordered()->get();
+        return view('frontend.tentang.logo', compact('profile', 'filosofiItems'));
     }
 
     public function filosofiLogo()

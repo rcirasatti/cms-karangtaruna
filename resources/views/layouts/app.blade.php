@@ -53,9 +53,6 @@
                                 <a href="{{ route('tentang.logo') }}"
                                     class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Logo
                                     Karang Taruna</a>
-                                <a href="{{ route('tentang.filosofi') }}"
-                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Filosofi
-                                    Logo</a>
                                 <a href="{{ route('tentang.profil') }}"
                                     class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Profil
                                     Organisasi</a>
