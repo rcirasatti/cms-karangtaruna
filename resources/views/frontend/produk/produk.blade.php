@@ -1,10 +1,13 @@
 @extends('layouts.app')
 
+@section('navbar_transparent')
+@endsection
+
 @section('title', 'Produk UMKM - Karang Taruna')
 
 @section('content')
     <!-- Hero Section -->
-    <div class="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 text-white py-20 overflow-hidden">
+    <div class="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 text-white py-32 md:h-[420px] h-[420px] overflow-hidden">
         <!-- Decorative Elements -->
         <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -mr-32 -mt-32"></div>
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-white opacity-5 rounded-full -ml-48 -mb-48"></div>
@@ -181,8 +184,9 @@
                         <!-- Grid Produk - 3 Kolom dengan Cards Vertikal -->
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
                             @foreach ($produk as $item)
-                                <div
-                                    class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col border border-gray-100 hover:border-primary-200 transform hover:-translate-y-1">
+                                    @php $isHighlight = request('highlight') == $item->id; @endphp
+                                    <div id="produk-{{ $item->id }}"
+                                        class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col border border-gray-100 hover:border-primary-200 transform hover:-translate-y-1 {{ $isHighlight ? 'ring-4 ring-primary-300/60 scale-105' : '' }}">
                                     <!-- Gambar Produk -->
                                     <div class="relative h-40 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
                                         @if ($item->foto)
@@ -252,7 +256,7 @@
                                         <span>Pesan WhatsApp</span>
                                     </button>
                                 </div>
-                        </div>
+                                </div>
                     @endforeach
             </div>
 
@@ -304,96 +308,65 @@
         </div>
     </div>
 
-    <!-- Custom Pagination Styles -->
-    <style>
-        /* Modern Pagination Design */
-        nav[role="navigation"] {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.375rem;
-            margin-top: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        nav[role="navigation"] a,
-        nav[role="navigation"] span {
-            min-width: 2.75rem;
-            height: 2.75rem;
-            padding: 0 0.75rem;
-            border-radius: 0.75rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 0.9375rem;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            text-decoration: none;
-        }
-
-        /* Default state */
-        nav[role="navigation"] a {
-            background: white;
-            color: #374151;
-            border: 2px solid #e5e7eb;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-        }
-
-        /* Hover state */
-        nav[role="navigation"] a:hover {
-            background: linear-gradient(135deg, #134686 0%, #1a5a9e 100%);
-            color: white;
-            border-color: #134686;
-            box-shadow: 0 4px 12px rgba(19, 70, 134, 0.25);
-            transform: translateY(-2px) scale(1.05);
-        }
-
-        /* Active page */
-        nav[role="navigation"] span[aria-current="page"] {
-            background: linear-gradient(135deg, #134686 0%, #1a5a9e 100%);
-            color: white;
-            border: 2px solid #134686;
-            box-shadow: 0 4px 16px rgba(19, 70, 134, 0.3), 0 0 0 4px rgba(19, 70, 134, 0.1);
-            font-weight: 700;
-        }
-
-        /* Disabled buttons */
-        nav[role="navigation"] span[aria-disabled="true"] {
-            background: #f9fafb;
-            color: #d1d5db;
-            border: 2px solid #f3f4f6;
-            cursor: not-allowed;
-            opacity: 0.5;
-        }
-
-        /* Previous/Next buttons */
-        nav[role="navigation"] a[rel="prev"],
-        nav[role="navigation"] a[rel="next"] {
-            padding: 0 1rem;
-            font-weight: 700;
-        }
-
-        nav[role="navigation"] a[rel="prev"]:hover,
-        nav[role="navigation"] a[rel="next"]:hover {
-            padding-left: 1.125rem;
-            padding-right: 1.125rem;
-        }
-
-        /* Mobile responsiveness */
-        @media (max-width: 640px) {
-            nav[role="navigation"] {
-                gap: 0.25rem;
-            }
-
-            nav[role="navigation"] a,
-            nav[role="navigation"] span {
-                min-width: 2.5rem;
-                height: 2.5rem;
-                font-size: 0.875rem;
-            }
-        }
-    </style>
+    <!-- Pagination styles moved to resources/css/app.css -->
 @endsection
+
+@push('scripts')
+    <script>
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const highlight = params.get('highlight');
+            if (!highlight) return;
+
+            const el = document.getElementById('produk-' + highlight);
+            if (!el) return;
+
+            // Smooth scroll into center-ish view
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            // create dim overlay behind content
+            const overlay = document.createElement('div');
+            overlay.id = 'highlight-overlay';
+            overlay.style.position = 'fixed';
+            overlay.style.inset = '0';
+            overlay.style.background = 'rgba(0,0,0,0.45)';
+            overlay.style.zIndex = '45';
+            overlay.style.backdropFilter = 'blur(2px)';
+            document.body.appendChild(overlay);
+
+            // bring element above overlay and add strong shadow + ring
+            el.style.position = 'relative';
+            el.style.zIndex = '50';
+            el.classList.add('shadow-2xl');
+            el.classList.add('ring-8', 'ring-primary-500/40');
+
+            // temporary pulse animation
+            el.classList.add('transition-transform', 'duration-300');
+            el.classList.add('scale-105');
+            setTimeout(() => el.classList.remove('scale-105'), 800);
+
+            // Remove highlight after 5 seconds (5000 ms)
+            const removeHighlight = () => {
+                if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
+                el.classList.remove('shadow-2xl', 'ring-8', 'ring-primary-500/40');
+                el.style.zIndex = '';
+            };
+
+            const timeoutId = setTimeout(removeHighlight, 1500);
+
+            // dismiss early when overlay clicked or when highlighted card clicked
+            overlay.addEventListener('click', () => {
+                clearTimeout(timeoutId);
+                removeHighlight();
+            });
+
+            el.addEventListener('click', () => {
+                clearTimeout(timeoutId);
+                removeHighlight();
+            });
+        })();
+    </script>
+@endpush
 
 @section('cta')
     <!-- Call to Action -->

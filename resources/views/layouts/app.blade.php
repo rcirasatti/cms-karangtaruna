@@ -10,7 +10,14 @@
 
 <body class="bg-gray-50">
     <!-- Navbar -->
-    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
+        @php
+            // If a page defines @section('navbar_transparent'), use white-friendly nav styles
+            $navTransparent = View::hasSection('navbar_transparent');
+            $hoverLink = $navTransparent ? 'hover:text-white/90' : 'hover:text-primary-800';
+            $activeClass = $navTransparent ? 'text-white bg-white/10 font-semibold' : 'text-white bg-primary-700 font-semibold';
+            $mobileHoverBg = $navTransparent ? 'hover:bg-white/10' : 'hover:bg-primary-700';
+        @endphp
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
                 <!-- Logo -->
@@ -27,14 +34,14 @@
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-1">
                     <a href="{{ route('home') }}"
-                        class="px-4 py-2 rounded-lg hover:text-primary-800 transition {{ request()->routeIs('home') ? 'text-white bg-primary-700 font-semibold' : 'text-white' }}">
+                        class="px-4 py-2 rounded-lg {{ $hoverLink }} transition {{ request()->routeIs('home') ? $activeClass : 'text-white' }}">
                         Home
                     </a>
 
                     <!-- Tentang Dropdown -->
                     <div class="relative group">
                         <button
-                            class="px-4 py-2 rounded-lg hover:text-primary-800 transition flex items-center {{ request()->routeIs('tentang.*') ? 'text-white bg-primary-700 font-semibold' : 'text-white' }}">
+                            class="px-4 py-2 rounded-lg {{ $hoverLink }} transition flex items-center {{ request()->routeIs('tentang.*') ? $activeClass : 'text-white' }}">
                             About
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -42,16 +49,16 @@
                             </svg>
                         </button>
                         <div
-                            class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                            class="{{ $navTransparent ? 'absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-primary-900/80 ring-1 ring-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300' : 'absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300' }}">
                             <div class="py-1">
                                 <a href="{{ route('tentang.logo') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600">Logo
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Logo
                                     Karang Taruna</a>
                                 <a href="{{ route('tentang.filosofi') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600">Filosofi
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Filosofi
                                     Logo</a>
                                 <a href="{{ route('tentang.profil') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600">Profil
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Profil
                                     Organisasi</a>
                             </div>
                         </div>
@@ -60,7 +67,7 @@
                     <!-- Visi & Nilai Dropdown -->
                     <div class="relative group">
                         <button
-                            class="px-4 py-2 rounded-lg hover:text-primary-800 transition flex items-center {{ request()->routeIs('visi.*') ? 'text-white bg-primary-700 font-semibold' : 'text-white' }}">
+                            class="px-4 py-2 rounded-lg {{ $hoverLink }} transition flex items-center {{ request()->routeIs('visi.*') ? $activeClass : 'text-white' }}">
                             Profile
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -68,17 +75,17 @@
                             </svg>
                         </button>
                         <div
-                            class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                            class="{{ $navTransparent ? 'absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-primary-900/80 ring-1 ring-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300' : 'absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300' }}">
                             <div class="py-1">
                                 <a href="{{ route('visi.visi') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600">Visi</a>
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Visi</a>
                                 <a href="{{ route('visi.misi') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600">Misi</a>
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Misi</a>
                                 <a href="{{ route('visi.tujuan') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600">Tujuan
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Tujuan
                                     & Fungsi</a>
                                 <a href="{{ route('visi.nilai') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600">Nilai-Nilai
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Nilai-Nilai
                                     Dasar</a>
                             </div>
                         </div>
@@ -87,7 +94,7 @@
                     <!-- Kepengurusan Dropdown -->
                     <div class="relative group">
                         <button
-                            class="px-4 py-2 rounded-lg hover:text-primary-800 transition flex items-center {{ request()->routeIs('kepengurusan.*') ? 'text-white bg-primary-700 font-semibold' : 'text-white' }}">
+                            class="px-4 py-2 rounded-lg {{ $hoverLink }} transition flex items-center {{ request()->routeIs('kepengurusan.*') ? $activeClass : 'text-white' }}">
                             Organization
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -95,16 +102,16 @@
                             </svg>
                         </button>
                         <div
-                            class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                            class="{{ $navTransparent ? 'absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-primary-900/80 ring-1 ring-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300' : 'absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300' }}">
                             <div class="py-1">
                                 <a href="{{ route('kepengurusan.struktur') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600">Struktur
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Struktur
                                     Pengurus</a>
                                 <a href="{{ route('kepengurusan.tugas') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600">Tugas
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Tugas
                                     Pengurus</a>
                                 <a href="{{ route('kepengurusan.tokoh') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600">Tokoh
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Tokoh
                                     Utama</a>
                             </div>
                         </div>
@@ -113,7 +120,7 @@
                     <!-- Kegiatan Dropdown -->
                     <div class="relative group">
                         <button
-                            class="px-4 py-2 rounded-lg hover:text-primary-800 transition flex items-center {{ request()->routeIs('kegiatan.*') ? 'text-white bg-primary-700 font-semibold' : 'text-white' }}">
+                            class="px-4 py-2 rounded-lg {{ $hoverLink }} transition flex items-center {{ request()->routeIs('kegiatan.*') ? $activeClass : 'text-white' }}">
                             Gallery
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -121,15 +128,15 @@
                             </svg>
                         </button>
                         <div
-                            class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                            class="{{ $navTransparent ? 'absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-primary-900/80 ring-1 ring-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300' : 'absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300' }}">
                             <div class="py-1">
                                 <a href="{{ route('kegiatan.galeri') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600">Galeri
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Galeri
                                     Foto</a>
                                 <a href="{{ route('kegiatan.video') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600">Video/Dokumenter</a>
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Video/Dokumenter</a>
                                 <a href="{{ route('kegiatan.berita') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600">Arsip
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Arsip
                                     Berita</a>
                             </div>
                         </div>
@@ -138,7 +145,7 @@
                     <!-- Produk & Mitra Dropdown -->
                     <div class="relative group">
                         <button
-                            class="px-4 py-2 rounded-lg hover:text-primary-800 transition flex items-center {{ request()->routeIs('produk.*') ? 'text-white bg-primary-700 font-semibold' : 'text-white' }}">
+                            class="px-4 py-2 rounded-lg {{ $hoverLink }} transition flex items-center {{ request()->routeIs('produk.*') ? $activeClass : 'text-white' }}">
                             Product & Partners
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -146,21 +153,21 @@
                             </svg>
                         </button>
                         <div
-                            class="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                            class="{{ $navTransparent ? 'absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-primary-900/80 ring-1 ring-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300' : 'absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300' }}">
                             <div class="py-1">
                                 <a href="{{ route('produk.list') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600">Daftar
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Daftar
                                     Produk</a>
                                 <a href="{{ route('produk.mitra') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600">Mitra/UMKM</a>
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Mitra/UMKM</a>
                                 <a href="{{ route('produk.testimoni') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600">Testimoni</a>
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Testimoni</a>
                             </div>
                         </div>
                     </div>
 
                     <a href="{{ route('kontak.index') }}"
-                        class="px-4 py-2 rounded-lg hover:text-primary-800 transition {{ request()->routeIs('kontak.*') ? 'text-white bg-primary-700 font-semibold' : 'text-white' }}">
+                        class="px-4 py-2 rounded-lg {{ $hoverLink }} transition {{ request()->routeIs('kontak.*') ? $activeClass : 'text-white' }}">
                         Contact
                     </a>
                 </div>
@@ -177,11 +184,11 @@
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden pb-4">
                 <a href="{{ route('home') }}"
-                    class="block px-4 py-2 text-white hover:bg-primary-700 rounded">Beranda</a>
+                    class="block px-4 py-2 {{ $navTransparent ? 'text-white' : 'text-white' }} {{ $mobileHoverBg }} rounded">Beranda</a>
 
                 <div class="mobile-dropdown">
                     <button
-                        class="mobile-dropdown-button w-full text-left px-4 py-2 text-white hover:bg-primary-700 rounded flex justify-between items-center">
+                        class="mobile-dropdown-button w-full text-left px-4 py-2 text-white {{ $mobileHoverBg }} rounded flex justify-between items-center">
                         Tentang
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
@@ -190,20 +197,20 @@
                     </button>
                     <div class="mobile-dropdown-content hidden pl-4">
                         <a href="{{ route('tentang.logo') }}"
-                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Logo Karang
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Logo Karang
                             Taruna</a>
                         <a href="{{ route('tentang.filosofi') }}"
-                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Filosofi
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Filosofi
                             Logo</a>
                         <a href="{{ route('tentang.profil') }}"
-                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Profil
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Profil
                             Organisasi</a>
                     </div>
                 </div>
 
                 <div class="mobile-dropdown">
                     <button
-                        class="mobile-dropdown-button w-full text-left px-4 py-2 text-white hover:bg-primary-700 rounded flex justify-between items-center">
+                        class="mobile-dropdown-button w-full text-left px-4 py-2 text-white {{ $mobileHoverBg }} rounded flex justify-between items-center">
                         Visi & Nilai
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
@@ -212,21 +219,21 @@
                     </button>
                     <div class="mobile-dropdown-content hidden pl-4">
                         <a href="{{ route('visi.visi') }}"
-                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Visi</a>
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Visi</a>
                         <a href="{{ route('visi.misi') }}"
-                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Misi</a>
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Misi</a>
                         <a href="{{ route('visi.tujuan') }}"
-                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Tujuan &
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Tujuan &
                             Fungsi</a>
                         <a href="{{ route('visi.nilai') }}"
-                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Nilai-Nilai
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Nilai-Nilai
                             Dasar</a>
                     </div>
                 </div>
 
                 <div class="mobile-dropdown">
                     <button
-                        class="mobile-dropdown-button w-full text-left px-4 py-2 text-white hover:bg-primary-700 rounded flex justify-between items-center">
+                        class="mobile-dropdown-button w-full text-left px-4 py-2 text-white {{ $mobileHoverBg }} rounded flex justify-between items-center">
                         Kepengurusan
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
@@ -235,20 +242,20 @@
                     </button>
                     <div class="mobile-dropdown-content hidden pl-4">
                         <a href="{{ route('kepengurusan.struktur') }}"
-                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Struktur
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Struktur
                             Pengurus</a>
                         <a href="{{ route('kepengurusan.tugas') }}"
-                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Tugas
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Tugas
                             Pengurus</a>
                         <a href="{{ route('kepengurusan.tokoh') }}"
-                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Tokoh
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Tokoh
                             Utama</a>
                     </div>
                 </div>
 
                 <div class="mobile-dropdown">
                     <button
-                        class="mobile-dropdown-button w-full text-left px-4 py-2 text-white hover:bg-primary-700 rounded flex justify-between items-center">
+                        class="mobile-dropdown-button w-full text-left px-4 py-2 text-white {{ $mobileHoverBg }} rounded flex justify-between items-center">
                         Kegiatan
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
@@ -257,19 +264,19 @@
                     </button>
                     <div class="mobile-dropdown-content hidden pl-4">
                         <a href="{{ route('kegiatan.galeri') }}"
-                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Galeri
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Galeri
                             Foto</a>
                         <a href="{{ route('kegiatan.video') }}"
-                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Video/Dokumenter</a>
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Video/Dokumenter</a>
                         <a href="{{ route('kegiatan.berita') }}"
-                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Arsip
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Arsip
                             Berita</a>
                     </div>
                 </div>
 
                 <div class="mobile-dropdown">
                     <button
-                        class="mobile-dropdown-button w-full text-left px-4 py-2 text-white hover:bg-primary-700 rounded flex justify-between items-center">
+                        class="mobile-dropdown-button w-full text-left px-4 py-2 text-white {{ $mobileHoverBg }} rounded flex justify-between items-center">
                         Produk & Mitra
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
@@ -278,17 +285,17 @@
                     </button>
                     <div class="mobile-dropdown-content hidden pl-4">
                         <a href="{{ route('produk.list') }}"
-                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Daftar
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Daftar
                             Produk</a>
                         <a href="{{ route('produk.mitra') }}"
-                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Mitra/UMKM</a>
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Mitra/UMKM</a>
                         <a href="{{ route('produk.testimoni') }}"
-                            class="block px-4 py-2 text-sm text-primary-100 hover:bg-primary-700 rounded">Testimoni</a>
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Testimoni</a>
                     </div>
                 </div>
 
                 <a href="{{ route('kontak.index') }}"
-                    class="block px-4 py-2 text-white hover:bg-primary-700 rounded">Kontak</a>
+                    class="block px-4 py-2 {{ $navTransparent ? 'text-white' : 'text-white' }} {{ $mobileHoverBg }} rounded">Kontak</a>
             </div>
         </div>
     </nav>
@@ -339,16 +346,15 @@
         const navbar = document.getElementById('navbar');
 
         window.addEventListener('scroll', function () {
-            if (window.scrollY > 50) {
-                // Navbar dengan background saat scroll
-                navbar.classList.add('bg-primary-600', 'shadow-lg');
-                navbar.classList.remove('bg-transparent');
-            } else {
-                // Navbar transparan di atas
-                navbar.classList.remove('bg-primary-600', 'shadow-lg');
-                navbar.classList.add('bg-transparent');
-            }
-        });
+    if (window.scrollY > 50) {
+        navbar.classList.add('bg-primary-600/90', 'shadow-lg', 'backdrop-blur-md');
+        navbar.classList.remove('bg-transparent');
+    } else {
+        navbar.classList.remove('bg-primary-600/90', 'shadow-lg', 'backdrop-blur-md');
+        navbar.classList.add('bg-transparent');
+    }
+});
+
 
         // Set initial state
         if (window.scrollY > 50) {
@@ -371,5 +377,10 @@
         });
     </script>
 </body>
+
+    {{-- Stacked scripts from child views (e.g. pesanWhatsApp, product highlight) --}}
+    @stack('scripts')
+
+</html>
 
 </html>
