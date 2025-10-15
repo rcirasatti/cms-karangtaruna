@@ -117,13 +117,53 @@
     @media (max-width: 640px) {
         nav[role="navigation"] {
             gap: 0.25rem;
+            padding: 0.75rem;
         }
 
         nav[role="navigation"] a,
         nav[role="navigation"] span {
-            min-width: 2.5rem;
-            height: 2.5rem;
+            min-width: 2.75rem;
+            height: 2.75rem;
             font-size: 0.875rem;
+            padding: 0 0.75rem;
+        }
+
+        nav[role="navigation"] a[rel="prev"],
+        nav[role="navigation"] a[rel="next"] {
+            padding: 0 0.5rem;
         }
     }
+}
+
+/* Mitra Scrolling Animation */
+@keyframes mitra-scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-mitra-scroll {
+    animation: mitra-scroll 40s linear infinite;
+}
+
+.animate-mitra-scroll:hover {
+    animation-play-state: paused;
+}
+
+/* Active Mitra Highlight */
+.mitra-item.active {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(14, 165, 233, 0.3);
+    border-color: var(--color-primary-400) !important;
+}
+
+.mitra-item.active > div {
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.05), rgba(235, 203, 144, 0.08)) !important;
+}
+
+.mitra-item.active .group:hover {
+    transform: scale(1.05);
 }

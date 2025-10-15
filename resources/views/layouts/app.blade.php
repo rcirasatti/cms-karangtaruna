@@ -152,12 +152,9 @@
                             class="{{ $navTransparent ? 'absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-primary-900/80 ring-1 ring-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300' : 'absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300' }}">
                             <div class="py-1">
                                 <a href="{{ route('produk.list') }}"
-                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Daftar
-                                    Produk</a>
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Daftar Produk</a>
                                 <a href="{{ route('produk.mitra') }}"
                                     class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Mitra/UMKM</a>
-                                <a href="{{ route('produk.testimoni') }}"
-                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Testimoni</a>
                             </div>
                         </div>
                     </div>
@@ -273,7 +270,7 @@
                 <div class="mobile-dropdown">
                     <button
                         class="mobile-dropdown-button w-full text-left px-4 py-2 text-white {{ $mobileHoverBg }} rounded flex justify-between items-center">
-                        Produk & Mitra
+                        Product & Partners
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
@@ -281,12 +278,9 @@
                     </button>
                     <div class="mobile-dropdown-content hidden pl-4">
                         <a href="{{ route('produk.list') }}"
-                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Daftar
-                            Produk</a>
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Produk</a>
                         <a href="{{ route('produk.mitra') }}"
-                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Mitra/UMKM</a>
-                        <a href="{{ route('produk.testimoni') }}"
-                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Testimoni</a>
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Mitra</a>
                     </div>
                 </div>
 
