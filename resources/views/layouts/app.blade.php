@@ -292,8 +292,11 @@
         @yield('content')
     </main>
 
+    <!-- CTA Section (Optional - can be yielded from pages) -->
+    @yield('cta')
+
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 mt-12">
+    <footer class="bg-gray-800 text-white py-8">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
