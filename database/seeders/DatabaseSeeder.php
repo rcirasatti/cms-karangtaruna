@@ -7,7 +7,6 @@ use App\Models\Profile;
 use App\Models\VisiMisi;
 use App\Models\Kepengurusan;
 use App\Models\Kegiatan;
-use App\Models\Produk;
 use App\Models\Mitra;
 use App\Models\Kontak;
 use App\Models\FilosofiLogoItem;
@@ -100,38 +99,6 @@ class DatabaseSeeder extends Seeder
             Kegiatan::create($k);
         }
 
-        // Create Produk
-        $produk = [
-            [
-                'nama_produk' => 'Keripik Singkong Original',
-                'deskripsi' => 'Keripik singkong renyah dengan rasa original yang gurih dan enak.',
-                'harga' => 15000,
-                'kategori' => 'Makanan'
-            ],
-            [
-                'nama_produk' => 'Tas Anyaman Pandan',
-                'deskripsi' => 'Tas anyaman dari pandan berkualitas dengan desain modern dan elegan.',
-                'harga' => 75000,
-                'kategori' => 'Kerajinan'
-            ],
-            [
-                'nama_produk' => 'Sambal Khas Bu Tini',
-                'deskripsi' => 'Sambal homemade dengan resep turun temurun, pedas dan nikmat.',
-                'harga' => 25000,
-                'kategori' => 'Makanan'
-            ],
-            [
-                'nama_produk' => 'Batik Tulis Modern',
-                'deskripsi' => 'Kain batik tulis dengan motif modern untuk berbagai keperluan.',
-                'harga' => 250000,
-                'kategori' => 'Fashion'
-            ],
-        ];
-
-        foreach ($produk as $p) {
-            Produk::create($p);
-        }
-
         // Create Mitra
         $mitra = [
             [
@@ -208,6 +175,9 @@ class DatabaseSeeder extends Seeder
         foreach ($filosofiItems as $item) {
             FilosofiLogoItem::create($item);
         }
+
+        // Call ProdukSeeder
+        $this->call(ProdukSeeder::class);
     }
 }
 

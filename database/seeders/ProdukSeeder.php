@@ -17,7 +17,7 @@ class ProdukSeeder extends Seeder
         Kontak::updateOrCreate(
             ['id' => 1],
             [
-                'whatsapp' => '6281234567890', // GANTI dengan nomor WhatsApp admin yang sebenarnya
+                'whatsapp' => '6285725040030', 
                 'telepon' => '021-12345678',
                 'email' => 'info@karangtaruna.org',
                 'alamat_sekretariat' => 'Jl. Contoh No. 123, Jakarta',

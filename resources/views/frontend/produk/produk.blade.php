@@ -247,7 +247,8 @@
                                     
                                     <!-- Tombol Pesan WhatsApp -->
                                     <button
-                                        onclick="pesanWhatsApp('{{ $item->nama_produk }}', '{{ $item->harga ? 'Rp ' . number_format($item->harga, 0, ',', '.') : 'Hubungi untuk info harga' }}')"
+                                        onclick="pesanWhatsApp({!! json_encode($item->nama_produk) !!}, {!! json_encode($item->harga ? 'Rp ' . number_format($item->harga, 0, ',', '.') : 'Hubungi untuk info harga') !!})"
+                                        aria-label="{{ 'Pesan ' . e($item->nama_produk) . ' via WhatsApp' }}"
                                         class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white py-2.5 px-3 rounded-lg font-semibold text-sm transition-all duration-300 flex items-center justify-center space-x-2 shadow-md hover:shadow-lg mt-auto">
                                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                                             <path
@@ -464,8 +465,8 @@
 
 Saya tertarik dengan produk berikut:
 
-📦- Produk: *${namaProduk}*
-💰- Harga: *${harga}*
+📦 Produk: *${namaProduk}*
+💰 Harga: *${harga}*
 
 Mohon informasi lebih lanjut mengenai produk ini.
 
