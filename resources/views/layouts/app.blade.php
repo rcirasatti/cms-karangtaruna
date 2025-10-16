@@ -113,10 +113,10 @@
                         </div>
                     </div>
 
-                    <!-- Kegiatan Dropdown -->
+                    <!-- Gallery Dropdown (Foto, Video & Arsip Berita) -->
                     <div class="relative group">
                         <button
-                            class="px-4 py-2 rounded-lg {{ $hoverLink }} transition flex items-center {{ request()->routeIs('kegiatan.*') ? $activeClass : 'text-white' }}">
+                            class="px-4 py-2 rounded-lg {{ $hoverLink }} transition flex items-center {{ request()->routeIs('galeri.*') ? $activeClass : 'text-white' }}">
                             Gallery
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -126,14 +126,12 @@
                         <div
                             class="{{ $navTransparent ? 'absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-primary-900/80 ring-1 ring-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300' : 'absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300' }}">
                             <div class="py-1">
-                                <a href="{{ route('kegiatan.galeri') }}"
-                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Galeri
-                                    Foto</a>
-                                <a href="{{ route('kegiatan.video') }}"
-                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Video/Dokumenter</a>
-                                <a href="{{ route('kegiatan.berita') }}"
-                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Arsip
-                                    Berita</a>
+                                <a href="{{ route('galeri.foto') }}"
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Foto</a>
+                                <a href="{{ route('galeri.video') }}"
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Video</a>
+                                <a href="{{ route('galeri.berita') }}"
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Arsip Berita</a>
                             </div>
                         </div>
                     </div>
@@ -166,20 +164,30 @@
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" class="md:hidden text-white">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button id="mobile-menu-button" class="md:hidden text-white p-2 focus:outline-none" aria-label="Toggle menu">
+                    <svg class="w-6 h-6 transition-transform duration-300" id="menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
             </div>
+        </div>
+    </nav>
 
-            <!-- Mobile Menu (full-screen overlay) -->
-            <div id="mobile-menu" class="hidden md:hidden fixed inset-0 z-50 transition-transform duration-200 transform">
-                <!-- Use a solid background so the mobile menu covers entire viewport -->
-                <div class="w-full h-full bg-primary-900/95 backdrop-blur-md shadow-xl">
-                    <!-- push content below navbar (navbar height ~64px) -->
-                    <div class="pt-20 py-4 px-4">
+    <!-- Mobile Menu (full-screen overlay) -->
+    <div id="mobile-menu" class="hidden md:hidden fixed inset-0 z-40 pt-16 bg-primary-900/95 backdrop-blur-md overflow-y-auto">
+        <div class="w-full h-full">
+            <!-- Close button at top -->
+            <div class="flex justify-end p-4 border-b border-white/10">
+                <button id="mobile-menu-close" class="md:hidden text-white p-2 focus:outline-none" aria-label="Close menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Menu content -->
+            <div class="py-4 px-4">
                 <a href="{{ route('home') }}"
                     class="block px-4 py-2 {{ $navTransparent ? 'text-white' : 'text-white' }} {{ $mobileHoverBg }} rounded">Home</a>
 
@@ -257,14 +265,12 @@
                         </svg>
                     </button>
                     <div class="mobile-dropdown-content hidden pl-4">
-                        <a href="{{ route('kegiatan.galeri') }}"
-                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Galeri
-                            Foto</a>
-                        <a href="{{ route('kegiatan.video') }}"
-                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Video/Dokumenter</a>
-                        <a href="{{ route('kegiatan.berita') }}"
-                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Arsip
-                            Berita</a>
+                        <a href="{{ route('galeri.foto') }}"
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Foto</a>
+                        <a href="{{ route('galeri.video') }}"
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Video</a>
+                        <a href="{{ route('galeri.berita') }}"
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Arsip Berita</a>
                     </div>
                 </div>
 
@@ -289,7 +295,7 @@
                     class="block px-4 py-2 {{ $navTransparent ? 'text-white' : 'text-white' }} {{ $mobileHoverBg }} rounded">Contact</a>
             </div>
         </div>
-    </nav>
+    </div>
 
     <!-- Main Content -->
     <main class="min-h-screen">
@@ -356,7 +362,7 @@
                         <li><a href="{{ route('tentang.logo') }}" class="text-gray-100 hover:text-secondary transition-colors duration-150 flex items-center">
                             <span class="w-1.5 h-1.5 rounded-full bg-secondary mr-2"></span>About
                         </a></li>
-                        <li><a href="{{ route('kegiatan.index') }}" class="text-gray-100 hover:text-secondary transition-colors duration-150 flex items-center">
+                        <li><a href="{{ route('galeri.index') }}" class="text-gray-100 hover:text-secondary transition-colors duration-150 flex items-center">
                             <span class="w-1.5 h-1.5 rounded-full bg-secondary mr-2"></span>Gallery
                         </a></li>
                         <li><a href="{{ route('produk.list') }}" class="text-gray-100 hover:text-secondary transition-colors duration-150 flex items-center">
@@ -435,17 +441,21 @@
 
     <script>
         const navbar = document.getElementById('navbar');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
 
+        // Scroll effect
         window.addEventListener('scroll', function () {
-    if (window.scrollY > 50) {
-        navbar.classList.add('bg-primary-600/90', 'shadow-lg', 'backdrop-blur-md');
-        navbar.classList.remove('bg-transparent');
-    } else {
-        navbar.classList.remove('bg-primary-600/90', 'shadow-lg', 'backdrop-blur-md');
-        navbar.classList.add('bg-transparent');
-    }
-});
-
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-primary-600/90', 'shadow-lg', 'backdrop-blur-md');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.remove('bg-primary-600/90', 'shadow-lg', 'backdrop-blur-md');
+                navbar.classList.add('bg-transparent');
+            }
+        });
 
         // Set initial state
         if (window.scrollY > 50) {
@@ -453,31 +463,79 @@
         } else {
             navbar.classList.add('bg-transparent');
         }
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
+
         // Accessibility state
         mobileMenuButton.setAttribute('aria-expanded', 'false');
         mobileMenuButton.setAttribute('aria-controls', 'mobile-menu');
 
-        mobileMenuButton.addEventListener('click', function () {
-            // Toggle visibility by toggling transform and pointer events on the mobile menu wrapper
-            if (mobileMenu.classList.contains('hidden')) {
+        // Function to toggle mobile menu
+        function toggleMobileMenu() {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
                 mobileMenu.classList.remove('hidden');
                 mobileMenuButton.setAttribute('aria-expanded', 'true');
+                menuIcon.style.transform = 'rotate(90deg)';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
             } else {
                 mobileMenu.classList.add('hidden');
                 mobileMenuButton.setAttribute('aria-expanded', 'false');
+                menuIcon.style.transform = 'rotate(0deg)';
+                document.body.style.overflow = '';
             }
+        }
+
+        // Menu button click
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+
+        // Close button click
+        mobileMenuClose.addEventListener('click', toggleMobileMenu);
+
+        // Close menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function () {
+                if (!mobileMenu.classList.contains('hidden')) {
+                    toggleMobileMenu();
+                }
+            });
         });
 
-        // Mobile Dropdown Toggle
+        // Mobile Dropdown Toggle with smooth animation
         document.querySelectorAll('.mobile-dropdown-button').forEach(button => {
-            button.addEventListener('click', function () {
+            button.addEventListener('click', function (e) {
+                e.stopPropagation();
                 const content = this.nextElementSibling;
-                content.classList.toggle('hidden');
                 const svg = this.querySelector('svg');
-                svg.style.transform = content.classList.contains('hidden') ? '' : 'rotate(180deg)';
+                const isHidden = content.classList.contains('hidden');
+                
+                // Close other dropdowns
+                document.querySelectorAll('.mobile-dropdown-content').forEach(el => {
+                    if (el !== content) {
+                        el.classList.add('hidden');
+                    }
+                });
+                
+                document.querySelectorAll('.mobile-dropdown-button svg').forEach(s => {
+                    if (s !== svg) {
+                        s.style.transform = 'rotate(0deg)';
+                    }
+                });
+
+                // Toggle current dropdown
+                content.classList.toggle('hidden');
+                svg.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
             });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.mobile-dropdown')) {
+                document.querySelectorAll('.mobile-dropdown-content').forEach(el => {
+                    el.classList.add('hidden');
+                });
+                document.querySelectorAll('.mobile-dropdown-button svg').forEach(svg => {
+                    svg.style.transform = 'rotate(0deg)';
+                });
+            }
         });
     </script>
 </body>

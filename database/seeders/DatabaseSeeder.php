@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\Profile;
 use App\Models\VisiMisi;
 use App\Models\Kepengurusan;
-use App\Models\Kegiatan;
+use App\Models\Berita;
 use App\Models\Mitra;
 use App\Models\Kontak;
 use App\Models\FilosofiLogoItem;
@@ -66,8 +66,8 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // Create Kegiatan
-        $kegiatan = [
+        // Create Berita
+        $berita = [
             [
                 'judul' => 'Bakti Sosial Ramadan 2024',
                 'deskripsi' => 'Kegiatan bakti sosial dalam rangka menyambut bulan Ramadan dengan membagikan sembako kepada masyarakat kurang mampu.',
@@ -95,8 +95,8 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
-        foreach ($kegiatan as $k) {
-            Kegiatan::create($k);
+        foreach ($berita as $b) {
+            Berita::create($b);
         }
 
         // Create Mitra

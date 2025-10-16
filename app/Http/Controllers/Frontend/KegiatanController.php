@@ -41,6 +41,12 @@ class KegiatanController extends Controller
     public function show($id)
     {
         $kegiatan = Kegiatan::findOrFail($id);
+        
+        // Optional: Increment view count if field exists
+        // if (schema()->hasColumn('kegiatan', 'view_count')) {
+        //     $kegiatan->increment('view_count');
+        // }
+        
         return view('frontend.kegiatan.show', compact('kegiatan'));
     }
 }

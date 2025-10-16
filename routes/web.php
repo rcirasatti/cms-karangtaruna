@@ -5,9 +5,9 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\TentangController;
 use App\Http\Controllers\Frontend\VisiMisiController;
 use App\Http\Controllers\Frontend\KepengurusanController;
-use App\Http\Controllers\Frontend\KegiatanController;
 use App\Http\Controllers\Frontend\ProdukController;
 use App\Http\Controllers\Frontend\KontakController;
+use App\Http\Controllers\Frontend\GaleriController;
 
 // Frontend Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -37,15 +37,6 @@ Route::prefix('kepengurusan')->group(function () {
     Route::get('/tokoh-utama', [KepengurusanController::class, 'tokohUtama'])->name('kepengurusan.tokoh');
 });
 
-// Kegiatan
-Route::prefix('kegiatan')->group(function () {
-    Route::get('/', [KegiatanController::class, 'index'])->name('kegiatan.index');
-    Route::get('/galeri', [KegiatanController::class, 'galeri'])->name('kegiatan.galeri');
-    Route::get('/video', [KegiatanController::class, 'video'])->name('kegiatan.video');
-    Route::get('/berita', [KegiatanController::class, 'berita'])->name('kegiatan.berita');
-    Route::get('/{id}', [KegiatanController::class, 'show'])->name('kegiatan.show');
-});
-
 // Produk & Mitra
 Route::prefix('produk-mitra')->group(function () {
     Route::get('/', [ProdukController::class, 'index'])->name('produk.index');
@@ -53,6 +44,16 @@ Route::prefix('produk-mitra')->group(function () {
     Route::get('/produk/{id}', [ProdukController::class, 'show'])->name('produk.show');
     Route::get('/mitra', [ProdukController::class, 'mitra'])->name('produk.mitra');
     Route::get('/testimoni', [ProdukController::class, 'testimoni'])->name('produk.testimoni');
+});
+
+// Galeri (Foto, Video & Arsip Berita)
+Route::prefix('galeri')->group(function () {
+    Route::get('/', [GaleriController::class, 'index'])->name('galeri.index');
+    Route::get('/foto', [GaleriController::class, 'foto'])->name('galeri.foto');
+    Route::get('/video', [GaleriController::class, 'video'])->name('galeri.video');
+    Route::get('/berita', [GaleriController::class, 'berita'])->name('galeri.berita');
+    Route::get('/berita/{id}', [GaleriController::class, 'beritaShow'])->name('galeri.berita.show');
+    Route::get('/{id}', [GaleriController::class, 'show'])->name('galeri.show');
 });
 
 // Kontak

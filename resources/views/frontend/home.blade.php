@@ -55,46 +55,59 @@
 </div>
 @endif
 
-<!-- Kegiatan Terbaru -->
+<!-- Galeri Terbaru -->
 <div class="bg-gray-100 py-16">
     <div class="container mx-auto px-4">
         <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4">Kegiatan Terbaru</h2>
-            <p class="text-gray-600">Dokumentasi kegiatan dan program Karang Taruna</p>
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Galeri Terbaru</h2>
+            <p class="text-gray-600">Koleksi foto dan video terbaru dari kegiatan Karang Taruna</p>
         </div>
 
-        @if($kegiatanTerbaru->count() > 0)
+        @if($galeriTerbaru->count() > 0)
         <div class="grid md:grid-cols-3 gap-6 mb-8">
-            @foreach($kegiatanTerbaru as $kegiatan)
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition">
-                @if($kegiatan->thumbnail)
-                    <img src="{{ asset('storage/' . $kegiatan->thumbnail) }}" alt="{{ $kegiatan->judul }}" class="w-full h-48 object-cover">
+            @foreach($galeriTerbaru as $galeri)
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group">
+                @if($galeri->tipe === 'foto')
+                    <div class="w-full h-48 bg-gray-200 overflow-hidden">
+                        <img src="{{ $galeri->url }}" alt="{{ $galeri->judul }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
                 @else
-                    <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
-                        <span class="text-gray-400">No Image</span>
+                    <div class="w-full h-48 bg-black/20 flex items-center justify-center relative">
+                        @if($galeri->thumbnail)
+                            <img src="{{ $galeri->thumbnail }}" alt="{{ $galeri->judul }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                        @else
+                            <svg class="w-12 h-12 text-white/50" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
+                            </svg>
+                        @endif
+                        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors flex items-center justify-center">
+                            <svg class="w-16 h-16 text-white opacity-0 group-hover:opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
+                            </svg>
+                        </div>
                     </div>
                 @endif
                 <div class="p-6">
-                    <span class="text-xs text-primary-600 font-semibold uppercase">{{ $kegiatan->kategori }}</span>
-                    <h3 class="text-xl font-bold mt-2 mb-3">{{ $kegiatan->judul }}</h3>
-                    <p class="text-gray-600 text-sm mb-4">{{ Str::limit($kegiatan->deskripsi, 100) }}</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-sm text-gray-500">{{ $kegiatan->tanggal_kegiatan->format('d M Y') }}</span>
-                        <a href="{{ route('kegiatan.show', $kegiatan->id) }}" class="text-primary-600 text-sm font-semibold hover:text-primary-700">
-                            Lihat Detail →
-                        </a>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs bg-primary-100 text-primary-600 font-semibold px-2 py-1 rounded">{{ ucfirst($galeri->tipe) }}</span>
+                        <span class="text-xs text-gray-500">{{ $galeri->created_at->format('d M Y') }}</span>
                     </div>
+                    <h3 class="text-lg font-bold mt-2 mb-2 line-clamp-2">{{ $galeri->judul }}</h3>
+                    <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ $galeri->deskripsi ?? 'Tidak ada deskripsi' }}</p>
+                    <a href="{{ route('galeri.show', $galeri->id) }}" class="text-primary-600 text-sm font-semibold hover:text-primary-700">
+                        Lihat Detail →
+                    </a>
                 </div>
             </div>
             @endforeach
         </div>
         @else
-        <p class="text-center text-gray-500">Belum ada kegiatan tersedia.</p>
+        <p class="text-center text-gray-500">Belum ada galeri tersedia.</p>
         @endif
 
         <div class="text-center">
-            <a href="{{ route('kegiatan.index') }}" class="inline-block bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition">
-                Lihat Semua Kegiatan
+            <a href="{{ route('galeri.index') }}" class="inline-block bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition">
+                Lihat Semua Galeri
             </a>
         </div>
     </div>
