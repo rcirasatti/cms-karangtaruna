@@ -54,7 +54,7 @@
 }
 
 .animate-mitra-scroll {
-    animation: mitra-scroll 40s linear infinite;
+    animation: mitra-scroll 30s linear infinite;
 }
 
 .animate-mitra-scroll:hover {
@@ -62,16 +62,53 @@
 }
 
 /* Active Mitra Highlight */
-.mitra-item.active {
-    transform: scale(1.05);
-    box-shadow: 0 8px 25px rgba(14, 165, 233, 0.3);
-    border-color: var(--color-primary-400) !important;
-}
-
 .mitra-item.active > div {
     background: linear-gradient(135deg, rgba(14, 165, 233, 0.05), rgba(235, 203, 144, 0.08)) !important;
+    border-color: var(--color-primary-400) !important;
+    box-shadow: 0 8px 25px rgba(14, 165, 233, 0.3);
 }
 
-.mitra-item.active .group:hover {
-    transform: scale(1.05);
+/* Ensure consistent card dimensions */
+.mitra-item > div {
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+
+/* Hide scrollbar for mitra scroll container */
+#scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+#scroll-container {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-behavior: smooth;
+}
+
+/* Blob Animation for Hero Sections */
+@keyframes blob {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    33% {
+        transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+        transform: translate(-20px, 20px) scale(0.9);
+    }
+}
+
+.animate-blob {
+    animation: blob 15s infinite ease-in-out;
+}
+
+.animation-delay-2000 {
+    animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+    animation-delay: 4s;
+}
+

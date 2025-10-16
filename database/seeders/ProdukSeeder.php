@@ -31,12 +31,14 @@ class ProdukSeeder extends Seeder
                 'deskripsi' => 'Kue kering istimewa dengan berbagai varian rasa yang lezat dan renyah. Cocok untuk hampers lebaran atau oleh-oleh keluarga.',
                 'harga' => 75000,
                 'kategori' => 'Makanan',
+                'galeri' => ['produk/kue1.jpg', 'produk/kue2.jpg', 'produk/kue3.jpg'],
             ],
             [
                 'nama_produk' => 'Tas Anyaman Handmade',
                 'deskripsi' => 'Tas anyaman berkualitas tinggi dibuat dengan tangan oleh pengrajin lokal. Desain modern dan ramah lingkungan.',
                 'harga' => 150000,
                 'kategori' => 'Kerajinan',
+                'galeri' => ['produk/tas1.jpg', 'produk/tas2.jpg'],
             ],
             [
                 'nama_produk' => 'Sambal Khas Nusantara',
@@ -49,12 +51,14 @@ class ProdukSeeder extends Seeder
                 'deskripsi' => 'Keripik pisang crispy dengan berbagai varian rasa: original, coklat, keju, dan balado. Camilan favorit keluarga.',
                 'harga' => 25000,
                 'kategori' => 'Makanan',
+                'galeri' => ['produk/keripik1.jpg', 'produk/keripik2.jpg', 'produk/keripik3.jpg', 'produk/keripik4.jpg'],
             ],
             [
                 'nama_produk' => 'Batik Tulis Exclusive',
                 'deskripsi' => 'Kain batik tulis asli dengan motif tradisional yang elegan. Cocok untuk acara formal dan kasual.',
                 'harga' => 500000,
                 'kategori' => 'Fashion',
+                'galeri' => ['produk/batik1.jpg', 'produk/batik2.jpg'],
             ],
             [
                 'nama_produk' => 'Tanaman Hias Indoor',

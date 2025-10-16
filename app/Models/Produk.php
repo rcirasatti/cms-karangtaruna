@@ -13,10 +13,12 @@ class Produk extends Model
         'deskripsi',
         'harga',
         'foto',
+        'galeri',
         'kategori'
     ];
 
     protected $casts = [
-        'harga' => 'decimal:2'
+        'harga' => 'decimal:2',
+        'galeri' => 'array'
     ];
 }

@@ -7,7 +7,7 @@
 
 @section('content')
     <!-- Hero Section -->
-    <div class="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 text-white py-32 md:h-[420px] h-[420px] overflow-hidden">
+    <div class="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 text-white py-20 md:py-32 md:h-[420px] h-auto overflow-hidden">
         <!-- Decorative Elements -->
         <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -mr-32 -mt-32"></div>
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-white opacity-5 rounded-full -ml-48 -mb-48"></div>
@@ -16,7 +16,7 @@
             <div class="max-w-3xl">
                 <!-- Breadcrumb -->
                 <nav class="flex items-center space-x-2 text-sm text-blue-200 mb-4">
-                    <a href="{{ route('home') }}" class="hover:text-white transition-colors">Beranda</a>
+                    <a href="{{ route('home') }}" class="hover:text-white transition-colors">Home</a>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
@@ -65,7 +65,7 @@
     </div>
 
     <!-- Produk Section dengan Sidebar Filter -->
-    <div class="bg-gray-100 py-16">
+    <div class="bg-gray-100 pt-6 pb-16 md:py-16">
         <div class="container mx-auto px-4">
             <div class="flex flex-col lg:flex-row gap-8">
                 <!-- Sidebar Filter Kategori -->
@@ -180,6 +180,81 @@
                         </div>
                     @endif
 
+                    <!-- Search and Sort Controls -->
+                    <div class="mb-8 bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+                        <div class="flex flex-col lg:flex-row gap-4 items-center justify-between">
+                            <!-- Search Box -->
+                            <div class="flex-1 max-w-md">
+                                <form method="GET" action="{{ route('produk.list') }}" class="relative">
+                                    <input type="hidden" name="kategori" value="{{ $kategori }}">
+                                    <input type="hidden" name="sort" value="{{ $sort }}">
+                                    <div class="relative">
+                                        <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                        </svg>
+                                        <input type="text" name="search" value="{{ $search }}" placeholder="Cari produk..."
+                                               class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200 bg-gray-50 focus:bg-white">
+                                        <button type="submit" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-primary-600 hover:bg-primary-700 text-white px-4 py-1.5 rounded-lg text-sm font-medium transition-colors">
+                                            Cari
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Sort Dropdown -->
+                            <div class="flex items-center space-x-3">
+                                <span class="text-sm font-medium text-gray-700">Urutkan:</span>
+                                <form method="GET" action="{{ route('produk.list') }}" class="relative">
+                                    <input type="hidden" name="kategori" value="{{ $kategori }}">
+                                    <input type="hidden" name="search" value="{{ $search }}">
+                                    <select name="sort" onchange="this.form.submit()"
+                                            class="appearance-none bg-white border border-gray-300 rounded-xl px-4 py-3 pr-8 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200 text-sm font-medium">
+                                        <option value="nama_produk" {{ $sort == 'nama_produk' ? 'selected' : '' }}>Nama A-Z</option>
+                                        <option value="harga_asc" {{ $sort == 'harga_asc' ? 'selected' : '' }}>Harga Terendah</option>
+                                        <option value="harga_desc" {{ $sort == 'harga_desc' ? 'selected' : '' }}>Harga Tertinggi</option>
+                                        <option value="terbaru" {{ $sort == 'terbaru' ? 'selected' : '' }}>Terbaru</option>
+                                        <option value="terlama" {{ $sort == 'terlama' ? 'selected' : '' }}>Terlama</option>
+                                    </select>
+                                    <div class="absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Active Filters Display -->
+                        @if ($search || $kategori)
+                            <div class="flex flex-wrap items-center gap-2 mt-4 pt-4 border-t border-gray-200">
+                                <span class="text-sm text-gray-600 font-medium">Filter aktif:</span>
+                                @if ($search)
+                                    <span class="inline-flex items-center bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-sm font-medium">
+                                        Pencarian: "{{ $search }}"
+                                        <a href="{{ route('produk.list', ['kategori' => $kategori, 'sort' => $sort]) }}" class="ml-2 text-primary-600 hover:text-primary-800">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                            </svg>
+                                        </a>
+                                    </span>
+                                @endif
+                                @if ($kategori)
+                                    <span class="inline-flex items-center bg-secondary-100 text-secondary-800 px-3 py-1 rounded-full text-sm font-medium">
+                                        Kategori: {{ $kategori }}
+                                        <a href="{{ route('produk.list', ['search' => $search, 'sort' => $sort]) }}" class="ml-2 text-secondary-600 hover:text-secondary-800">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                            </svg>
+                                        </a>
+                                    </span>
+                                @endif
+                                <a href="{{ route('produk.list', ['sort' => $sort]) }}" class="text-sm text-gray-500 hover:text-gray-700 font-medium ml-2">
+                                    Hapus semua filter
+                                </a>
+                            </div>
+                        @endif
+                    </div>
+
                     @if ($produk->count() > 0)
                         <!-- Grid Produk - 3 Kolom dengan Cards Vertikal -->
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
@@ -187,21 +262,52 @@
                                     @php $isHighlight = request('highlight') == $item->id; @endphp
                                     <div id="produk-{{ $item->id }}"
                                         class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col border border-gray-100 hover:border-primary-200 transform hover:-translate-y-1 {{ $isHighlight ? 'ring-4 ring-primary-300/60 scale-105' : '' }}">
-                                    <!-- Gambar Produk -->
-                                    <div class="relative h-40 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
-                                        @if ($item->foto)
-                                            <img src="{{ asset('storage/' . $item->foto) }}"
-                                                alt="{{ $item->nama_produk }}"
-                                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                    <!-- Gambar Produk dengan Galeri -->
+                                    <div class="relative h-40 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 group/gallery">
+                                        @php
+                                            $images = [];
+                                            if ($item->galeri && is_array($item->galeri)) {
+                                                $images = array_merge($item->galeri, $item->foto ? [$item->foto] : []);
+                                            } elseif ($item->foto) {
+                                                $images = [$item->foto];
+                                            }
+                                            $hasMultipleImages = count($images) > 1;
+                                        @endphp
+
+                                        @if (count($images) > 0)
+                                            <div class="relative w-full h-full {{ $hasMultipleImages ? 'carousel' : '' }}" data-images="{{ json_encode($images) }}">
+                                                @foreach ($images as $index => $image)
+                                                    <img src="{{ asset('storage/' . $image) }}"
+                                                        alt="{{ $item->nama_produk }} - {{ $index + 1 }}"
+                                                        class="w-full h-full object-cover transition-transform duration-300 {{ $index === 0 ? 'block' : 'hidden' }} gallery-image"
+                                                        data-index="{{ $index }}">
+                                                @endforeach
+
+                                                @if ($hasMultipleImages)
+                                                    <!-- Navigation Arrows -->
+                                                    <button class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-1.5 rounded-full transition-all opacity-0 group-hover/gallery:opacity-100 prev-image" data-target="produk-{{ $item->id }}">
+                                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                                        </svg>
+                                                    </button>
+                                                    <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-1.5 rounded-full transition-all opacity-0 group-hover/gallery:opacity-100 next-image" data-target="produk-{{ $item->id }}">
+                                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                                        </svg>
+                                                    </button>
+
+                                                    <!-- Image Indicators -->
+                                                    <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-1">
+                                                        @for ($i = 0; $i < count($images); $i++)
+                                                            <button class="w-2 h-2 rounded-full transition-all {{ $i === 0 ? 'bg-white' : 'bg-white/50' }} indicator" data-target="produk-{{ $item->id }}" data-index="{{ $i }}"></button>
+                                                        @endfor
+                                                    </div>
+                                                @endif
+                                            </div>
                                         @else
-                                            <div
-                                                class="w-full h-full flex items-center justify-center bg-gradient-to-br from-secondary/20 to-accent/30">
-                                                <svg class="w-16 h-16 text-primary-300" fill="none"
-                                                    stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="1.5"
-                                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                                    </path>
+                                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-secondary/20 to-accent/30">
+                                                <svg class="w-16 h-16 text-primary-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                                 </svg>
                                             </div>
                                         @endif
@@ -209,9 +315,20 @@
                                         <!-- Badge Kategori -->
                                         @if ($item->kategori)
                                             <div class="absolute top-3 right-3">
-                                                <span
-                                                    class="bg-white/95 backdrop-blur-sm text-primary-600 px-2.5 py-1 rounded-full text-xs font-bold shadow-lg border border-primary-100">
+                                                <span class="bg-white/95 backdrop-blur-sm text-primary-600 px-2.5 py-1 rounded-full text-xs font-bold shadow-lg border border-primary-100">
                                                     {{ $item->kategori }}
+                                                </span>
+                                            </div>
+                                        @endif
+
+                                        <!-- Multiple Images Badge -->
+                                        @if ($hasMultipleImages)
+                                            <div class="absolute top-3 left-3">
+                                                <span class="bg-black/70 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs font-medium flex items-center">
+                                                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                                    </svg>
+                                                    {{ count($images) }}
                                                 </span>
                                             </div>
                                         @endif
@@ -364,6 +481,74 @@
             el.addEventListener('click', () => {
                 clearTimeout(timeoutId);
                 removeHighlight();
+            });
+        })();
+
+        // Product Gallery Carousel Functionality
+        (function() {
+            // Initialize carousels for each product
+            document.querySelectorAll('.carousel').forEach(carousel => {
+                const images = carousel.querySelectorAll('.gallery-image');
+                const indicators = carousel.querySelectorAll('.indicator');
+                const prevBtn = carousel.querySelector('.prev-image');
+                const nextBtn = carousel.querySelector('.next-image');
+                let currentIndex = 0;
+
+                function showImage(index) {
+                    images.forEach((img, i) => {
+                        img.classList.toggle('hidden', i !== index);
+                    });
+                    indicators.forEach((indicator, i) => {
+                        indicator.classList.toggle('bg-white', i === index);
+                        indicator.classList.toggle('bg-white/50', i !== index);
+                    });
+                    currentIndex = index;
+                }
+
+                function nextImage() {
+                    const nextIndex = (currentIndex + 1) % images.length;
+                    showImage(nextIndex);
+                }
+
+                function prevImage() {
+                    const prevIndex = (currentIndex - 1 + images.length) % images.length;
+                    showImage(prevIndex);
+                }
+
+                // Event listeners
+                if (nextBtn) nextBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    nextImage();
+                });
+
+                if (prevBtn) prevBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    prevImage();
+                });
+
+                indicators.forEach((indicator, index) => {
+                    indicator.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        showImage(index);
+                    });
+                });
+
+                // Auto-play functionality (optional)
+                let autoplayInterval;
+                function startAutoplay() {
+                    autoplayInterval = setInterval(nextImage, 3000);
+                }
+
+                function stopAutoplay() {
+                    clearInterval(autoplayInterval);
+                }
+
+                // Start autoplay on hover, stop on mouse leave
+                carousel.addEventListener('mouseenter', startAutoplay);
+                carousel.addEventListener('mouseleave', stopAutoplay);
             });
         })();
     </script>

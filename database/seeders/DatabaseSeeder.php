@@ -178,6 +178,9 @@ class DatabaseSeeder extends Seeder
 
         // Call ProdukSeeder
         $this->call(ProdukSeeder::class);
+
+        // Call MitraSeeder
+        $this->call(MitraSeeder::class);
     }
 }
 

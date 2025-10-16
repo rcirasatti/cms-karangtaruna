@@ -21,7 +21,7 @@
             <div class="flex justify-between items-center py-4">
                 <!-- Logo -->
                 <div class="flex items-center space-x-3">
-                    <img src="{{ asset('https://clipground.com/images/logo-karang-taruna-png-5.png') }}"
+                    <img src="https://clipground.com/images/logo-karang-taruna-png-5.png"
                         alt="Logo Karang Taruna" class="h-12">
                     <div class="text-left">
                         <span class="text-xl font-Montserrat font-bold text-white">Karang Taruna</span>
@@ -174,15 +174,19 @@
                 </button>
             </div>
 
-            <!-- Mobile Menu -->
-            <div id="mobile-menu" class="hidden md:hidden pb-4">
+            <!-- Mobile Menu (full-screen overlay) -->
+            <div id="mobile-menu" class="hidden md:hidden fixed inset-0 z-50 transition-transform duration-200 transform">
+                <!-- Use a solid background so the mobile menu covers entire viewport -->
+                <div class="w-full h-full bg-primary-900/95 backdrop-blur-md shadow-xl">
+                    <!-- push content below navbar (navbar height ~64px) -->
+                    <div class="pt-20 py-4 px-4">
                 <a href="{{ route('home') }}"
-                    class="block px-4 py-2 {{ $navTransparent ? 'text-white' : 'text-white' }} {{ $mobileHoverBg }} rounded">Beranda</a>
+                    class="block px-4 py-2 {{ $navTransparent ? 'text-white' : 'text-white' }} {{ $mobileHoverBg }} rounded">Home</a>
 
                 <div class="mobile-dropdown">
                     <button
                         class="mobile-dropdown-button w-full text-left px-4 py-2 text-white {{ $mobileHoverBg }} rounded flex justify-between items-center">
-                        Tentang
+                        About
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
@@ -192,10 +196,7 @@
                         <a href="{{ route('tentang.logo') }}"
                             class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Logo Karang
                             Taruna</a>
-                        <a href="{{ route('tentang.filosofi') }}"
-                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Filosofi
-                            Logo</a>
-                        <a href="{{ route('tentang.profil') }}"
+                                              <a href="{{ route('tentang.profil') }}"
                             class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Profil
                             Organisasi</a>
                     </div>
@@ -204,7 +205,7 @@
                 <div class="mobile-dropdown">
                     <button
                         class="mobile-dropdown-button w-full text-left px-4 py-2 text-white {{ $mobileHoverBg }} rounded flex justify-between items-center">
-                        Visi & Nilai
+                        Profile
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
@@ -227,7 +228,7 @@
                 <div class="mobile-dropdown">
                     <button
                         class="mobile-dropdown-button w-full text-left px-4 py-2 text-white {{ $mobileHoverBg }} rounded flex justify-between items-center">
-                        Kepengurusan
+                        Organization
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
@@ -249,7 +250,7 @@
                 <div class="mobile-dropdown">
                     <button
                         class="mobile-dropdown-button w-full text-left px-4 py-2 text-white {{ $mobileHoverBg }} rounded flex justify-between items-center">
-                        Kegiatan
+                        Gallery
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
@@ -278,14 +279,14 @@
                     </button>
                     <div class="mobile-dropdown-content hidden pl-4">
                         <a href="{{ route('produk.list') }}"
-                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Produk</a>
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Daftar Produk</a>
                         <a href="{{ route('produk.mitra') }}"
-                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Mitra</a>
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Mitra/UMKM</a>
                     </div>
                 </div>
 
                 <a href="{{ route('kontak.index') }}"
-                    class="block px-4 py-2 {{ $navTransparent ? 'text-white' : 'text-white' }} {{ $mobileHoverBg }} rounded">Kontak</a>
+                    class="block px-4 py-2 {{ $navTransparent ? 'text-white' : 'text-white' }} {{ $mobileHoverBg }} rounded">Contact</a>
             </div>
         </div>
     </nav>
@@ -324,6 +325,7 @@
                         <li>Telepon: (021) 1234567</li>
                         <li>WhatsApp: 0812-3456-7890</li>
                     </ul>
+                    </div>
                 </div>
             </div>
             <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
@@ -352,8 +354,21 @@
         } else {
             navbar.classList.add('bg-transparent');
         }
-        document.getElementById('mobile-menu-button').addEventListener('click', function () {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        // Accessibility state
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
+        mobileMenuButton.setAttribute('aria-controls', 'mobile-menu');
+
+        mobileMenuButton.addEventListener('click', function () {
+            // Toggle visibility by toggling transform and pointer events on the mobile menu wrapper
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                mobileMenuButton.setAttribute('aria-expanded', 'true');
+            } else {
+                mobileMenu.classList.add('hidden');
+                mobileMenuButton.setAttribute('aria-expanded', 'false');
+            }
         });
 
         // Mobile Dropdown Toggle
