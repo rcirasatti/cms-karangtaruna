@@ -112,3 +112,97 @@
     animation-delay: 4s;
 }
 
+footer a {
+    position: relative;
+    display: inline-block;
+}
+
+footer a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #EBCB90, #FFF0CE);
+    transition: width 0.15s ease;
+}
+
+footer a:hover::after {
+    width: 100%;
+}
+
+/* Override for long text links in list items */
+footer ul a {
+    white-space: nowrap;
+}
+
+footer .flex.space-x-4 a {
+    display: flex;
+    position: relative;
+}
+
+footer .flex.space-x-4 a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #EBCB90, #FFF0CE);
+    border-radius: 999px;
+    transition: width 0.15s ease;
+}
+
+footer .flex.space-x-4 a:hover::after {
+    width: 24px;
+}
+
+footer .group {
+    position: relative;
+}
+
+footer .group::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(235, 203, 144, 0.3) 0%, transparent 70%);
+    border-radius: 9999px;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+footer .group:hover::before {
+    opacity: 1;
+}
+
+.border-t {
+    position: relative;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+footer h4 {
+    position: relative;
+    display: inline-block;
+    transition: transform 0.15s ease;
+}
+
+footer h4:hover {
+    transform: translateX(4px);
+}
+
+footer .flex.items-start,
+footer .flex.items-center {
+    transition: transform 0.15s ease, padding-left 0.15s ease;
+}
+
+footer .flex.items-start:hover,
+footer .flex.items-center:hover {
+    transform: translateX(4px);
+    padding-left: 4px;
+}
+
