@@ -327,28 +327,38 @@
                     </p>
                     <!-- Social Media -->
                     <div class="flex space-x-4">
-                        <a href="https://www.facebook.com/karangtaruna" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-secondary/20 hover:bg-secondary/40 flex items-center justify-center transition-all duration-150 transform hover:scale-110 group" title="Facebook">
-                            <svg class="w-5 h-5 text-secondary group-hover:text-accent transition-colors duration-150" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.twitter.com/karangtaruna" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-secondary/20 hover:bg-secondary/40 flex items-center justify-center transition-all duration-150 transform hover:scale-110 group" title="Twitter">
-                            <svg class="w-5 h-5 text-secondary group-hover:text-accent transition-colors duration-150" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2s9 5 20 5a9.5 9.5 0 00-9-5.5c4.75 2.25 9-7.27 9-7.27z"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.instagram.com/karangtaruna" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-secondary/20 hover:bg-secondary/40 flex items-center justify-center transition-all duration-150 transform hover:scale-110 group" title="Instagram">
-                            <svg class="w-5 h-5 text-secondary group-hover:text-accent transition-colors duration-150" fill="currentColor" viewBox="0 0 24 24">
-                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
-                                <path d="M16.5 7.5a1 1 0 0 0 0-2 1 1 0 0 0 0 2z" fill="currentColor"/>
-                                <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.youtube.com/channel/karangtaruna" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-secondary/20 hover:bg-secondary/40 flex items-center justify-center transition-all duration-150 transform hover:scale-110 group" title="YouTube">
-                            <svg class="w-5 h-5 text-secondary group-hover:text-accent transition-colors duration-150" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M19.615 3.175c-3.899-.369-11.369-.369-15.268 0-3.899.369-4.613 1.472-4.613 5.365v11.12c0 3.893.692 4.995 4.613 5.364 3.899.369 11.369.369 15.268 0 3.899-.369 4.613-1.471 4.613-5.364V8.54c0-3.893-.692-4.995-4.613-5.365zm-10.615 12.582v-11.391l11.344 5.727-11.344 5.664z"/>
-                            </svg>
-                        </a>
+                        @if(isset($kontak) && $kontak)
+                            @if($kontak->facebook)
+                                <a href="{{ $kontak->facebook }}" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-secondary/20 hover:bg-secondary/40 flex items-center justify-center transition-all duration-150 transform hover:scale-110 group" title="Facebook">
+                                    <svg class="w-5 h-5 text-secondary group-hover:text-accent transition-colors duration-150" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                    </svg>
+                                </a>
+                            @endif
+                            @if($kontak->twitter)
+                                <a href="{{ $kontak->twitter }}" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-secondary/20 hover:bg-secondary/40 flex items-center justify-center transition-all duration-150 transform hover:scale-110 group" title="Twitter">
+                                    <svg class="w-5 h-5 text-secondary group-hover:text-accent transition-colors duration-150" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2s9 5 20 5a9.5 9.5 0 00-9-5.5c4.75 2.25 9-7.27 9-7.27z"/>
+                                    </svg>
+                                </a>
+                            @endif
+                            @if($kontak->instagram)
+                                <a href="{{ $kontak->instagram }}" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-secondary/20 hover:bg-secondary/40 flex items-center justify-center transition-all duration-150 transform hover:scale-110 group" title="Instagram">
+                                    <svg class="w-5 h-5 text-secondary group-hover:text-accent transition-colors duration-150" fill="currentColor" viewBox="0 0 24 24">
+                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
+                                        <path d="M16.5 7.5a1 1 0 0 0 0-2 1 1 0 0 0 0 2z" fill="currentColor"/>
+                                        <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                </a>
+                            @endif
+                            @if($kontak->youtube)
+                                <a href="{{ $kontak->youtube }}" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-secondary/20 hover:bg-secondary/40 flex items-center justify-center transition-all duration-150 transform hover:scale-110 group" title="YouTube">
+                                    <svg class="w-5 h-5 text-secondary group-hover:text-accent transition-colors duration-150" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M19.615 3.175c-3.899-.369-11.369-.369-15.268 0-3.899.369-4.613 1.472-4.613 5.365v11.12c0 3.893.692 4.995 4.613 5.364 3.899.369 11.369.369 15.268 0 3.899-.369 4.613-1.471 4.613-5.364V8.54c0-3.893-.692-4.995-4.613-5.365zm-10.615 12.582v-11.391l11.344 5.727-11.344 5.664z"/>
+                                    </svg>
+                                </a>
+                            @endif
+                        @endif
                     </div>
                 </div>
 
@@ -377,36 +387,45 @@
                 <!-- Contact Information -->
                 <div class="col-span-1">
                     <h4 class="text-lg font-bold mb-4 text-secondary">Hubungi Kami</h4>
+                    @if(isset($kontak) && $kontak)
                     <div class="space-y-4">
+                        @if($kontak->alamat_sekretariat)
                         <div class="flex items-start">
                             <svg class="w-5 h-5 text-secondary mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                             </svg>
-                            <div class="text-sm">
-                                <p class="text-gray-100">Jl. Turus Asri IV No. 6</p>
-                                <p class="text-gray-100">Tembalang, Kota Semarang</p>
-                            </div>
+                            <a href="https://www.google.com/maps/search/{{ urlencode($kontak->alamat_sekretariat) }}" target="_blank" rel="noopener noreferrer" class="text-gray-100 hover:text-secondary transition-colors duration-150 cursor-pointer">
+                                {{ $kontak->alamat_sekretariat }}
+                            </a>
                         </div>
+                        @endif
+                        @if($kontak->telepon)
                         <div class="flex items-center">
                             <svg class="w-5 h-5 text-secondary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 00.948-.684l1.498-4.493a1 1 0 011.502-.684l1.498 4.493a1 1 0 00.948.684H19a2 2 0 012 2v1M3 5h18v13a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"/>
                             </svg>
-                            <a href="tel:+6281276253242" class="text-gray-100 hover:text-secondary transition-colors duration-150">+62 812-7625-3242</a>
+                            <a href="tel:+6281276253242" class="text-gray-100 hover:text-secondary transition-colors duration-150">{{ $kontak->telepon }}</a>
                         </div>
+                        @endif
+                        @if($kontak->whatsapp)
                         <div class="flex items-center">
                             <svg class="w-5 h-5 text-secondary mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                             </svg>
-                            <a href="mailto:omahiot@gmail.com" class="text-gray-100 hover:text-secondary transition-colors duration-150">omahiot@gmail.com</a>
+                            <a href="mailto:{{ $kontak->email }}" class="text-gray-100 hover:text-secondary transition-colors duration-150">{{ $kontak->email }}</a>
                         </div>
+                        @endif
+                        @if($kontak->whatsapp)
                         <div class="flex items-center">
                             <svg class="w-5 h-5 text-secondary mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-5.031 1.378c-3.055 2.116-4.687 5.351-4.687 8.905 0 3.554 1.632 6.789 4.686 8.905 3.055 2.117 7.144 2.117 10.199 0 3.054-2.116 4.687-5.351 4.687-8.905 0-3.554-1.633-6.789-4.687-8.905a9.87 9.87 0 00-5.165-1.378zm0-1.932a11.88 11.88 0 0111.923 11.923c0 6.59-2.953 11.923-11.923 11.923C5.265 23.97.932 21.017.932 14.427.932 7.836 3.886 2.503 11.051 2.503z"/>
                             </svg>
-                            <a href="https://wa.me/6281276253242" target="_blank" rel="noopener noreferrer" class="text-gray-100 hover:text-secondary transition-colors duration-150">Chat WhatsApp</a>
+                            <a href="https://wa.me/{{ $kontak->whatsapp }}" target="_blank" rel="noopener noreferrer" class="text-gray-100 hover:text-secondary transition-colors duration-150">Chat WhatsApp</a>
                         </div>
+                        @endif
                     </div>
+                    @endif
                 </div>
 
                 <!-- Map/Additional Info -->
@@ -542,7 +561,5 @@
 
     {{-- Stacked scripts from child views (e.g. pesanWhatsApp, product highlight) --}}
     @stack('scripts')
-
-</html>
 
 </html>

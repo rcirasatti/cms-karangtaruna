@@ -59,8 +59,19 @@ Route::prefix('galeri')->group(function () {
 // Kontak
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak.index');
 
-// Admin Routes (akan ditambahkan authentication nanti)
+// Admin Authentication Routes
 Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/login', [\App\Http\Controllers\Admin\AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [\App\Http\Controllers\Admin\AuthController::class, 'login'])->name('login.post');
+    Route::post('/logout', [\App\Http\Controllers\Admin\AuthController::class, 'logout'])->name('logout');
+});
+
+// Admin Routes (protected by authentication)
+Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function () {
+    // Dashboard
+    Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+    
+    // Resources
     Route::resource('profile', \App\Http\Controllers\Admin\ProfileController::class);
     Route::resource('visi-misi', \App\Http\Controllers\Admin\VisiMisiController::class);
     Route::resource('kepengurusan', \App\Http\Controllers\Admin\KepengurusanController::class);

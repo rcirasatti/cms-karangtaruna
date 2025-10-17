@@ -176,11 +176,15 @@ class DatabaseSeeder extends Seeder
             FilosofiLogoItem::create($item);
         }
 
+        // Call AdminSeeder
+        $this->call(AdminSeeder::class);
+
         // Call ProdukSeeder
         $this->call(ProdukSeeder::class);
 
         // Call MitraSeeder
         $this->call(MitraSeeder::class);
+
     }
 }
 

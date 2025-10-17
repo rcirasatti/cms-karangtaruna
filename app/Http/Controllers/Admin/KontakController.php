@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kontak;
 use Illuminate\Http\Request;
 
 class KontakController extends Controller
@@ -12,7 +13,18 @@ class KontakController extends Controller
      */
     public function index()
     {
-        //
+        $kontak = Kontak::first() ?? Kontak::create([
+            'alamat_sekretariat' => '',
+            'telepon' => '',
+            'whatsapp' => '',
+            'email' => '',
+            'instagram' => '',
+            'facebook' => '',
+            'twitter' => '',
+            'youtube' => ''
+        ]);
+        
+        return view('admin.kontak.index', compact('kontak'));
     }
 
     /**
@@ -52,7 +64,27 @@ class KontakController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'alamat_sekretariat' => 'nullable|string|max:500',
+                'telepon' => 'nullable|string|max:20',
+                'whatsapp' => 'nullable|string|max:20',
+                'email' => 'nullable|email|max:100',
+                'instagram' => 'nullable|string|max:100',
+                'facebook' => 'nullable|string|max:100',
+                'twitter' => 'nullable|string|max:100',
+                'youtube' => 'nullable|string|max:100'
+            ]);
+
+            $kontak = Kontak::findOrFail($id);
+            $kontak->update($validated);
+
+            return redirect()->route('admin.kontak.index')
+                ->with('success', 'Data kontak berhasil diperbarui!');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.kontak.index')
+                ->with('error', 'Gagal memperbarui data kontak. Silakan coba lagi.');
+        }
     }
 
     /**
