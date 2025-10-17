@@ -8,26 +8,39 @@ echo "==================================="
 PORT=${PORT:-8000}
 echo "Using PORT: $PORT"
 
-# Wait longer for database to be ready
-echo "Waiting for database connection..."
+# Force SQLite if no DB_CONNECTION is set
+if [ -z "$DB_CONNECTION" ]; then
+    export DB_CONNECTION=sqlite
+    echo "DB_CONNECTION not set, using SQLite"
+fi
+
+# Ensure database directory exists
+mkdir -p storage/database
+export DB_DATABASE=${DB_DATABASE:-storage/database/database.sqlite}
+
+echo "Database Connection: $DB_CONNECTION"
+echo "Database Path: $DB_DATABASE"
+
+# Wait longer for database to be ready (for MySQL/PostgreSQL if configured)
+echo "Waiting for database..."
 for i in {1..30}; do
     echo "Attempt $i/30..."
     sleep 2
 done
 
-# Try to run migrations if database is available
+# Try to run migrations
 echo "Attempting database migrations..."
 php artisan migrate --force 2>&1 || {
-    echo "Note: Database operations skipped - this is OK if DB_CONNECTION=sqlite"
-    echo "Creating sqlite database file if needed..."
-    php artisan db:create 2>&1 || true
+    echo "⚠️  Database migration skipped"
 }
 
 # Try seeders (optional)
 echo "Attempting database seeding..."
-php artisan db:seed --force 2>&1 || echo "Seeding skipped (this is OK)"
+php artisan db:seed --force 2>&1 || {
+    echo "⚠️  Database seeding skipped"
+}
 
-# Optimize the app regardless of DB status
+# Optimize the app
 echo "Optimizing application..."
 php artisan config:clear 2>&1 || true
 php artisan cache:clear 2>&1 || true
