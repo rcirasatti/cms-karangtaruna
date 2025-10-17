@@ -11,24 +11,18 @@ class KepengurusanController extends Controller
     public function index()
     {
         $pengurus = Kepengurusan::orderBy('urutan')->get();
-        return view('frontend.kepengurusan.index', compact('pengurus'));
+        return view('frontend.organisasi.index', compact('pengurus'));
     }
 
     public function struktur()
     {
         $pengurus = Kepengurusan::orderBy('urutan')->get();
-        return view('frontend.kepengurusan.struktur', compact('pengurus'));
-    }
-
-    public function tugas()
-    {
-        $pengurus = Kepengurusan::whereNotNull('tugas')->orderBy('urutan')->get();
-        return view('frontend.kepengurusan.tugas', compact('pengurus'));
+        return view('frontend.organisasi.index', compact('pengurus'));
     }
 
     public function tokohUtama()
     {
         $tokoh = Kepengurusan::where('is_tokoh_utama', true)->orderBy('urutan')->get();
-        return view('frontend.kepengurusan.tokoh', compact('tokoh'));
+        return view('frontend.organisasi.index', compact('tokoh'));
     }
 }
