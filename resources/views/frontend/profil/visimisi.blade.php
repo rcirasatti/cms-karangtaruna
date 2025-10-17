@@ -48,8 +48,8 @@
                 <div class="m-4 md:m-20">
                     <!-- Vision Section -->
                     <div id="vision" class="relative flex flex-col md:flex-row mb-10 scroll-mt-24">
-                        <div class="md:w-[400px] bg-gray-100 md:absolute">
-                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop"
+                        <div class="md:w-[400px] bg-gray-100 md:absolute shadow-xl hover:scale-105">
+                            <img src="https://thvnext.bing.com/th/id/OIP.zoeZaZ3NDCrAh-Z7sK67rgHaFx?o=7&cb=12rm=3&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
                                 alt="Vision" class="w-full h-full object-cover">
                         </div>
                         <div
@@ -70,8 +70,8 @@
                                 <p class="whitespace-pre-line">{{ $visiMisi->misi }}</p>
                             </div>
                         </div>
-                        <div class="md:w-[400px] bg-gray-100 md:absolute right-0 top-0">
-                            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop"
+                        <div class="md:w-[400px] bg-gray-100 md:absolute right-0 top-0 shadow-xl hover:scale-105">
+                            <img src="https://assets.radarcirebon.id/main/2023/03/karta-1000x675.webp"
                                 alt="Mission" class="w-full h-full object-cover">
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                                 <div
                                     class="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105">
                                     <div class="relative h-48 overflow-hidden">
-                                        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&h=600&fit=crop"
+                                        <img src="https://desagontor.com/wp-content/uploads/2023/03/KARANG-TARUNA-1536x864.jpg"
                                             alt="Tujuan" class="w-full h-full object-cover">
                                         <div class="absolute inset-0 bg-gradient-to-t from-primary-900/90 to-transparent"></div>
                                         <div class="absolute bottom-0 left-0 p-6">
