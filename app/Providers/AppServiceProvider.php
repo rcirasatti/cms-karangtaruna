@@ -27,10 +27,7 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        // Share kontak data to all views that use layouts.app
-        View::composer('layouts.app', function ($view) {
-            $kontak = Kontak::first();
-            $view->with('kontak', $kontak);
-        });
+        // Share kontak data to all views
+        View::share('kontak', Kontak::first());
     }
 }

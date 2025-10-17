@@ -364,7 +364,7 @@
                                     
                                     <!-- Tombol Pesan WhatsApp -->
                                     <button
-                                        onclick="pesanWhatsApp({!! json_encode($item->nama_produk) !!}, {!! json_encode($item->harga ? 'Rp ' . number_format($item->harga, 0, ',', '.') : 'Hubungi untuk info harga') !!})"
+                                        onclick="pesanWhatsApp('{{ addslashes($item->nama_produk) }}', '{{ $item->harga ? 'Rp ' . number_format($item->harga, 0, ',', '.') : 'Hubungi untuk info harga' }}')"
                                         aria-label="{{ 'Pesan ' . e($item->nama_produk) . ' via WhatsApp' }}"
                                         class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white py-2.5 px-3 rounded-lg font-semibold text-sm transition-all duration-300 flex items-center justify-center space-x-2 shadow-md hover:shadow-lg mt-auto">
                                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -638,20 +638,27 @@
     <script>
         function pesanWhatsApp(namaProduk, harga) {
             // Nomor WhatsApp Admin dari database
-            @if (isset($kontak) && $kontak && $kontak->whatsapp)
-                const nomorAdmin = '{{ $kontak->whatsapp }}';
-            @else
-                const nomorAdmin = '6285725040030'; // Nomor default jika belum diset
-                console.warn('Nomor WhatsApp admin belum diatur di database');
-            @endif
+            let nomorAdmin = '{{ isset($kontak) && $kontak && $kontak->whatsapp ? $kontak->whatsapp : "6285725040030" }}';
+            
+            // Hapus format yang tidak diperlukan dari nomor WhatsApp
+            nomorAdmin = nomorAdmin.replace(/\D/g, '');
+            
+            // Pastikan format +62
+            if (!nomorAdmin.startsWith('62')) {
+                if (nomorAdmin.startsWith('0')) {
+                    nomorAdmin = '62' + nomorAdmin.substring(1);
+                } else if (!nomorAdmin.startsWith('62')) {
+                    nomorAdmin = '62' + nomorAdmin;
+                }
+            }
 
             // Template pesan
             const pesan = `Halo Admin Karang Taruna,
 
 Saya tertarik dengan produk berikut:
 
-📦 Produk: *${namaProduk}*
-💰 Harga: *${harga}*
+📦 Produk: ${namaProduk}
+💰 Harga: ${harga}
 
 Mohon informasi lebih lanjut mengenai produk ini.
 
@@ -663,6 +670,8 @@ Terima kasih!`;
             // Buat URL WhatsApp
             const urlWhatsApp = `https://wa.me/${nomorAdmin}?text=${pesanEncoded}`;
 
+            console.log('Mengirim pesan WhatsApp ke:', nomorAdmin);
+            
             // Buka WhatsApp di tab baru
             window.open(urlWhatsApp, '_blank');
         }
