@@ -19,7 +19,7 @@
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
-                    <span class="text-white font-medium">Profil Organisasi</span>
+                    <span class="text-white font-medium">Sejarah Organisasi</span>
                 </nav>
 
                 <!-- Title dengan Icon -->
@@ -31,7 +31,7 @@
                         </svg>
                     </div>
                     <div>
-                        <h1 class="text-5xl font-bold tracking-tight">Profil Organisasi</h1>
+                        <h1 class="text-5xl font-bold tracking-tight">Sejarah Organisasi</h1>
                     </div>
                 </div>
             </div>
