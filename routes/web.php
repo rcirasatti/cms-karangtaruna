@@ -22,11 +22,10 @@ Route::prefix('tentang')->group(function () {
 
 // Visi & Nilai
 Route::prefix('visi-nilai')->group(function () {
-    Route::get('/', [VisiMisiController::class, 'index'])->name('visi.index');
-    Route::get('/visi', [VisiMisiController::class, 'visi'])->name('visi.visi');
-    Route::get('/misi', [VisiMisiController::class, 'misi'])->name('visi.misi');
-    Route::get('/tujuan-fungsi', [VisiMisiController::class, 'tujuanFungsi'])->name('visi.tujuan');
-    Route::get('/nilai-dasar', [VisiMisiController::class, 'nilaiDasar'])->name('visi.nilai');
+    Route::get('/', [VisiMisiController::class, 'index'])->name('profil.index');
+    Route::get('/visimisi', [VisiMisiController::class, 'visi'])->name('profil.visimisi');
+    Route::get('/tujuan-fungsi', [VisiMisiController::class, 'tujuanFungsi'])->name('profil.tujuan');
+    Route::get('/nilai-dasar', [VisiMisiController::class, 'nilaiDasar'])->name('profil.nilai');
 });
 
 // Kepengurusan
