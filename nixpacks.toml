@@ -1,0 +1,9 @@
+[build]
+cmds = [
+  "composer install --no-dev",
+  "npm install",
+  "npm run build"
+]
+
+[start]
+cmd = "bash railway-start.sh"
