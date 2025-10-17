@@ -40,7 +40,7 @@
     </div>
 
     @if($pengurus && $pengurus->count() > 0)
-        <div class="bg-gradient-to-b from-gray-900 to-gray-800 py-20">
+        <div class="py-20">
             <div class="container mx-auto px-4">
                 <!-- Tokoh Utama Section -->
                 @php
