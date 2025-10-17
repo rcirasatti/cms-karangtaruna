@@ -2,7 +2,7 @@
 cmds = [
   "composer install --no-dev",
   "npm install",
-  "npm run build"
+  "npm run build || { echo 'Build failed'; exit 1; }"
 ]
 
 [start]
