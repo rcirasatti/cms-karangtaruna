@@ -1,5 +1,0 @@
-# Alternative Procfile - Skip auto-migration
-# Gunakan ini jika release phase terus error
-# Run migration manual: railway run php artisan migrate:fresh --seed
-
-web: vendor/bin/heroku-php-apache2 public/

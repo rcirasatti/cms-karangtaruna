@@ -19,11 +19,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create Admin User - will be handled by AdminSeeder
-        // User::factory()->create([
-        //     'name' => 'Admin',
-        //     'email' => 'admin@karangtaruna.com',
-        // ]);
+        // Call AdminSeeder first to create admin user
+        $this->call(AdminSeeder::class);
 
         // Create Profile
         Profile::create([
@@ -175,9 +172,6 @@ class DatabaseSeeder extends Seeder
         foreach ($filosofiItems as $item) {
             FilosofiLogoItem::create($item);
         }
-
-        // Call AdminSeeder
-        $this->call(AdminSeeder::class);
 
         // Call ProdukSeeder
         $this->call(ProdukSeeder::class);
