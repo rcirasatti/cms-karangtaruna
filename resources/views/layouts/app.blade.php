@@ -423,7 +423,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M3 5a2 2 0 012-2h3.28a1 1 0 00.948-.684l1.498-4.493a1 1 0 011.502-.684l1.498 4.493a1 1 0 00.948.684H19a2 2 0 012 2v1M3 5h18v13a2 2 0 01-2 2H5a2 2 0 01-2-2V5z" />
                             </svg>
-                            <a href="tel:+6281276253242" class="text-gray-100 hover:text-secondary transition-colors duration-150">{{ $kontak->telepon }}</a>
+                            <a href="tel:{{ $kontak->telepon }}" class="text-gray-100 hover:text-secondary transition-colors duration-150">{{ $kontak->telepon }}</a>
                         </div>
                         @endif
                         @if($kontak->whatsapp)
