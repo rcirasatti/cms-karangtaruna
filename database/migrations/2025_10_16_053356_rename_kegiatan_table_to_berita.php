@@ -11,7 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::rename('kegiatan', 'berita');
+        // Table already renamed - skipping
+        if (Schema::hasTable('kegiatan') && !Schema::hasTable('berita')) {
+            Schema::rename('kegiatan', 'berita');
+        }
     }
 
     /**
@@ -19,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::rename('berita', 'kegiatan');
+        // Skipping rollback
     }
 };

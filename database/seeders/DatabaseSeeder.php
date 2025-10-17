@@ -19,11 +19,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create Admin User
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@karangtaruna.com',
-        ]);
+        // Create Admin User - will be handled by AdminSeeder
+        // User::factory()->create([
+        //     'name' => 'Admin',
+        //     'email' => 'admin@karangtaruna.com',
+        // ]);
 
         // Create Profile
         Profile::create([
