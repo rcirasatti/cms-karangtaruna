@@ -27,7 +27,9 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        // Share kontak data to all views
-        View::share('kontak', Kontak::first());
+        // Share kontak data to all views (only in HTTP requests, not console commands)
+        if (!app()->runningInConsole()) {
+            View::share('kontak', Kontak::first());
+        }
     }
 }
