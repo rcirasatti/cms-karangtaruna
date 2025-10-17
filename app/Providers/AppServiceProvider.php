@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\URL;
 use App\Models\Kontak;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,6 +22,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Force HTTPS in production (Railway uses HTTPS)
+        if (env('APP_ENV') === 'production' && env('APP_DEBUG') === false) {
+            URL::forceScheme('https');
+        }
+
         // Share kontak data to all views that use layouts.app
         View::composer('layouts.app', function ($view) {
             $kontak = Kontak::first();
