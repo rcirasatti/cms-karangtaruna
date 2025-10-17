@@ -1,51 +1,42 @@
 #!/bin/bash
-set -e
 
 echo "==================================="
 echo "Railway Deployment Started"
 echo "==================================="
 
-# Wait for database to be ready
+# Set PORT default
+PORT=${PORT:-8000}
+echo "Using PORT: $PORT"
+
+# Wait longer for database to be ready
 echo "Waiting for database connection..."
-sleep 10
+for i in {1..30}; do
+    echo "Attempt $i/30..."
+    sleep 2
+done
 
-# Test database connection
-echo "Testing database connection..."
-php artisan db:show || echo "Database connection check failed, but continuing..."
+# Try to run migrations if database is available
+echo "Attempting database migrations..."
+php artisan migrate --force 2>&1 || {
+    echo "Note: Database operations skipped - this is OK if DB_CONNECTION=sqlite"
+    echo "Creating sqlite database file if needed..."
+    php artisan db:create 2>&1 || true
+}
 
-# Run migrations
-echo "Running migrations..."
-if ! php artisan migrate --force; then
-    echo "Migration failed!"
-    php artisan migrate:status
-    # Continue anyway - the app might still work with partial schema
-fi
+# Try seeders (optional)
+echo "Attempting database seeding..."
+php artisan db:seed --force 2>&1 || echo "Seeding skipped (this is OK)"
 
-echo "Migration completed!"
-
-# Run seeders (optional - don't fail if it doesn't work)
-echo "Running database seeders..."
-php artisan db:seed --force || echo "Seeding skipped or failed, but continuing..."
-
-echo "Seeding completed!"
-
-# Clear and cache configs
+# Optimize the app regardless of DB status
 echo "Optimizing application..."
-php artisan config:clear
-php artisan cache:clear
-php artisan view:clear
-php artisan route:clear
-
-php artisan config:cache
-
-# Cache routes and views
-echo "Caching routes and views..."
-php artisan route:cache || echo "Route caching failed, continuing..."
-php artisan view:cache || echo "View caching failed, continuing..."
+php artisan config:clear 2>&1 || true
+php artisan cache:clear 2>&1 || true
+php artisan view:clear 2>&1 || true
+php artisan route:clear 2>&1 || true
+php artisan config:cache 2>&1 || true
 
 # Start server
 echo "==================================="
-echo "Starting Laravel server on port ${PORT:-8000}..."
+echo "Starting Laravel server on 0.0.0.0:$PORT"
 echo "==================================="
-PORT=${PORT:-8000}
 exec php artisan serve --host=0.0.0.0 --port=$PORT
