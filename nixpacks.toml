@@ -10,6 +10,8 @@ nixpkgs = ["php82", "php82Extensions.mysql", "php82Extensions.pdo", "composer", 
 
 [phases.build]
 cmds = [
+    "mkdir -p bootstrap/cache storage/logs",
+    "chmod -R 775 bootstrap/cache storage",
     "composer install --no-dev --optimize-autoloader",
     "npm install",
     "npm run build",

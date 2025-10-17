@@ -1,7 +1,11 @@
 #!/bin/bash
 set -e
 
-echo "🔄 Waiting for database to be ready..."
+echo "� Creating required directories..."
+mkdir -p bootstrap/cache storage/logs
+chmod -R 775 bootstrap/cache storage
+
+echo "�🔄 Waiting for database to be ready..."
 
 # Retry logic untuk menunggu database siap
 for i in {1..60}; do
