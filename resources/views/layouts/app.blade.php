@@ -99,15 +99,10 @@
                         <div
                             class="{{ $navTransparent ? 'absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-primary-900/80 ring-1 ring-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300' : 'absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300' }}">
                             <div class="py-1">
-                                <a href="{{ route('kepengurusan.struktur') }}"
-                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Struktur
-                                    Pengurus</a>
-                                <a href="{{ route('kepengurusan.tugas') }}"
-                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Tugas
-                                    Pengurus</a>
-                                <a href="{{ route('kepengurusan.tokoh') }}"
-                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Tokoh
-                                    Utama</a>
+                                <a href="{{ route('kepengurusan.index') }}#tokoh_utama"
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Tokoh Utama</a>
+                                <a href="{{ route('kepengurusan.index') }}#struktur_pengurus"
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Struktur Kepengurusan</a>
                             </div>
                         </div>
                     </div>
@@ -249,15 +244,10 @@
                         </svg>
                     </button>
                     <div class="mobile-dropdown-content hidden pl-4">
-                        <a href="{{ route('kepengurusan.struktur') }}"
-                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Struktur
-                            Pengurus</a>
-                        <a href="{{ route('kepengurusan.tugas') }}"
-                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Tugas
-                            Pengurus</a>
-                        <a href="{{ route('kepengurusan.tokoh') }}"
-                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Tokoh
-                            Utama</a>
+                        <a href="{{ route('kepengurusan.index') }}#tokoh_utama"
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Tokoh Utama</a>
+                        <a href="{{ route('kepengurusan.index') }}#struktur_pengurus"
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Struktur Pengurus</a>
                     </div>
                 </div>
 

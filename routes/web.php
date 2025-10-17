@@ -32,7 +32,6 @@ Route::prefix('visi-nilai')->group(function () {
 Route::prefix('kepengurusan')->group(function () {
     Route::get('/', [KepengurusanController::class, 'index'])->name('kepengurusan.index');
     Route::get('/struktur', [KepengurusanController::class, 'struktur'])->name('kepengurusan.struktur');
-    Route::get('/tugas', [KepengurusanController::class, 'tugas'])->name('kepengurusan.tugas');
     Route::get('/tokoh-utama', [KepengurusanController::class, 'tokohUtama'])->name('kepengurusan.tokoh');
 });
 

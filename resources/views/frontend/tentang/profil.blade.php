@@ -31,7 +31,8 @@
                         </svg>
                     </div>
                     <div>
-                        <h1 class="text-5xl font-bold tracking-tight">Sejarah Organisasi</h1>
+                        <h1 class="text-4xl md:text-5xl font-bold tracking-tight">Sejarah Organisasi</h1>
+                        <p class="mt-2 text-xl text-blue-100">Didirikan sebagai wadah pemuda dalam menggerakkan kegiatan sosial dan kemasyarakatan</p>
                     </div>
                 </div>
             </div>
