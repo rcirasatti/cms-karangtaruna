@@ -6,10 +6,10 @@
 
     @if($profile)
         <!-- Logo Section with Modern Design -->
-        <div class="mx-auto px-20 py-20 bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 w-full">
-            <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -mr-32 -mt-32"></div>
-            <div class="absolute bottom-0 left-0 w-96 h-96 bg-white opacity-5 rounded-full -ml-48 -mb-48"></div>
-            <div class="grid lg:grid-cols-2 gap-16 items-center mt-16">
+        <div class="relative mx-auto px-4 md:px-8 lg:px-20 py-12 md:py-16 lg:py-20 bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 w-full overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 bg-white opacity-5 rounded-full -mr-16 md:-mr-24 lg:-mr-32 -mt-16 md:-mt-24 lg:-mt-32"></div>
+            <div class="absolute bottom-0 left-0 w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 bg-white opacity-5 rounded-full -ml-24 md:-ml-36 lg:-ml-48 -mb-24 md:-mb-36 lg:-mb-48"></div>
+            <div class="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center mt-8 md:mt-12 lg:mt-16 relative z-10">
                 <div class="relative">
                     <div class="absolute">
                     </div>
