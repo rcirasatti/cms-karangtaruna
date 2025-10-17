@@ -15,11 +15,7 @@
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
-                    <span class="text-blue-200">About</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                    <span class="text-white font-medium">Profil Organisasi</span>
+                    <span class="text-blue-200">Profil</span>
                 </nav>
 
                 <!-- Title dengan Icon -->
@@ -31,7 +27,8 @@
                         </svg>
                     </div>
                     <div>
-                        <h1 class="text-5xl font-bold tracking-tight">Profil Organisasi</h1>
+                        <h1 class="text-4xl md:text-5xl font-bold tracking-tight">Profil Organisasi</h1>
+                        <p class="mt-2 text-xl text-blue-100">Organisasi kepemudaan untuk pengembangan dan pemberdayaan masyarakat</p>
                     </div>
                 </div>
             </div>

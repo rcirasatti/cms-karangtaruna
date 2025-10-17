@@ -31,7 +31,8 @@
                         </svg>
                     </div>
                     <div>
-                        <h1 class="text-5xl font-bold tracking-tight">Struktur Organisasi</h1>
+                        <h1 class="text-4xl md:text-5xl font-bold tracking-tight">Struktur Organisasi</h1>
+                        <p class="mt-2 text-xl text-blue-100">Susunan kepengurusan yang mendukung kerja tim, memperkuat komunikasi, dan mempercepat eksekusi kegiatan</p>
                     </div>
                 </div>
             </div>
