@@ -1,6 +1,6 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-H3D8O_rL.css",
+    "file": "assets/app-C0veYv_p.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "names": [
@@ -11,6 +11,12 @@
     "file": "assets/app-Bj43h_rG.js",
     "name": "app",
     "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/form-validation.js": {
+    "file": "assets/form-validation-BFyVgNJ1.js",
+    "name": "form-validation",
+    "src": "resources/js/form-validation.js",
     "isEntry": true
   }
 }

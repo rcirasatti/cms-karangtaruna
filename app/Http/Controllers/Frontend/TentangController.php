@@ -18,7 +18,7 @@ class TentangController extends Controller
     public function logo()
     {
         $profile = Profile::first();
-        $filosofiItems = FilosofiLogoItem::active()->ordered()->get();
+        $filosofiItems = FilosofiLogoItem::ordered()->get();
         return view('frontend.tentang.logo', compact('profile', 'filosofiItems'));
     }
 

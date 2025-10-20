@@ -15,8 +15,8 @@ return new class extends Migration {
             $table->string('title'); // Judul item filosofi (misal: Desain Unik, Warna Merah)
             $table->text('description'); // Deskripsi filosofi
             $table->string('icon')->nullable(); // Nama icon (optional)
+            $table->string('gambar')->nullable(); // Path gambar (optional)
             $table->integer('urutan')->default(0); // Urutan tampilan
-            $table->boolean('is_active')->default(true); // Status aktif/nonaktif
             $table->timestamps();
         });
     }

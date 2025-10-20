@@ -68,10 +68,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function () {
     // Dashboard
     Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
-    
+
     // Resources
     Route::resource('profile', \App\Http\Controllers\Admin\ProfileController::class);
-    Route::resource('visi-misi', \App\Http\Controllers\Admin\VisiMisiController::class);
+    Route::resource('about/logo', \App\Http\Controllers\Admin\AboutController::class);
+    Route::get('/about/logo', [\App\Http\Controllers\Admin\AboutController::class, 'logo'])->name('about.logo');
+    Route::put('/about/logo', [\App\Http\Controllers\Admin\AboutController::class, 'update_logo'])->name('about.logo.update');
+    Route::get('/about/sejarah', [\App\Http\Controllers\Admin\AboutController::class, 'sejarah'])->name('about.sejarah');
+    Route::put('/about/sejarah', [\App\Http\Controllers\Admin\AboutController::class, 'update_sejarah'])->name('about.sejarah.update');
     Route::resource('kepengurusan', \App\Http\Controllers\Admin\KepengurusanController::class);
     Route::resource('berita', \App\Http\Controllers\Admin\BeritaController::class);
     Route::resource('produk', \App\Http\Controllers\Admin\ProdukController::class);

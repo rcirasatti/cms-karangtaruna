@@ -10,19 +10,9 @@ class FilosofiLogoItem extends Model
         'title',
         'description',
         'icon',
-        'urutan',
-        'is_active'
+        'gambar',
+        'urutan'
     ];
-
-    protected $casts = [
-        'is_active' => 'boolean',
-    ];
-
-    // Scope untuk hanya mengambil item yang aktif
-    public function scopeActive($query)
-    {
-        return $query->where('is_active', true);
-    }
 
     // Scope untuk mengurutkan berdasarkan urutan
     public function scopeOrdered($query)

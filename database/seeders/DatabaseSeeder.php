@@ -137,35 +137,30 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Melambangkan keberanian, semangat juang, dan dedikasi para pemuda dalam menghadapi tantangan serta berkontribusi untuk masyarakat.',
                 'icon' => 'fire',
                 'urutan' => 1,
-                'is_active' => true
             ],
             [
                 'title' => 'Warna Kuning',
                 'description' => 'Melambangkan kemakmuran, harapan cerah, dan optimisme untuk masa depan generasi muda yang gemilang dan penuh prestasi.',
                 'icon' => 'sun',
                 'urutan' => 2,
-                'is_active' => true
             ],
             [
                 'title' => 'Warna Hijau',
                 'description' => 'Melambangkan pertumbuhan, kesegaran, kehidupan yang dinamis, serta kesinambungan pembangunan karakter pemuda yang terus berkembang.',
                 'icon' => 'leaf',
                 'urutan' => 3,
-                'is_active' => true
             ],
             [
                 'title' => 'Bentuk Lingkaran',
                 'description' => 'Melambangkan persatuan, kesatuan, kebersamaan, dan kekompakan dalam organisasi yang tidak terputus dan terus bersinergi.',
                 'icon' => 'circle',
                 'urutan' => 4,
-                'is_active' => true
             ],
             [
                 'title' => 'Simbol Bunga Teratai',
                 'description' => 'Melambangkan kesucian, ketahanan, dan kemampuan tumbuh di berbagai kondisi, mencerminkan kekuatan pemuda dalam menghadapi situasi apapun.',
                 'icon' => 'flower',
                 'urutan' => 5,
-                'is_active' => false
             ]
         ];
 
