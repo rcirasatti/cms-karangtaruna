@@ -162,11 +162,13 @@
                 </tbody>
             </table>
         </div>
-    </div>
 
-    <!-- Pagination -->
-    <div class="flex justify-center">
-        {{ $produk->links() }}
+        <!-- Pagination -->
+        @if($produk->hasPages())
+            <div class="bg-gray-50 px-6 py-4 border-t border-gray-200">
+                {{ $produk->links() }}
+            </div>
+        @endif
     </div>
 
     <!-- Delete Modal -->
