@@ -167,8 +167,14 @@
                         <!-- Mitra Info -->
                         <div class="flex justify-center items-center space-x-6">
                             @if($mitra->count() > 0)
-                                <div class="w-20 h-20 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-lg ring-4 ring-accent/30" id="active-avatar">
-                                    {{ substr($mitra->first()->nama_mitra ?? 'M', 0, 2) }}
+                                <div id="active-avatar-container">
+                                    @if($mitra->first()->logo)
+                                        <img src="{{ asset('storage/' . $mitra->first()->logo) }}" alt="{{ $mitra->first()->nama_mitra }}" class="w-20 h-20 rounded-full object-cover shadow-lg ring-4 ring-accent/30" id="active-avatar">
+                                    @else
+                                        <div class="w-20 h-20 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-lg ring-4 ring-accent/30" id="active-avatar">
+                                            {{ substr($mitra->first()->nama_mitra ?? 'M', 0, 2) }}
+                                        </div>
+                                    @endif
                                 </div>
                                 <div class="text-left">
                                     <h4 class="font-bold text-gray-900 text-2xl mb-2" id="active-nama">{{ $mitra->first()->nama_mitra ?? 'Memuat...' }}</h4>
@@ -220,10 +226,14 @@
                             <div class="relative bg-white rounded-2xl p-6 transition-all duration-300 hover:shadow-xl border-2 border-gray-100 group-hover:border-primary-300 w-[280px] h-[280px] overflow-hidden">
                                 <!-- Content Wrapper - Normal State -->
                                 <div class="absolute inset-0 p-6 flex flex-col items-center justify-center transition-opacity duration-300 group-hover:opacity-0 z-10">
-                                    <!-- Logo Placeholder -->
-                                    <div class="w-24 h-24 bg-gradient-to-br from-primary-400 to-primary-600 rounded-xl flex items-center justify-center text-white font-bold text-2xl shadow-lg mb-4 flex-shrink-0">
-                                        {{ substr($item->nama_mitra, 0, 2) }}
-                                    </div>
+                                    <!-- Logo or Avatar -->
+                                    @if($item->logo)
+                                        <img src="{{ asset('storage/' . $item->logo) }}" alt="{{ $item->nama_mitra }}" class="w-24 h-24 object-cover rounded-xl shadow-lg mb-4 flex-shrink-0">
+                                    @else
+                                        <div class="w-24 h-24 bg-gradient-to-br from-primary-400 to-primary-600 rounded-xl flex items-center justify-center text-white font-bold text-2xl shadow-lg mb-4 flex-shrink-0">
+                                            {{ substr($item->nama_mitra, 0, 2) }}
+                                        </div>
+                                    @endif
                                     <!-- Mitra Name -->
                                     <h4 class="font-bold text-gray-900 text-center text-lg mb-2 line-clamp-2 px-2">{{ $item->nama_mitra }}</h4>
                                     <p class="text-primary-600 font-semibold text-center text-sm">{{ $item->jenis }}</p>
@@ -231,9 +241,13 @@
 
                                 <!-- Hover Details - Full Card Overlay -->
                                 <div class="absolute inset-0 p-6 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary-50 to-accent/20 z-20">
-                                    <div class="w-16 h-16 bg-gradient-to-br from-primary-400 to-primary-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg mb-3 flex-shrink-0">
-                                        {{ substr($item->nama_mitra, 0, 2) }}
-                                    </div>
+                                    @if($item->logo)
+                                        <img src="{{ asset('storage/' . $item->logo) }}" alt="{{ $item->nama_mitra }}" class="w-16 h-16 object-cover rounded-xl shadow-lg mb-3 flex-shrink-0">
+                                    @else
+                                        <div class="w-16 h-16 bg-gradient-to-br from-primary-400 to-primary-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg mb-3 flex-shrink-0">
+                                            {{ substr($item->nama_mitra, 0, 2) }}
+                                        </div>
+                                    @endif
                                     <h4 class="font-bold text-gray-900 text-center text-base mb-2 line-clamp-2 px-2">{{ $item->nama_mitra }}</h4>
                                     <p class="text-primary-600 font-semibold text-center text-xs mb-3">{{ $item->jenis }}</p>
                                     <p class="text-gray-700 text-xs text-center leading-relaxed line-clamp-5 px-2">{{ $item->deskripsi }}</p>
@@ -254,10 +268,14 @@
                             <div class="relative bg-white rounded-2xl p-6 transition-all duration-300 hover:shadow-xl border-2 border-gray-100 group-hover:border-primary-300 w-[280px] h-[280px] overflow-hidden">
                                 <!-- Content Wrapper - Normal State -->
                                 <div class="absolute inset-0 p-6 flex flex-col items-center justify-center transition-opacity duration-300 group-hover:opacity-0 z-10">
-                                    <!-- Logo Placeholder -->
-                                    <div class="w-24 h-24 bg-gradient-to-br from-primary-400 to-primary-600 rounded-xl flex items-center justify-center text-white font-bold text-2xl shadow-lg mb-4 flex-shrink-0">
-                                        {{ substr($item->nama_mitra, 0, 2) }}
-                                    </div>
+                                    <!-- Logo or Avatar -->
+                                    @if($item->logo)
+                                        <img src="{{ asset('storage/' . $item->logo) }}" alt="{{ $item->nama_mitra }}" class="w-24 h-24 object-cover rounded-xl shadow-lg mb-4 flex-shrink-0">
+                                    @else
+                                        <div class="w-24 h-24 bg-gradient-to-br from-primary-400 to-primary-600 rounded-xl flex items-center justify-center text-white font-bold text-2xl shadow-lg mb-4 flex-shrink-0">
+                                            {{ substr($item->nama_mitra, 0, 2) }}
+                                        </div>
+                                    @endif
                                     <!-- Mitra Name -->
                                     <h4 class="font-bold text-gray-900 text-center text-lg mb-2 line-clamp-2 px-2">{{ $item->nama_mitra }}</h4>
                                     <p class="text-primary-600 font-semibold text-center text-sm">{{ $item->jenis }}</p>
@@ -265,9 +283,13 @@
 
                                 <!-- Hover Details - Full Card Overlay -->
                                 <div class="absolute inset-0 p-6 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-primary-50 to-accent/20 z-20">
-                                    <div class="w-16 h-16 bg-gradient-to-br from-primary-400 to-primary-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg mb-3 flex-shrink-0">
-                                        {{ substr($item->nama_mitra, 0, 2) }}
-                                    </div>
+                                    @if($item->logo)
+                                        <img src="{{ asset('storage/' . $item->logo) }}" alt="{{ $item->nama_mitra }}" class="w-16 h-16 object-cover rounded-xl shadow-lg mb-3 flex-shrink-0">
+                                    @else
+                                        <div class="w-16 h-16 bg-gradient-to-br from-primary-400 to-primary-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg mb-3 flex-shrink-0">
+                                            {{ substr($item->nama_mitra, 0, 2) }}
+                                        </div>
+                                    @endif
                                     <h4 class="font-bold text-gray-900 text-center text-base mb-2 line-clamp-2 px-2">{{ $item->nama_mitra }}</h4>
                                     <p class="text-primary-600 font-semibold text-center text-xs mb-3">{{ $item->jenis }}</p>
                                     <p class="text-gray-700 text-xs text-center leading-relaxed line-clamp-5 px-2">{{ $item->deskripsi }}</p>
@@ -346,7 +368,20 @@ function updateActiveTestimoni(index) {
         document.getElementById('active-testimoni').textContent = `"${mitra.testimoni}"`;
         document.getElementById('active-nama').textContent = mitra.nama_mitra;
         document.getElementById('active-jenis').textContent = mitra.jenis;
-        document.getElementById('active-avatar').textContent = mitra.nama_mitra.substring(0, 2);
+        
+        // Update avatar - show logo if exists, otherwise show initials
+        const avatarContainer = document.getElementById('active-avatar-container');
+        if (avatarContainer) {
+            if (mitra.logo) {
+                // Show logo
+                const logoUrl = '/storage/' + mitra.logo;
+                avatarContainer.innerHTML = `<img src="${logoUrl}" alt="${mitra.nama_mitra}" class="w-20 h-20 rounded-full object-cover shadow-lg ring-4 ring-accent/30" id="active-avatar">`;
+            } else {
+                // Show initials
+                const initials = mitra.nama_mitra.substring(0, 2);
+                avatarContainer.innerHTML = `<div class="w-20 h-20 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-lg ring-4 ring-accent/30" id="active-avatar">${initials}</div>`;
+            }
+        }
     }
 }
 
