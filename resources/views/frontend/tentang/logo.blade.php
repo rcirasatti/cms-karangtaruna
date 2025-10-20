@@ -89,7 +89,6 @@
             </div>
         </div>
 
-        <!-- Additional Info Section - Horizontal Layout with Icon Left -->
         <div class="bg-white py-16">
             <div class="mx-auto px-4">
                 <div class="max-w-5xl mx-auto">
@@ -97,7 +96,7 @@
                         <div class="space-y-6">
                             @foreach($filosofiItems as $item)
                                 <div class="flex items-start gap-6 p-6 hover:bg-gray-50 rounded-xl transition duration-300">
-                                    <!-- Left: Logo Icon -->
+                                  
                                     <div class="flex-shrink-0">
                                         @switch($item->icon)
                                             @case('fire')
@@ -133,7 +132,6 @@
                                         @endswitch
                                     </div>
                                     
-                                    <!-- Right: Title and Description -->
                                     <div class="flex-1">
                                         <h3 class="text-xl font-bold text-primary-600 mb-3 uppercase tracking-wide">
                                             {{ $item->title }}

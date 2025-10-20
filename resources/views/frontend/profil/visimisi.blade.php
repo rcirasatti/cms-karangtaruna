@@ -9,7 +9,6 @@
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-white opacity-5 rounded-full -ml-48 -mb-48"></div>
         <div class="container mx-auto px-4 relative z-10">
             <div class="max-w-3xl">
-                <!-- Breadcrumb -->
                 <nav class="flex items-center space-x-2 text-sm text-blue-200 mb-4">
                     <a href="{{ route('home') }}" class="hover:text-white transition-colors">Home</a>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -18,7 +17,6 @@
                     <span class="text-blue-200">Profil</span>
                 </nav>
 
-                <!-- Title dengan Icon -->
                 <div class="flex items-center space-x-4 mb-4">
                     <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl">
                         <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -43,7 +41,6 @@
                     <div class="w-24 h-1 bg-secondary mx-auto"></div>
                 </div>
                 <div class="m-4 md:m-20">
-                    <!-- Vision Section -->
                     <div id="vision" class="relative flex flex-col md:flex-row mb-10 scroll-mt-24">
                         <div class="md:w-[400px] bg-gray-100 md:absolute shadow-xl hover:scale-105">
                             <img src="https://thvnext.bing.com/th/id/OIP.zoeZaZ3NDCrAh-Z7sK67rgHaFx?o=7&cb=12rm=3&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
@@ -58,7 +55,6 @@
                         </div>
                     </div>
 
-                    <!-- Mission Section -->
                     <div id="mission" class="relative flex flex-col md:flex-row mb-20 scroll-mt-24">
                         <div
                             class="order-last bg-gradient-to-br from-primary-700 via-primary-800 to-primary-700 py-16 px-8 md:px-16 md:rounded md:min-h-[400px] md:mr-[350px] md:pr-32 shadow-xl">
@@ -74,7 +70,6 @@
                     </div>
 
                     @if($visiMisi->tujuan && $visiMisi->fungsi)
-                        <!-- Tujuan & Fungsi Section - Grid Layout -->
                         <div id="tujuan" class="scroll-mt-24 mb-10">
                             <div class="text-center mb-12">
                                 <h2 class="text-4xl font-bold text-gray-800 mb-3 uppercase tracking-wide">Tujuan & Fungsi</h2>
@@ -82,7 +77,6 @@
                             </div>
 
                             <div class="grid md:grid-cols-2 gap-8">
-                                <!-- Tujuan Card -->
                                 <div
                                     class="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105">
                                     <div class="relative h-48 overflow-hidden">
@@ -109,8 +103,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- Fungsi Card -->
                                 <div id="fungsi"
                                     class="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105">
                                     <div class="relative h-48 overflow-hidden">
@@ -140,7 +132,6 @@
                             </div>
                         </div>
                     @elseif($visiMisi->tujuan)
-                        <!-- Tujuan Only -->
                         <div id="tujuan" class="scroll-mt-24 mb-10">
                             <div class="bg-white rounded-2xl shadow-2xl overflow-hidden max-w-4xl mx-auto">
                                 <div class="relative h-64 overflow-hidden">
@@ -159,7 +150,6 @@
                             </div>
                         </div>
                     @elseif($visiMisi->fungsi)
-                        <!-- Fungsi Only -->
                         <div id="fungsi" class="scroll-mt-24 mb-10">
                             <div class="bg-white rounded-2xl shadow-2xl overflow-hidden max-w-4xl mx-auto">
                                 <div class="relative h-64 overflow-hidden">
@@ -180,7 +170,6 @@
                     @endif
 
                     @if($visiMisi->nilai_dasar)
-                        <!-- Nilai-Nilai Dasar Section - Full Width Card with Pattern -->
                         <div id="nilai-dasar" class="scroll-mt-24">
                             <div
                                 class="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 rounded-2xl shadow-2xl overflow-hidden">
@@ -194,7 +183,6 @@
                                 </div>
 
                                 <div class="relative z-10 p-8 md:p-16">
-                                    <!-- Icon and Title -->
                                     <div class="flex flex-col items-center mb-12">
                                         <div class="bg-secondary p-4 rounded-full mb-6 shadow-lg">
                                             <svg class="w-12 h-12 text-primary-900" fill="none" stroke="currentColor"
@@ -209,7 +197,6 @@
                                         <div class="w-32 h-1 bg-secondary"></div>
                                     </div>
 
-                                    <!-- Content Box -->
                                     <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 md:p-12 border border-white/20">
                                         <div
                                             class="text-white leading-relaxed text-base lg:text-lg whitespace-pre-line text-center max-w-5xl mx-auto">
@@ -234,9 +221,7 @@
 
 @push('scripts')
     <script>
-        // Smooth scroll dengan offset untuk fixed header
         document.addEventListener('DOMContentLoaded', function () {
-            // Handle hash pada URL saat halaman dimuat
             if (window.location.hash) {
                 setTimeout(function () {
                     const target = document.querySelector(window.location.hash);
@@ -246,7 +231,6 @@
                 }, 100);
             }
 
-            // Handle klik pada link dengan hash
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -259,7 +243,6 @@
                             block: 'start'
                         });
 
-                        // Update URL tanpa jump
                         history.pushState(null, null, targetId);
                     }
                 });

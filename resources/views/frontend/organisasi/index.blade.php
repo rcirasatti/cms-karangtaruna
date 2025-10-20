@@ -9,7 +9,6 @@
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-white opacity-5 rounded-full -ml-48 -mb-48"></div>
         <div class="container mx-auto px-4 relative z-10">
             <div class="max-w-3xl">
-                <!-- Breadcrumb -->
                 <nav class="flex items-center space-x-2 text-sm text-blue-200 mb-4">
                     <a href="{{ route('home') }}" class="hover:text-white transition-colors">Home</a>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -22,7 +21,6 @@
                     <span class="text-white font-medium">Struktur Organisasi</span>
                 </nav>
 
-                <!-- Title dengan Icon -->
                 <div class="flex items-center space-x-4 mb-4">
                     <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl">
                         <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -42,7 +40,6 @@
     @if($pengurus && $pengurus->count() > 0)
         <div class="py-20">
             <div class="container mx-auto px-4">
-                <!-- Tokoh Utama Section -->
                 @php
                     $tokohUtama = $pengurus->where('is_tokoh_utama', true);
                 @endphp
@@ -57,7 +54,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 max-w-7xl mx-auto px-4">
                             @foreach($tokohUtama as $tokoh)
                                 <div class="text-center cursor-pointer" onclick="openModal('{{ $tokoh->nama }}', '{{ $tokoh->jabatan }}', '{{ $tokoh->foto }}', '{{ addslashes($tokoh->tugas ?? 'Tidak ada deskripsi tugas') }}', '{{ addslashes($tokoh->profil_singkat ?? '') }}')">
-                                    <!-- Photo with Gold Background -->
+                          
                                     <div class="bg-gradient-to-b from-yellow-600 to-yellow-700 mb-6 inline-block">
                                         <div class="w-full aspect-[3/4] hover:scale-105 transition-transform">
                                             @if($tokoh->foto)
@@ -74,7 +71,6 @@
                                         </div>
                                     </div>
 
-                                    <!-- Name and Position -->
                                     <h3 class="text-primary-600 font-bold text-base md:text-lg uppercase tracking-wide mb-1">
                                         {{ $tokoh->nama }}
                                     </h3>
@@ -85,7 +81,6 @@
                     </div>
                 @endif
 
-                <!-- Struktur Pengurus Section -->
                 @php
                     $strukturPengurus = $pengurus->where('is_tokoh_utama', false);
                 @endphp
@@ -100,7 +95,6 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 max-w-7xl mx-auto px-4">
                             @foreach($strukturPengurus as $anggota)
                                 <div class="text-center cursor-pointer" onclick="openModal('{{ $anggota->nama }}', '{{ $anggota->jabatan }}', '{{ $anggota->foto }}', '{{ addslashes($anggota->tugas ?? 'Tidak ada deskripsi tugas') }}', '{{ addslashes($anggota->profil_singkat ?? '') }}')">
-                                    <!-- Photo with Gold Background -->
                                     <div class="bg-gradient-to-b from-yellow-600 to-yellow-700 mb-6 inline-block">
                                         <div class="w-full aspect-[3/4] hover:scale-105 transition-transform">
                                             @if($anggota->foto)
@@ -117,7 +111,6 @@
                                         </div>
                                     </div>
 
-                                    <!-- Name and Position -->
                                     <h3 class="text-primary-600 font-bold text-base md:text-lg uppercase tracking-wide mb-1">
                                         {{ $anggota->nama }}
                                     </h3>
@@ -130,10 +123,9 @@
             </div>
         </div>
 
-        <!-- Modal Detail Pengurus -->
         <div id="pengurusModal" class="hidden fixed inset-0 bg-transparent bg-opacity-75 z-50 flex items-center justify-center p-4" onclick="closeModal(event)">
             <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl" onclick="event.stopPropagation()">
-                <!-- Modal Header -->
+               
                 <div class="relative bg-gradient-to-r from-primary-600 to-primary-800 text-white p-6 rounded-t-2xl">
                     <button onclick="closeModal()" class="absolute top-4 right-4 text-white hover:text-gray-200 transition-colors">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -151,9 +143,7 @@
                     </div>
                 </div>
 
-                <!-- Modal Body -->
                 <div class="p-6">
-                    <!-- Profil Singkat -->
                     <div id="modalProfilSection" class="mb-6">
                         <h4 class="text-lg font-bold text-gray-800 mb-3 flex items-center">
                             <svg class="w-5 h-5 mr-2 text-primary-600" fill="currentColor" viewBox="0 0 24 24">
@@ -164,7 +154,6 @@
                         <p id="modalProfil" class="text-gray-700 leading-relaxed whitespace-pre-line"></p>
                     </div>
 
-                    <!-- Tugas & Tanggung Jawab -->
                     <div>
                         <h4 class="text-lg font-bold text-gray-800 mb-3 flex items-center">
                             <svg class="w-5 h-5 mr-2 text-primary-600" fill="currentColor" viewBox="0 0 24 24">
@@ -176,7 +165,6 @@
                     </div>
                 </div>
 
-                <!-- Modal Footer -->
                 <div class="bg-gray-50 px-6 py-4 rounded-b-2xl flex justify-end">
                     <button onclick="closeModal()" class="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium">
                         Tutup
@@ -195,7 +183,6 @@
 
 @push('scripts')
     <script>
-        // Modal Functions
         function openModal(nama, jabatan, foto, tugas, profil) {
             const modal = document.getElementById('pengurusModal');
             const modalFoto = document.getElementById('modalFoto');
@@ -205,12 +192,10 @@
             const modalProfil = document.getElementById('modalProfil');
             const modalProfilSection = document.getElementById('modalProfilSection');
 
-            // Set content
             modalNama.textContent = nama;
             modalJabatan.textContent = jabatan;
             modalTugas.textContent = tugas;
             
-            // Set foto
             if (foto) {
                 modalFoto.src = "{{ asset('storage') }}/" + foto;
                 modalFoto.alt = nama;
@@ -219,7 +204,6 @@
                 modalFoto.alt = "No photo";
             }
 
-            // Show/hide profil section
             if (profil && profil.trim() !== '') {
                 modalProfil.textContent = profil;
                 modalProfilSection.classList.remove('hidden');
@@ -227,11 +211,9 @@
                 modalProfilSection.classList.add('hidden');
             }
 
-            // Show modal with animation
             modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
             
-            // Trigger animation
             setTimeout(() => {
                 modal.classList.add('opacity-100');
             }, 10);
@@ -246,16 +228,13 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Close modal with Escape key
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 closeModal();
             }
         });
 
-        // Smooth scroll dengan offset untuk fixed header
         document.addEventListener('DOMContentLoaded', function () {
-            // Handle hash pada URL saat halaman dimuat
             if (window.location.hash) {
                 setTimeout(function () {
                     const target = document.querySelector(window.location.hash);
@@ -265,7 +244,6 @@
                 }, 100);
             }
 
-            // Handle klik pada link dengan hash
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -278,7 +256,6 @@
                             block: 'start'
                         });
 
-                        // Update URL tanpa jump
                         history.pushState(null, null, targetId);
                     }
                 });

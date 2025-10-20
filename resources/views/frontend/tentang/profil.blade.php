@@ -9,7 +9,6 @@
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-white opacity-5 rounded-full -ml-48 -mb-48"></div>
         <div class="container mx-auto px-4 relative z-10">
             <div class="max-w-3xl">
-                <!-- Breadcrumb -->
                 <nav class="flex items-center space-x-2 text-sm text-blue-200 mb-4">
                     <a href="{{ route('home') }}" class="hover:text-white transition-colors">Home</a>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -22,7 +21,6 @@
                     <span class="text-white font-medium">Sejarah Organisasi</span>
                 </nav>
 
-                <!-- Title dengan Icon -->
                 <div class="flex items-center space-x-4 mb-4">
                     <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl">
                         <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -43,9 +41,7 @@
         <div class="bg-white py-16">
             <div class="container mx-auto px-4">
                 <div class="grid lg:grid-cols-3 gap-8">
-                    <!-- Main Content - Sejarah & Identitas (2/3) -->
                     <div class="lg:col-span-2 space-y-12">
-                        <!-- Tentang Karang Taruna -->
                         <div>
                             <h2 class="text-3xl font-bold text-primary-800 mb-6 pb-3 border-b-4 border-secondary inline-block">
                                 Sejarah Karang Taruna
@@ -58,7 +54,6 @@
                             </div>
                         </div>
 
-                        <!-- Identitas Organisasi -->
                         <div class="bg-gray-50 rounded-xl p-8 border border-gray-200">
                             <h3 class="text-2xl font-bold text-primary-800 mb-6">Identitas Organisasi</h3>
 
@@ -86,10 +81,8 @@
                         </div>
                     </div>
 
-                    <!-- Sidebar - Profil Singkat & CTA (1/3) -->
                     <div class="lg:col-span-1">
                         <div class="sticky top-24 space-y-6">
-                            <!-- Profil Card -->
                             <div class="bg-primary-800 text-white rounded-xl p-6 shadow-lg">
                                 <h3 class="text-xl font-bold mb-4 pb-2 border-b border-white/30">
                                     Profil Karang Taruna
@@ -99,7 +92,6 @@
                                 </p>
                             </div>
 
-                            <!-- Call to Action - Kontak -->
                             <div class="bg-gradient-to-br from-secondary to-accent rounded-xl p-6 shadow-lg">
                                 <h3 class="text-xl font-bold text-primary-900 mb-3">
                                     Mau Gabung atau Punya Pertanyaan?
@@ -113,7 +105,6 @@
                                 </a>
                             </div>
 
-                            <!-- Quote Card -->
                             <div class="bg-gray-50 rounded-xl p-6 border-l-4 border-secondary">
                                 <div class="text-6xl text-secondary mb-2 leading-none">"</div>
                                 <p class="text-gray-700 italic mb-4 leading-relaxed">
