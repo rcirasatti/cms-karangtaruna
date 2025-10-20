@@ -193,7 +193,7 @@
                                         <!-- Thumbnail -->
                                         <div class="relative h-44 bg-gradient-to-br from-gray-200 to-gray-300 overflow-hidden">
                                             @if($berita->thumbnail)
-                                                <img src="{{ $berita->thumbnail }}" alt="{{ $berita->judul }}" 
+                                                <img src="{{ asset('storage/' . $berita->thumbnail) }}" alt="{{ $berita->judul }}" 
                                                      loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                             @else
                                                 <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary-200 to-primary-300">
@@ -204,31 +204,43 @@
                                                     </svg>
                                                 </div>
                                             @endif
-                                            <!-- Badge -->
-                                            <div class="absolute top-3 right-3 bg-primary-600 text-white px-2.5 py-1 rounded-full text-xs font-semibold group-hover:scale-110 transition-transform duration-300">
-                                                Berita
-                                            </div>
+                                            <!-- Badge Kategori -->
+                                            @if($berita->kategori)
+                                                <div class="absolute top-3 right-3 bg-white/95 backdrop-blur-sm text-primary-600 px-2.5 py-1 rounded-full text-xs font-bold shadow-lg border border-primary-100 group-hover:scale-110 transition-transform duration-300">
+                                                    {{ $berita->kategori }}
+                                                </div>
+                                            @else
+                                                <div class="absolute top-3 right-3 bg-primary-600 text-white px-2.5 py-1 rounded-full text-xs font-semibold group-hover:scale-110 transition-transform duration-300">
+                                                    Berita
+                                                </div>
+                                            @endif
                                         </div>
 
                                         <!-- Content -->
                                         <div class="p-4 flex flex-col flex-grow">
                                             <!-- Title -->
-                                            <h3 class="text-sm md:text-base font-bold text-gray-800 group-hover:text-primary-600 transition-colors mb-2 line-clamp-2 leading-tight">
+                                            <h3 class="text-lg font-bold text-gray-800 group-hover:text-primary-600 transition-colors mb-2 line-clamp-2 leading-tight">
                                                 {{ $berita->judul }}
                                             </h3>
 
                                             <!-- Description -->
-                                            <p class="text-gray-600 text-xs md:text-sm mb-3 line-clamp-2 leading-relaxed flex-grow">
-                                                {{ $berita->deskripsi }}
+                                            <p class="text-gray-600 text-sm mb-3 line-clamp-2 leading-relaxed flex-grow">
+                                                {{ Str::limit($berita->deskripsi, 100, '...') ?: 'Berita menarik dari Karang Taruna' }}
                                             </p>
 
                                             <!-- Meta Info -->
                                             <div class="flex items-center justify-between pt-3 border-t border-gray-100">
-                                                <div class="flex items-center space-x-1 text-gray-500 text-xs">
-                                                    <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                <div class="flex items-center space-x-2 text-gray-500 text-xs">
+                                                    <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                                         <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v2h16V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5H4v8a2 2 0 002 2h12a2 2 0 002-2V7h-2v1a1 1 0 11-2 0V7h-4v1a1 1 0 11-2 0V7H6v1a1 1 0 11-2 0V7z" clip-rule="evenodd"></path>
                                                     </svg>
-                                                    <span class="font-medium">{{ $berita->tanggal_kegiatan->format('d M Y') }}</span>
+                                                    <span class="font-medium">
+                                                        @if($berita->tanggal_kegiatan)
+                                                            {{ \Carbon\Carbon::parse($berita->tanggal_kegiatan)->format('d M Y') }}
+                                                        @else
+                                                            {{ $berita->created_at->format('d M Y') }}
+                                                        @endif
+                                                    </span>
                                                 </div>
                                                 <span class="inline-flex items-center text-primary-600 font-semibold group-hover:text-primary-700 transition-colors text-xs">
                                                     Baca →

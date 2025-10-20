@@ -207,7 +207,7 @@
             </div>
 
             <!-- Modal Content -->
-            <form action="{{ route('admin.kontak.update', $kontak->id) }}" method="POST" class="p-8 space-y-6">
+            <form action="{{ route('admin.kontak.update', $kontak->id) }}" method="POST" class="p-8 space-y-6" data-validate="true">
                 @csrf
                 @method('PUT')
 

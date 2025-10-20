@@ -19,6 +19,7 @@ class Berita extends Model
     ];
 
     protected $casts = [
-        'tanggal_kegiatan' => 'date'
+        'tanggal_kegiatan' => 'date',
+        'media_path' => 'array'
     ];
 }

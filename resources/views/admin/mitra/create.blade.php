@@ -21,7 +21,7 @@
     </div>
 
     <!-- Form Card -->
-    <form action="{{ route('admin.mitra.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.mitra.store') }}" method="POST" enctype="multipart/form-data" data-validate="true">
         @csrf
         
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">

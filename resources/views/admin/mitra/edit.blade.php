@@ -22,7 +22,7 @@
 
     <!-- Form Card -->
     <div class="bg-white rounded-2xl shadow-lg p-8">
-        <form action="{{ route('admin.mitra.update', $mitra->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+        <form action="{{ route('admin.mitra.update', $mitra->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6" data-validate="true">
             @csrf
             @method('PUT')
 

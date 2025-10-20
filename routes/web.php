@@ -73,7 +73,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::resource('profile', \App\Http\Controllers\Admin\ProfileController::class);
     Route::resource('visi-misi', \App\Http\Controllers\Admin\VisiMisiController::class);
     Route::resource('kepengurusan', \App\Http\Controllers\Admin\KepengurusanController::class);
-    Route::resource('kegiatan', \App\Http\Controllers\Admin\KegiatanController::class);
+    Route::resource('berita', \App\Http\Controllers\Admin\BeritaController::class);
     Route::resource('produk', \App\Http\Controllers\Admin\ProdukController::class);
     Route::resource('mitra', \App\Http\Controllers\Admin\MitraController::class);
     Route::resource('kontak', \App\Http\Controllers\Admin\KontakController::class);

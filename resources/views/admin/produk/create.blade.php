@@ -21,7 +21,7 @@
     </div>
 
     <!-- Form Card -->
-    <form action="{{ route('admin.produk.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.produk.store') }}" method="POST" enctype="multipart/form-data" data-validate="true">
         @csrf
         
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -112,13 +112,14 @@
                     <!-- Deskripsi -->
                     <div class="border-t pt-6">
                         <label for="deskripsi" class="block text-sm font-semibold text-gray-800 mb-2.5">
-                            📝 Deskripsi Produk
+                            <span class="text-red-500 font-bold">*</span> 📝 Deskripsi Produk
                         </label>
                         <textarea id="deskripsi"
                                   name="deskripsi"
                                   rows="4"
                                   placeholder="Tuliskan deskripsi produk yang menarik, spesifikasi, dan keunggulan produk..."
-                                  class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition font-poppins resize-none @error('deskripsi') border-red-500 @enderror">{{ old('deskripsi') }}</textarea>
+                                  class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition font-poppins resize-none @error('deskripsi') border-red-500 @enderror"
+                                  required>{{ old('deskripsi') }}</textarea>
                         <p class="text-gray-500 text-xs mt-1.5">Maksimal 1000 karakter</p>
                         @error('deskripsi')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>

@@ -98,7 +98,7 @@
                         </div>
                         Berita Terbaru
                     </h3>
-                    <a href="{{ route('admin.kegiatan.index') }}" class="text-sm text-primary-600 hover:text-primary-700 font-semibold transition">
+                    <a href="{{ route('admin.berita.index') }}" class="text-sm text-primary-600 hover:text-primary-700 font-semibold transition">
                         Lihat Semua →
                     </a>
                 </div>
@@ -190,7 +190,7 @@
             Aksi Cepat
         </h3>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <a href="{{ route('admin.kegiatan.create') }}" 
+            <a href="{{ route('admin.berita.create') }}" 
                class="flex flex-col items-center justify-center p-6 bg-gradient-to-br from-primary-50 to-primary-100 rounded-xl hover:from-primary-100 hover:to-primary-200 transition duration-200 shadow-sm hover:shadow-md group">
                 <div class="bg-white rounded-full p-3 mb-3 shadow-sm group-hover:shadow transition">
                     <svg class="w-10 h-10 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">

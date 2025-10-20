@@ -93,8 +93,95 @@
             </div>
 
             <!-- Video Grid -->
-            @if($galeris->count() > 0)
+            @if($galeris->count() > 0 || $beritaVideos->count() > 0)
                 <div class="max-w-6xl mx-auto">
+                    <!-- Video dari Berita -->
+                    @if($beritaVideos->count() > 0)
+                        <div class="mb-12">
+                            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                                <svg class="w-6 h-6 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                                </svg>
+                                Video dari Berita
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                                @foreach($beritaVideos as $berita)
+                                    <a href="{{ route('galeri.berita.show', $berita->id) }}" class="group">
+                                        <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 h-full flex flex-col border border-gray-100 hover:border-primary-200">
+                                            <!-- Video Thumbnail -->
+                                            <div class="relative w-full aspect-video bg-black overflow-hidden">
+                                                @php
+                                                    $videoUrl = $berita->link_video;
+                                                    $videoId = '';
+                                                    
+                                                    // Extract YouTube video ID
+                                                    if (preg_match('/youtube\.com\/watch\?v=([^\&\?\/]+)/', $videoUrl, $matches)) {
+                                                        $videoId = $matches[1];
+                                                    } elseif (preg_match('/youtu\.be\/([^\&\?\/]+)/', $videoUrl, $matches)) {
+                                                        $videoId = $matches[1];
+                                                    } elseif (preg_match('/youtube\.com\/embed\/([^\&\?\/]+)/', $videoUrl, $matches)) {
+                                                        $videoId = $matches[1];
+                                                    }
+                                                    
+                                                    $thumbnail = $videoId ? "https://img.youtube.com/vi/{$videoId}/maxresdefault.jpg" : ($berita->thumbnail ? asset('storage/' . $berita->thumbnail) : '');
+                                                @endphp
+                                                
+                                                @if($thumbnail)
+                                                    <img src="{{ $thumbnail }}" alt="{{ $berita->judul }}" 
+                                                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                                         loading="lazy">
+                                                @else
+                                                    <div class="w-full h-full bg-gradient-to-br from-gray-800 to-black flex items-center justify-center">
+                                                        <svg class="w-20 h-20 text-white/50" fill="currentColor" viewBox="0 0 24 24">
+                                                            <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
+                                                        </svg>
+                                                    </div>
+                                                @endif
+                                                
+                                                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
+                                                    <svg class="w-20 h-20 text-accent opacity-80 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
+                                                    </svg>
+                                                </div>
+                                                <div class="absolute top-3 right-3 bg-accent text-primary-800 px-3 py-1 rounded-lg text-xs font-semibold flex items-center space-x-1">
+                                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                                        <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
+                                                    </svg>
+                                                    <span>Video</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Content -->
+                                            <div class="p-4 flex-1 flex flex-col">
+                                                <h3 class="text-lg font-semibold text-gray-800 group-hover:text-primary-600 transition-colors line-clamp-2">
+                                                    {{ $berita->judul }}
+                                                </h3>
+                                                <p class="text-sm text-gray-600 mt-2 line-clamp-2">
+                                                    {{ $berita->deskripsi ?? 'Tidak ada deskripsi' }}
+                                                </p>
+                                                <div class="mt-auto pt-4 border-t border-gray-100">
+                                                    <div class="flex items-center justify-between text-xs text-gray-500">
+                                                        <span class="font-medium text-primary-600">{{ $berita->kategori }}</span>
+                                                        <span>{{ $berita->tanggal_kegiatan->format('d M Y') }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+
+                    <!-- Video dari Galeri -->
+                    @if($galeris->count() > 0)
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                                <svg class="w-6 h-6 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                                Galeri Video
+                            </h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach($galeris as $galeri)
                             <a href="{{ route('galeri.show', $galeri->id) }}" class="group">
@@ -148,6 +235,8 @@
                     <div class="mt-12">
                         {{ $galeris->links() }}
                     </div>
+                        </div>
+                    @endif
                 </div>
             @else
                 <!-- Empty State -->

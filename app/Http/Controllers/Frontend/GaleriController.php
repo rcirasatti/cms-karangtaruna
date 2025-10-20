@@ -37,15 +37,24 @@ class GaleriController extends Controller
         $search = $request->input('search', '');
         $kegiatan_id = $request->input('kegiatan_id', '');
 
+        // Get galeri foto
         $galeris = Galeri::latest()
             ->where('tipe', 'foto')
             ->search($search)
             ->byKegiatan($kegiatan_id)
             ->paginate(12);
 
+        // Get foto dari berita (media_path)
+        $beritaFotos = Berita::whereNotNull('media_path')
+            ->when($search, function($query) use ($search) {
+                $query->where('judul', 'like', "%{$search}%");
+            })
+            ->latest('tanggal_kegiatan')
+            ->get();
+
         $kegiatanList = Berita::orderBy('tanggal_kegiatan', 'desc')->get();
 
-        return view('frontend.galeri.foto', compact('galeris', 'kegiatanList', 'search', 'kegiatan_id'));
+        return view('frontend.galeri.foto', compact('galeris', 'beritaFotos', 'kegiatanList', 'search', 'kegiatan_id'));
     }
 
     /**
@@ -56,15 +65,25 @@ class GaleriController extends Controller
         $search = $request->input('search', '');
         $kegiatan_id = $request->input('kegiatan_id', '');
 
+        // Get galeri video
         $galeris = Galeri::latest()
             ->where('tipe', 'video')
             ->search($search)
             ->byKegiatan($kegiatan_id)
             ->paginate(12);
 
+        // Get video dari berita (link_video)
+        $beritaVideos = Berita::whereNotNull('link_video')
+            ->where('link_video', '!=', '')
+            ->when($search, function($query) use ($search) {
+                $query->where('judul', 'like', "%{$search}%");
+            })
+            ->latest('tanggal_kegiatan')
+            ->get();
+
         $kegiatanList = Berita::orderBy('tanggal_kegiatan', 'desc')->get();
 
-        return view('frontend.galeri.video', compact('galeris', 'kegiatanList', 'search', 'kegiatan_id'));
+        return view('frontend.galeri.video', compact('galeris', 'beritaVideos', 'kegiatanList', 'search', 'kegiatan_id'));
     }
 
     /**

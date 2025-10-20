@@ -95,8 +95,60 @@
             </div>
 
             <!-- Foto Grid -->
-            @if($galeris->count() > 0)
+            @if($galeris->count() > 0 || $beritaFotos->count() > 0)
                 <div class="max-w-6xl mx-auto">
+                    <!-- Foto dari Berita -->
+                    @if($beritaFotos->count() > 0)
+                        <div class="mb-12">
+                            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                                <svg class="w-6 h-6 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                                </svg>
+                                Foto dari Berita
+                            </h2>
+                            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+                                @foreach($beritaFotos as $berita)
+                                    @if($berita->media_path && is_array($berita->media_path))
+                                        @foreach($berita->media_path as $index => $media)
+                                            <a href="{{ route('galeri.berita.show', $berita->id) }}" class="group">
+                                                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary-200">
+                                                    <div class="relative aspect-square bg-gradient-to-br from-gray-200 to-gray-300 overflow-hidden">
+                                                        <img src="{{ asset('storage/' . $media) }}" 
+                                                             alt="{{ $berita->judul }} - {{ $index + 1 }}" 
+                                                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                                             loading="lazy">
+                                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
+                                                            <svg class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div class="p-3">
+                                                        <h3 class="text-sm font-semibold text-gray-800 group-hover:text-primary-600 transition-colors line-clamp-2">
+                                                            {{ $berita->judul }}
+                                                        </h3>
+                                                        <p class="text-xs text-gray-500 mt-1">
+                                                            {{ $berita->tanggal_kegiatan->format('d M Y') }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        @endforeach
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+
+                    <!-- Foto dari Galeri -->
+                    @if($galeris->count() > 0)
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                                <svg class="w-6 h-6 text-primary-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                Galeri Foto
+                            </h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach($galeris as $galeri)
                             <a href="{{ route('galeri.show', $galeri->id) }}" class="group">
@@ -136,6 +188,8 @@
                     <div class="mt-12">
                         {{ $galeris->links() }}
                     </div>
+                        </div>
+                    @endif
                 </div>
             @else
                 <!-- Empty State -->

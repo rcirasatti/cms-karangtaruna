@@ -39,7 +39,7 @@ class MitraController extends Controller
                 'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'kontak' => 'nullable|string|max:100',
                 'testimoni' => 'nullable|string|max:1000'
-            ]);
+            ], $this->validationMessages(), $this->validationAttributes());
 
             if ($request->hasFile('logo')) {
                 $logoPath = $request->file('logo')->store('mitra-logos', 'public');
@@ -92,7 +92,7 @@ class MitraController extends Controller
                 'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'kontak' => 'nullable|string|max:100',
                 'testimoni' => 'nullable|string|max:1000'
-            ]);
+            ], $this->validationMessages(), $this->validationAttributes());
 
             if ($request->hasFile('logo')) {
                 // Hapus logo lama jika ada

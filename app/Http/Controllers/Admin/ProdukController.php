@@ -34,12 +34,12 @@ class ProdukController extends Controller
         try {
             $validated = $request->validate([
                 'nama_produk' => 'required|string|max:100|unique:produk,nama_produk',
-                'deskripsi' => 'nullable|string|max:1000',
+                'deskripsi' => 'required|string|max:1000',
                 'harga' => 'nullable|numeric|min:0',
                 'kategori' => 'nullable|string|max:100',
                 'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'galeri.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
-            ]);
+            ], $this->validationMessages(), $this->validationAttributes());
 
             if ($request->hasFile('foto')) {
                 $fotoPath = $request->file('foto')->store('produk-fotos', 'public');
@@ -95,12 +95,12 @@ class ProdukController extends Controller
 
             $validated = $request->validate([
                 'nama_produk' => 'required|string|max:100|unique:produk,nama_produk,' . $id,
-                'deskripsi' => 'nullable|string|max:1000',
+                'deskripsi' => 'required|string|max:1000',
                 'harga' => 'nullable|numeric|min:0',
                 'kategori' => 'nullable|string|max:100',
                 'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'galeri.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
-            ]);
+            ], $this->validationMessages(), $this->validationAttributes());
 
             if ($request->hasFile('foto')) {
                 // Hapus foto lama jika ada

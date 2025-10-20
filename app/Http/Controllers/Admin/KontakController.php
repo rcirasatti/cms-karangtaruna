@@ -66,15 +66,15 @@ class KontakController extends Controller
     {
         try {
             $validated = $request->validate([
-                'alamat_sekretariat' => 'nullable|string|max:500',
-                'telepon' => 'nullable|string|max:20',
-                'whatsapp' => 'nullable|string|max:20',
-                'email' => 'nullable|email|max:100',
+                'alamat_sekretariat' => 'required|string|max:500',
+                'telepon' => 'required|string|max:20',
+                'whatsapp' => 'required|string|max:20',
+                'email' => 'required|email|max:100',
                 'instagram' => 'nullable|string|max:100',
                 'facebook' => 'nullable|string|max:100',
                 'twitter' => 'nullable|string|max:100',
                 'youtube' => 'nullable|string|max:100'
-            ]);
+            ], $this->validationMessages(), $this->validationAttributes());
 
             $kontak = Kontak::findOrFail($id);
             $kontak->update($validated);

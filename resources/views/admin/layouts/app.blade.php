@@ -52,6 +52,7 @@
     </div>
 
     @stack('scripts')
+    @vite(['resources/js/form-validation.js'])
     <script src="//unpkg.com/alpinejs" defer></script>
 </body>
 </html>
