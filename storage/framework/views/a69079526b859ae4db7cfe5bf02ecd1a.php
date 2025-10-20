@@ -157,6 +157,15 @@
                         class="px-4 py-2 rounded-lg <?php echo e($hoverLink); ?> transition <?php echo e(request()->routeIs('kontak.*') ? $activeClass : 'text-white'); ?>">
                         Contact
                     </a>
+
+                    <!-- Admin Login Button -->
+                    <a href="<?php echo e(route('admin.login')); ?>"
+                        class="ml-2 px-4 py-2 rounded-lg bg-white/20 text-white hover:bg-white/30 transition font-semibold border border-white/30">
+                        <svg class="w-4 h-4 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                        Admin
+                    </a>
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -291,6 +300,17 @@
 
                 <a href="<?php echo e(route('kontak.index')); ?>"
                     class="block px-4 py-2 <?php echo e($navTransparent ? 'text-white' : 'text-white'); ?> <?php echo e($mobileHoverBg); ?> rounded">Contact</a>
+
+                <!-- Mobile Admin Login Button -->
+                <div class="border-t border-white/20 mt-4 pt-4">
+                    <a href="<?php echo e(route('admin.login')); ?>"
+                        class="flex items-center justify-center px-4 py-3 bg-white/20 text-white hover:bg-white/30 transition font-semibold rounded border border-white/30">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                        Admin Login
+                    </a>
+                </div>
             </div>
         </div>
     </div>
