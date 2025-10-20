@@ -428,6 +428,8 @@
                                                     <option value="mountain">🏔️ Mountain (Gunung)</option>
                                                     <option value="sea">🌊 Sea (Laut)</option>
                                                     <option value="ribbon">🎗️ Ribbon (Pita)</option>
+                                                    <option value="lotus">🌺 Lotus (Teratai)</option>
+                                                    <option value="palette">🎨 Palette (Palet)</option>
                                                 </select>
                                             </div>
 
