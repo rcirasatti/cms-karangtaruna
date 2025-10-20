@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             'legalitas' => 'SK Gubernur No. 123/2010',
             'sejarah' => 'Karang Taruna Maju Bersama didirikan pada tahun 2010 dengan tujuan memberdayakan pemuda di wilayah Jakarta Selatan. Organisasi ini lahir dari kesadaran para pemuda untuk berkontribusi dalam pembangunan masyarakat.',
             'profil_singkat' => 'Karang Taruna Maju Bersama adalah organisasi kepemudaan yang fokus pada pengembangan karakter, keterampilan, dan pemberdayaan masyarakat. Kami berkomitmen untuk menciptakan generasi muda yang berkarakter dan berprestasi.',
-            'filosofi_logo' => 'Logo Karang Taruna menggambarkan semangat pemuda yang dinamis dan penuh makna. Warna merah melambangkan keberanian dan semangat juang para pemuda dalam menghadapi tantangan. Warna kuning melambangkan kemakmuran dan harapan cerah untuk masa depan generasi muda. Warna hijau melambangkan pertumbuhan, kesegaran, dan kehidupan yang terus berkembang. Lingkaran melambangkan persatuan, kesatuan, dan kebersamaan dalam organisasi.'
+            'filosofi_logo' => 'lambang Karang Taruna berarti tekad insan remaja/generasi muda Indonesia (warga Karang Taruna) untuk mengembangkan dirinya menjadi patriot/pejuang yang berkepribadian, berpengetahuan/cerdas, serta terampil dan selalu berkarya nyata agar mampu ikut secara aktif dalam pembangunan untuk menciptakan masyarakat yang adil dan makmur berdasarkan Pancasila.'
         ]);
 
         // Create Visi Misi
@@ -130,39 +130,45 @@ class DatabaseSeeder extends Seeder
             'youtube' => 'Karang Taruna Channel'
         ]);
 
-        // Create Filosofi Logo Items
         $filosofiItems = [
             [
-                'title' => 'Warna Merah',
-                'description' => 'Melambangkan keberanian, semangat juang, dan dedikasi para pemuda dalam menghadapi tantangan serta berkontribusi untuk masyarakat.',
-                'icon' => 'fire',
+                'title' => 'Teratai Mekar',
+                'description' => 'Melambangkan generasi muda yang berjiwa sosial. Terdiri dari tujuh kuntum: Taat, Tanggap, Tanggon, Tandas, Tangkas, Terampil, Tulus.',
+                'icon' => 'flower',
                 'urutan' => 1,
             ],
             [
-                'title' => 'Warna Kuning',
-                'description' => 'Melambangkan kemakmuran, harapan cerah, dan optimisme untuk masa depan generasi muda yang gemilang dan penuh prestasi.',
-                'icon' => 'sun',
+                'title' => 'Empat Helai Daun',
+                'description' => 'Memaknai 4 fungsi: memupuk kreativitas & tanggung jawab; membina kegiatan sosial-edukatif-ekoproduktif; mengembangkan harapan & kapasitas remaja; menanamkan & mengimplementasikan nilai Pancasila.',
+                'icon' => 'leaf',
                 'urutan' => 2,
             ],
             [
-                'title' => 'Warna Hijau',
-                'description' => 'Melambangkan pertumbuhan, kesegaran, kehidupan yang dinamis, serta kesinambungan pembangunan karakter pemuda yang terus berkembang.',
-                'icon' => 'leaf',
+                'title' => 'Dua Helai Pita',
+                'description' => 'Pita atas: motto “Adhitya Karya Mahatva Yodha” (cerdas, berkarya, berbudi luhur, pejuang). Pita bawah: “Karang Taruna” sebagai wadah pengembangan remaja; bermakna generasi muda yang kokoh & tegar.',
+                'icon' => 'ribbon',
                 'urutan' => 3,
             ],
             [
-                'title' => 'Bentuk Lingkaran',
-                'description' => 'Melambangkan persatuan, kesatuan, kebersamaan, dan kekompakan dalam organisasi yang tidak terputus dan terus bersinergi.',
+                'title' => 'Lingkaran',
+                'description' => 'Lambang ketahanan nasional; berfungsi sebagai tameng/perisai.',
                 'icon' => 'circle',
                 'urutan' => 4,
             ],
             [
-                'title' => 'Simbol Bunga Teratai',
-                'description' => 'Melambangkan kesucian, ketahanan, dan kemampuan tumbuh di berbagai kondisi, mencerminkan kekuatan pemuda dalam menghadapi situasi apapun.',
-                'icon' => 'flower',
+                'title' => 'Teratai Berdaun Lima',
+                'description' => 'Melambangkan lingkaran kehidupan masyarakat yang adil dan sejahtera berdasarkan Pancasila.',
+                'icon' => 'lotus',
                 'urutan' => 5,
-            ]
+            ],
+            [
+                'title' => 'Unsur Warna',
+                'description' => 'Putih: kesucian; Merah: keberanian, tenang, tekad pantang mundur; Kuning: keagungan & keluhuran budi.',
+                'icon' => 'palette',
+                'urutan' => 6,
+            ],
         ];
+
 
         foreach ($filosofiItems as $item) {
             FilosofiLogoItem::create($item);
