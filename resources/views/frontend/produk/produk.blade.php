@@ -266,10 +266,11 @@
                                     <div class="relative h-40 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 group/gallery">
                                         @php
                                             $images = [];
+                                            if ($item->foto) {
+                                                $images[] = $item->foto;
+                                            }
                                             if ($item->galeri && is_array($item->galeri)) {
-                                                $images = array_merge($item->galeri, $item->foto ? [$item->foto] : []);
-                                            } elseif ($item->foto) {
-                                                $images = [$item->foto];
+                                                $images = array_merge($images, $item->galeri);
                                             }
                                             $hasMultipleImages = count($images) > 1;
                                         @endphp
@@ -488,10 +489,13 @@
         (function() {
             // Initialize carousels for each product
             document.querySelectorAll('.carousel').forEach(carousel => {
+                const container = carousel.closest('[id^="produk-"]');
+                const targetId = container?.id;
+                
                 const images = carousel.querySelectorAll('.gallery-image');
                 const indicators = carousel.querySelectorAll('.indicator');
-                const prevBtn = carousel.querySelector('.prev-image');
-                const nextBtn = carousel.querySelector('.next-image');
+                const prevBtn = container.querySelector(`.prev-image[data-target="${targetId}"]`);
+                const nextBtn = container.querySelector(`.next-image[data-target="${targetId}"]`);
                 let currentIndex = 0;
 
                 function showImage(index) {
@@ -516,17 +520,21 @@
                 }
 
                 // Event listeners
-                if (nextBtn) nextBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    nextImage();
-                });
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        nextImage();
+                    });
+                }
 
-                if (prevBtn) prevBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    prevImage();
-                });
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        prevImage();
+                    });
+                }
 
                 indicators.forEach((indicator, index) => {
                     indicator.addEventListener('click', (e) => {
