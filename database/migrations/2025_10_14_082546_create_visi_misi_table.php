@@ -18,6 +18,10 @@ return new class extends Migration
             $table->text('tujuan')->nullable();
             $table->text('fungsi')->nullable();
             $table->text('nilai_dasar')->nullable();
+            $table->string('gambar_visi')->nullable();
+            $table->string('gambar_misi')->nullable();
+            $table->string('gambar_tujuan')->nullable();
+            $table->string('gambar_fungsi')->nullable();
             $table->timestamps();
         });
     }

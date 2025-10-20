@@ -43,8 +43,7 @@
                 <div class="m-4 md:m-20">
                     <div id="vision" class="relative flex flex-col md:flex-row mb-10 scroll-mt-24">
                         <div class="md:w-[400px] bg-gray-100 md:absolute shadow-xl hover:scale-105">
-                            <img src="https://thvnext.bing.com/th/id/OIP.zoeZaZ3NDCrAh-Z7sK67rgHaFx?o=7&cb=12rm=3&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
-                                alt="Vision" class="w-full h-full object-cover">
+                            <img src={{ $visiMisi->gambar_visi }} alt="Vision" class="w-full h-full object-cover">
                         </div>
                         <div
                             class="bg-gradient-to-br from-primary-700 via-primary-800 to-primary-700 py-16 px-8 md:px-16 md:rounded md:min-h-[400px] md:ml-[350px] md:pl-32 shadow-xl">
@@ -64,7 +63,7 @@
                             </div>
                         </div>
                         <div class="md:w-[400px] bg-gray-100 md:absolute right-0 top-0 shadow-xl hover:scale-105">
-                            <img src="https://assets.radarcirebon.id/main/2023/03/karta-1000x675.webp"
+                            <img src={{ $visiMisi->gambar_misi }}
                                 alt="Mission" class="w-full h-full object-cover">
                         </div>
                     </div>
@@ -80,7 +79,7 @@
                                 <div
                                     class="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105">
                                     <div class="relative h-48 overflow-hidden">
-                                        <img src="https://desagontor.com/wp-content/uploads/2023/03/KARANG-TARUNA-1536x864.jpg"
+                                        <img src={{ $visiMisi->gambar_tujuan }}
                                             alt="Tujuan" class="w-full h-full object-cover">
                                         <div class="absolute inset-0 bg-gradient-to-t from-primary-900/90 to-transparent"></div>
                                         <div class="absolute bottom-0 left-0 p-6">
@@ -106,7 +105,7 @@
                                 <div id="fungsi"
                                     class="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105">
                                     <div class="relative h-48 overflow-hidden">
-                                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop"
+                                        <img src={{ $visiMisi->gambar_fungsi }}
                                             alt="Fungsi" class="w-full h-full object-cover">
                                         <div class="absolute inset-0 bg-gradient-to-t from-primary-900/90 to-transparent"></div>
                                         <div class="absolute bottom-0 left-0 p-6">
@@ -153,7 +152,7 @@
                         <div id="fungsi" class="scroll-mt-24 mb-10">
                             <div class="bg-white rounded-2xl shadow-2xl overflow-hidden max-w-4xl mx-auto">
                                 <div class="relative h-64 overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop"
+                                    <img src={{ $visiMisi->gambar_fungsi }}
                                         alt="Fungsi" class="w-full h-full object-cover">
                                     <div class="absolute inset-0 bg-gradient-to-t from-primary-900/90 to-transparent"></div>
                                     <div class="absolute bottom-0 left-0 p-8">

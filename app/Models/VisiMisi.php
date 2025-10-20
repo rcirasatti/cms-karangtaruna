@@ -13,6 +13,10 @@ class VisiMisi extends Model
         'misi',
         'tujuan',
         'fungsi',
-        'nilai_dasar'
+        'nilai_dasar',
+        'gambar_visi',
+        'gambar_misi',
+        'gambar_tujuan',
+        'gambar_fungsi'
     ];
 }
