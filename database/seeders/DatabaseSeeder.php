@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             'legalitas' => 'SK Gubernur No. 123/2010',
             'sejarah' => 'Karang Taruna Maju Bersama didirikan pada tahun 2010 dengan tujuan memberdayakan pemuda di wilayah Jakarta Selatan. Organisasi ini lahir dari kesadaran para pemuda untuk berkontribusi dalam pembangunan masyarakat.',
             'profil_singkat' => 'Karang Taruna Maju Bersama adalah organisasi kepemudaan yang fokus pada pengembangan karakter, keterampilan, dan pemberdayaan masyarakat. Kami berkomitmen untuk menciptakan generasi muda yang berkarakter dan berprestasi.',
+            'logo_path' => 'https://i.pinimg.com/originals/79/e2/b5/79e2b5897b6bfaaac9d314a4b0a89348.png',
             'filosofi_logo' => 'lambang Karang Taruna berarti tekad insan remaja/generasi muda Indonesia (warga Karang Taruna) untuk mengembangkan dirinya menjadi patriot/pejuang yang berkepribadian, berpengetahuan/cerdas, serta terampil dan selalu berkarya nyata agar mampu ikut secara aktif dalam pembangunan untuk menciptakan masyarakat yang adil dan makmur berdasarkan Pancasila.'
         ]);
 
