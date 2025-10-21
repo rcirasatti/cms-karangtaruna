@@ -6,6 +6,39 @@
 
 @section('content')
 <div class="space-y-6">
+    <!-- Welcome Banner -->
+    <div class="relative bg-gradient-to-r from-[#134686] via-[#1a5fa0] to-[#2575c5] rounded-2xl shadow-xl overflow-hidden">
+        <!-- Decorative background elements (subtle circles) -->
+        <div class="absolute inset-0" aria-hidden="true">
+            <div class="absolute top-4 right-10 w-72 h-72 bg-white/10 rounded-full blur-3xl -mr-36"></div>
+            <div class="absolute -bottom-20 -left-20 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
+        </div>
+
+        <!-- Smooth overlay for text contrast -->
+        <div class="absolute inset-0 bg-gradient-to-r from-black/30 via-black/10 to-transparent rounded-2xl pointer-events-none" aria-hidden="true"></div>
+
+        <div class="relative z-10 p-8 md:p-12">
+            <div class="flex items-center justify-between gap-6">
+                <div class="flex-1">
+                    <h2 class="text-4xl md:text-5xl font-bold text-white font-montserrat mb-3 drop-shadow-lg">
+                        Selamat Datang, Admin
+                    </h2>
+                    <p class="text-white/95 text-base md:text-lg font-poppins drop-shadow">
+                        Kelola konten, pantau statistik, dan perbarui data dengan mudah.
+                    </p>
+                </div>
+                <div class="hidden lg:flex items-center justify-center">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-yellow-400/20 blur-2xl rounded-full w-24 h-24"></div>
+                        <svg class="w-24 h-24 text-white relative z-10" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Stats Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
         <!-- Berita Card -->
@@ -72,8 +105,8 @@
         <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-red-600 hover:shadow-xl transition duration-200">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-gray-500 text-sm font-medium font-poppins">Total Galeri</p>
-                    <h3 class="text-3xl font-bold text-gray-800 mt-2 font-montserrat">{{ $total_galeri }}</h3>
+                    <p class="text-gray-500 text-sm font-medium font-poppins">Berita dengan Media</p>
+                    <h3 class="text-3xl font-bold text-gray-800 mt-2 font-montserrat">{{ count($berita_terbaru) }}</h3>
                 </div>
                 <div class="bg-red-50 rounded-xl p-3">
                     <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -108,8 +141,8 @@
                     <div class="space-y-4">
                         @foreach($berita_terbaru as $berita)
                             <div class="flex items-start space-x-4 pb-4 border-b border-gray-100 last:border-0 hover:bg-gray-50 p-2 rounded-lg transition">
-                                @if($berita->foto)
-                                    <img src="{{ asset('storage/' . $berita->foto) }}" 
+                                @if($berita->thumbnail)
+                                    <img src="{{ asset('storage/' . $berita->thumbnail) }}" 
                                          alt="{{ $berita->judul }}" 
                                          class="w-20 h-20 rounded-lg object-cover shadow-md">
                                 @else
@@ -166,8 +199,9 @@
                                     </div>
                                 @endif
                                 <div class="flex-1">
-                                    <h4 class="font-semibold text-gray-800 font-poppins">{{ $produk->nama }}</h4>
-                                    <p class="text-sm text-gray-500 mt-1">{{ $produk->created_at->diffForHumans() }}</p>
+                                    <h4 class="font-semibold text-gray-800 line-clamp-1 font-poppins">{{ $produk->nama }}</h4>
+                                    <p class="text-sm text-gray-600 line-clamp-1">Rp {{ number_format($produk->harga ?? 0, 0, ',', '.') }}</p>
+                                    <p class="text-xs text-gray-500 mt-1">{{ $produk->created_at->diffForHumans() }}</p>
                                 </div>
                             </div>
                         @endforeach

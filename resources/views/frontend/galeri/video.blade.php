@@ -172,7 +172,6 @@
                             </div>
                         </div>
                     @endif
-
                     <!-- Video dari Galeri -->
                     @if($galeris->count() > 0)
                         <div>
@@ -184,13 +183,30 @@
                             </h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach($galeris as $galeri)
-                            <a href="{{ route('galeri.show', $galeri->id) }}" class="group">
-                                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
+                            <a href="{{ route('galeri.berita.show', $galeri->id) }}" class="group">
+                                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 h-full flex flex-col border border-gray-100 hover:border-primary-200">
                                     <!-- Video Thumbnail -->
                                     <div class="relative w-full aspect-video bg-black overflow-hidden">
-                                        @if($galeri->thumbnail)
-                                            <img src="{{ $galeri->thumbnail }}" alt="{{ $galeri->judul }}" 
-                                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                        @php
+                                            $videoUrl = $galeri->link_video;
+                                            $videoId = '';
+                                            
+                                            // Extract YouTube video ID
+                                            if (preg_match('/youtube\.com\/watch\?v=([^\&\?\/]+)/', $videoUrl, $matches)) {
+                                                $videoId = $matches[1];
+                                            } elseif (preg_match('/youtu\.be\/([^\&\?\/]+)/', $videoUrl, $matches)) {
+                                                $videoId = $matches[1];
+                                            } elseif (preg_match('/youtube\.com\/embed\/([^\&\?\/]+)/', $videoUrl, $matches)) {
+                                                $videoId = $matches[1];
+                                            }
+                                            
+                                            $thumbnail = $videoId ? "https://img.youtube.com/vi/{$videoId}/maxresdefault.jpg" : ($galeri->thumbnail ? asset('storage/' . $galeri->thumbnail) : '');
+                                        @endphp
+                                        
+                                        @if($thumbnail)
+                                            <img src="{{ $thumbnail }}" alt="{{ $galeri->judul }}" 
+                                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                                 loading="lazy">
                                         @else
                                             <div class="w-full h-full bg-gradient-to-br from-gray-800 to-black flex items-center justify-center">
                                                 <svg class="w-20 h-20 text-white/50" fill="currentColor" viewBox="0 0 24 24">
@@ -198,8 +214,8 @@
                                                 </svg>
                                             </div>
                                         @endif
-                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
-                                            <svg class="w-20 h-20 text-accent opacity-100 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 24 24">
+                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
+                                            <svg class="w-20 h-20 text-accent opacity-80 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 24 24">
                                                 <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
                                             </svg>
                                         </div>
@@ -221,8 +237,8 @@
                                         </p>
                                         <div class="mt-auto pt-4 border-t border-gray-100">
                                             <div class="flex items-center justify-between text-xs text-gray-500">
-                                                <span class="font-medium text-primary-600">{{ $galeri->kegiatan->judul ?? 'N/A' }}</span>
-                                                <span>{{ $galeri->created_at->format('d M Y') }}</span>
+                                                <span class="font-medium text-primary-600">{{ $galeri->kategori }}</span>
+                                                <span>{{ $galeri->tanggal_kegiatan->format('d M Y') }}</span>
                                             </div>
                                         </div>
                                     </div>

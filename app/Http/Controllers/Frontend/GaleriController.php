@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\Galeri;
 use App\Models\Berita;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,11 +17,27 @@ class GaleriController extends Controller
         $tipe = $request->input('tipe', '');
         $kegiatan_id = $request->input('kegiatan_id', '');
 
-        $galeris = Galeri::latest()
-            ->search($search)
-            ->byTipe($tipe)
-            ->byKegiatan($kegiatan_id)
-            ->paginate(12);
+        $query = Berita::query();
+
+        if ($search) {
+            $query->where('judul', 'like', "%{$search}%");
+        }
+
+        if ($tipe == 'foto') {
+            $query->whereNotNull('media_path');
+        } elseif ($tipe == 'video') {
+            $query->whereNotNull('link_video');
+        } else {
+            $query->where(function ($q) {
+                $q->whereNotNull('media_path')->orWhereNotNull('link_video');
+            });
+        }
+
+        if ($kegiatan_id) {
+            $query->where('id', $kegiatan_id);
+        }
+
+        $galeris = $query->latest('tanggal_kegiatan')->paginate(12);
 
         $kegiatanList = Berita::orderBy('tanggal_kegiatan', 'desc')->get();
 
@@ -37,20 +52,27 @@ class GaleriController extends Controller
         $search = $request->input('search', '');
         $kegiatan_id = $request->input('kegiatan_id', '');
 
-        // Get galeri foto
-        $galeris = Galeri::latest()
-            ->where('tipe', 'foto')
-            ->search($search)
-            ->byKegiatan($kegiatan_id)
-            ->paginate(12);
+        $query = Berita::whereNotNull('media_path');
 
-        // Get foto dari berita (media_path)
-        $beritaFotos = Berita::whereNotNull('media_path')
-            ->when($search, function($query) use ($search) {
-                $query->where('judul', 'like', "%{$search}%");
-            })
-            ->latest('tanggal_kegiatan')
-            ->get();
+        if ($search) {
+            $query->where('judul', 'like', "%{$search}%");
+        }
+
+        if ($kegiatan_id) {
+            $query->where('id', $kegiatan_id);
+        }
+
+        $galeris = $query->latest('tanggal_kegiatan')->paginate(12);
+        
+        // Get all berita with photos for display
+        $beritaFotosQuery = Berita::whereNotNull('media_path');
+        if ($search) {
+            $beritaFotosQuery->where('judul', 'like', "%{$search}%");
+        }
+        if ($kegiatan_id) {
+            $beritaFotosQuery->where('id', $kegiatan_id);
+        }
+        $beritaFotos = $beritaFotosQuery->latest('tanggal_kegiatan')->get();
 
         $kegiatanList = Berita::orderBy('tanggal_kegiatan', 'desc')->get();
 
@@ -65,21 +87,27 @@ class GaleriController extends Controller
         $search = $request->input('search', '');
         $kegiatan_id = $request->input('kegiatan_id', '');
 
-        // Get galeri video
-        $galeris = Galeri::latest()
-            ->where('tipe', 'video')
-            ->search($search)
-            ->byKegiatan($kegiatan_id)
-            ->paginate(12);
+        $query = Berita::whereNotNull('link_video')->where('link_video', '!=', '');
 
-        // Get video dari berita (link_video)
-        $beritaVideos = Berita::whereNotNull('link_video')
-            ->where('link_video', '!=', '')
-            ->when($search, function($query) use ($search) {
-                $query->where('judul', 'like', "%{$search}%");
-            })
-            ->latest('tanggal_kegiatan')
-            ->get();
+        if ($search) {
+            $query->where('judul', 'like', "%{$search}%");
+        }
+
+        if ($kegiatan_id) {
+            $query->where('id', $kegiatan_id);
+        }
+
+        $galeris = $query->latest('tanggal_kegiatan')->paginate(12);
+        
+        // Get all berita with videos for display
+        $beritaVideosQuery = Berita::whereNotNull('link_video')->where('link_video', '!=', '');
+        if ($search) {
+            $beritaVideosQuery->where('judul', 'like', "%{$search}%");
+        }
+        if ($kegiatan_id) {
+            $beritaVideosQuery->where('id', $kegiatan_id);
+        }
+        $beritaVideos = $beritaVideosQuery->latest('tanggal_kegiatan')->get();
 
         $kegiatanList = Berita::orderBy('tanggal_kegiatan', 'desc')->get();
 
@@ -128,20 +156,5 @@ class GaleriController extends Controller
         $kegiatan = Berita::findOrFail($id);
 
         return view('frontend.galeri.berita-show', compact('kegiatan'));
-    }
-
-    /**
-     * Display a single galeri item with related items
-     */
-    public function show($id)
-    {
-        $galeri = Galeri::findOrFail($id);
-        $relatedGaleris = Galeri::where('kegiatan_id', $galeri->kegiatan_id)
-            ->where('id', '!=', $id)
-            ->latest()
-            ->take(6)
-            ->get();
-
-        return view('frontend.galeri.show', compact('galeri', 'relatedGaleris'));
     }
 }

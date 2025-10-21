@@ -149,38 +149,35 @@
                                 </svg>
                                 Galeri Foto
                             </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                         @foreach($galeris as $galeri)
-                            <a href="{{ route('galeri.show', $galeri->id) }}" class="group">
-                                <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
-                                    <!-- Image -->
-                                    <div class="relative w-full aspect-video bg-gradient-to-br from-gray-200 to-gray-300 overflow-hidden">
-                                        <img src="{{ $galeri->url }}" alt="{{ $galeri->judul }}" 
-                                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-                                            <svg class="w-16 h-16 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
-                                            </svg>
-                                        </div>
-                                    </div>
-
-                                    <!-- Content -->
-                                    <div class="p-4 flex-1 flex flex-col">
-                                        <h3 class="text-lg font-semibold text-gray-800 group-hover:text-primary-600 transition-colors line-clamp-2">
-                                            {{ $galeri->judul }}
-                                        </h3>
-                                        <p class="text-sm text-gray-600 mt-2 line-clamp-2">
-                                            {{ $galeri->deskripsi ?? 'Tidak ada deskripsi' }}
-                                        </p>
-                                        <div class="mt-auto pt-4 border-t border-gray-100">
-                                            <div class="flex items-center justify-between text-xs text-gray-500">
-                                                <span class="font-medium text-primary-600">{{ $galeri->kegiatan->judul ?? 'N/A' }}</span>
-                                                <span>{{ $galeri->created_at->format('d M Y') }}</span>
+                            @if($galeri->media_path && is_array($galeri->media_path))
+                                @foreach($galeri->media_path as $index => $media)
+                                    <a href="{{ route('galeri.berita.show', $galeri->id) }}" class="group">
+                                        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary-200">
+                                            <div class="relative aspect-square bg-gradient-to-br from-gray-200 to-gray-300 overflow-hidden">
+                                                <img src="{{ asset('storage/' . $media) }}" 
+                                                     alt="{{ $galeri->judul }} - {{ $index + 1 }}" 
+                                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                                     loading="lazy">
+                                                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
+                                                    <svg class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="p-3">
+                                                <h3 class="text-sm font-semibold text-gray-800 group-hover:text-primary-600 transition-colors line-clamp-2">
+                                                    {{ $galeri->judul }}
+                                                </h3>
+                                                <p class="text-xs text-gray-500 mt-1">
+                                                    {{ $galeri->tanggal_kegiatan->format('d M Y') }}
+                                                </p>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </a>
+                                    </a>
+                                @endforeach
+                            @endif
                         @endforeach
                     </div>
 

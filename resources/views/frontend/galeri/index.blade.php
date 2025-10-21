@@ -120,12 +120,17 @@
                 <div class="max-w-6xl mx-auto">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach($galeris as $galeri)
-                            <a href="{{ route('galeri.show', $galeri->id) }}" class="group">
+                            <a href="{{ route('galeri.berita.show', $galeri->id) }}" class="group">
                                 <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
                                     <!-- Thumbnail -->
                                     <div class="relative w-full aspect-video bg-gradient-to-br from-gray-200 to-gray-300 overflow-hidden">
-                                        @if($galeri->tipe === 'foto')
-                                            <img src="{{ $galeri->url }}" alt="{{ $galeri->judul }}" 
+                                        @php
+                                            $isVideo = !empty($galeri->link_video);
+                                            $tipe = $isVideo ? 'video' : 'foto';
+                                            $url = $isVideo ? ($galeri->thumbnail ?: '') : (is_array($galeri->media_path) ? $galeri->media_path[0] : $galeri->media_path);
+                                        @endphp
+                                        @if($tipe === 'foto')
+                                            <img src="{{ asset('storage/' . $url) }}" alt="{{ $galeri->judul }}" 
                                                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                                             <div class="absolute top-3 right-3 bg-primary-600 text-white px-3 py-1 rounded-lg text-xs font-semibold flex items-center space-x-1">
                                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -136,7 +141,7 @@
                                         @else
                                             <div class="w-full h-full bg-black/20 flex items-center justify-center">
                                                 @if($galeri->thumbnail)
-                                                    <img src="{{ $galeri->thumbnail }}" alt="{{ $galeri->judul }}" 
+                                                    <img src="{{ asset('storage/' . $galeri->thumbnail) }}" alt="{{ $galeri->judul }}" 
                                                          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                                                 @else
                                                     <svg class="w-16 h-16 text-white/50" fill="currentColor" viewBox="0 0 24 24">
@@ -163,8 +168,8 @@
                                         </p>
                                         <div class="mt-auto pt-4 border-t border-gray-100">
                                             <div class="flex items-center justify-between text-xs text-gray-500">
-                                                <span class="font-medium text-primary-600">{{ $galeri->kegiatan->judul ?? 'N/A' }}</span>
-                                                <span>{{ $galeri->created_at->format('d M Y') }}</span>
+                                                <span class="font-medium text-primary-600">{{ $galeri->kategori ?? 'Berita' }}</span>
+                                                <span>{{ $galeri->tanggal_kegiatan->format('d M Y') }}</span>
                                             </div>
                                         </div>
                                     </div>
