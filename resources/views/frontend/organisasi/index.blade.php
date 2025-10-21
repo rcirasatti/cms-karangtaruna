@@ -30,7 +30,8 @@
                     </div>
                     <div>
                         <h1 class="text-4xl md:text-5xl font-bold tracking-tight">Struktur Organisasi</h1>
-                        <p class="mt-2 text-xl text-blue-100">Susunan kepengurusan yang mendukung kerja tim, memperkuat komunikasi, dan mempercepat eksekusi kegiatan</p>
+                        <p class="mt-2 text-xl text-blue-100">Susunan kepengurusan yang mendukung kerja tim, memperkuat
+                            komunikasi, dan mempercepat eksekusi kegiatan</p>
                     </div>
                 </div>
             </div>
@@ -53,16 +54,17 @@
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 max-w-7xl mx-auto px-4">
                             @foreach($tokohUtama as $tokoh)
-                                <div class="text-center cursor-pointer" onclick="openModal('{{ $tokoh->nama }}', '{{ $tokoh->jabatan }}', '{{ $tokoh->foto }}', '{{ addslashes($tokoh->tugas ?? 'Tidak ada deskripsi tugas') }}', '{{ addslashes($tokoh->profil_singkat ?? '') }}')">
-                          
-                                    <div class="bg-gradient-to-b from-yellow-600 to-yellow-700 mb-6 inline-block">
-                                        <div class="w-full aspect-[3/4] hover:scale-105 transition-transform">
+                                <div class="text-center w-40 sm:w-44 md:w-48 lg:w-52 cursor-pointer"
+                                    onclick="openModal('{{ $tokoh->nama }}', '{{ $tokoh->jabatan }}', '{{ $tokoh->foto }}', '{{ addslashes($tokoh->tugas ?? 'Tidak ada deskripsi tugas') }}', '{{ addslashes($tokoh->profil_singkat ?? '') }}')">
+                                    <div class="bg-gradient-to-b from-yellow-600 to-yellow-700 p-[3px] rounded-2xl">
+                                        <div class="aspect-[3/4] overflow-hidden rounded-xl shadow-2xl hover:scale-105 transition-transform mb-4">
                                             @if($tokoh->foto)
                                                 <img src="{{ asset('storage/' . $tokoh->foto) }}" alt="{{ $tokoh->nama }}"
-                                                    class="w-full h-full object-cover">
+                                                    class="block w-full h-full object-cover" loading="lazy">
                                             @else
-                                                <div class="w-full h-full bg-gray-300 flex items-center justify-center">
-                                                    <svg class="w-24 h-24 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                                <div class="flex w-full h-full items-center justify-center bg-gray-300">
+                                                    <svg class="w-1/2 h-1/2 text-gray-400" viewBox="0 0 24 24" fill="currentColor"
+                                                        aria-hidden="true">
                                                         <path
                                                             d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                                                     </svg>
@@ -70,7 +72,6 @@
                                             @endif
                                         </div>
                                     </div>
-
                                     <h3 class="text-primary-600 font-bold text-base md:text-lg uppercase tracking-wide mb-1">
                                         {{ $tokoh->nama }}
                                     </h3>
@@ -94,15 +95,17 @@
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 max-w-7xl mx-auto px-4">
                             @foreach($strukturPengurus as $anggota)
-                                <div class="text-center cursor-pointer" onclick="openModal('{{ $anggota->nama }}', '{{ $anggota->jabatan }}', '{{ $anggota->foto }}', '{{ addslashes($anggota->tugas ?? 'Tidak ada deskripsi tugas') }}', '{{ addslashes($anggota->profil_singkat ?? '') }}')">
-                                    <div class="bg-gradient-to-b from-yellow-600 to-yellow-700 mb-6 inline-block">
-                                        <div class="w-full aspect-[3/4] hover:scale-105 transition-transform">
+                                <div class="text-center w-40 sm:w-44 md:w-48 lg:w-52cursor-pointer"
+                                    onclick="openModal('{{ $anggota->nama }}', '{{ $anggota->jabatan }}', '{{ $anggota->foto }}', '{{ addslashes($anggota->tugas ?? 'Tidak ada deskripsi tugas') }}', '{{ addslashes($anggota->profil_singkat ?? '') }}')">
+                                    <div class="bg-gradient-to-b from-yellow-600 to-yellow-700 p-[3px] rounded-2xl">
+                                        <div class="aspect-[3/4] overflow-hidden rounded-xl shadow-lg hover:scale-105 transition-transform mb-4">
                                             @if($anggota->foto)
                                                 <img src="{{ asset('storage/' . $anggota->foto) }}" alt="{{ $anggota->nama }}"
-                                                    class="w-full h-full object-cover">
+                                                    class="block w-full h-full object-cover" loading="lazy">
                                             @else
-                                                <div class="w-full h-full bg-gray-300 flex items-center justify-center">
-                                                    <svg class="w-24 h-24 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                                <div class="flex w-full h-full items-center justify-center bg-gray-300">
+                                                    <svg class="w-1/2 h-1/2 text-gray-400" viewBox="0 0 24 24" fill="currentColor"
+                                                        aria-hidden="true">
                                                         <path
                                                             d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                                                     </svg>
@@ -110,7 +113,6 @@
                                             @endif
                                         </div>
                                     </div>
-
                                     <h3 class="text-primary-600 font-bold text-base md:text-lg uppercase tracking-wide mb-1">
                                         {{ $anggota->nama }}
                                     </h3>
@@ -123,17 +125,23 @@
             </div>
         </div>
 
-        <div id="pengurusModal" class="hidden fixed inset-0 bg-transparent bg-opacity-75 z-50 flex items-center justify-center p-4" onclick="closeModal(event)">
-            <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl" onclick="event.stopPropagation()">
-               
+        <div id="pengurusModal"
+            class="hidden fixed inset-0 bg-transparent bg-opacity-75 z-50 flex items-center justify-center p-4"
+            onclick="closeModal(event)">
+            <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+                onclick="event.stopPropagation()">
+
                 <div class="relative bg-gradient-to-r from-primary-600 to-primary-800 text-white p-6 rounded-t-2xl">
-                    <button onclick="closeModal()" class="absolute top-4 right-4 text-white hover:text-gray-200 transition-colors">
+                    <button onclick="closeModal()"
+                        class="absolute top-4 right-4 text-white hover:text-gray-200 transition-colors">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                            </path>
                         </svg>
                     </button>
                     <div class="flex items-center space-x-4">
-                        <div class="w-24 h-24 bg-gradient-to-b from-yellow-600 to-yellow-700 rounded-lg overflow-hidden flex-shrink-0">
+                        <div
+                            class="w-24 h-24 bg-gradient-to-b from-yellow-600 to-yellow-700 rounded-lg overflow-hidden flex-shrink-0">
                             <img id="modalFoto" src="" alt="" class="w-full h-full object-cover">
                         </div>
                         <div>
@@ -147,7 +155,8 @@
                     <div id="modalProfilSection" class="mb-6">
                         <h4 class="text-lg font-bold text-gray-800 mb-3 flex items-center">
                             <svg class="w-5 h-5 mr-2 text-primary-600" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                <path
+                                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                             </svg>
                             Profil Singkat
                         </h4>
@@ -157,7 +166,8 @@
                     <div>
                         <h4 class="text-lg font-bold text-gray-800 mb-3 flex items-center">
                             <svg class="w-5 h-5 mr-2 text-primary-600" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+                                <path
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                             </svg>
                             Tugas & Tanggung Jawab
                         </h4>
@@ -166,7 +176,8 @@
                 </div>
 
                 <div class="bg-gray-50 px-6 py-4 rounded-b-2xl flex justify-end">
-                    <button onclick="closeModal()" class="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium">
+                    <button onclick="closeModal()"
+                        class="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium">
                         Tutup
                     </button>
                 </div>
@@ -195,7 +206,7 @@
             modalNama.textContent = nama;
             modalJabatan.textContent = jabatan;
             modalTugas.textContent = tugas;
-            
+
             if (foto) {
                 modalFoto.src = "{{ asset('storage') }}/" + foto;
                 modalFoto.alt = nama;
@@ -213,7 +224,7 @@
 
             modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
-            
+
             setTimeout(() => {
                 modal.classList.add('opacity-100');
             }, 10);
@@ -228,7 +239,7 @@
             document.body.style.overflow = 'auto';
         }
 
-        document.addEventListener('keydown', function(event) {
+        document.addEventListener('keydown', function (event) {
             if (event.key === 'Escape') {
                 closeModal();
             }

@@ -82,7 +82,7 @@
                 </ul>
             </li>
 
-            <!-- Kepengurusan -->
+            <!-- Organisasi -->
             <li>
                 <a href="{{ route('admin.kepengurusan.index') }}"
                     class="flex items-center px-4 py-3 rounded-xl transition duration-200 {{ request()->routeIs('admin.kepengurusan.*') ? 'bg-white/25 backdrop-blur-sm text-white shadow-lg font-semibold' : 'hover:bg-white/10' }}">
