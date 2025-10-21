@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-2xl overflow-hidden p-5 m-10">
+        <div class="bg-white rounded-2xl shadow-2xl overflow-hidden p-5">
             <div class="text-center mb-12 relative">
                 <div class="text-center mb-12 relative">
                         <div class="w-24 h-1 mx-auto"></div>
