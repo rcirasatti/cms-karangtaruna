@@ -108,7 +108,11 @@
                                 @endif
                             </td>
                             <td class="px-6 py-4 text-sm font-semibold text-gray-800">{{ $item->judul }}</td>
-                            <td class="px-6 py-4 text-sm text-gray-600">{{ $item->kategori ?? '-' }}</td>
+                            <td class="px-6 py-4 text-sm">
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-sky-100 text-sky-800">
+                                    {{ $item->kategori ?? '-' }}
+                                </span>
+                            </td>
                             <td class="px-6 py-4 text-sm text-gray-600">
                                 @if($item->tanggal_kegiatan)
                                     {{ \Carbon\Carbon::parse($item->tanggal_kegiatan)->format('d M Y') }}

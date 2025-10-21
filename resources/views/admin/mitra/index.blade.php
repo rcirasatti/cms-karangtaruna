@@ -114,7 +114,11 @@
                                     <div class="text-xs text-gray-500 mt-1 truncate">{{ Str::limit($item->deskripsi, 50) }}</div>
                                 @endif
                             </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">{{ $item->jenis }}</td>
+                            <td class="px-6 py-4 text-sm">
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-sky-100 text-sky-800">
+                                    {{ $item->jenis }}
+                                </span>
+                            </td>
                             <td class="px-6 py-4 text-sm text-gray-600">{{ $item->kontak ?? '-' }}</td>
                             <td class="px-6 py-4 text-sm">
                                 @if($item->testimoni)
