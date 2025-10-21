@@ -30,7 +30,8 @@
                     </div>
                     <div>
                         <h1 class="text-4xl md:text-5xl font-bold tracking-tight">Sejarah Organisasi</h1>
-                        <p class="mt-2 text-xl text-blue-100">Didirikan sebagai wadah pemuda dalam menggerakkan kegiatan sosial dan kemasyarakatan</p>
+                        <p class="mt-2 text-xl text-blue-100">Didirikan sebagai wadah pemuda dalam menggerakkan kegiatan
+                            sosial dan kemasyarakatan</p>
                     </div>
                 </div>
             </div>
@@ -47,10 +48,8 @@
                                 Sejarah Karang Taruna
                             </h2>
 
-                            <div class="space-y-4 text-gray-700 leading-relaxed text-justify">
-                                <p>
-                                    {{ $profile->sejarah }}
-                                </p>
+                            <div class="space-y-4 text-gray-700 leading-relaxed text-justify whitespace-pre-line">
+                                {{ $profile->sejarah }}
                             </div>
                         </div>
 
@@ -108,15 +107,14 @@
                             <div class="bg-gray-50 rounded-xl p-6 border-l-4 border-secondary">
                                 <div class="text-6xl text-secondary mb-2 leading-none">"</div>
                                 <p class="text-gray-700 italic mb-4 leading-relaxed">
-                                    Karang Taruna membentuk generasi muda yang peduli dan berpikiran sosial, sangat bermanfaat
-                                    dalam membangun kepemimpinan dan jiwa sosial.
+                                    {{ $quote->quote }}
                                 </p>
                                 <div class="flex items-center space-x-3 mt-4">
                                     <img src="https://ui-avatars.com/api/?name=Prabowo+Subianto&size=48&background=134686&color=fff"
                                         alt="Prabowo Subianto" class="w-12 h-12 rounded-full border-2 border-primary-600">
                                     <div>
-                                        <div class="font-bold text-gray-900">Prabowo Subianto</div>
-                                        <div class="text-sm text-gray-600">Presiden Republik Indonesia</div>
+                                        <div class="font-bold text-gray-900">{{ $quote->nama }}</div>
+                                        <div class="text-sm text-gray-600">{{ $quote->peran }}</div>
                                     </div>
                                 </div>
                             </div>

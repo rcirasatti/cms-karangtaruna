@@ -80,6 +80,8 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::put('/about/logo', [\App\Http\Controllers\Admin\AboutController::class, 'update_logo'])->name('about.logo.update');
     Route::get('/about/sejarah', [\App\Http\Controllers\Admin\AboutController::class, 'sejarah'])->name('about.sejarah');
     Route::put('/about/sejarah', [\App\Http\Controllers\Admin\AboutController::class, 'update_sejarah'])->name('about.sejarah.update');
+    Route::put('/about/identitas', [\App\Http\Controllers\Admin\AboutController::class, 'update_identitas'])->name('about.identitas.update');
+    Route::put('/about/quote', [\App\Http\Controllers\Admin\AboutController::class, 'update_quote'])->name('about.quote.update');
     Route::resource('kepengurusan', \App\Http\Controllers\Admin\KepengurusanController::class);
     Route::resource('berita', \App\Http\Controllers\Admin\BeritaController::class);
     Route::resource('produk', \App\Http\Controllers\Admin\ProdukController::class);
