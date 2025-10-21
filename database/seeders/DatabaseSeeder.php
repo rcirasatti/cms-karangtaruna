@@ -10,6 +10,7 @@ use App\Models\Berita;
 use App\Models\Mitra;
 use App\Models\Kontak;
 use App\Models\FilosofiLogoItem;
+use App\Models\Quote;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -170,6 +171,14 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
+        $quote = [
+            'nama' => 'Prabowo Subianto',
+            'peran' => 'Presiden Republik Indonesia',
+            'quote' => 'Karang Taruna membentuk generasi muda yang peduli dan berpikiran sosial, sangat bermanfaat dalam membangun kepemimpinan dan jiwa sosial.'
+        ];
+
+        // Insert quote to database
+        Quote::create($quote);
 
         foreach ($filosofiItems as $item) {
             FilosofiLogoItem::create($item);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Profile;
 use App\Models\FilosofiLogoItem;
+use App\Models\Quote;
 use Illuminate\Http\Request;
 
 class TentangController extends Controller
@@ -25,12 +26,18 @@ class TentangController extends Controller
     public function filosofiLogo()
     {
         $profile = Profile::first();
-        return view('frontend.tentang.filosofi', compact('profile'));
+        return view('frontend.tentang.profil', compact('profile'));
     }
 
     public function profil()
     {
         $profile = Profile::first();
-        return view('frontend.tentang.profil', compact('profile'));
+        $quote = Quote::find(1) ?? Quote::create([
+            'id' => 1,
+            'nama' => 'Nama Tokoh',
+            'peran' => 'Jabatan/Peran',
+            'quote' => 'Kutipan inspiratif...'
+        ]);
+        return view('frontend.tentang.profil', compact('profile', 'quote'));
     }
 }

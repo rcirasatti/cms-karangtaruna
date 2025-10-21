@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Profile;
 use App\Models\FilosofiLogoItem;
+use App\Models\Quote;
 use Illuminate\Http\Request;
 
 class AboutController extends Controller
@@ -169,7 +170,15 @@ class AboutController extends Controller
         $profile = Profile::first() ?? Profile::create([
             'sejarah' => ''
         ]);
-        return view('admin.about.sejarah', compact('profile'));
+
+        $quote = Quote::find(1) ?? Quote::create([
+            'id' => 1,
+            'nama' => 'Nama Tokoh',
+            'peran' => 'Jabatan/Peran',
+            'quote' => 'Kutipan inspiratif...'
+        ]);
+
+        return view('admin.about.sejarah', compact('profile', 'quote'));
     }
 
     public function update_sejarah(Request $request)
@@ -197,5 +206,58 @@ class AboutController extends Controller
         }
 
         return redirect()->back()->with('success', 'Sejarah organisasi berhasil diperbarui.');
+    }
+
+    public function update_identitas(Request $request)
+    {
+        $request->validate([
+            'nama_organisasi' => 'required|string|max:255',
+            'tahun_berdiri' => 'required|integer',
+            'legalitas' => 'nullable|string|max:255',
+            'alamat' => 'required|string',
+            'profil_singkat' => 'required|string'
+        ]);
+
+        $profile = Profile::first();
+        if (!$profile) {
+            return redirect()->back()->with('error', 'Data profil tidak ditemukan.');
+        }
+
+        $profile->update([
+            'nama_organisasi' => $request->nama_organisasi,
+            'tahun_berdiri' => $request->tahun_berdiri,
+            'legalitas' => $request->legalitas,
+            'alamat' => $request->alamat,
+            'profil_singkat' => $request->profil_singkat
+        ]);
+
+        return redirect()->back()->with('success', 'Identitas dan profil organisasi berhasil diperbarui.');
+    }
+
+    public function update_quote(Request $request)
+    {
+        $request->validate([
+            'quote' => 'required|string',
+            'nama' => 'required|string|max:255',
+            'peran' => 'required|string|max:255'
+        ]);
+
+        $quote = Quote::find(1);
+        if (!$quote) {
+            $quote = Quote::create([
+                'id' => 1,
+                'quote' => $request->quote,
+                'nama' => $request->nama,
+                'peran' => $request->peran
+            ]);
+        } else {
+            $quote->update([
+                'quote' => $request->quote,
+                'nama' => $request->nama,
+                'peran' => $request->peran
+            ]);
+        }
+
+        return redirect()->back()->with('success', 'Quote berhasil diperbarui.');
     }
 }
