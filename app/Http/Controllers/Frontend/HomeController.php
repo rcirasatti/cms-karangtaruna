@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Profile;
-use App\Models\Galeri;
 use App\Models\Berita;
 use App\Models\Produk;
 use App\Models\Kontak;

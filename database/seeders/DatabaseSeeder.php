@@ -96,29 +96,6 @@ class DatabaseSeeder extends Seeder
         foreach ($berita as $b) {
             Berita::create($b);
         }
-
-        // Create Mitra
-        $mitra = [
-            [
-                'nama_mitra' => 'UMKM Sejahtera',
-                'jenis' => 'UMKM',
-                'deskripsi' => 'UMKM yang bergerak di bidang makanan dan minuman.',
-                'kontak' => '081234567890',
-                'testimoni' => 'Kerjasama dengan Karang Taruna sangat membantu perkembangan usaha kami.'
-            ],
-            [
-                'nama_mitra' => 'Kerajinan Nusantara',
-                'jenis' => 'UMKM',
-                'deskripsi' => 'Produsen kerajinan tangan khas Indonesia.',
-                'kontak' => '081234567891',
-                'testimoni' => 'Melalui Karang Taruna, produk kami bisa lebih dikenal masyarakat luas.'
-            ],
-        ];
-
-        foreach ($mitra as $m) {
-            Mitra::create($m);
-        }
-
         // Create Kontak
         Kontak::create([
             'alamat_sekretariat' => 'Jl. Pemuda No. 123, Jakarta Selatan, DKI Jakarta 12345',

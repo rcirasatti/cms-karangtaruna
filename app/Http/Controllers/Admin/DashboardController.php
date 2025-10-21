@@ -7,7 +7,6 @@ use App\Models\Berita;
 use App\Models\Produk;
 use App\Models\Mitra;
 use App\Models\Kepengurusan;
-use App\Models\Galeri;
 
 class DashboardController extends Controller
 {
@@ -21,7 +20,6 @@ class DashboardController extends Controller
             'total_produk' => Produk::count(),
             'total_mitra' => Mitra::count(),
             'total_kepengurusan' => Kepengurusan::count(),
-            'total_galeri' => Galeri::count(),
             'berita_terbaru' => Berita::orderBy('created_at', 'desc')->take(5)->get(),
             'produk_terbaru' => Produk::orderBy('created_at', 'desc')->take(5)->get(),
         ];

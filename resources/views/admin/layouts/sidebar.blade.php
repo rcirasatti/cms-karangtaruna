@@ -11,7 +11,7 @@
     x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
     x-transition:leave="transition ease-in-out duration-300 transform" x-transition:leave-start="translate-x-0"
     x-transition:leave-end="-translate-x-full" :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
-    class="fixed lg:static inset-y-0 left-0 bg-gradient-to-b from-primary-800 to-primary-900 text-white w-64 flex-shrink-0 overflow-y-auto shadow-2xl z-50 transition-transform duration-300 ease-in-out"
+    class="fixed lg:static inset-y-0 left-0 bg-gradient-to-br from-[#134686] via-[#1a5fa0] to-[#1a5fa0] text-gray-50 w-64 flex-shrink-0 overflow-y-auto shadow-2xl z-50 transition-transform duration-300 ease-in-out"
     style="display: none;">
 
     <!-- Navigation -->
@@ -20,7 +20,7 @@
             <!-- Dashboard -->
             <li>
                 <a href="{{ route('admin.dashboard') }}"
-                    class="flex items-center px-4 py-3 rounded-xl transition duration-200 {{ request()->routeIs('admin.dashboard') ? 'bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-lg' : 'hover:bg-primary-800/50' }}">
+                    class="flex items-center px-4 py-3 rounded-xl transition duration-200 {{ request()->routeIs('admin.dashboard') ? 'bg-white/25 backdrop-blur-sm text-white shadow-lg font-semibold' : 'hover:bg-white/10' }}">
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
@@ -32,13 +32,13 @@
 
             <!-- Divider -->
             <li class="pt-4 pb-2">
-                <span class="px-4 text-xs font-semibold text-primary-300 uppercase tracking-wider">Konten</span>
+                <span class="px-4 text-xs font-semibold text-white/70 uppercase tracking-wider">Konten</span>
             </li>
 
             <!-- Profile -->
             <li>
                 <a href="{{ route('admin.profile.index') }}"
-                    class="flex items-center px-4 py-3 rounded-xl transition duration-200 {{ request()->routeIs('admin.profile.*') ? 'bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-lg' : 'hover:bg-primary-800/50' }}">
+                    class="flex items-center px-4 py-3 rounded-xl transition duration-200 {{ request()->routeIs('admin.profile.*') ? 'bg-white/25 backdrop-blur-sm text-white shadow-lg font-semibold' : 'hover:bg-white/10' }}">
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
@@ -50,7 +50,7 @@
             <!-- About -->
             <li x-data="{ open: false }">
                 <button @click="open = !open"
-                    class="flex items-center justify-between w-full px-4 py-3 rounded-xl transition duration-200 hover:bg-primary-800/50">
+                    class="flex items-center justify-between w-full px-4 py-3 rounded-xl transition duration-200 hover:bg-white/10">
                     <div class="flex items-center">
                         <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -69,13 +69,13 @@
                 <ul x-show="open" x-transition class="ml-8 mt-2 space-y-1">
                     <li>
                         <a href="{{ route('admin.about.logo') }}"
-                            class="flex items-center px-4 py-2 rounded-lg transition duration-200 {{ request()->routeIs('admin.about.*') ? 'bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-lg' : 'hover:bg-primary-800/50'}}">
+                            class="flex items-center px-4 py-2 rounded-lg transition duration-200 {{ request()->routeIs('admin.about.*') ? 'bg-white/25 backdrop-blur-sm text-white font-semibold' : 'hover:bg-white/10'}}">
                             <span class="font-medium">Logo</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.about.sejarah') }}"
-                            class="flex items-center px-4 py-2 rounded-lg transition duration-200 {{ request()->routeIs('admin.about.*') ? 'bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-lg' : 'hover:bg-primary-800/50'}}">
+                            class="flex items-center px-4 py-2 rounded-lg transition duration-200 {{ request()->routeIs('admin.about.*') ? 'bg-white/25 backdrop-blur-sm text-white font-semibold' : 'hover:bg-white/10'}}">
                             <span class="font-medium">Sejarah Organisasi</span>
                         </a>
                     </li>
@@ -85,7 +85,7 @@
             <!-- Kepengurusan -->
             <li>
                 <a href="{{ route('admin.kepengurusan.index') }}"
-                    class="flex items-center px-4 py-3 rounded-xl transition duration-200 {{ request()->routeIs('admin.kepengurusan.*') ? 'bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-lg' : 'hover:bg-primary-800/50' }}">
+                    class="flex items-center px-4 py-3 rounded-xl transition duration-200 {{ request()->routeIs('admin.kepengurusan.*') ? 'bg-white/25 backdrop-blur-sm text-white shadow-lg font-semibold' : 'hover:bg-white/10' }}">
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
@@ -98,7 +98,7 @@
             <!-- Berita -->
             <li>
                 <a href="{{ route('admin.berita.index') }}"
-                    class="flex items-center px-4 py-3 rounded-xl transition duration-200 {{ request()->routeIs('admin.berita.*') ? 'bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-lg' : 'hover:bg-primary-800/50' }}">
+                    class="flex items-center px-4 py-3 rounded-xl transition duration-200 {{ request()->routeIs('admin.berita.*') ? 'bg-white/25 backdrop-blur-sm text-white shadow-lg font-semibold' : 'hover:bg-white/10' }}">
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z">
@@ -111,7 +111,7 @@
             <!-- Produk -->
             <li>
                 <a href="{{ route('admin.produk.index') }}"
-                    class="flex items-center px-4 py-3 rounded-xl transition duration-200 {{ request()->routeIs('admin.produk.*') ? 'bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-lg' : 'hover:bg-primary-800/50' }}">
+                    class="flex items-center px-4 py-3 rounded-xl transition duration-200 {{ request()->routeIs('admin.produk.*') ? 'bg-white/25 backdrop-blur-sm text-white shadow-lg font-semibold' : 'hover:bg-white/10' }}">
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
@@ -123,7 +123,7 @@
             <!-- Mitra -->
             <li>
                 <a href="{{ route('admin.mitra.index') }}"
-                    class="flex items-center px-4 py-3 rounded-xl transition duration-200 {{ request()->routeIs('admin.mitra.*') ? 'bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-lg' : 'hover:bg-primary-800/50' }}">
+                    class="flex items-center px-4 py-3 rounded-xl transition duration-200 {{ request()->routeIs('admin.mitra.*') ? 'bg-white/25 backdrop-blur-sm text-white shadow-lg font-semibold' : 'hover:bg-white/10' }}">
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
@@ -136,7 +136,7 @@
             <!-- Kontak -->
             <li>
                 <a href="{{ route('admin.kontak.index') }}"
-                    class="flex items-center px-4 py-3 rounded-xl transition duration-200 {{ request()->routeIs('admin.kontak.*') ? 'bg-gradient-to-r from-primary-600 to-primary-700 text-white shadow-lg' : 'hover:bg-primary-800/50' }}">
+                    class="flex items-center px-4 py-3 rounded-xl transition duration-200 {{ request()->routeIs('admin.kontak.*') ? 'bg-white/25 backdrop-blur-sm text-white shadow-lg font-semibold' : 'hover:bg-white/10' }}">
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
