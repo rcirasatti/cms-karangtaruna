@@ -6,10 +6,10 @@
 @section('content')
 
     <div x-data="{
-                                                    visiMisiModalOpen: false,
-                                                    tujuanFungsiModalOpen: false,
-                                                    nilaiDasarModalOpen: false
-                                                }" class="space-y-6">
+                                                        visiMisiModalOpen: false,
+                                                        tujuanFungsiModalOpen: false,
+                                                        nilaiDasarModalOpen: false
+                                                    }" class="space-y-6">
         <!-- Header Card -->
         <div class="bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl shadow-lg p-8 text-white">
             <div class="flex items-center justify-between">
@@ -20,7 +20,7 @@
                 <div class="bg-white/20 backdrop-blur-sm rounded-xl p-4">
                     <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
                         </path>
                     </svg>
                 </div>
@@ -267,7 +267,8 @@
                             </svg>
                             <h3 class="text-xl font-bold text-white">Edit Visi & Misi</h3>
                         </div>
-                        <button type="button" @click="visiMisiModalOpen = false" class="text-white hover:bg-primary-800/30 rounded-lg p-2 transition">
+                        <button type="button" @click="visiMisiModalOpen = false"
+                            class="text-white hover:bg-primary-800/30 rounded-lg p-2 transition">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M6 18L18 6M6 6l12 12"></path>
@@ -363,7 +364,8 @@
                             </svg>
                             <h3 class="text-xl font-bold text-white">Edit Tujuan & Fungsi</h3>
                         </div>
-                        <button type="button" @click="tujuanFungsiModalOpen = false" class="text-white hover:bg-primary-800/30 rounded-lg p-2 transition">
+                        <button type="button" @click="tujuanFungsiModalOpen = false"
+                            class="text-white hover:bg-primary-800/30 rounded-lg p-2 transition">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M6 18L18 6M6 6l12 12"></path>
@@ -457,7 +459,8 @@
                             </svg>
                             <h3 class="text-xl font-bold text-white">Edit Nilai Dasar</h3>
                         </div>
-                        <button type="button" @click="nilaiDasarModalOpen = false" class="text-white hover:bg-primary-800/30 rounded-lg p-2 transition">
+                        <button type="button" @click="nilaiDasarModalOpen = false"
+                            class="text-white hover:bg-primary-800/30 rounded-lg p-2 transition">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M6 18L18 6M6 6l12 12"></path>
