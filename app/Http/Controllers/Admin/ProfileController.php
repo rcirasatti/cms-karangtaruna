@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\VisiMisi;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -95,56 +96,41 @@ class ProfileController extends Controller
                 $profil->nilai_dasar = $request->nilai_dasar;
             }
 
-            // Handle gambar_visi upload
             if ($request->hasFile('gambar_visi')) {
-                // Delete old image if exists
-                if ($profil->gambar_visi && file_exists(public_path($profil->gambar_visi))) {
-                    unlink(public_path($profil->gambar_visi));
+                // Hapus foto lama jika ada
+                if ($profil->gambar_visi && Storage::disk('public')->exists($profil->gambar_visi)) {
+                    Storage::disk('public')->delete($profil->gambar_visi);
                 }
-
-                $file = $request->file('gambar_visi');
-                $fileName = time() . '_visi_' . $file->getClientOriginalName();
-                $file->move(public_path('images/profil'), $fileName);
-                $profil->gambar_visi = 'images/profil/' . $fileName;
+                $fotoPath = $request->file('gambar_visi')->store('profil-gambar', 'public');
+                $profil->gambar_visi = $fotoPath;
             }
 
-            // Handle gambar_misi upload
             if ($request->hasFile('gambar_misi')) {
-                // Delete old image if exists
-                if ($profil->gambar_misi && file_exists(public_path($profil->gambar_misi))) {
-                    unlink(public_path($profil->gambar_misi));
+                // Hapus foto lama jika ada
+                if ($profil->gambar_misi && Storage::disk('public')->exists($profil->gambar_misi)) {
+                    Storage::disk('public')->delete($profil->gambar_misi);
                 }
-
-                $file = $request->file('gambar_misi');
-                $fileName = time() . '_misi_' . $file->getClientOriginalName();
-                $file->move(public_path('images/profil'), $fileName);
-                $profil->gambar_misi = 'images/profil/' . $fileName;
+                $fotoPath = $request->file('gambar_misi')->store('profil-gambar', 'public');
+                $profil->gambar_misi = $fotoPath;
             }
 
             // Handle gambar_tujuan upload
             if ($request->hasFile('gambar_tujuan')) {
-                // Delete old image if exists
-                if ($profil->gambar_tujuan && file_exists(public_path($profil->gambar_tujuan))) {
-                    unlink(public_path($profil->gambar_tujuan));
+                // Hapus foto lama jika ada
+                if ($profil->gambar_tujuan && Storage::disk('public')->exists($profil->gambar_tujuan)) {
+                    Storage::disk('public')->delete($profil->gambar_tujuan);
                 }
-
-                $file = $request->file('gambar_tujuan');
-                $fileName = time() . '_tujuan_' . $file->getClientOriginalName();
-                $file->move(public_path('images/profil'), $fileName);
-                $profil->gambar_tujuan = 'images/profil/' . $fileName;
+                $fotoPath = $request->file('gambar_tujuan')->store('profil-gambar', 'public');
+                $profil->gambar_tujuan = $fotoPath;
             }
 
-            // Handle gambar_fungsi upload
             if ($request->hasFile('gambar_fungsi')) {
-                // Delete old image if exists
-                if ($profil->gambar_fungsi && file_exists(public_path($profil->gambar_fungsi))) {
-                    unlink(public_path($profil->gambar_fungsi));
+                // Hapus foto lama jika ada
+                if ($profil->gambar_fungsi && Storage::disk('public')->exists($profil->gambar_fungsi)) {
+                    Storage::disk('public')->delete($profil->gambar_fungsi);
                 }
-
-                $file = $request->file('gambar_fungsi');
-                $fileName = time() . '_fungsi_' . $file->getClientOriginalName();
-                $file->move(public_path('images/profil'), $fileName);
-                $profil->gambar_fungsi = 'images/profil/' . $fileName;
+                $fotoPath = $request->file('gambar_fungsi')->store('profil-gambar', 'public');
+                $profil->gambar_fungsi = $fotoPath;
             }
 
             $profil->save();

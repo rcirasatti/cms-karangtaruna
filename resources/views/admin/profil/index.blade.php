@@ -27,7 +27,7 @@
             </div>
         </div>
 
-        <div class="bg-white shadow-2xl m-6 rounded-2xl">
+        <div class="bg-white shadow-2xl rounded-2xl">
             <div class="bg-color_bg py-16">
                 <div class="container mx-auto px-4">
                     <div class="text-center mb-12 relative">
@@ -47,7 +47,7 @@
                     <div class="m-4 md:m-20">
                         <div id="vision" class="relative flex flex-col md:flex-row mb-10 scroll-mt-24">
                             <div class="md:w-[400px] bg-gray-100 md:absolute shadow-xl hover:scale-105">
-                                <img src="{{ asset($profil->gambar_visi) }}" alt="Vision"
+                                <img src="{{ asset('storage/' . $profil->gambar_visi) }}" alt="Vision"
                                     class="w-full h-full object-cover">
                             </div>
                             <div
@@ -68,7 +68,7 @@
                                 </div>
                             </div>
                             <div class="md:w-[400px] bg-gray-100 md:absolute right-0 top-0 shadow-xl hover:scale-105">
-                                <img src="{{ asset($profil->gambar_misi) }}" alt="Mission"
+                                <img src="{{ asset('storage/' . $profil->gambar_misi) }}" alt="Mission"
                                     class="w-full h-full object-cover">
                             </div>
                         </div>
@@ -95,7 +95,7 @@
                                     <div
                                         class="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105">
                                         <div class="relative h-48 overflow-hidden">
-                                            <img src="{{ asset($profil->gambar_tujuan) }}" alt="Tujuan"
+                                            <img src="{{ asset('storage/' . $profil->gambar_tujuan) }}" alt="Tujuan"
                                                 class="w-full h-full object-cover">
                                             <div class="absolute inset-0 bg-gradient-to-t from-primary-900/90 to-transparent">
                                             </div>
@@ -124,7 +124,7 @@
                                     <div id="fungsi"
                                         class="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105">
                                         <div class="relative h-48 overflow-hidden">
-                                            <img src="{{ asset($profil->gambar_fungsi) }}" alt="Fungsi"
+                                            <img src="{{ asset('storage/' . $profil->gambar_fungsi) }}" alt="Fungsi"
                                                 class="w-full h-full object-cover">
                                             <div class="absolute inset-0 bg-gradient-to-t from-primary-900/90 to-transparent">
                                             </div>
@@ -306,7 +306,7 @@
                                 <input type="file" name="gambar_visi" accept="image/*"
                                     class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
                                 @if($profil->gambar_visi)
-                                    <p class="text-xs text-gray-500 mt-1">Current: {{ basename($profil->gambar_visi) }}</p>
+                                    <p class="text-xs text-gray-500 mt-1">Current: {{ basename('storage/'.$profil->gambar_visi) }}</p>
                                 @endif
                             </div>
 
@@ -315,7 +315,7 @@
                                 <input type="file" name="gambar_misi" accept="image/*"
                                     class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
                                 @if($profil->gambar_misi)
-                                    <p class="text-xs text-gray-500 mt-1">Current: {{ basename($profil->gambar_misi) }}</p>
+                                    <p class="text-xs text-gray-500 mt-1">Current: {{ basename('storage/'.$profil->gambar_misi) }}</p>
                                 @endif
                             </div>
                         </div>
@@ -399,7 +399,7 @@
                                 <input type="file" name="gambar_tujuan" accept="image/*"
                                     class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
                                 @if($profil->gambar_tujuan)
-                                    <p class="text-xs text-gray-500 mt-1">Current: {{ basename($profil->gambar_tujuan) }}
+                                    <p class="text-xs text-gray-500 mt-1">Current: {{ basename('storage/'.$profil->gambar_tujuan) }}
                                     </p>
                                 @endif
                             </div>
@@ -409,7 +409,7 @@
                                 <input type="file" name="gambar_fungsi" accept="image/*"
                                     class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
                                 @if($profil->gambar_fungsi)
-                                    <p class="text-xs text-gray-500 mt-1">Current: {{ basename($profil->gambar_fungsi) }}
+                                    <p class="text-xs text-gray-500 mt-1">Current: {{ basename('storage/'.$profil->gambar_fungsi) }}
                                     </p>
                                 @endif
                             </div>
