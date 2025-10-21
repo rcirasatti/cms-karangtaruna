@@ -44,8 +44,17 @@
         </div>
         <div>
             @if($profile->logo_path)
-                <img src="{{ asset('storage/' . $profile->logo_path) }}" alt="Logo {{ $profile->nama_organisasi }}" class="w-full max-w-md mx-auto">
-            @else
+                    <div class="transform hover:scale-105 transition duration-500">
+                    @php
+                        $isUrl = preg_match('/^https?:\/\//i', $profile->logo_path);
+                        $logoSrc = $isUrl ? $profile->logo_path : asset('storage/' . $profile->logo_path);
+                    @endphp
+                        <img src="{{ $logoSrc }}"
+                            alt="Logo {{ $profile->nama_organisasi }}"
+                            class="max-w-md w-full drop-shadow-2xl"
+                            onerror="this.parentElement.innerHTML='<div class=\'text-center\'><p class=\'text-gray-400 text-lg font-medium\'>Logo tidak dapat dimuat</p></div>'">
+                        </div>
+                    @else
                 <div class="bg-gray-200 w-full h-64 rounded-lg flex items-center justify-center">
                     <span class="text-gray-400">Logo Karang Taruna</span>
                 </div>
