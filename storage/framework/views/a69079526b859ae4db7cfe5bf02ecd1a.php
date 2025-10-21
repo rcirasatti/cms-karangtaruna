@@ -54,7 +54,7 @@
                                     class="block px-4 py-2 text-sm <?php echo e($navTransparent ? 'text-white' : 'text-gray-700'); ?> <?php echo e($navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600'); ?>">Logo
                                     Karang Taruna</a>
                                 <a href="<?php echo e(route('tentang.profil')); ?>"
-                                    class="block px-4 py-2 text-sm <?php echo e($navTransparent ? 'text-white' : 'text-gray-700'); ?> <?php echo e($navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600'); ?>">Profil
+                                    class="block px-4 py-2 text-sm <?php echo e($navTransparent ? 'text-white' : 'text-gray-700'); ?> <?php echo e($navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600'); ?>">Sejarah
                                     Organisasi</a>
                             </div>
                         </div>
@@ -215,7 +215,7 @@
                             Karang
                             Taruna</a>
                         <a href="<?php echo e(route('tentang.profil')); ?>"
-                            class="block px-4 py-2 text-sm <?php echo e($navTransparent ? 'text-white' : 'text-primary-100'); ?> <?php echo e($mobileHoverBg); ?> rounded">Profil
+                            class="block px-4 py-2 text-sm <?php echo e($navTransparent ? 'text-white' : 'text-primary-100'); ?> <?php echo e($mobileHoverBg); ?> rounded">Sejarah
                             Organisasi</a>
                     </div>
                 </div>

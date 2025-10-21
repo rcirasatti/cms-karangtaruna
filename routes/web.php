@@ -51,7 +51,6 @@ Route::prefix('galeri')->group(function () {
     Route::get('/video', [GaleriController::class, 'video'])->name('galeri.video');
     Route::get('/berita', [GaleriController::class, 'berita'])->name('galeri.berita');
     Route::get('/berita/{id}', [GaleriController::class, 'beritaShow'])->name('galeri.berita.show');
-    Route::get('/{id}', [GaleriController::class, 'show'])->name('galeri.show');
 });
 
 // Kontak

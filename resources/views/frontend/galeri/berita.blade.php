@@ -13,7 +13,7 @@
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-white opacity-5 rounded-full -ml-48 -mb-48"></div>
 
         <div class="container mx-auto px-4 relative z-10">
-            <div class="max-w-3xl">
+            <div class="max-w-6xl mx-auto">
                 <!-- Breadcrumb -->
                 <nav class="flex items-center space-x-2 text-sm text-blue-200 mb-4">
                     <a href="{{ route('home') }}" class="hover:text-white transition-colors">Home</a>
@@ -73,7 +73,8 @@
     <!-- Main Content -->
     <div class="bg-gray-100 pt-6 pb-16 md:py-16">
         <div class="container mx-auto px-4">
-            <div class="flex flex-col lg:flex-row gap-8">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex flex-col lg:flex-row gap-8">
                 <!-- Sidebar Filter -->
                 <aside class="lg:w-72 flex-shrink-0">
                     <div class="bg-white rounded-2xl shadow-xl p-6 sticky top-24 border border-gray-100 space-y-6">

@@ -67,14 +67,19 @@
         <div class="grid md:grid-cols-3 gap-6 mb-8">
             <?php $__currentLoopData = $galeriTerbaru; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $galeri): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group">
-                <?php if($galeri->tipe === 'foto'): ?>
+                <?php
+                    $isVideo = !empty($galeri->link_video);
+                    $tipe = $isVideo ? 'video' : 'foto';
+                    $url = $isVideo ? ($galeri->thumbnail ?: '') : (is_array($galeri->media_path) ? $galeri->media_path[0] : $galeri->media_path);
+                ?>
+                <?php if($tipe === 'foto'): ?>
                     <div class="w-full h-48 bg-gray-200 overflow-hidden">
-                        <img src="<?php echo e($galeri->url); ?>" alt="<?php echo e($galeri->judul); ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                        <img src="<?php echo e(asset('storage/' . $url)); ?>" alt="<?php echo e($galeri->judul); ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                     </div>
                 <?php else: ?>
                     <div class="w-full h-48 bg-black/20 flex items-center justify-center relative">
                         <?php if($galeri->thumbnail): ?>
-                            <img src="<?php echo e($galeri->thumbnail); ?>" alt="<?php echo e($galeri->judul); ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                            <img src="<?php echo e(asset('storage/' . $galeri->thumbnail)); ?>" alt="<?php echo e($galeri->judul); ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                         <?php else: ?>
                             <svg class="w-12 h-12 text-white/50" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
@@ -89,12 +94,12 @@
                 <?php endif; ?>
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="text-xs bg-primary-100 text-primary-600 font-semibold px-2 py-1 rounded"><?php echo e(ucfirst($galeri->tipe)); ?></span>
-                        <span class="text-xs text-gray-500"><?php echo e($galeri->created_at->format('d M Y')); ?></span>
+                        <span class="text-xs bg-primary-100 text-primary-600 font-semibold px-2 py-1 rounded"><?php echo e(ucfirst($tipe)); ?></span>
+                        <span class="text-xs text-gray-500"><?php echo e($galeri->tanggal_kegiatan->format('d M Y')); ?></span>
                     </div>
                     <h3 class="text-lg font-bold mt-2 mb-2 line-clamp-2"><?php echo e($galeri->judul); ?></h3>
                     <p class="text-gray-600 text-sm mb-4 line-clamp-2"><?php echo e($galeri->deskripsi ?? 'Tidak ada deskripsi'); ?></p>
-                    <a href="<?php echo e(route('galeri.show', $galeri->id)); ?>" class="text-primary-600 text-sm font-semibold hover:text-primary-700">
+                    <a href="<?php echo e(route('galeri.berita.show', $galeri->id)); ?>" class="text-primary-600 text-sm font-semibold hover:text-primary-700">
                         Lihat Detail →
                     </a>
                 </div>
@@ -106,7 +111,7 @@
         <?php endif; ?>
 
         <div class="text-center">
-            <a href="<?php echo e(route('galeri.index')); ?>" class="inline-block bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition">
+            <a href="<?php echo e(route('galeri.berita')); ?>" class="inline-block bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition">
                 Lihat Semua Galeri
             </a>
         </div>
