@@ -82,9 +82,14 @@
 
                             @if($profile->logo_path)
                                 <div class="transform hover:scale-105 transition duration-500">
-                                    <img src="{{ asset('storage/' . $profile->logo_path) }}"
+                                    @php
+                                        $isUrl = preg_match('/^https?:\/\//i', $profile->logo_path);
+                                        $logoSrc = $isUrl ? $profile->logo_path : asset('storage/' . $profile->logo_path);
+                                    @endphp
+                                    <img src="{{ $logoSrc }}"
                                          alt="Logo {{ $profile->nama_organisasi }}"
-                                         class="max-w-md w-full drop-shadow-2xl">
+                                         class="max-w-md w-full drop-shadow-2xl"
+                                         onerror="this.parentElement.innerHTML='<div class=\'text-center\'><p class=\'text-gray-400 text-lg font-medium\'>Logo tidak dapat dimuat</p></div>'">
                                 </div>
                             @else
                                 <div class="text-center">
@@ -289,14 +294,34 @@
                         @endif
 
                         <!-- Upload Logo -->
-                        <div>
-                            <label for="logo_path" class="block text-sm font-semibold text-gray-700 mb-2">
+                        <div x-data="{ logoInputType: 'file' }">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
                                 <svg class="w-4 h-4 inline-block text-primary-600 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                 </svg>
-                                Upload Logo Baru
+                                Logo
                             </label>
-                            <div class="mt-2">
+                            
+                            <!-- Toggle antara Upload File dan URL -->
+                            <div class="flex gap-4 mb-3">
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="radio" 
+                                           x-model="logoInputType"
+                                           value="file"
+                                           class="text-primary-600 focus:ring-primary-500">
+                                    <span class="text-sm font-medium text-gray-700">Upload File</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="radio" 
+                                           x-model="logoInputType"
+                                           value="url"
+                                           class="text-primary-600 focus:ring-primary-500">
+                                    <span class="text-sm font-medium text-gray-700">URL Gambar</span>
+                                </label>
+                            </div>
+
+                            <!-- Input File Upload -->
+                            <div x-show="logoInputType === 'file'" class="mt-2">
                                 <input
                                     type="file"
                                     id="logo_path"
@@ -311,16 +336,43 @@
                                     Format: JPG, PNG, GIF. Maksimal 2MB. Biarkan kosong jika tidak ingin mengubah logo.
                                 </p>
                             </div>
+
+                            <!-- Input URL -->
+                            <div x-show="logoInputType === 'url'" class="mt-2">
+                                <input
+                                    type="url"
+                                    id="logo_url"
+                                    name="logo_url"
+                                    placeholder="https://example.com/logo.png"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent font-poppins @error('logo_url') border-red-500 @enderror"
+                                >
+                                <p class="mt-2 text-sm text-gray-500">
+                                    <svg class="w-4 h-4 inline-block text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    Masukkan URL gambar yang valid (http:// atau https://)
+                                </p>
+                            </div>
+                            
                             @error('logo_path')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
+                            @error('logo_url')
                                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                             @enderror
 
                             @if($profile->logo_path)
                                 <div class="mt-3 p-3 bg-gray-50 rounded-lg">
                                     <p class="text-sm font-medium text-gray-700 mb-2">Logo saat ini:</p>
-                                    <img src="{{ asset('storage/' . $profile->logo_path) }}" 
+                                    @php
+                                        $isUrlPreview = preg_match('/^https?:\/\//i', $profile->logo_path);
+                                        $logoSrcPreview = $isUrlPreview ? $profile->logo_path : asset('storage/' . $profile->logo_path);
+                                    @endphp
+                                    <img src="{{ $logoSrcPreview }}" 
                                          alt="Current Logo" 
-                                         class="h-24 w-auto object-contain border border-gray-200 rounded-lg">
+                                         class="h-24 w-auto object-contain border border-gray-200 rounded-lg"
+                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                    <p style="display:none;" class="text-red-500 text-sm mt-2">Gambar tidak dapat dimuat</p>
                                 </div>
                             @endif
                         </div>

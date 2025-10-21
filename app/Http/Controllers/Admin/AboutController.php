@@ -36,6 +36,7 @@ class AboutController extends Controller
     {
         $request->validate([
             'logo_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'logo_url' => 'nullable|url',
             'filosofi_logo' => 'required|string',
             'filosofi_items' => 'nullable|array',
             'filosofi_items.*.title' => 'required|string|max:255',
@@ -62,16 +63,24 @@ class AboutController extends Controller
 
         $data = ['filosofi_logo' => $request->filosofi_logo];
 
-        // Handle logo upload
+        // Handle logo upload or URL
         if ($request->hasFile('logo_path')) {
-            // Delete old logo if exists
-            if ($profile->logo_path && \Storage::disk('public')->exists($profile->logo_path)) {
+            // Delete old logo if exists and it's not a URL
+            if ($profile->logo_path && !preg_match('/^https?:\/\//i', $profile->logo_path) && \Storage::disk('public')->exists($profile->logo_path)) {
                 \Storage::disk('public')->delete($profile->logo_path);
             }
 
             // Store new logo
             $logoPath = $request->file('logo_path')->store('logos', 'public');
             $data['logo_path'] = $logoPath;
+        } elseif ($request->filled('logo_url')) {
+            // Delete old logo if exists and it's not a URL
+            if ($profile->logo_path && !preg_match('/^https?:\/\//i', $profile->logo_path) && \Storage::disk('public')->exists($profile->logo_path)) {
+                \Storage::disk('public')->delete($profile->logo_path);
+            }
+
+            // Save URL directly
+            $data['logo_path'] = $request->logo_url;
         }
 
         $profile->update($data);
