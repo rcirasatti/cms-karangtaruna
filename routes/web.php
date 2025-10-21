@@ -68,6 +68,11 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     // Dashboard
     Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 
+    // User Profile
+    Route::get('/user/profile', [\App\Http\Controllers\Admin\UserProfileController::class, 'show'])->name('user.profile.show');
+    Route::get('/user/profile/edit', [\App\Http\Controllers\Admin\UserProfileController::class, 'edit'])->name('user.profile.edit');
+    Route::put('/user/profile', [\App\Http\Controllers\Admin\UserProfileController::class, 'update'])->name('user.profile.update');
+
     // Resources
     Route::resource('profile', \App\Http\Controllers\Admin\ProfileController::class);
     Route::resource('about/logo', \App\Http\Controllers\Admin\AboutController::class);
