@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Karang Taruna')</title>
+    <!-- Favicon (explicit) - prefer PNG then ICO fallback -->
+    <link rel="icon" type="image/png" href="{{ asset('assets/logo.png') }}" />
+    <link rel="alternate icon" href="{{ asset('favicon.ico') }}" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -19,10 +22,9 @@
         @endphp
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
-                <!-- Logo -->
+                <!-- Logo (use local asset) -->
                 <div class="flex items-center space-x-3">
-                    <img src="https://clipground.com/images/logo-karang-taruna-png-5.png" alt="Logo Karang Taruna"
-                        class="h-12">
+                    <img src="{{ asset('assets/logo.png') }}" alt="Logo Karang Taruna" class="h-12">
                     <div class="text-left">
                         <span class="text-xl font-Montserrat font-bold text-white">Karang Taruna</span>
                         <br>
