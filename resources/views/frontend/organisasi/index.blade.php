@@ -54,10 +54,13 @@
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 max-w-7xl mx-auto px-4">
                             @foreach($tokohUtama as $tokoh)
-                                <div class="text-center w-40 sm:w-44 md:w-48 lg:w-52 cursor-pointer"
-                                    onclick="openModal('{{ $tokoh->nama }}', '{{ $tokoh->jabatan }}', '{{ $tokoh->foto }}', '{{ addslashes($tokoh->tugas ?? 'Tidak ada deskripsi tugas') }}', '{{ addslashes($tokoh->profil_singkat ?? '') }}')">
+                                <div class="text-center w-40 sm:w-44 md:w-48 lg:w-52 cursor-pointer pengurus-card"
+                                    data-nama="{{ $tokoh->nama }}" data-jabatan="{{ $tokoh->jabatan }}" data-foto="{{ $tokoh->foto }}"
+                                    data-tugas="{{ $tokoh->tugas ?? 'Tidak ada deskripsi tugas' }}"
+                                    data-profil="{{ $tokoh->profil_singkat ?? '' }}">
                                     <div class="bg-gradient-to-b from-yellow-600 to-yellow-700 p-[3px] rounded-2xl">
-                                        <div class="aspect-[3/4] overflow-hidden rounded-xl shadow-2xl hover:scale-105 transition-transform mb-4">
+                                        <div
+                                            class="aspect-[3/4] overflow-hidden rounded-xl shadow-2xl hover:scale-105 transition-transform mb-4">
                                             @if($tokoh->foto)
                                                 <img src="{{ asset('storage/' . $tokoh->foto) }}" alt="{{ $tokoh->nama }}"
                                                     class="block w-full h-full object-cover" loading="lazy">
@@ -95,10 +98,13 @@
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 max-w-7xl mx-auto px-4">
                             @foreach($strukturPengurus as $anggota)
-                                <div class="text-center w-40 sm:w-44 md:w-48 lg:w-52cursor-pointer"
-                                    onclick="openModal('{{ $anggota->nama }}', '{{ $anggota->jabatan }}', '{{ $anggota->foto }}', '{{ addslashes($anggota->tugas ?? 'Tidak ada deskripsi tugas') }}', '{{ addslashes($anggota->profil_singkat ?? '') }}')">
+                                <div class="text-center w-40 sm:w-44 md:w-48 lg:w-52 cursor-pointer pengurus-card"
+                                    data-nama="{{ $anggota->nama }}" data-jabatan="{{ $anggota->jabatan }}"
+                                    data-foto="{{ $anggota->foto }}" data-tugas="{{ $anggota->tugas ?? 'Tidak ada deskripsi tugas' }}"
+                                    data-profil="{{ $anggota->profil_singkat ?? '' }}">
                                     <div class="bg-gradient-to-b from-yellow-600 to-yellow-700 p-[3px] rounded-2xl">
-                                        <div class="aspect-[3/4] overflow-hidden rounded-xl shadow-lg hover:scale-105 transition-transform mb-4">
+                                        <div
+                                            class="aspect-[3/4] overflow-hidden rounded-xl shadow-lg hover:scale-105 transition-transform mb-4">
                                             @if($anggota->foto)
                                                 <img src="{{ asset('storage/' . $anggota->foto) }}" alt="{{ $anggota->nama }}"
                                                     class="block w-full h-full object-cover" loading="lazy">
@@ -246,6 +252,19 @@
         });
 
         document.addEventListener('DOMContentLoaded', function () {
+            // Event listener untuk pengurus cards
+            document.querySelectorAll('.pengurus-card').forEach(card => {
+                card.addEventListener('click', function () {
+                    const nama = this.dataset.nama;
+                    const jabatan = this.dataset.jabatan;
+                    const foto = this.dataset.foto;
+                    const tugas = this.dataset.tugas;
+                    const profil = this.dataset.profil;
+
+                    openModal(nama, jabatan, foto, tugas, profil);
+                });
+            });
+
             if (window.location.hash) {
                 setTimeout(function () {
                     const target = document.querySelector(window.location.hash);
