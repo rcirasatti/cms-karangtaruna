@@ -172,15 +172,9 @@ class AboutController extends Controller
             'sejarah' => ''
         ]);
 
-        $quote = Quote::find(1) ?? Quote::create([
-            'id' => 1,
-            'nama' => 'Nama Tokoh',
-            'foto' => 'path/to/foto.jpg',
-            'peran' => 'Jabatan/Peran',
-            'quote' => 'Kutipan inspiratif...'
-        ]);
+        $quotes = Quote::orderBy('created_at', 'desc')->get();
 
-        return view('admin.about.sejarah', compact('profile', 'quote'));
+        return view('admin.about.sejarah', compact('profile', 'quotes'));
     }
 
     public function update_sejarah(Request $request)
@@ -242,16 +236,19 @@ class AboutController extends Controller
             'quote' => 'required|string',
             'nama' => 'required|string|max:255',
             'peran' => 'required|string|max:255',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'is_tampil' => 'nullable|boolean'
         ]);
 
-        $quote = Quote::find(1);
+        $quoteId = $request->input('quote_id');
+        $quote = $quoteId ? Quote::find($quoteId) : null;
 
         // Prepare data array
         $data = [
             'quote' => $request->quote,
             'nama' => $request->nama,
-            'peran' => $request->peran
+            'peran' => $request->peran,
+            'is_tampil' => $request->has('is_tampil') ? true : false
         ];
 
         // Handle foto upload jika ada
@@ -268,11 +265,42 @@ class AboutController extends Controller
 
         // Create or update
         if (!$quote) {
-            $quote = Quote::create(array_merge(['id' => 1], $data));
+            Quote::create($data);
+            $message = 'Quote berhasil ditambahkan.';
         } else {
             $quote->update($data);
+            $message = 'Quote berhasil diperbarui.';
         }
 
-        return redirect()->back()->with('success', 'Quote berhasil diperbarui.');
+        return redirect()->back()->with('success', $message);
+    }
+
+    public function delete_quote($id)
+    {
+        $quote = Quote::find($id);
+
+        if (!$quote) {
+            return redirect()->back()->with('error', 'Quote tidak ditemukan.');
+        }
+
+        // Hapus foto jika ada
+        if ($quote->foto && Storage::disk('public')->exists($quote->foto)) {
+            Storage::disk('public')->delete($quote->foto);
+        }
+
+        $quote->delete();
+
+        return redirect()->back()->with('success', 'Quote berhasil dihapus.');
+    }
+
+    public function get_quote($id)
+    {
+        $quote = Quote::find($id);
+
+        if (!$quote) {
+            return response()->json(['error' => 'Quote tidak ditemukan'], 404);
+        }
+
+        return response()->json($quote);
     }
 }

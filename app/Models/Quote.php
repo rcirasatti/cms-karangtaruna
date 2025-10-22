@@ -11,5 +11,10 @@ class Quote extends Model
         'foto',
         'peran',
         'quote',
+        'is_tampil',
+    ];
+
+    protected $casts = [
+        'is_tampil' => 'boolean',
     ];
 }

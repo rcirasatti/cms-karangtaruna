@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('foto')->nullable(); // Foto bersifat opsional
             $table->string('peran');
             $table->text('quote');
+            $table->boolean('is_tampil')->default(false);
             $table->timestamps();
         });
     }

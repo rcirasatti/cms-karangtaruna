@@ -82,6 +82,8 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::put('/about/sejarah', [\App\Http\Controllers\Admin\AboutController::class, 'update_sejarah'])->name('about.sejarah.update');
     Route::put('/about/identitas', [\App\Http\Controllers\Admin\AboutController::class, 'update_identitas'])->name('about.identitas.update');
     Route::put('/about/quote', [\App\Http\Controllers\Admin\AboutController::class, 'update_quote'])->name('about.quote.update');
+    Route::delete('/about/quote/{id}', [\App\Http\Controllers\Admin\AboutController::class, 'delete_quote'])->name('about.quote.delete');
+    Route::get('/get-quote/{id}', [\App\Http\Controllers\Admin\AboutController::class, 'get_quote'])->name('about.quote.get');
     Route::resource('kepengurusan', \App\Http\Controllers\Admin\KepengurusanController::class);
     Route::post('kepengurusan/{id}/toggle-tokoh-utama', [\App\Http\Controllers\Admin\KepengurusanController::class, 'toggleTokohUtama'])->name('kepengurusan.toggle-tokoh-utama');
     Route::resource('berita', \App\Http\Controllers\Admin\BeritaController::class);

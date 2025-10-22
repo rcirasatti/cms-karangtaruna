@@ -32,12 +32,7 @@ class TentangController extends Controller
     public function profil()
     {
         $profile = Profile::first();
-        $quote = Quote::find(1) ?? Quote::create([
-            'id' => 1,
-            'nama' => 'Nama Tokoh',
-            'peran' => 'Jabatan/Peran',
-            'quote' => 'Kutipan inspiratif...'
-        ]);
-        return view('frontend.tentang.profil', compact('profile', 'quote'));
+        $quotes = Quote::orderBy('created_at', 'desc')->get();
+        return view('frontend.tentang.profil', compact('profile', 'quotes'));
     }
 }

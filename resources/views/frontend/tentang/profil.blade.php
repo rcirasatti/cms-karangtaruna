@@ -104,36 +104,37 @@
                                 </a>
                             </div>
 
-                            <div class="bg-gray-50 rounded-xl p-6 border-l-4 border-secondary">
-                                <div class="text-6xl text-secondary leading-none">"</div>
-                                <p class="text-gray-700 font-rajdhani italic mb-4 leading-relaxed">
-                                    {{ $quote->quote }}
-                                </p>
-                                <div class="flex items-center space-x-3 mt-4">
-                                    @if(!empty($quote->foto) && file_exists(public_path('storage/' . $quote->foto)))
-                                        <img src="{{ asset('storage/' . $quote->foto) }}" alt="{{ $quote->nama }}" class="w-12 h-12 rounded-full object-cover border-2 border-primary-600">
-                                    @else
-                                        @php
-                                            $parts = preg_split('/\s+/', trim($quote->nama));
-                                            $initials = '';
-                                            if (!empty($parts)) {
-                                                $initials .= strtoupper(mb_substr($parts[0], 0, 1));
-                                                if (isset($parts[1])) {
-                                                    $initials .= strtoupper(mb_substr($parts[1], 0, 1));
-                                                }
-                                            }
-                                            if ($initials === '') $initials = strtoupper(mb_substr($quote->nama, 0, 1));
-                                        @endphp
-                                        <div class="w-12 h-12 rounded-full flex items-center justify-center bg-primary-600 text-white font-bold border-2 border-primary-600">
-                                            {{ $initials }}
+                            @if($quotes->where('is_tampil', true)->count() > 0)
+                                @foreach($quotes->where('is_tampil', true) as $quote)
+                                    <div class="bg-gray-50 rounded-xl p-6 border-l-4 border-secondary">
+                                        <div class="text-6xl text-secondary mb-2 leading-none">"</div>
+                                        <p class="text-gray-700 italic mb-4 leading-relaxed">
+                                            {{ $quote->quote }}
+                                        </p>
+                                        <div class="flex items-center space-x-3 mt-4">
+                                            @if($quote->foto)
+                                                <img src="{{ asset('storage/' . $quote->foto) }}" alt="{{ $quote->nama }}"
+                                                    class="w-12 h-12 rounded-full object-cover border-2 border-primary-600">
+                                            @else
+                                                <div
+                                                    class="w-12 h-12 rounded-full bg-primary-100 border-2 border-primary-600 flex items-center justify-center">
+                                                    <span class="text-primary-600 font-bold text-lg">{{ substr($quote->nama, 0, 1) }}</span>
+                                                </div>
+                                            @endif
+                                            <div>
+                                                <div class="font-bold text-gray-900">{{ $quote->nama }}</div>
+                                                <div class="text-sm text-gray-600">{{ $quote->peran }}</div>
+                                            </div>
                                         </div>
-                                    @endif
-                                    <div>
-                                        <div class="font-bold text-gray-900">{{ $quote->nama }}</div>
-                                        <div class="text-sm text-gray-600">{{ $quote->peran }}</div>
                                     </div>
+                                @endforeach
+                            @else
+                                <div class="bg-gray-50 rounded-xl p-6 border-l-4 border-gray-300 text-center">
+                                    <p class="text-gray-500 italic">Belum ada quote yang ditampilkan</p>
+                                    <p class="text-xs text-gray-400 mt-1">Aktifkan "Tampilkan di Live Preview" untuk menampilkan
+                                        quote</p>
                                 </div>
-                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
