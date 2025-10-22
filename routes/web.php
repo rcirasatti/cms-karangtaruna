@@ -88,5 +88,9 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     Route::resource('produk', \App\Http\Controllers\Admin\ProdukController::class);
     Route::resource('mitra', \App\Http\Controllers\Admin\MitraController::class);
     Route::resource('kontak', \App\Http\Controllers\Admin\KontakController::class);
+
+    // Hero Section
+    Route::get('/hero', [\App\Http\Controllers\Admin\HeroController::class, 'index'])->name('hero.index');
+    Route::put('/hero', [\App\Http\Controllers\Admin\HeroController::class, 'update'])->name('hero.update');
 });
 

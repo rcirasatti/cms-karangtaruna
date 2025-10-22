@@ -32,6 +32,24 @@
 
             <!-- Divider -->
             <li class="pt-4 pb-2">
+                <span class="px-4 text-xs font-semibold text-white/70 uppercase tracking-wider">Tampilan</span>
+            </li>
+
+            <!-- Hero Section -->
+            <li>
+                <a href="{{ route('admin.hero.index') }}"
+                    class="flex items-center px-4 py-3 rounded-xl transition duration-200 {{ request()->routeIs('admin.hero.*') ? 'bg-white/25 backdrop-blur-sm text-white shadow-lg font-semibold' : 'hover:bg-white/10' }}">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                        </path>
+                    </svg>
+                    <span class="font-medium">Hero Section</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <li class="pt-4 pb-2">
                 <span class="px-4 text-xs font-semibold text-white/70 uppercase tracking-wider">Konten</span>
             </li>
 

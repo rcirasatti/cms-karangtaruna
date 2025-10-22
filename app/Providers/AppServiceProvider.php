@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\URL;
 use App\Models\Kontak;
+use App\Models\Hero;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,9 +28,10 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        // Share kontak data to all views (only in HTTP requests, not console commands)
+        // Share kontak and navbar data to all views (only in HTTP requests, not console commands)
         if (!app()->runningInConsole()) {
             View::share('kontak', Kontak::first());
+            View::share('navbar', Hero::first());
         }
     }
 }
