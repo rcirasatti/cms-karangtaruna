@@ -6,63 +6,190 @@
 @section('title', 'Beranda - Karang Taruna')
 
 @section('content')
-<!-- Hero Section -->
-<section class="relative h-[580px] flex items-center justify-center mb-16">
-    <img src="{{ asset('images/hero.jpg') }}" 
-             class="absolute inset-0 w-full h-full object-cover z-0" alt="Hero Image" />
+<!-- Hero Section with Slider -->
+<section class="relative h-[580px] flex items-center justify-center overflow-hidden">
+    @if($heroSlides && $heroSlides->count() > 0)
+        <!-- Slider Container -->
+        <div class="hero-slider absolute inset-0 w-full h-full">
+            @foreach($heroSlides as $index => $slide)
+            <div class="slide {{ $index === 0 ? 'active' : '' }} absolute inset-0 w-full h-full transition-opacity duration-1000 {{ $index === 0 ? 'opacity-100' : 'opacity-0' }}">
+                <img src="{{ asset('storage/' . $slide['image']) }}" 
+                     class="w-full h-full object-cover" 
+                     alt="{{ $slide['judul'] }}" />
+            </div>
+            @endforeach
+        </div>
+
+        <!-- Navigation Dots -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex space-x-2">
+            @foreach($heroSlides as $index => $slide)
+            <button class="slider-dot w-3 h-3 rounded-full {{ $index === 0 ? 'bg-white' : 'bg-white/50' }} transition-all hover:bg-white" data-slide="{{ $index }}"></button>
+            @endforeach
+        </div>
+
+        <!-- Navigation Arrows -->
+        <button class="slider-prev absolute left-4 top-1/2 transform -translate-y-1/2 z-30 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+        </button>
+        <button class="slider-next absolute right-4 top-1/2 transform -translate-y-1/2 z-30 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </button>
+    @else
+        <!-- Fallback jika tidak ada gambar -->
+        <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-primary-600 to-primary-800"></div>
+    @endif
 
     <div class="absolute inset-0 bg-black/50 z-10"></div> <!-- Overlay Gelap -->
 
     <div class="relative z-20 flex flex-col items-center justify-center text-center px-6 py-28 w-full">
         <h1 class="text-4xl md:text-5xl font-bold text-white drop-shadow-lg mb-4">
-            Selamat Datang di Website Karang Taruna
+            {{ $hero->title ?? 'Tanpa Judul' }}
         </h1>
         <p class="text-lg md:text-xl text-white drop-shadow mb-8 max-w-2xl">
-            Bersama kita membangun pemuda dan masyarakat yang berdaya!
+            {{ $hero->subtitle ?? 'Null' }}
         </p>
-            <div class="flex space-x-4">
-                <a href="{{ route('tentang.profil') }}" class="inline-block bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition">
-                    Tentang Kami
-                </a>
-                <a href="{{ route('kontak.index') }}" class="inline-block bg-white text-primary-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
-                    Hubungi Kami
-                </a>
-            </div>
+        <div class="flex space-x-4">
+            <a href="{{ route('tentang.profil') }}" class="inline-block bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition">
+                Tentang Kami
+            </a>
+            <a href="{{ route('kontak.index') }}" class="inline-block bg-white text-primary-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                Hubungi Kami
+            </a>
+        </div>
     </div>
 </section>
 
-<!-- Profil Singkat -->
-@if($profile)
-<div class="container mx-auto px-4 py-16">
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div>
-            <h2 class="text-3xl font-bold mb-4 text-gray-800">Tentang Kami</h2>
-            <p class="text-gray-600 leading-relaxed mb-6">{{ Str::limit($profile->profil_singkat, 300) }}</p>
-            <a href="{{ route('tentang.profil') }}" class="text-primary-600 font-semibold hover:text-primary-700">
-                Selengkapnya →
-            </a>
-        </div>
-        <div>
-            @if($profile->logo_path)
-                    <div class="transform hover:scale-105 transition duration-500">
-                    @php
-                        $isUrl = preg_match('/^https?:\/\//i', $profile->logo_path);
-                        $logoSrc = $isUrl ? $profile->logo_path : asset('storage/' . $profile->logo_path);
-                    @endphp
-                        <img src="{{ $logoSrc }}"
-                            alt="Logo {{ $profile->nama_organisasi }}"
-                            class="max-w-md w-full drop-shadow-2xl"
-                            onerror="this.parentElement.innerHTML='<div class=\'text-center\'><p class=\'text-gray-400 text-lg font-medium\'>Logo tidak dapat dimuat</p></div>'">
+<!-- Quote Section / What They Say About Us -->
+@if($quotes && $quotes->count() > 0)
+<div class="bg-gradient-to-r from-primary-700 to-primary-900 py-20 relative">
+    <div class="container mx-auto px-4">
+        <!-- Quote Carousel -->
+        <div class="relative">
+            <!-- Quotes Container -->
+            <div class="quote-carousel-wrapper overflow-hidden">
+                <div class="quote-carousel-track flex transition-transform duration-500 ease-in-out gap-8">
+                    @foreach($quotes as $index => $q)
+                    <div class="quote-item flex-shrink-0 w-full md:w-1/2">
+                        <div class="flex flex-col md:flex-row gap-6 backdrop-blur-sm rounded-lg p-6">
+                            <!-- Left Side - Photo/Avatar -->
+                            <div class="flex-shrink-0">
+                                @if($q->foto && file_exists(public_path('storage/' . $q->foto)))
+                                    <div class="w-32 h-32 md:w-40 md:h-40 overflow-hidden shadow-lg rounded-lg">
+                                        <img src="{{ asset('storage/' . $q->foto) }}" 
+                                            alt="{{ $q->nama }}" 
+                                            class="w-full h-full object-cover">
+                                    </div>
+                                @else
+                                    @php
+                                        $parts = preg_split('/\s+/', trim($q->nama));
+                                        $initials = '';
+                                        if (!empty($parts)) {
+                                            $initials .= strtoupper(mb_substr($parts[0], 0, 1));
+                                            if (isset($parts[1])) {
+                                                $initials .= strtoupper(mb_substr($parts[1], 0, 1));
+                                            }
+                                        }
+                                        if ($initials === '') $initials = strtoupper(mb_substr($q->nama, 0, 1));
+                                    @endphp
+                                    <div class="w-32 h-32 md:w-40 md:h-40 bg-secondary flex items-center justify-center shadow-lg rounded-lg">
+                                        <p class="text-7xl font-bold text-white">{{ $initials }}</p>
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="flex-1 text-primary-100">
+                                
+                                <p class="italic font-rajdhani text-sm md:text-base leading-relaxed mb-4">
+                                    "{{ $q->quote }}"
+                                </p>
+
+                                <p class="text-sm font-semibold text-yellow-400">-{{ $q->nama }}</p>
+                                <p class="text-xs text-primary-200">{{ $q->peran }}</p>
+                            </div>
                         </div>
-                    @else
-                <div class="bg-gray-200 w-full h-64 rounded-lg flex items-center justify-center">
-                    <span class="text-gray-400">Logo Karang Taruna</span>
+                    </div>
+                    @endforeach
                 </div>
+            </div>
+
+            <!-- Left Arrow -->
+            @if($quotes->count() > 2)
+            <button class="quote-prev absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition hidden md:block">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </button>
+            @endif
+
+            <!-- Right Arrow -->
+            @if($quotes->count() > 2)
+            <button class="quote-next absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition hidden md:block">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </button>
             @endif
         </div>
+
+        <!-- Navigation Dots -->
+        @if($quotes->count() > 2)
+        <div class="flex justify-center gap-3 mt-8">
+            @foreach($quotes as $index => $q)
+            <button
+                class="quote-dot w-10 md:w-14 h-1 rounded-full bg-gray-600 hover:bg-yellow-400 transition {{ $index === 0 ? 'bg-yellow-400' : '' }}"
+                data-slide="{{ $index }}"
+                aria-label="Pergi ke quote {{ $index + 1 }}"
+            ></button>
+            @endforeach
+        </div>
+        @endif
     </div>
 </div>
 @endif
+
+<!-- Produk UMKM -->
+<div class="container mx-auto px-4 py-24">
+    <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">Produk UMKM</h2>
+        <p class="text-gray-600">Produk unggulan dari mitra Karang Taruna</p>
+    </div>
+
+    @if($produkTerbaru->count() > 0)
+    <div class="grid md:grid-cols-4 gap-6 mb-8">
+    @foreach($produkTerbaru->take(4) as $produk)
+    <a href="{{ route('produk.list') }}?highlight={{ $produk->id }}" class="block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition relative group">
+            @if($produk->foto)
+                <img src="{{ asset('storage/' . $produk->foto) }}" alt="{{ $produk->nama_produk }}" class="w-full h-48 object-cover">
+            @else
+                <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+                    <span class="text-gray-400">No Image</span>
+                </div>
+            @endif
+            <div class="p-4 text-center">
+                <h3 class="font-bold mb-2">{{ $produk->nama_produk }}</h3>
+                @if($produk->harga)
+                <p class="text-primary-600 font-bold text-lg mb-3">Rp {{ number_format($produk->harga, 0, ',', '.') }}</p>
+                @endif
+
+                
+            </div>
+        </a>
+        @endforeach
+    </div>
+    @else
+    <p class="text-center text-gray-500">Belum ada produk tersedia.</p>
+    @endif
+
+    <div class="text-center">
+        <a href="{{ route('produk.list') }}" class="inline-block bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition">
+            Lihat Semua Produk
+        </a>
+    </div>
+</div>
 
 <!-- Galeri Terbaru -->
 <div class="bg-gray-100 py-16">
@@ -127,46 +254,6 @@
     </div>
 </div>
 
-<!-- Produk UMKM -->
-<div class="container mx-auto px-4 py-24">
-    <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-800 mb-4">Produk UMKM</h2>
-        <p class="text-gray-600">Produk unggulan dari mitra Karang Taruna</p>
-    </div>
-
-    @if($produkTerbaru->count() > 0)
-    <div class="grid md:grid-cols-4 gap-6 mb-8">
-    @foreach($produkTerbaru->take(4) as $produk)
-    <a href="{{ route('produk.list') }}?highlight={{ $produk->id }}" class="block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition relative group">
-            @if($produk->foto)
-                <img src="{{ asset('storage/' . $produk->foto) }}" alt="{{ $produk->nama_produk }}" class="w-full h-48 object-cover">
-            @else
-                <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
-                    <span class="text-gray-400">No Image</span>
-                </div>
-            @endif
-            <div class="p-4 text-center">
-                <h3 class="font-bold mb-2">{{ $produk->nama_produk }}</h3>
-                @if($produk->harga)
-                <p class="text-primary-600 font-bold text-lg mb-3">Rp {{ number_format($produk->harga, 0, ',', '.') }}</p>
-                @endif
-
-                
-            </div>
-        </a>
-        @endforeach
-    </div>
-    @else
-    <p class="text-center text-gray-500">Belum ada produk tersedia.</p>
-    @endif
-
-    <div class="text-center">
-        <a href="{{ route('produk.list') }}" class="inline-block bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition">
-            Lihat Semua Produk
-        </a>
-    </div>
-</div>
-
 <!-- Call to Action -->
 <div class="bg-primary-600 text-white py-16">
     <div class="container mx-auto px-4 text-center">
@@ -181,6 +268,196 @@
 
 @push('scripts')
     <script>
+        // Hero Slider
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.hero-slider .slide');
+            const dots = document.querySelectorAll('.slider-dot');
+            const prevBtn = document.querySelector('.slider-prev');
+            const nextBtn = document.querySelector('.slider-next');
+            let currentSlide = 0;
+            let autoPlayInterval;
+
+            if (slides.length === 0) return;
+
+            function showSlide(index) {
+                // Hapus active dari semua slide
+                slides.forEach(slide => {
+                    slide.classList.remove('opacity-100');
+                    slide.classList.add('opacity-0');
+                });
+                
+                // Hapus active dari semua dots
+                dots.forEach(dot => {
+                    dot.classList.remove('bg-white');
+                    dot.classList.add('bg-white/50');
+                });
+
+                // Tambahkan active ke slide dan dot yang sesuai
+                slides[index].classList.remove('opacity-0');
+                slides[index].classList.add('opacity-100');
+                dots[index].classList.remove('bg-white/50');
+                dots[index].classList.add('bg-white');
+                
+                currentSlide = index;
+            }
+
+            function nextSlide() {
+                let next = (currentSlide + 1) % slides.length;
+                showSlide(next);
+            }
+
+            function prevSlide() {
+                let prev = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(prev);
+            }
+
+            // Event listeners untuk navigasi
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    nextSlide();
+                    resetAutoPlay();
+                });
+            }
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    prevSlide();
+                    resetAutoPlay();
+                });
+            }
+
+            // Event listeners untuk dots
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    showSlide(index);
+                    resetAutoPlay();
+                });
+            });
+
+            // Auto play
+            function startAutoPlay() {
+                autoPlayInterval = setInterval(nextSlide, 5000); // Ganti slide setiap 5 detik
+            }
+
+            function resetAutoPlay() {
+                clearInterval(autoPlayInterval);
+                startAutoPlay();
+            }
+
+            // Mulai autoplay
+            if (slides.length > 1) {
+                startAutoPlay();
+            }
+
+            // Quote Carousel
+            const quoteCarousel = document.querySelector('.quote-carousel-track');
+            const quoteItems = document.querySelectorAll('.quote-item');
+            const quoteDots = document.querySelectorAll('.quote-dot');
+            const quotePrevBtn = document.querySelector('.quote-prev');
+            const quoteNextBtn = document.querySelector('.quote-next');
+            let currentQuoteSlide = 0;
+            let quoteAutoPlayInterval;
+
+            if (quoteCarousel && quoteItems.length > 0) {
+                // Calculate the width of one item plus gap
+                function getItemWidth() {
+                    const item = quoteItems[0];
+                    const gap = 32; // 8 * 4 = 32px (gap-8 in Tailwind)
+                    return item.offsetWidth + gap;
+                }
+
+                function showQuoteSlide(index) {
+                    const itemWidth = getItemWidth();
+                    const translateX = -(index * itemWidth);
+                    quoteCarousel.style.transform = `translateX(${translateX}px)`;
+                    
+                    // Update dots
+                    quoteDots.forEach(dot => {
+                        dot.classList.remove('bg-yellow-400');
+                        dot.classList.add('bg-gray-600');
+                    });
+                    if (quoteDots[index]) {
+                        quoteDots[index].classList.remove('bg-gray-600');
+                        quoteDots[index].classList.add('bg-yellow-400');
+                    }
+                    
+                    currentQuoteSlide = index;
+                }
+
+                function nextQuoteSlide() {
+                    // Maximum slide depends on screen size
+                    const maxSlide = window.innerWidth >= 768 
+                        ? Math.max(0, quoteItems.length - 2) // Show 2 items on desktop
+                        : quoteItems.length - 1; // Show 1 item on mobile
+                    
+                    let next = currentQuoteSlide + 1;
+                    if (next > maxSlide) {
+                        next = 0; // Loop back to start
+                    }
+                    showQuoteSlide(next);
+                }
+
+                function prevQuoteSlide() {
+                    const maxSlide = window.innerWidth >= 768 
+                        ? Math.max(0, quoteItems.length - 2)
+                        : quoteItems.length - 1;
+                    
+                    let prev = currentQuoteSlide - 1;
+                    if (prev < 0) {
+                        prev = maxSlide; // Loop to end
+                    }
+                    showQuoteSlide(prev);
+                }
+
+                if (quoteNextBtn) {
+                    quoteNextBtn.addEventListener('click', () => {
+                        nextQuoteSlide();
+                        resetQuoteAutoPlay();
+                    });
+                }
+
+                if (quotePrevBtn) {
+                    quotePrevBtn.addEventListener('click', () => {
+                        prevQuoteSlide();
+                        resetQuoteAutoPlay();
+                    });
+                }
+
+                quoteDots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => {
+                        showQuoteSlide(index);
+                        resetQuoteAutoPlay();
+                    });
+                });
+
+                function startQuoteAutoPlay() {
+                    quoteAutoPlayInterval = setInterval(nextQuoteSlide, 6000);
+                }
+
+                function resetQuoteAutoPlay() {
+                    clearInterval(quoteAutoPlayInterval);
+                    startQuoteAutoPlay();
+                }
+
+                // Initialize first slide
+                showQuoteSlide(0);
+
+                // Start autoplay
+                if (quoteItems.length > 1) {
+                    startQuoteAutoPlay();
+                }
+
+                // Recalculate on window resize
+                let resizeTimeout;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(() => {
+                        showQuoteSlide(currentQuoteSlide);
+                    }, 250);
+                });
+            }
+        });
+
         function pesanWhatsApp(namaProduk, harga) {
             @if (isset($kontak) && $kontak && $kontak->whatsapp)
                 const nomorAdmin = '{{ $kontak->whatsapp }}';

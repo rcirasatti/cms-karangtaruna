@@ -11,6 +11,7 @@ use App\Models\Mitra;
 use App\Models\Kontak;
 use App\Models\FilosofiLogoItem;
 use App\Models\Quote;
+use App\Models\Hero;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
     {
         // Call AdminSeeder first to create admin user
         $this->call(AdminSeeder::class);
+
 
         // Create Profile
         Profile::create([
@@ -150,15 +152,33 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
-        $quote = [
-            'nama' => 'Prabowo Subianto',
-            'peran' => 'Presiden Republik Indonesia',
-            'quote' => 'Karang Taruna membentuk generasi muda yang peduli dan berpikiran sosial, sangat bermanfaat dalam membangun kepemimpinan dan jiwa sosial.',
-            'foto' => null // Foto opsional, bisa di-update nanti
+        $quotes = [
+            [
+                'nama' => 'Prabowo Subianto',
+                'peran' => 'Presiden Republik Indonesia',
+                'quote' => 'Karang Taruna membentuk generasi muda yang peduli dan berpikiran sosial, sangat bermanfaat dalam membangun kepemimpinan dan jiwa sosial.',
+                'foto' => null
+            ],
+            [
+                'nama' => 'Tri Rismaharini',
+                'peran' => 'Menteri Sosial Republik Indonesia',
+                'quote' => 'Peran Karang Taruna sangat strategis dalam memberdayakan masyarakat, terutama di bidang sosial dan kemanusiaan.',
+                'foto' => null
+            ]
         ];
 
-        // Insert quote to database
-        Quote::create($quote);
+        // Insert quotes to database
+        foreach ($quotes as $q) {
+            Quote::create($q);
+        }
+
+        // Create Hero with all required fields
+        Hero::create([
+            'title' => 'Selamat Datang di Karang Taruna Maju Bersama',
+            'subtitle' => 'Bersama Membangun Generasi Muda yang Berkarakter dan Berprestasi',
+            'title_navbar' => 'Karang Taruna',
+            'subtitle_navbar' => 'Kelurahan Tembalang'
+        ]);
 
         foreach ($filosofiItems as $item) {
             FilosofiLogoItem::create($item);
