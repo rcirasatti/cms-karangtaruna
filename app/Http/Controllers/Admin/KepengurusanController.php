@@ -149,6 +149,29 @@ class KepengurusanController extends Controller
         }
     }
 
+    /**
+     * Toggle tokoh utama status
+     */
+    public function toggleTokohUtama(Request $request, string $id)
+    {
+        try {
+            $pengurus = Kepengurusan::findOrFail($id);
+            $pengurus->is_tokoh_utama = !$pengurus->is_tokoh_utama;
+            $pengurus->save();
+
+            return response()->json([
+                'success' => true,
+                'is_tokoh_utama' => $pengurus->is_tokoh_utama,
+                'message' => 'Status tokoh utama berhasil diperbarui!'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal memperbarui status tokoh utama.'
+            ], 500);
+        }
+    }
+
     public function destroy(string $id)
     {
         try {
