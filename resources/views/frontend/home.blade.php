@@ -63,7 +63,7 @@
     </div>
 </section>
 
-<!-- Quote Section / What They Say About Us -->
+<!-- Quote Section -->
 @if($quotes && $quotes->count() > 0)
 <div class="bg-gradient-to-r from-primary-700 to-primary-900 py-20 relative">
     <div class="container mx-auto px-4">
@@ -71,11 +71,10 @@
         <div class="relative">
             <!-- Quotes Container -->
             <div class="quote-carousel-wrapper overflow-hidden">
-                <div class="quote-carousel-track flex transition-transform duration-500 ease-in-out gap-8">
+                <div class="quote-carousel-track flex transition-transform duration-500 ease-in-out gap-8 pr-8">
                     @foreach($quotes as $index => $q)
-                    <div class="quote-item flex-shrink-0 w-full md:w-1/2">
+                    <div class="quote-item flex-shrink-0 w-full md:w-1/2" data-index="{{ $index }}">
                         <div class="flex flex-col md:flex-row gap-6 backdrop-blur-sm rounded-lg p-6">
-                            <!-- Left Side - Photo/Avatar -->
                             <div class="flex-shrink-0">
                                 @if($q->foto && file_exists(public_path('storage/' . $q->foto)))
                                     <div class="w-32 h-32 md:w-40 md:h-40 overflow-hidden shadow-lg rounded-lg">
@@ -113,6 +112,46 @@
                         </div>
                     </div>
                     @endforeach
+                    
+                    @if($quotes->count() > 2)
+                        @php $firstQuote = $quotes->first(); @endphp
+                        <div class="quote-item quote-item-clone flex-shrink-0 w-full md:w-1/2" data-index="clone">
+                            <div class="flex flex-col md:flex-row gap-6 backdrop-blur-sm rounded-lg p-6">
+                                <div class="flex-shrink-0">
+                                    @if($firstQuote->foto && file_exists(public_path('storage/' . $firstQuote->foto)))
+                                        <div class="w-32 h-32 md:w-40 md:h-40 overflow-hidden shadow-lg rounded-lg">
+                                            <img src="{{ asset('storage/' . $firstQuote->foto) }}" 
+                                                alt="{{ $firstQuote->nama }}" 
+                                                class="w-full h-full object-cover">
+                                        </div>
+                                    @else
+                                        @php
+                                            $parts = preg_split('/\s+/', trim($firstQuote->nama));
+                                            $initials = '';
+                                            if (!empty($parts)) {
+                                                $initials .= strtoupper(mb_substr($parts[0], 0, 1));
+                                                if (isset($parts[1])) {
+                                                    $initials .= strtoupper(mb_substr($parts[1], 0, 1));
+                                                }
+                                            }
+                                            if ($initials === '') $initials = strtoupper(mb_substr($firstQuote->nama, 0, 1));
+                                        @endphp
+                                        <div class="w-32 h-32 md:w-40 md:h-40 bg-secondary flex items-center justify-center shadow-lg rounded-lg">
+                                            <p class="text-7xl font-bold text-white">{{ $initials }}</p>
+                                        </div>
+                                    @endif
+                                </div>
+
+                                <div class="flex-1 text-primary-100">
+                                    <p class="italic font-rajdhani text-sm md:text-base leading-relaxed mb-4">
+                                        "{{ $firstQuote->quote }}"
+                                    </p>
+                                    <p class="text-sm font-semibold text-yellow-400">-{{ $firstQuote->nama }}</p>
+                                    <p class="text-xs text-primary-200">{{ $firstQuote->peran }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
 
@@ -280,7 +319,6 @@
             if (slides.length === 0) return;
 
             function showSlide(index) {
-                // Hapus active dari semua slide
                 slides.forEach(slide => {
                     slide.classList.remove('opacity-100');
                     slide.classList.add('opacity-0');
@@ -292,7 +330,6 @@
                     dot.classList.add('bg-white/50');
                 });
 
-                // Tambahkan active ke slide dan dot yang sesuai
                 slides[index].classList.remove('opacity-0');
                 slides[index].classList.add('opacity-100');
                 dots[index].classList.remove('bg-white/50');
@@ -311,7 +348,6 @@
                 showSlide(prev);
             }
 
-            // Event listeners untuk navigasi
             if (nextBtn) {
                 nextBtn.addEventListener('click', () => {
                     nextSlide();
@@ -326,7 +362,6 @@
                 });
             }
 
-            // Event listeners untuk dots
             dots.forEach((dot, index) => {
                 dot.addEventListener('click', () => {
                     showSlide(index);
@@ -336,7 +371,7 @@
 
             // Auto play
             function startAutoPlay() {
-                autoPlayInterval = setInterval(nextSlide, 5000); // Ganti slide setiap 5 detik
+                autoPlayInterval = setInterval(nextSlide, 5000); 
             }
 
             function resetAutoPlay() {
@@ -349,64 +384,83 @@
                 startAutoPlay();
             }
 
-            // Quote Carousel
             const quoteCarousel = document.querySelector('.quote-carousel-track');
-            const quoteItems = document.querySelectorAll('.quote-item');
+            const quoteItems = document.querySelectorAll('.quote-item:not(.quote-item-clone)');
             const quoteDots = document.querySelectorAll('.quote-dot');
             const quotePrevBtn = document.querySelector('.quote-prev');
             const quoteNextBtn = document.querySelector('.quote-next');
             let currentQuoteSlide = 0;
             let quoteAutoPlayInterval;
+            let isTransitioning = false;
 
             if (quoteCarousel && quoteItems.length > 0) {
-                // Calculate the width of one item plus gap
                 function getItemWidth() {
                     const item = quoteItems[0];
-                    const gap = 32; // 8 * 4 = 32px (gap-8 in Tailwind)
+                    const gap = 32; 
                     return item.offsetWidth + gap;
                 }
 
-                function showQuoteSlide(index) {
+                function showQuoteSlide(index, instant = false) {
                     const itemWidth = getItemWidth();
                     const translateX = -(index * itemWidth);
+                    
+                    if (instant) {
+                        quoteCarousel.style.transition = 'none';
+                    } else {
+                        quoteCarousel.style.transition = 'transform 500ms ease-in-out';
+                    }
+                    
                     quoteCarousel.style.transform = `translateX(${translateX}px)`;
                     
-                    // Update dots
                     quoteDots.forEach(dot => {
                         dot.classList.remove('bg-yellow-400');
                         dot.classList.add('bg-gray-600');
                     });
-                    if (quoteDots[index]) {
-                        quoteDots[index].classList.remove('bg-gray-600');
-                        quoteDots[index].classList.add('bg-yellow-400');
+                    const dotIndex = index % quoteItems.length;
+                    if (quoteDots[dotIndex]) {
+                        quoteDots[dotIndex].classList.remove('bg-gray-600');
+                        quoteDots[dotIndex].classList.add('bg-yellow-400');
                     }
                     
                     currentQuoteSlide = index;
                 }
 
                 function nextQuoteSlide() {
-                    // Maximum slide depends on screen size
-                    const maxSlide = window.innerWidth >= 768 
-                        ? Math.max(0, quoteItems.length - 2) // Show 2 items on desktop
-                        : quoteItems.length - 1; // Show 1 item on mobile
+                    if (isTransitioning) return;
+                    isTransitioning = true;
                     
-                    let next = currentQuoteSlide + 1;
-                    if (next > maxSlide) {
-                        next = 0; // Loop back to start
+                    const nextIndex = currentQuoteSlide + 1;
+                    showQuoteSlide(nextIndex);
+                    if (nextIndex >= quoteItems.length) {
+                        setTimeout(() => {
+                            showQuoteSlide(0, true);
+                            isTransitioning = false;
+                        }, 500);
+                    } else {
+                        setTimeout(() => {
+                            isTransitioning = false;
+                        }, 500);
                     }
-                    showQuoteSlide(next);
                 }
 
                 function prevQuoteSlide() {
-                    const maxSlide = window.innerWidth >= 768 
-                        ? Math.max(0, quoteItems.length - 2)
-                        : quoteItems.length - 1;
+                    if (isTransitioning) return;
+                    isTransitioning = true;
                     
-                    let prev = currentQuoteSlide - 1;
-                    if (prev < 0) {
-                        prev = maxSlide; // Loop to end
+                    if (currentQuoteSlide === 0) {
+                        showQuoteSlide(quoteItems.length, true);
+                        setTimeout(() => {
+                            showQuoteSlide(quoteItems.length - 1);
+                            setTimeout(() => {
+                                isTransitioning = false;
+                            }, 500);
+                        }, 20);
+                    } else {
+                        showQuoteSlide(currentQuoteSlide - 1);
+                        setTimeout(() => {
+                            isTransitioning = false;
+                        }, 500);
                     }
-                    showQuoteSlide(prev);
                 }
 
                 if (quoteNextBtn) {
@@ -425,6 +479,7 @@
 
                 quoteDots.forEach((dot, index) => {
                     dot.addEventListener('click', () => {
+                        if (isTransitioning) return;
                         showQuoteSlide(index);
                         resetQuoteAutoPlay();
                     });
@@ -439,20 +494,17 @@
                     startQuoteAutoPlay();
                 }
 
-                // Initialize first slide
                 showQuoteSlide(0);
 
-                // Start autoplay
                 if (quoteItems.length > 1) {
                     startQuoteAutoPlay();
                 }
 
-                // Recalculate on window resize
                 let resizeTimeout;
                 window.addEventListener('resize', () => {
                     clearTimeout(resizeTimeout);
                     resizeTimeout = setTimeout(() => {
-                        showQuoteSlide(currentQuoteSlide);
+                        showQuoteSlide(currentQuoteSlide, true);
                     }, 250);
                 });
             }
