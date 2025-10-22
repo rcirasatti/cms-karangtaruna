@@ -58,22 +58,20 @@
                                     data-nama="{{ $tokoh->nama }}" data-jabatan="{{ $tokoh->jabatan }}" data-foto="{{ $tokoh->foto }}"
                                     data-tugas="{{ $tokoh->tugas ?? 'Tidak ada deskripsi tugas' }}"
                                     data-profil="{{ $tokoh->profil_singkat ?? '' }}">
-                                    <div class="bg-gradient-to-b from-yellow-600 to-yellow-700 p-[3px] rounded-2xl">
-                                        <div
-                                            class="aspect-[3/4] overflow-hidden rounded-xl shadow-2xl hover:scale-105 transition-transform mb-4">
-                                            @if($tokoh->foto)
-                                                <img src="{{ asset('storage/' . $tokoh->foto) }}" alt="{{ $tokoh->nama }}"
-                                                    class="block w-full h-full object-cover" loading="lazy">
-                                            @else
-                                                <div class="flex w-full h-full items-center justify-center bg-gray-300">
-                                                    <svg class="w-1/2 h-1/2 text-gray-400" viewBox="0 0 24 24" fill="currentColor"
-                                                        aria-hidden="true">
-                                                        <path
-                                                            d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                                                    </svg>
-                                                </div>
-                                            @endif
-                                        </div>
+                                    <div
+                                        class="aspect-[3/4] overflow-hidden rounded-xl shadow-2xl hover:scale-105 transition-transform mb-4">
+                                        @if($tokoh->foto)
+                                            <img src="{{ asset('storage/' . $tokoh->foto) }}" alt="{{ $tokoh->nama }}"
+                                                class="block w-full h-full object-cover" loading="lazy">
+                                        @else
+                                            <div class="flex w-full h-full items-center justify-center bg-gray-300">
+                                                <svg class="w-1/2 h-1/2 text-gray-400" viewBox="0 0 24 24" fill="currentColor"
+                                                    aria-hidden="true">
+                                                    <path
+                                                        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                                </svg>
+                                            </div>
+                                        @endif
                                     </div>
                                     <h3 class="text-primary-600 font-bold text-base md:text-lg uppercase tracking-wide mb-1">
                                         {{ $tokoh->nama }}
@@ -102,22 +100,20 @@
                                     data-nama="{{ $anggota->nama }}" data-jabatan="{{ $anggota->jabatan }}"
                                     data-foto="{{ $anggota->foto }}" data-tugas="{{ $anggota->tugas ?? 'Tidak ada deskripsi tugas' }}"
                                     data-profil="{{ $anggota->profil_singkat ?? '' }}">
-                                    <div class="bg-gradient-to-b from-yellow-600 to-yellow-700 p-[3px] rounded-2xl">
-                                        <div
-                                            class="aspect-[3/4] overflow-hidden rounded-xl shadow-lg hover:scale-105 transition-transform mb-4">
-                                            @if($anggota->foto)
-                                                <img src="{{ asset('storage/' . $anggota->foto) }}" alt="{{ $anggota->nama }}"
-                                                    class="block w-full h-full object-cover" loading="lazy">
-                                            @else
-                                                <div class="flex w-full h-full items-center justify-center bg-gray-300">
-                                                    <svg class="w-1/2 h-1/2 text-gray-400" viewBox="0 0 24 24" fill="currentColor"
-                                                        aria-hidden="true">
-                                                        <path
-                                                            d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                                                    </svg>
-                                                </div>
-                                            @endif
-                                        </div>
+                                    <div
+                                        class="aspect-[3/4] overflow-hidden rounded-xl shadow-lg hover:scale-105 transition-transform mb-4">
+                                        @if($anggota->foto)
+                                            <img src="{{ asset('storage/' . $anggota->foto) }}" alt="{{ $anggota->nama }}"
+                                                class="block w-full h-full object-cover" loading="lazy">
+                                        @else
+                                            <div class="flex w-full h-full items-center justify-center bg-gray-300">
+                                                <svg class="w-1/2 h-1/2 text-gray-400" viewBox="0 0 24 24" fill="currentColor"
+                                                    aria-hidden="true">
+                                                    <path
+                                                        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                                </svg>
+                                            </div>
+                                        @endif
                                     </div>
                                     <h3 class="text-primary-600 font-bold text-base md:text-lg uppercase tracking-wide mb-1">
                                         {{ $anggota->nama }}
