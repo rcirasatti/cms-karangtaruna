@@ -146,7 +146,7 @@
                                     <p class="italic font-rajdhani text-sm md:text-base leading-relaxed mb-4">
                                         "{{ $firstQuote->quote }}"
                                     </p>
-                                    <p class="text-sm font-semibold text-yellow-400">-{{ $firstQuote->nama }}</p>
+                                    <p class="text-sm font-semibold text-yellow-400">{{ $firstQuote->nama }}</p>
                                     <p class="text-xs text-primary-200">{{ $firstQuote->peran }}</p>
                                 </div>
                             </div>
@@ -179,7 +179,7 @@
         <div class="flex justify-center gap-3 mt-8">
             @foreach($quotes as $index => $q)
             <button
-                class="quote-dot w-10 md:w-14 h-1 rounded-full bg-gray-600 hover:bg-yellow-400 transition {{ $index === 0 ? 'bg-yellow-400' : '' }}"
+                class="quote-dot w-10 md:w-14 h-1 rounded-full bg-gray-600 hover:bg-secondary transition {{ $index === 0 ? 'bg-secondary' : '' }}"
                 data-slide="{{ $index }}"
                 aria-label="Pergi ke quote {{ $index + 1 }}"
             ></button>
@@ -413,13 +413,13 @@
                     quoteCarousel.style.transform = `translateX(${translateX}px)`;
                     
                     quoteDots.forEach(dot => {
-                        dot.classList.remove('bg-yellow-400');
+                        dot.classList.remove('bg-secondary');
                         dot.classList.add('bg-gray-600');
                     });
                     const dotIndex = index % quoteItems.length;
                     if (quoteDots[dotIndex]) {
                         quoteDots[dotIndex].classList.remove('bg-gray-600');
-                        quoteDots[dotIndex].classList.add('bg-yellow-400');
+                        quoteDots[dotIndex].classList.add('bg-secondary');
                     }
                     
                     currentQuoteSlide = index;
