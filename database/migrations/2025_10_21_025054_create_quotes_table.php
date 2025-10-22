@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('quotes', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->string('foto')->nullable(); // Foto bersifat opsional
             $table->string('peran');
             $table->text('quote');
             $table->timestamps();

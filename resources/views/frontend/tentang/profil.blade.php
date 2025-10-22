@@ -110,8 +110,7 @@
                                     {{ $quote->quote }}
                                 </p>
                                 <div class="flex items-center space-x-3 mt-4">
-                                    <img src="https://ui-avatars.com/api/?name=Prabowo+Subianto&size=48&background=134686&color=fff"
-                                        alt="Prabowo Subianto" class="w-12 h-12 rounded-full border-2 border-primary-600">
+                                    <img src="{{ asset('storage/' . $quote->foto) }}" alt="{{ $quote->nama }}" class="w-12 h-12 rounded-full object-cover border-2 border-primary-600">
                                     <div>
                                         <div class="font-bold text-gray-900">{{ $quote->nama }}</div>
                                         <div class="text-sm text-gray-600">{{ $quote->peran }}</div>

@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             'alamat' => 'Jl. Pemuda No. 123, Jakarta Selatan',
             'tahun_berdiri' => 2010,
             'legalitas' => 'SK Gubernur No. 123/2010',
-            'sejarah' => 'Karang Taruna Maju Bersama didirikan pada tahun 2010 dengan tujuan memberdayakan pemuda di wilayah Jakarta Selatan. Organisasi ini lahir dari kesadaran para pemuda untuk berkontribusi dalam pembangunan masyarakat.',
+            'sejarah' => "Karang Taruna adalah organisasi sosial kepemudaan yang berfungsi sebagai wadah pengembangan generasi muda dalam berbagai aspek, termasuk sosial, ekonomi, dan budaya. Organisasi ini didirikan sebagai respons terhadap berbagai permasalahan yang dihadapi oleh anak-anak muda, seperti kemiskinan, pengangguran, serta berbagai bentuk penyimpangan sosial yang mengancam masa depan generasi muda. Dengan semangat gotong royong dan kepedulian sosial, Karang Taruna berupaya memberikan solusi nyata bagi persoalan-persoalan sosial yang terjadi di masyarakat.\nSejarah berdirinya Karang Taruna bermula pada 26 September 1960 di Kebon Baru, Jakarta Selatan. Pada masa itu, banyak anak muda yang mengalami kesulitan dalam mengakses pendidikan, pekerjaan, serta sarana untuk mengembangkan potensi mereka. Situasi ini mendorong lahirnya sebuah komunitas kepemudaan yang bertujuan untuk membantu pemerintah dalam menangani berbagai persoalan sosial yang muncul di lingkungan desa atau kelurahan. Dengan pendekatan berbasis komunitas dan kebersamaan, Karang Taruna berusaha memberdayakan pemuda agar mampu mandiri dan memiliki peran aktif dalam pembangunan masyarakat.\n Seiring waktu, keberadaan Karang Taruna semakin mendapatkan pengakuan dan dukungan dari pemerintah. Pada tahun 1971, Kementerian Sosial Republik Indonesia secara resmi mengakui Karang Taruna sebagai organisasi sosial kepemudaan yang berperan dalam pembangunan sosial masyarakat. Pengakuan ini membuka peluang bagi Karang Taruna untuk berkembang lebih luas dan membentuk kepengurusan yang terstruktur di berbagai daerah, mulai dari tingkat desa, kecamatan, kabupaten/kota, hingga tingkat provinsi. Dengan adanya struktur kepengurusan yang kuat, Karang Taruna dapat lebih efektif dalam menjalankan program-programnya di berbagai daerah di Indonesia.\nSebagai organisasi yang berlandaskan nilai sosial dan kebersamaan, Karang Taruna memiliki misi utama untuk menciptakan pemuda yang mandiri, kreatif, serta memiliki kontribusi nyata dalam pembangunan daerahnya. Berbagai kegiatan yang dilakukan oleh Karang Taruna tidak hanya terbatas pada bidang sosial, tetapi juga meluas ke sektor ekonomi kreatif, kewirausahaan, pendidikan, olahraga, hingga pelestarian budaya. Dengan mengikuti perkembangan zaman, Karang Taruna terus berinovasi dalam menghadirkan program-program yang relevan dengan kebutuhan pemuda dan masyarakat di era modern.\nSetiap tanggal 26 September, masyarakat Indonesia memperingati Hari Karang Taruna Nasional. Peringatan ini menjadi momen refleksi bagi seluruh anggota Karang Taruna untuk meninjau kembali peran dan kontribusi mereka dalam pembangunan bangsa. Selain itu, perayaan Hari Karang Taruna Nasional juga menjadi ajang untuk mempererat solidaritas antaranggota serta memperkuat komitmen dalam mewujudkan masyarakat yang lebih sejahtera melalui berbagai program pemberdayaan pemuda.",
             'profil_singkat' => 'Karang Taruna Maju Bersama adalah organisasi kepemudaan yang fokus pada pengembangan karakter, keterampilan, dan pemberdayaan masyarakat. Kami berkomitmen untuk menciptakan generasi muda yang berkarakter dan berprestasi.',
             'logo_path' => 'https://i.pinimg.com/originals/79/e2/b5/79e2b5897b6bfaaac9d314a4b0a89348.png',
             'filosofi_logo' => 'lambang Karang Taruna berarti tekad insan remaja/generasi muda Indonesia (warga Karang Taruna) untuk mengembangkan dirinya menjadi patriot/pejuang yang berkepribadian, berpengetahuan/cerdas, serta terampil dan selalu berkarya nyata agar mampu ikut secara aktif dalam pembangunan untuk menciptakan masyarakat yang adil dan makmur berdasarkan Pancasila.'
@@ -52,6 +52,8 @@ class DatabaseSeeder extends Seeder
             ['nama' => 'Agus Prasetyo', 'jabatan' => 'Bendahara', 'urutan' => 4, 'is_tokoh_utama' => true],
             ['nama' => 'Rina Kusuma', 'jabatan' => 'Koordinator Bidang Pendidikan', 'urutan' => 5, 'is_tokoh_utama' => false],
             ['nama' => 'Dedi Kurniawan', 'jabatan' => 'Koordinator Bidang Sosial', 'urutan' => 6, 'is_tokoh_utama' => false],
+            ['nama' => 'Lina Marlina', 'jabatan' => 'Koordinator Bidang Kewirausahaan', 'urutan' => 7, 'is_tokoh_utama' => false],
+            ['nama' => 'Eko Prabowo', 'jabatan' => 'Koordinator Bidang Olahraga', 'urutan' => 8, 'is_tokoh_utama' => false],
         ];
 
         foreach ($jabatan as $j) {
@@ -151,7 +153,8 @@ class DatabaseSeeder extends Seeder
         $quote = [
             'nama' => 'Prabowo Subianto',
             'peran' => 'Presiden Republik Indonesia',
-            'quote' => 'Karang Taruna membentuk generasi muda yang peduli dan berpikiran sosial, sangat bermanfaat dalam membangun kepemimpinan dan jiwa sosial.'
+            'quote' => 'Karang Taruna membentuk generasi muda yang peduli dan berpikiran sosial, sangat bermanfaat dalam membangun kepemimpinan dan jiwa sosial.',
+            'foto' => null // Foto opsional, bisa di-update nanti
         ];
 
         // Insert quote to database

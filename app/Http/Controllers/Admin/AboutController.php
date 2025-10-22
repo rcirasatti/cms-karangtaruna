@@ -7,6 +7,7 @@ use App\Models\Profile;
 use App\Models\FilosofiLogoItem;
 use App\Models\Quote;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AboutController extends Controller
 {
@@ -174,6 +175,7 @@ class AboutController extends Controller
         $quote = Quote::find(1) ?? Quote::create([
             'id' => 1,
             'nama' => 'Nama Tokoh',
+            'foto' => 'path/to/foto.jpg',
             'peran' => 'Jabatan/Peran',
             'quote' => 'Kutipan inspiratif...'
         ]);
@@ -239,23 +241,36 @@ class AboutController extends Controller
         $request->validate([
             'quote' => 'required|string',
             'nama' => 'required|string|max:255',
-            'peran' => 'required|string|max:255'
+            'peran' => 'required|string|max:255',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
         $quote = Quote::find(1);
+
+        // Prepare data array
+        $data = [
+            'quote' => $request->quote,
+            'nama' => $request->nama,
+            'peran' => $request->peran
+        ];
+
+        // Handle foto upload jika ada
+        if ($request->hasFile('foto')) {
+            // Hapus foto lama jika ada dan quote sudah ada
+            if ($quote && $quote->foto && Storage::disk('public')->exists($quote->foto)) {
+                Storage::disk('public')->delete($quote->foto);
+            }
+
+            // Upload foto baru
+            $fotoPath = $request->file('foto')->store('quote-fotos', 'public');
+            $data['foto'] = $fotoPath;
+        }
+
+        // Create or update
         if (!$quote) {
-            $quote = Quote::create([
-                'id' => 1,
-                'quote' => $request->quote,
-                'nama' => $request->nama,
-                'peran' => $request->peran
-            ]);
+            $quote = Quote::create(array_merge(['id' => 1], $data));
         } else {
-            $quote->update([
-                'quote' => $request->quote,
-                'nama' => $request->nama,
-                'peran' => $request->peran
-            ]);
+            $quote->update($data);
         }
 
         return redirect()->back()->with('success', 'Quote berhasil diperbarui.');

@@ -8,6 +8,7 @@ class Quote extends Model
 {
     protected $fillable = [
         'nama',
+        'foto',
         'peran',
         'quote',
     ];
