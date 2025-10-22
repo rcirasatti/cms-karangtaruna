@@ -42,7 +42,7 @@
         <div class="bg-white py-16">
             <div class="container mx-auto px-4">
                 <div class="grid lg:grid-cols-3 gap-8">
-                    <div class="lg:col-span-2 space-y-12">
+                    <div class="lg:col-span-2 space-y-12 mr-15">
                         <div>
                             <h2 class="text-3xl font-bold text-primary-800 mb-6 pb-3 border-b-4 border-secondary inline-block">
                                 Sejarah Karang Taruna
@@ -105,12 +105,29 @@
                             </div>
 
                             <div class="bg-gray-50 rounded-xl p-6 border-l-4 border-secondary">
-                                <div class="text-6xl text-secondary mb-2 leading-none">"</div>
-                                <p class="text-gray-700 italic mb-4 leading-relaxed">
+                                <div class="text-6xl text-secondary leading-none">"</div>
+                                <p class="text-gray-700 font-rajdhani italic mb-4 leading-relaxed">
                                     {{ $quote->quote }}
                                 </p>
                                 <div class="flex items-center space-x-3 mt-4">
-                                    <img src="{{ asset('storage/' . $quote->foto) }}" alt="{{ $quote->nama }}" class="w-12 h-12 rounded-full object-cover border-2 border-primary-600">
+                                    @if(!empty($quote->foto) && file_exists(public_path('storage/' . $quote->foto)))
+                                        <img src="{{ asset('storage/' . $quote->foto) }}" alt="{{ $quote->nama }}" class="w-12 h-12 rounded-full object-cover border-2 border-primary-600">
+                                    @else
+                                        @php
+                                            $parts = preg_split('/\s+/', trim($quote->nama));
+                                            $initials = '';
+                                            if (!empty($parts)) {
+                                                $initials .= strtoupper(mb_substr($parts[0], 0, 1));
+                                                if (isset($parts[1])) {
+                                                    $initials .= strtoupper(mb_substr($parts[1], 0, 1));
+                                                }
+                                            }
+                                            if ($initials === '') $initials = strtoupper(mb_substr($quote->nama, 0, 1));
+                                        @endphp
+                                        <div class="w-12 h-12 rounded-full flex items-center justify-center bg-primary-600 text-white font-bold border-2 border-primary-600">
+                                            {{ $initials }}
+                                        </div>
+                                    @endif
                                     <div>
                                         <div class="font-bold text-gray-900">{{ $quote->nama }}</div>
                                         <div class="text-sm text-gray-600">{{ $quote->peran }}</div>

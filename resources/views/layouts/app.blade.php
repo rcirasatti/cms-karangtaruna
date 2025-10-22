@@ -8,6 +8,16 @@
     <!-- Favicon (explicit) - prefer PNG then ICO fallback -->
     <link rel="icon" type="image/png" href="{{ asset('assets/logo.png') }}" />
     <link rel="alternate icon" href="{{ asset('favicon.ico') }}" />
+    <!-- Rajdhani font for headings/quotes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* small helper class when Tailwind config hasn't been extended yet */
+        .font-rajdhani { font-family: 'Rajdhani', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+    </style>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -26,9 +36,9 @@
                 <div class="flex items-center space-x-3">
                     <img src="{{ asset('assets/logo.png') }}" alt="Logo Karang Taruna" class="h-12">
                     <div class="text-left">
-                        <span class="text-xl font-Montserrat font-bold text-white">Karang Taruna</span>
+                        <span class="text-xl font-Montserrat font-bold text-white">{{ $navbar->title_navbar }}</span>
                         <br>
-                        <span class="font-italic text-sm text-[#EBCB90]">Kelurahan Tembalang</span>
+                        <span class="font-rajdhani font-italic text-md text-[#EBCB90]">{{ $navbar->subtitle_navbar }}</span>
                     </div>
                 </div>
 
