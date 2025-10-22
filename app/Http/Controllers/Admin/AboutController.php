@@ -243,12 +243,19 @@ class AboutController extends Controller
         $quoteId = $request->input('quote_id');
         $quote = $quoteId ? Quote::find($quoteId) : null;
 
+        $isTampil = $request->has('is_tampil') ? true : false;
+
+        // Jika is_tampil di-check, set semua quote lain menjadi is_tampil = false
+        if ($isTampil) {
+            Quote::where('id', '!=', $quoteId)->update(['is_tampil' => false]);
+        }
+
         // Prepare data array
         $data = [
             'quote' => $request->quote,
             'nama' => $request->nama,
             'peran' => $request->peran,
-            'is_tampil' => $request->has('is_tampil') ? true : false
+            'is_tampil' => $isTampil
         ];
 
         // Handle foto upload jika ada
