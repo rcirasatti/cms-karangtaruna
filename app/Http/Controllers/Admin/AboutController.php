@@ -174,6 +174,18 @@ class AboutController extends Controller
 
         $quotes = Quote::orderBy('created_at', 'desc')->get();
 
+        // Pastikan jika ada quote, minimal satu harus tampil
+        if ($quotes->count() > 0) {
+            $hasVisibleQuote = $quotes->where('is_tampil', true)->count() > 0;
+
+            if (!$hasVisibleQuote) {
+                // Set quote pertama untuk tampil
+                $firstQuote = $quotes->first();
+                $firstQuote->update(['is_tampil' => true]);
+                $quotes = Quote::orderBy('created_at', 'desc')->get(); // Refresh data
+            }
+        }
+
         return view('admin.about.sejarah', compact('profile', 'quotes'));
     }
 
@@ -245,6 +257,18 @@ class AboutController extends Controller
 
         $isTampil = $request->has('is_tampil') ? true : false;
 
+        // Cek apakah ini adalah satu-satunya quote yang tampil
+        $totalQuotes = Quote::count();
+        $quotesWithIsTampil = Quote::where('is_tampil', true)->count();
+
+        // Jika quote ini sedang ditampilkan dan user mencoba mematikannya
+        if ($quote && $quote->is_tampil && !$isTampil) {
+            // Jika ini satu-satunya quote yang tampil, tidak boleh dimatikan
+            if ($quotesWithIsTampil <= 1 && $totalQuotes > 0) {
+                return redirect()->back()->with('error', 'Tidak dapat mematikan tampilan quote. Minimal satu quote harus ditampilkan.');
+            }
+        }
+
         // Jika is_tampil di-check, set semua quote lain menjadi is_tampil = false
         if ($isTampil) {
             Quote::where('id', '!=', $quoteId)->update(['is_tampil' => false]);
@@ -258,9 +282,7 @@ class AboutController extends Controller
             'is_tampil' => $isTampil
         ];
 
-        // Handle foto upload jika ada
         if ($request->hasFile('foto')) {
-            // Hapus foto lama jika ada dan quote sudah ada
             if ($quote && $quote->foto && Storage::disk('public')->exists($quote->foto)) {
                 Storage::disk('public')->delete($quote->foto);
             }
@@ -272,7 +294,11 @@ class AboutController extends Controller
 
         // Create or update
         if (!$quote) {
-            Quote::create($data);
+            $newQuote = Quote::create($data);
+            if ($totalQuotes == 0 || $quotesWithIsTampil == 0) {
+                $newQuote->update(['is_tampil' => true]);
+            }
+
             $message = 'Quote berhasil ditambahkan.';
         } else {
             $quote->update($data);
@@ -288,6 +314,19 @@ class AboutController extends Controller
 
         if (!$quote) {
             return redirect()->back()->with('error', 'Quote tidak ditemukan.');
+        }
+
+        // Cek apakah quote ini adalah satu-satunya quote yang tampil
+        $totalQuotes = Quote::count();
+        $quotesWithIsTampil = Quote::where('is_tampil', true)->count();
+
+        // Jika ada quote dan quote ini yang tampil, dan ini satu-satunya yang tampil
+        if ($quote->is_tampil && $quotesWithIsTampil <= 1 && $totalQuotes > 1) {
+            // Set quote lain untuk tampil sebelum menghapus
+            $otherQuote = Quote::where('id', '!=', $id)->first();
+            if ($otherQuote) {
+                $otherQuote->update(['is_tampil' => true]);
+            }
         }
 
         // Hapus foto jika ada

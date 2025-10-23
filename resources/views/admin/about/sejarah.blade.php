@@ -155,20 +155,14 @@
                                     </svg>
                                     <span>Edit</span>
                                 </button>
-                                <form action="{{ route('admin.about.quote.delete', $quote->id) }}" method="POST" 
-                                    onsubmit="return confirm('Apakah Anda yakin ingin menghapus quote ini?')" class="flex-1">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-3 rounded-lg transition duration-300 flex items-center justify-center space-x-1 text-sm">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                                            </path>
-                                        </svg>
-                                        <span>Hapus</span>
-                                    </button>
-                                </form>
+                                <button @click="deleteQuote({{ $quote->id }})" class="flex-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-3 rounded-lg transition duration-300 flex items-center justify-center space-x-1 text-sm">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                        </path>
+                                    </svg>
+                                    <span>Hapus</span>
+                                </button>
                             </div>
                         </div>
                     @endforeach
@@ -342,7 +336,7 @@
                                 </div>
                             </div>
                             <button type="button" @click="editSejarahModalOpen = false"
-                                class="text-white hover:text-gray-200 transition-colors">
+                                class="text-white hover:text-gray-200 transition-colors hover:bg-gray-600 rounded-lg">
                                 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M6 18L18 6M6 6l12 12"></path>
@@ -368,7 +362,7 @@
                         <div
                             class="sticky bottom-0 bg-gray-50 px-8 py-4 -mx-8 -mb-8 flex items-center space-x-3 border-t rounded-b-2xl">
                             <button type="button" @click="editSejarahModalOpen = false"
-                                class="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-100 transition duration-300">
+                                class="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition duration-300">
                                 Batal
                             </button>
                             <button type="submit"
@@ -409,7 +403,7 @@
                                 </div>
                             </div>
                             <button type="button" @click="editIdentitasModalOpen = false"
-                                class="text-white hover:text-gray-200 transition-colors">
+                                class="text-white hover:text-gray-200 transition-colors hover:bg-gray-600 rounded-lg">
                                 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M6 18L18 6M6 6l12 12"></path>
@@ -476,7 +470,7 @@
                         <div
                             class="sticky bottom-0 bg-gray-50 px-8 py-4 -mx-8 -mb-8 flex items-center space-x-3 border-t rounded-b-2xl">
                             <button type="button" @click="editIdentitasModalOpen = false"
-                                class="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-100 transition duration-300">
+                                class="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition duration-300">
                                 Batal
                             </button>
                             <button type="submit"
@@ -518,7 +512,7 @@
                                 </div>
                             </div>
                             <button type="button" @click="quoteModalOpen = false"
-                                class="text-white hover:text-gray-200 transition-colors">
+                                class="text-white hover:text-gray-200 hover:bg-gray-600 rounded-lg transition-colors">
                                 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M6 18L18 6M6 6l12 12"></path>
@@ -580,9 +574,17 @@
 
                             <!-- Preview image -->
                             <div id="quoteImagePreview" class="mt-3 hidden">
-                                <p class="text-sm font-medium text-gray-700 mb-2">Preview:</p>
-                                <img id="quotePreviewImg" src="" alt="Preview"
-                                    class="w-24 h-24 rounded-full object-cover border-2 border-primary-500">
+                                <p class="text-sm font-medium text-gray-700 mb-2" id="quoteImagePreviewLabel">Preview:</p>
+                                <div class="relative inline-block">
+                                    <img id="quotePreviewImg" src="" alt="Preview"
+                                        class="w-24 h-24 rounded-full object-cover border-2 border-primary-500">
+                                    <button type="button" onclick="clearQuoteImage()" x-show="quoteModalMode === 'edit'"
+                                        class="absolute -top-2 -right-2 hover:text-red-600 text-gray-400 rounded-full p-1">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
@@ -607,7 +609,7 @@
                         <div
                             class="sticky bottom-0 bg-gray-50 px-8 py-4 -mx-8 -mb-8 flex items-center space-x-3 border-t rounded-b-2xl">
                             <button type="button" @click="quoteModalOpen = false"
-                                class="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-100 transition duration-300">
+                                class="flex-1 px-4 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition duration-300">
                                 Batal
                             </button>
                             <button type="submit"
@@ -615,6 +617,43 @@
                                 x-text="quoteModalMode === 'create' ? 'Tambah Quote' : 'Simpan Perubahan'">
                             </button>
                         </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Delete Confirmation -->
+        <div x-show="deleteModalOpen" @keydown.escape="deleteModalOpen = false"
+            class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            style="display: none;">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 space-y-6 animate-in fade-in zoom-in duration-300">
+                <div class="flex justify-center">
+                    <div class="bg-red-50 rounded-full p-4">
+                        <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="text-center space-y-2">
+                    <h3 class="text-xl font-bold text-gray-800">Hapus Quote?</h3>
+                    <p class="text-gray-600 text-sm">Anda yakin ingin menghapus quote ini? Tindakan ini tidak dapat dibatalkan.</p>
+                </div>
+
+                <div class="flex gap-3">
+                    <button @click="deleteModalOpen = false"
+                        class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-3 px-4 rounded-lg transition">
+                        Batal
+                    </button>
+                    <form :action="`{{ route('admin.about.quote.delete', '') }}/${deleteId}`" method="POST" class="flex-1">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                            class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-4 rounded-lg transition">
+                            Hapus
+                        </button>
                     </form>
                 </div>
             </div>
@@ -632,6 +671,8 @@
                 quoteModalOpen: false,
                 quoteModalMode: 'create',
                 currentQuote: null,
+                deleteModalOpen: false,
+                deleteId: null,
 
                 editQuote(quote) {
                     this.quoteModalMode = 'edit';
@@ -646,10 +687,22 @@
                     // Set checkbox is_tampil
                     document.getElementById('is_tampil').checked = quote.is_tampil;
                     
-                    // Hide preview
-                    document.getElementById('quoteImagePreview').classList.add('hidden');
+                    // Clear file input
+                    document.getElementById('foto').value = '';
                     
-                    // Open modal
+                    // Show existing photo preview if exists
+                    const preview = document.getElementById('quoteImagePreview');
+                    const previewImg = document.getElementById('quotePreviewImg');
+                    const previewLabel = document.getElementById('quoteImagePreviewLabel');
+                    
+                    if (quote.foto) {
+                        previewImg.src = '/storage/' + quote.foto;
+                        previewLabel.textContent = 'Foto Saat Ini:';
+                        preview.classList.remove('hidden');
+                    } else {
+                        preview.classList.add('hidden');
+                    }
+                    
                     this.quoteModalOpen = true;
                 },
 
@@ -665,6 +718,11 @@
                     
                     // Open modal
                     this.quoteModalOpen = true;
+                },
+
+                deleteQuote(id) {
+                    this.deleteId = id;
+                    this.deleteModalOpen = true;
                 }
             }
         }
@@ -673,6 +731,7 @@
             const file = event.target.files[0];
             const preview = document.getElementById('quoteImagePreview');
             const previewImg = document.getElementById('quotePreviewImg');
+            const previewLabel = document.getElementById('quoteImagePreviewLabel');
 
             if (file) {
                 // Validasi ukuran file (2MB)
@@ -696,12 +755,24 @@
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     previewImg.src = e.target.result;
+                    previewLabel.textContent = 'Preview Foto Baru:';
                     preview.classList.remove('hidden');
                 }
                 reader.readAsDataURL(file);
             } else {
                 preview.classList.add('hidden');
             }
+        }
+
+        function clearQuoteImage() {
+            const fileInput = document.getElementById('foto');
+            const preview = document.getElementById('quoteImagePreview');
+            const previewImg = document.getElementById('quotePreviewImg');
+            
+            fileInput.value = '';
+            
+            preview.classList.add('hidden');
+            previewImg.src = '';
         }
     </script>
 @endpush
