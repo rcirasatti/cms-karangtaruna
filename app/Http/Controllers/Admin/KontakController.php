@@ -67,6 +67,7 @@ class KontakController extends Controller
         try {
             $validated = $request->validate([
                 'alamat_sekretariat' => 'required|string|max:500',
+                'maps_url' => 'nullable|url|max:500',
                 'telepon' => 'required|string|max:20',
                 'whatsapp' => 'required|string|max:20',
                 'email' => 'required|email|max:100',

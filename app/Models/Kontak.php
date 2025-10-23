@@ -10,6 +10,7 @@ class Kontak extends Model
     
     protected $fillable = [
         'alamat_sekretariat',
+        'maps_url',
         'telepon',
         'whatsapp',
         'email',

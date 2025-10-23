@@ -475,8 +475,17 @@
                 <!-- Map/Additional Info -->
                 <div class="col-span-1">
                     <h4 class="text-lg font-bold mb-4 text-secondary">Lokasi</h4>
-                    <p class="text-gray-100 text-sm mb-4">Temukan kami di Google Maps untuk navigasi lebih mudah.</p>
-                    <a href="https://www.google.com/maps/search/Jl.+Turus+Asri+IV+No.+6,+Tembalang,+Semarang"
+                    @if(isset($kontak) && $kontak && $kontak->alamat_sekretariat)
+                    <div class="relative rounded-xl overflow-hidden shadow-lg mb-3 h-48 group grayscale hover:grayscale-0 transition-all duration-300 cursor-pointer">
+                        <iframe 
+                            src="{{ $kontak->maps_url ?? 'https://www.google.com/maps?q=' . urlencode($kontak->alamat_sekretariat) . '&output=embed' }}" 
+                            class="w-full h-full border-0 group-hover:saturate-150 transition-all duration-300" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <a href="https://www.google.com/maps/search/{{ urlencode($kontak->alamat_sekretariat) }}"
                         target="_blank" rel="noopener noreferrer"
                         class="inline-block bg-secondary hover:bg-secondary/90 text-primary px-4 py-2 rounded-lg font-semibold transition-all duration-150 transform hover:scale-105">
                         <svg class="w-4 h-4 inline mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -485,6 +494,7 @@
                         </svg>
                         Buka Maps
                     </a>
+                    @endif
                 </div>
             </div>
 

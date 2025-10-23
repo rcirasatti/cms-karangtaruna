@@ -249,6 +249,23 @@
                     @enderror
                 </div>
 
+                <!-- Maps URL -->
+                <div>
+                    <label for="maps_url" class="block text-sm font-semibold text-gray-700 mb-2">
+                        Google Maps Embed URL (Opsional)
+                    </label>
+                    <input type="url" 
+                           id="maps_url" 
+                           name="maps_url" 
+                           value="{{ $kontak->maps_url }}"
+                           placeholder="Paste embed URL dari Google Maps (https://...)"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent font-poppins @error('maps_url') border-red-500 @enderror">
+                    <p class="text-gray-500 text-xs mt-2">💡 Jika kosong, akan menggunakan pencarian otomatis dari alamat di atas</p>
+                    @error('maps_url')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <!-- Telepon & WhatsApp -->
                 <div class="grid grid-cols-2 gap-4">
                     <div>

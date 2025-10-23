@@ -125,7 +125,9 @@
                 @endif
 
                 <!-- Location Card -->
-                <div class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 transform hover:-translate-y-2 border border-gray-100 hover:border-primary-300 overflow-hidden">
+                @if($kontak->alamat_sekretariat)
+                <a href="https://www.google.com/maps/search/{{ urlencode($kontak->alamat_sekretariat) }}" target="_blank" rel="noopener noreferrer"
+                   class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 transform hover:-translate-y-2 border border-gray-100 hover:border-primary-300 overflow-hidden">
                     <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-primary-400/10 to-primary-600/10 rounded-bl-full"></div>
 
                     <div class="relative">
@@ -144,7 +146,8 @@
                             </svg>
                         </div>
                     </div>
-                </div>
+                </a>
+                @endif
             </div>
         </div>
 
@@ -180,7 +183,7 @@
                                     <div class="ml-5 flex-1">
                                         <h3 class="font-bold text-gray-900 text-lg mb-2">Alamat Sekretariat</h3>
                                         <p class="text-gray-600 leading-relaxed mb-3">{{ $kontak->alamat_sekretariat }}</p>
-                                        <a href="https://maps.google.com/?q={{ urlencode($kontak->alamat_sekretariat) }}" target="_blank" 
+                                        <a href="https://www.google.com/maps/search/{{ urlencode($kontak->alamat_sekretariat) }}" target="_blank" 
                                            class="inline-flex items-center text-primary-600 hover:text-primary-700 font-semibold text-sm group/link">
                                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
