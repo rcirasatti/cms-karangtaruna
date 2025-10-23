@@ -74,7 +74,7 @@
                 <div class="quote-carousel-track flex transition-transform duration-500 ease-in-out gap-8 pr-8">
                     @foreach($quotes as $index => $q)
                     <div class="quote-item flex-shrink-0 w-full md:w-1/2" data-index="{{ $index }}">
-                        <div class="flex flex-col md:flex-row gap-6 backdrop-blur-sm rounded-lg p-6">
+                        <div class=" flex flex-col md:flex-row gap-6 backdrop-blur-sm rounded-lg p-6 items-center md:items-start">
                             <div class="flex-shrink-0">
                                 @if($q->foto && file_exists(public_path('storage/' . $q->foto)))
                                     <div class="w-32 h-32 md:w-40 md:h-40 overflow-hidden shadow-lg rounded-lg">
