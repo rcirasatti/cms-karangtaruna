@@ -136,7 +136,7 @@
                                                              class="w-20 h-20 object-contain rounded-lg shadow-md">
                                                         @break
 
-                                                    @case('palette')
+                                                    @case('palet')
                                                         <img src="{{ asset('assets/palet.png') }}" 
                                                              alt="palet"
                                                              class="w-20 h-20 object-contain rounded-lg shadow-md">

@@ -193,7 +193,7 @@
                                                              class="w-20 h-20 object-contain rounded-lg shadow-md">
                                                         @break
 
-                                                    @case('palette')
+                                                    @case('palet')
                                                         <img src="{{ asset('assets/palet.png') }}" 
                                                              alt="palet"
                                                              class="w-20 h-20 object-contain rounded-lg shadow-md">
@@ -481,7 +481,7 @@
                                                     <option value="pita">Dua pita</option>
                                                     <option value="lingkaran">Lingkaran</option>
                                                     <option value="teratai mekar">Teratai Mekar</option>
-                                                    <option value="pallete">Palet Warna</option>
+                                                    <option value="palet">Palet Warna</option>
                                                 </select>
                                             </div>
 
