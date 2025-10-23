@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\URL;
 use App\Models\Kontak;
 use App\Models\Hero;
+use App\Models\Profile;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
         if (!app()->runningInConsole()) {
             View::share('kontak', Kontak::first());
             View::share('navbar', Hero::first());
+            View::share('profil', Profile::first());
         }
     }
 }

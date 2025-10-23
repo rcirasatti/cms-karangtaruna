@@ -86,7 +86,7 @@
                                         $isUrl = preg_match('/^https?:\/\//i', $profile->logo_path);
                                         $logoSrc = $isUrl ? $profile->logo_path : asset('storage/' . $profile->logo_path);
                                     @endphp
-                                    <img src="{{ $logoSrc }}"
+                                    <img src="{{ htmlspecialchars($logoSrc, ENT_QUOTES, 'UTF-8') }}"
                                          alt="Logo {{ $profile->nama_organisasi }}"
                                          class="max-w-md w-full drop-shadow-2xl"
                                          onerror="this.parentElement.innerHTML='<div class=\'text-center\'><p class=\'text-gray-400 text-lg font-medium\'>Logo tidak dapat dimuat</p></div>'">
@@ -373,7 +373,7 @@
                                         $isUrlPreview = preg_match('/^https?:\/\//i', $profile->logo_path);
                                         $logoSrcPreview = $isUrlPreview ? $profile->logo_path : asset('storage/' . $profile->logo_path);
                                     @endphp
-                                    <img src="{{ $logoSrcPreview }}" 
+                                    <img src="{{ htmlspecialchars($logoSrcPreview, ENT_QUOTES, 'UTF-8') }}" 
                                          alt="Current Logo" 
                                          class="h-24 w-auto object-contain border border-gray-200 rounded-lg"
                                          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">

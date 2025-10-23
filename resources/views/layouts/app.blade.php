@@ -6,16 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Karang Taruna')</title>
     <!-- Favicon (explicit) - prefer PNG then ICO fallback -->
-    <link rel="icon" type="image/png" href="{{ asset('assets/logo.png') }}" />
-    <link rel="alternate icon" href="{{ asset('favicon.ico') }}" />
+    @php
+        $faviconPath = $profile->logo_path ? (preg_match('/^https?:\/\//i', $profile->logo_path) ? $profile->logo_path : asset('storage/' . $profile->logo_path)) : asset('favicon.ico');
+    @endphp
+    <link rel="icon" type="image/png" href="{{ htmlspecialchars($faviconPath, ENT_QUOTES, 'UTF-8') }}" />
+    {{--
+    <link rel="alternate icon" href="{{ asset('favicon.ico') }}" /> --}}
     <!-- Rajdhani font for headings/quotes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <style>
         /* small helper class when Tailwind config hasn't been extended yet */
-        .font-rajdhani { font-family: 'Rajdhani', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+        .font-rajdhani {
+            font-family: 'Rajdhani', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+        }
     </style>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -34,11 +41,20 @@
             <div class="flex justify-between items-center py-4">
                 <!-- Logo (use local asset) -->
                 <div class="flex items-center space-x-3">
-                    <img src="{{ asset('assets/logo.png') }}" alt="Logo Karang Taruna" class="h-12">
+                    @if($profile->logo_path)
+                        @php
+                            $logoSrc = preg_match('/^https?:\/\//i', $profile->logo_path) ? $profile->logo_path : asset('storage/' . $profile->logo_path);
+                        @endphp
+                        <img src="{{ htmlspecialchars($logoSrc, ENT_QUOTES, 'UTF-8') }}" alt="Logo Karang Taruna"
+                            class="h-12">
+                    @else
+                        <img src="{{ asset('assets/logo.png') }}" alt="Logo Karang Taruna" class="h-12">
+                    @endif
                     <div class="text-left">
                         <span class="text-xl font-Montserrat font-bold text-white">{{ $navbar->title_navbar }}</span>
                         <br>
-                        <span class="font-rajdhani font-italic text-md text-[#EBCB90]">{{ $navbar->subtitle_navbar }}</span>
+                        <span
+                            class="font-rajdhani font-italic text-md text-[#EBCB90]">{{ $navbar->subtitle_navbar }}</span>
                     </div>
                 </div>
 
@@ -112,9 +128,11 @@
                             class="{{ $navTransparent ? 'absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-primary-900/80 ring-1 ring-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300' : 'absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300' }}">
                             <div class="py-1">
                                 <a href="{{ route('kepengurusan.index') }}#tokoh_utama"
-                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Tokoh Utama</a>
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Tokoh
+                                    Utama</a>
                                 <a href="{{ route('kepengurusan.index') }}#struktur_pengurus"
-                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Struktur Kepengurusan</a>
+                                    class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-gray-700' }} {{ $navTransparent ? 'hover:bg-white/10 hover:text-white' : 'hover:bg-primary-50 hover:text-primary-600' }}">Struktur
+                                    Kepengurusan</a>
                             </div>
                         </div>
                     </div>
@@ -174,7 +192,9 @@
                     <a href="{{ route('admin.login') }}"
                         class="ml-2 px-4 py-2 rounded-lg bg-white/20 text-white hover:bg-white/30 transition font-semibold border border-white/30">
                         <svg class="w-4 h-4 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                            </path>
                         </svg>
                         Admin
                     </a>
@@ -266,9 +286,11 @@
                     </button>
                     <div class="mobile-dropdown-content hidden pl-4">
                         <a href="{{ route('kepengurusan.index') }}#tokoh_utama"
-                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Tokoh Utama</a>
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Tokoh
+                            Utama</a>
                         <a href="{{ route('kepengurusan.index') }}#struktur_pengurus"
-                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Struktur Pengurus</a>
+                            class="block px-4 py-2 text-sm {{ $navTransparent ? 'text-white' : 'text-primary-100' }} {{ $mobileHoverBg }} rounded">Struktur
+                            Pengurus</a>
                     </div>
                 </div>
 
@@ -318,7 +340,9 @@
                     <a href="{{ route('admin.login') }}"
                         class="flex items-center justify-center px-4 py-3 bg-white/20 text-white hover:bg-white/30 transition font-semibold rounded border border-white/30">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                            </path>
                         </svg>
                         Admin Login
                     </a>
@@ -345,8 +369,15 @@
                 <!-- About Section -->
                 <div class="col-span-1 md:col-span-1 lg:col-span-1">
                     <div class="flex items-center mb-4">
-                        <img src="https://clipground.com/images/logo-karang-taruna-png-5.png" alt="Logo Karang Taruna"
-                            class="h-10 mr-3">
+                        @if($profile->logo_path)
+                            @php
+                                $footerLogoSrc = preg_match('/^https?:\/\//i', $profile->logo_path) ? $profile->logo_path : asset('storage/' . $profile->logo_path);
+                            @endphp
+                            <img src="{{ htmlspecialchars($footerLogoSrc, ENT_QUOTES, 'UTF-8') }}" alt="Logo Karang Taruna"
+                                class="h-10 mr-3">
+                        @else
+                            <img src="{{ asset('assets/logo.png') }}" alt="Logo Karang Taruna" class="h-10 mr-3">
+                        @endif
                         <div>
                             <h3 class="text-lg font-bold font-montserrat">Karang Taruna</h3>
                             <p class="text-xs text-secondary">Tembalang</p>
@@ -359,32 +390,48 @@
                     <div class="flex space-x-4">
                         @if(isset($kontak) && $kontak)
                             @if($kontak->facebook)
-                                <a href="{{ $kontak->facebook }}" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-secondary/20 hover:bg-secondary/40 flex items-center justify-center transition-all duration-150 transform hover:scale-110 group" title="Facebook">
-                                    <svg class="w-5 h-5 text-secondary group-hover:text-accent transition-colors duration-150" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                <a href="{{ $kontak->facebook }}" target="_blank" rel="noopener noreferrer"
+                                    class="w-10 h-10 rounded-full bg-secondary/20 hover:bg-secondary/40 flex items-center justify-center transition-all duration-150 transform hover:scale-110 group"
+                                    title="Facebook">
+                                    <svg class="w-5 h-5 text-secondary group-hover:text-accent transition-colors duration-150"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                                     </svg>
                                 </a>
                             @endif
                             @if($kontak->twitter)
-                                <a href="{{ $kontak->twitter }}" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-secondary/20 hover:bg-secondary/40 flex items-center justify-center transition-all duration-150 transform hover:scale-110 group" title="Twitter">
-                                    <svg class="w-5 h-5 text-secondary group-hover:text-accent transition-colors duration-150" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2s9 5 20 5a9.5 9.5 0 00-9-5.5c4.75 2.25 9-7.27 9-7.27z"/>
+                                <a href="{{ $kontak->twitter }}" target="_blank" rel="noopener noreferrer"
+                                    class="w-10 h-10 rounded-full bg-secondary/20 hover:bg-secondary/40 flex items-center justify-center transition-all duration-150 transform hover:scale-110 group"
+                                    title="Twitter">
+                                    <svg class="w-5 h-5 text-secondary group-hover:text-accent transition-colors duration-150"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2s9 5 20 5a9.5 9.5 0 00-9-5.5c4.75 2.25 9-7.27 9-7.27z" />
                                     </svg>
                                 </a>
                             @endif
                             @if($kontak->instagram)
-                                <a href="{{ $kontak->instagram }}" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-secondary/20 hover:bg-secondary/40 flex items-center justify-center transition-all duration-150 transform hover:scale-110 group" title="Instagram">
-                                    <svg class="w-5 h-5 text-secondary group-hover:text-accent transition-colors duration-150" fill="currentColor" viewBox="0 0 24 24">
-                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
-                                        <path d="M16.5 7.5a1 1 0 0 0 0-2 1 1 0 0 0 0 2z" fill="currentColor"/>
-                                        <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <a href="{{ $kontak->instagram }}" target="_blank" rel="noopener noreferrer"
+                                    class="w-10 h-10 rounded-full bg-secondary/20 hover:bg-secondary/40 flex items-center justify-center transition-all duration-150 transform hover:scale-110 group"
+                                    title="Instagram">
+                                    <svg class="w-5 h-5 text-secondary group-hover:text-accent transition-colors duration-150"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor"
+                                            stroke-width="2" />
+                                        <path d="M16.5 7.5a1 1 0 0 0 0-2 1 1 0 0 0 0 2z" fill="currentColor" />
+                                        <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2" />
                                     </svg>
                                 </a>
                             @endif
                             @if($kontak->youtube)
-                                <a href="{{ $kontak->youtube }}" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-secondary/20 hover:bg-secondary/40 flex items-center justify-center transition-all duration-150 transform hover:scale-110 group" title="YouTube">
-                                    <svg class="w-5 h-5 text-secondary group-hover:text-accent transition-colors duration-150" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M19.615 3.175c-3.899-.369-11.369-.369-15.268 0-3.899.369-4.613 1.472-4.613 5.365v11.12c0 3.893.692 4.995 4.613 5.364 3.899.369 11.369.369 15.268 0 3.899-.369 4.613-1.471 4.613-5.364V8.54c0-3.893-.692-4.995-4.613-5.365zm-10.615 12.582v-11.391l11.344 5.727-11.344 5.664z"/>
+                                <a href="{{ $kontak->youtube }}" target="_blank" rel="noopener noreferrer"
+                                    class="w-10 h-10 rounded-full bg-secondary/20 hover:bg-secondary/40 flex items-center justify-center transition-all duration-150 transform hover:scale-110 group"
+                                    title="YouTube">
+                                    <svg class="w-5 h-5 text-secondary group-hover:text-accent transition-colors duration-150"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M19.615 3.175c-3.899-.369-11.369-.369-15.268 0-3.899.369-4.613 1.472-4.613 5.365v11.12c0 3.893.692 4.995 4.613 5.364 3.899.369 11.369.369 15.268 0 3.899-.369 4.613-1.471 4.613-5.364V8.54c0-3.893-.692-4.995-4.613-5.365zm-10.615 12.582v-11.391l11.344 5.727-11.344 5.664z" />
                                     </svg>
                                 </a>
                             @endif
@@ -423,52 +470,58 @@
                 <div class="col-span-1">
                     <h4 class="text-lg font-bold mb-4 text-secondary">Hubungi Kami</h4>
                     @if(isset($kontak) && $kontak)
-                    <div class="space-y-4">
-                        @if($kontak->alamat_sekretariat)
-                        <div class="flex items-start">
-                            <svg class="w-5 h-5 text-secondary mr-3 mt-1 flex-shrink-0" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                            <a href="https://www.google.com/maps/search/{{ urlencode($kontak->alamat_sekretariat) }}" target="_blank" rel="noopener noreferrer" class="text-gray-100 hover:text-secondary transition-colors duration-150 cursor-pointer">
-                                {{ $kontak->alamat_sekretariat }}
-                            </a>
+                        <div class="space-y-4">
+                            @if($kontak->alamat_sekretariat)
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-secondary mr-3 mt-1 flex-shrink-0" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                    <a href="https://www.google.com/maps/search/{{ urlencode($kontak->alamat_sekretariat) }}"
+                                        target="_blank" rel="noopener noreferrer"
+                                        class="text-gray-100 hover:text-secondary transition-colors duration-150 cursor-pointer">
+                                        {{ $kontak->alamat_sekretariat }}
+                                    </a>
+                                </div>
+                            @endif
+                            @if($kontak->telepon)
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 text-secondary mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 5a2 2 0 012-2h3.28a1 1 0 00.948-.684l1.498-4.493a1 1 0 011.502-.684l1.498 4.493a1 1 0 00.948.684H19a2 2 0 012 2v1M3 5h18v13a2 2 0 01-2 2H5a2 2 0 01-2-2V5z" />
+                                    </svg>
+                                    <a href="tel:{{ $kontak->telepon }}"
+                                        class="text-gray-100 hover:text-secondary transition-colors duration-150">{{ $kontak->telepon }}</a>
+                                </div>
+                            @endif
+                            @if($kontak->whatsapp)
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 text-secondary mr-3 flex-shrink-0" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                    <a href="mailto:{{ $kontak->email }}"
+                                        class="text-gray-100 hover:text-secondary transition-colors duration-150">{{ $kontak->email }}</a>
+                                </div>
+                            @endif
+                            @if($kontak->whatsapp)
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 text-secondary mr-3 flex-shrink-0" fill="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-5.031 1.378c-3.055 2.116-4.687 5.351-4.687 8.905 0 3.554 1.632 6.789 4.686 8.905 3.055 2.117 7.144 2.117 10.199 0 3.054-2.116 4.687-5.351 4.687-8.905 0-3.554-1.633-6.789-4.687-8.905a9.87 9.87 0 00-5.165-1.378zm0-1.932a11.88 11.88 0 0111.923 11.923c0 6.59-2.953 11.923-11.923 11.923C5.265 23.97.932 21.017.932 14.427.932 7.836 3.886 2.503 11.051 2.503z" />
+                                    </svg>
+                                    <a href="https://wa.me/{{ $kontak->whatsapp }}" target="_blank" rel="noopener noreferrer"
+                                        class="text-gray-100 hover:text-secondary transition-colors duration-150">Chat
+                                        WhatsApp</a>
+                                </div>
+                            @endif
                         </div>
-                        @endif
-                        @if($kontak->telepon)
-                        <div class="flex items-center">
-                            <svg class="w-5 h-5 text-secondary mr-3 flex-shrink-0" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 00.948-.684l1.498-4.493a1 1 0 011.502-.684l1.498 4.493a1 1 0 00.948.684H19a2 2 0 012 2v1M3 5h18v13a2 2 0 01-2 2H5a2 2 0 01-2-2V5z" />
-                            </svg>
-                            <a href="tel:{{ $kontak->telepon }}" class="text-gray-100 hover:text-secondary transition-colors duration-150">{{ $kontak->telepon }}</a>
-                        </div>
-                        @endif
-                        @if($kontak->whatsapp)
-                        <div class="flex items-center">
-                            <svg class="w-5 h-5 text-secondary mr-3 flex-shrink-0" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                            <a href="mailto:{{ $kontak->email }}" class="text-gray-100 hover:text-secondary transition-colors duration-150">{{ $kontak->email }}</a>
-                        </div>
-                        @endif
-                        @if($kontak->whatsapp)
-                        <div class="flex items-center">
-                            <svg class="w-5 h-5 text-secondary mr-3 flex-shrink-0" fill="currentColor"
-                                viewBox="0 0 24 24">
-                                <path
-                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-5.031 1.378c-3.055 2.116-4.687 5.351-4.687 8.905 0 3.554 1.632 6.789 4.686 8.905 3.055 2.117 7.144 2.117 10.199 0 3.054-2.116 4.687-5.351 4.687-8.905 0-3.554-1.633-6.789-4.687-8.905a9.87 9.87 0 00-5.165-1.378zm0-1.932a11.88 11.88 0 0111.923 11.923c0 6.59-2.953 11.923-11.923 11.923C5.265 23.97.932 21.017.932 14.427.932 7.836 3.886 2.503 11.051 2.503z" />
-                            </svg>
-                            <a href="https://wa.me/{{ $kontak->whatsapp }}" target="_blank" rel="noopener noreferrer" class="text-gray-100 hover:text-secondary transition-colors duration-150">Chat WhatsApp</a>
-                        </div>
-                        @endif
-                    </div>
                     @endif
                 </div>
 
@@ -476,24 +529,23 @@
                 <div class="col-span-1">
                     <h4 class="text-lg font-bold mb-4 text-secondary">Lokasi</h4>
                     @if(isset($kontak) && $kontak && $kontak->alamat_sekretariat)
-                    <div class="relative rounded-xl overflow-hidden shadow-lg mb-3 h-48 group grayscale hover:grayscale-0 transition-all duration-300 cursor-pointer">
-                        <iframe 
-                            src="{{ $kontak->maps_url ?? 'https://www.google.com/maps?q=' . urlencode($kontak->alamat_sekretariat) . '&output=embed' }}" 
-                            class="w-full h-full border-0 group-hover:saturate-150 transition-all duration-300" 
-                            allowfullscreen="" 
-                            loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
-                    </div>
-                    <a href="https://www.google.com/maps/search/{{ urlencode($kontak->alamat_sekretariat) }}"
-                        target="_blank" rel="noopener noreferrer"
-                        class="inline-block bg-secondary hover:bg-secondary/90 text-primary px-4 py-2 rounded-lg font-semibold transition-all duration-150 transform hover:scale-105">
-                        <svg class="w-4 h-4 inline mr-2" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M12 0C7.3 0 3.5 3.8 3.5 8.5c0 5.7 8.5 15.5 8.5 15.5s8.5-9.8 8.5-15.5C20.5 3.8 16.7 0 12 0z" />
-                        </svg>
-                        Buka Maps
-                    </a>
+                        <div
+                            class="relative rounded-xl overflow-hidden shadow-lg mb-3 h-48 group grayscale hover:grayscale-0 transition-all duration-300 cursor-pointer">
+                            <iframe
+                                src="{{ $kontak->maps_url ?? 'https://www.google.com/maps?q=' . urlencode($kontak->alamat_sekretariat) . '&output=embed' }}"
+                                class="w-full h-full border-0 group-hover:saturate-150 transition-all duration-300"
+                                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                        <a href="https://www.google.com/maps/search/{{ urlencode($kontak->alamat_sekretariat) }}"
+                            target="_blank" rel="noopener noreferrer"
+                            class="inline-block bg-secondary hover:bg-secondary/90 text-primary px-4 py-2 rounded-lg font-semibold transition-all duration-150 transform hover:scale-105">
+                            <svg class="w-4 h-4 inline mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 0C7.3 0 3.5 3.8 3.5 8.5c0 5.7 8.5 15.5 8.5 15.5s8.5-9.8 8.5-15.5C20.5 3.8 16.7 0 12 0z" />
+                            </svg>
+                            Buka Maps
+                        </a>
                     @endif
                 </div>
             </div>

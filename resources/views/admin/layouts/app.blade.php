@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Dashboard') - Admin CMS Karang Taruna</title>
     <!-- Favicon (explicit) - prefer PNG then ICO fallback -->
-    <link rel="icon" type="image/png" href="{{ asset('assets/logo.png') }}" />
+    @php
+        $adminFaviconPath = $profil->logo_path ? (preg_match('/^https?:\/\//i', $profil->logo_path) ? $profil->logo_path : asset('storage/' . $profil->logo_path)) : asset('favicon.ico');
+    @endphp
+    <link rel="icon" type="image/png" href="{{ htmlspecialchars($adminFaviconPath, ENT_QUOTES, 'UTF-8') }}" />
     <link rel="alternate icon" href="{{ asset('favicon.ico') }}" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 </head>
+
 <body class="bg-color_bg font-poppins" x-data="{ sidebarOpen: true }">
     <!-- Global Alert Component -->
     @include('admin.layouts.alert')
@@ -58,4 +63,5 @@
     @vite(['resources/js/form-validation.js'])
     <script src="//unpkg.com/alpinejs" defer></script>
 </body>
+
 </html>

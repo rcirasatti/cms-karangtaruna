@@ -147,7 +147,7 @@ class DatabaseSeeder extends Seeder
             [
                 'title' => 'Unsur Warna',
                 'description' => 'Putih: kesucian; Merah: keberanian, tenang, tekad pantang mundur; Kuning: keagungan & keluhuran budi.',
-                'icon' => 'palette',
+                'icon' => 'palet',
                 'urutan' => 6,
             ],
         ];

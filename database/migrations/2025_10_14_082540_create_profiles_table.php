@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('legalitas')->nullable();
             $table->text('sejarah');
             $table->text('profil_singkat');
-            $table->string('logo_path')->nullable();
+            $table->text('logo_path')->nullable();
             $table->text('filosofi_logo')->nullable();
             $table->timestamps();
         });
@@ -31,5 +31,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('profiles');
+
     }
 };
