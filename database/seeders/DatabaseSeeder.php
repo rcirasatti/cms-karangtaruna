@@ -115,33 +115,33 @@ class DatabaseSeeder extends Seeder
 
         $filosofiItems = [
             [
-                'title' => 'Teratai Mekar',
+                'title' => 'Sekuntum bunga teratai yang mulai mekar',
                 'description' => 'Melambangkan generasi muda yang berjiwa sosial. Terdiri dari tujuh kuntum: Taat, Tanggap, Tanggon, Tandas, Tangkas, Terampil, Tulus.',
-                'icon' => 'flower',
+                'icon' => 'teratai',
                 'urutan' => 1,
             ],
             [
-                'title' => 'Empat Helai Daun',
+                'title' => 'Empat helai daun bunga',
                 'description' => 'Memaknai 4 fungsi: memupuk kreativitas & tanggung jawab; membina kegiatan sosial-edukatif-ekoproduktif; mengembangkan harapan & kapasitas remaja; menanamkan & mengimplementasikan nilai Pancasila.',
-                'icon' => 'leaf',
+                'icon' => 'daun',
                 'urutan' => 2,
             ],
             [
-                'title' => 'Dua Helai Pita',
+                'title' => 'Dua helai pita terpampang di bagian atas dan bawah',
                 'description' => 'Pita atas: motto “Adhitya Karya Mahatva Yodha” (cerdas, berkarya, berbudi luhur, pejuang). Pita bawah: “Karang Taruna” sebagai wadah pengembangan remaja; bermakna generasi muda yang kokoh & tegar.',
-                'icon' => 'ribbon',
+                'icon' => 'pita',
                 'urutan' => 3,
             ],
             [
-                'title' => 'Lingkaran',
+                'title' => 'Sebuah lingkaran yang melingkari sekuntum bunga teratai dan dua pita',
                 'description' => 'Lambang ketahanan nasional; berfungsi sebagai tameng/perisai.',
-                'icon' => 'circle',
+                'icon' => 'lingkaran',
                 'urutan' => 4,
             ],
             [
-                'title' => 'Teratai Berdaun Lima',
+                'title' => 'Bunga teratai yang mekar berdaun lima helai sebagai latar belakang',
                 'description' => 'Melambangkan lingkaran kehidupan masyarakat yang adil dan sejahtera berdasarkan Pancasila.',
-                'icon' => 'lotus',
+                'icon' => 'teratai mekar',
                 'urutan' => 5,
             ],
             [

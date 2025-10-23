@@ -110,61 +110,36 @@
                                                      class="w-20 h-20 object-contain rounded-lg shadow-md">
                                             @else
                                                 @switch($item->icon)
-                                                    @case('fire')
-                                                        <svg class="w-20 h-20 text-secondary" fill="currentColor" viewBox="0 0 24 24">
-                                                            <path d="M12 2c1.5 2 4 4.5 4 7.5 0 2.5-1.5 4.5-4 4.5s-4-2-4-4.5c0-3 2.5-5.5 4-7.5zm-1 11c-.8 0-1.5.7-1.5 1.5S10.2 16 11 16s1.5-.7 1.5-1.5S11.8 13 11 13zm6-3c0-1.8-.9-3.5-2.4-4.5.3.8.4 1.6.4 2.5 0 3.3-2.7 6-6 6s-6-2.7-6-6c0-.9.1-1.7.4-2.5C2.9 6.5 2 8.2 2 10c0 4.4 3.6 8 8 8s8-3.6 8-8c0-1-.2-2-.6-2.9.4.9.6 1.9.6 2.9z"/>
-                                                        </svg>
+                                                    @case('teratai')
+                                                        <img src="{{ asset('assets/teratai.png') }}" 
+                                                             alt="teratai"
+                                                             class="w-20 h-20 object-contain rounded-lg shadow-md">
                                                         @break
-                                                    @case('sun')
-                                                        <svg class="w-20 h-20 text-secondary" fill="currentColor" viewBox="0 0 24 24">
-                                                            <path d="M12 18a6 6 0 100-12 6 6 0 000 12zm0-2a4 4 0 110-8 4 4 0 010 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/>
-                                                        </svg>
+                                                    @case('daun')
+                                                        <img src="{{ asset('assets/helai_daun.png') }}" 
+                                                             alt="helai daun"
+                                                             class="w-20 h-20 object-contain rounded-lg shadow-md">
                                                         @break
-                                                    @case('leaf')
-                                                        <svg class="w-20 h-20 text-secondary" fill="currentColor" viewBox="0 0 24 24">
-                                                            <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.66-1.89C6 20 6 20 7 19c1-1 4-4 4-6 0-1.66 1.34-3 3-3s3 1.34 3 3c0 2-3 5-4 6-1 1-1 1-1.11 1.11l.66 1.89 1.89-.66C19.1 16.17 17 10 8 8c2.82 0 5.11 2.29 5.11 5.11 0 .39-.06.79-.18 1.16C15.05 14.1 17 12.19 17 10c0-2.21-1.79-4-4-4zm-3 8.5c.28 0 .5.22.5.5s-.22.5-.5.5-.5-.22-.5-.5.22-.5.5-.5z"/>
-                                                        </svg>
+                                                    @case('pita')
+                                                        <img src="{{ asset('assets/pita.png') }}" 
+                                                             alt="pita"
+                                                             class="w-20 h-20 object-contain rounded-lg shadow-md">
                                                         @break
-                                                    @case('circle')
-                                                        <svg class="w-20 h-20 text-secondary" fill="currentColor" viewBox="0 0 24 24">
-                                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7z"/>
-                                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
-                                                        </svg>
+                                                    @case('lingkaran')
+                                                        <img src="{{ asset('assets/lingkaran.png') }}" 
+                                                             alt="lingkaran"
+                                                             class="w-20 h-20 object-contain rounded-lg shadow-md">
                                                         @break
-                                                    @case('flower')
-                                                        <svg class="w-20 h-20 text-secondary" fill="currentColor" viewBox="0 0 24 24">
-                                                            <path d="M12 2C9.24 2 7 4.24 7 7c0 1.28.48 2.44 1.27 3.32C7.48 11.2 7 12.36 7 13.64c0 2.76 2.24 5 5 5s5-2.24 5-5c0-1.28-.48-2.44-1.27-3.32C16.52 9.44 17 8.28 17 7c0-2.76-2.24-5-5-5zm0 14c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm0-10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
-                                                        </svg>
-                                                        @break
-                                                    @case('lotus')
-                                                        <svg class="w-20 h-20 text-secondary" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                                            <!-- Kelopak tengah -->
-                                                            <path d="M12 2c-2 2-3.5 4.5-3.5 7 0 1.5.5 2.9 1.3 4-1.9-.3-3.7-1.1-5.1-2.5 0 3.9 3.5 7 7.3 7s7.3-3.1 7.3-7c-1.4 1.4-3.2 2.2-5.1 2.5.8-1.1 1.3-2.5 1.3-4 0-2.5-1.5-5-3.5-7z"/>
-                                                            <!-- Daun bawah -->
-                                                            <path d="M7 14c1.5 1.2 3.3 2 5 2s3.5-.8 5-2c-1 3-3.5 5-5 6-1.5-1-4-3-5-6z"/>
-                                                        </svg>
+                                                    @case('teratai mekar')
+                                                        <img src="{{ asset('assets/bg.png') }}" 
+                                                             alt="teratai mekar"
+                                                             class="w-20 h-20 object-contain rounded-lg shadow-md">
                                                         @break
 
                                                     @case('palette')
-                                                        <svg class="w-20 h-20 text-secondary" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                                            <!-- Badan palet -->
-                                                            <path d="M12 3C7.1 3 3 6.9 3 11c0 4 3.1 7 7 7h1.5c1.4 0 2.5-1.1 2.5-2.5 0-.8-.4-1.5-1-2 .9 0 1.8-.3 2.5-.8 1.2-.9 2-2.3 2-3.9C17.5 5.7 14.9 3 12 3z"/>
-                                                            <!-- Lubang warna -->
-                                                            <circle cx="7.5" cy="10" r="1.3"/>
-                                                            <circle cx="10.5" cy="8.5" r="1.3"/>
-                                                            <circle cx="13.5" cy="9.5" r="1.3"/>
-                                                            <circle cx="16" cy="12" r="1.3"/>
-                                                        </svg>
-                                                        @break
-                                                    @case('ribbon')
-                                                        <svg class="w-20 h-20 text-secondary" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                                            <!-- Medali (lingkaran pita) -->
-                                                            <circle cx="12" cy="8" r="5"/>
-                                                            <!-- Ekor pita kiri -->
-                                                            <path d="M8 12l-3 8 4-2 3 2v-6z"/>
-                                                            <!-- Ekor pita kanan -->
-                                                            <path d="M16 12l3 8-4-2-3 2v-6z"/>
-                                                        </svg>
+                                                        <img src="{{ asset('assets/palet.png') }}" 
+                                                             alt="palet"
+                                                             class="w-20 h-20 object-contain rounded-lg shadow-md">
                                                         @break
                                                     @default
                                                         <svg class="w-20 h-20 text-secondary" fill="currentColor" viewBox="0 0 24 24">
