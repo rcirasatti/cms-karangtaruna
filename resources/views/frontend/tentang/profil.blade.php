@@ -42,7 +42,7 @@
         <div class="bg-white py-16">
             <div class="container mx-auto px-4">
                 <div class="grid lg:grid-cols-3 gap-8">
-                    <div class="lg:col-span-2 space-y-12 mr-15">
+                    <div class="lg:col-span-2 space-y-12 mr-0 md:mr-15">
                         <div>
                             <h2 class="text-3xl font-bold text-primary-800 mb-6 pb-3 border-b-4 border-secondary inline-block">
                                 Sejarah Karang Taruna
