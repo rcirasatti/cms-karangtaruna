@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\hero;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 
 class HeroController extends Controller
@@ -20,7 +21,10 @@ class HeroController extends Controller
             $hero = new hero();
         }
 
-        return view('admin.home.herosection', compact('hero'));
+        // Ambil data profile untuk logo
+        $profile = Profile::first();
+
+        return view('admin.home.herosection', compact('hero', 'profile'));
     }
 
     /**
