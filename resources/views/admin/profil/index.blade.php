@@ -47,8 +47,11 @@
                     <div class="m-4 md:m-20">
                         <div id="vision" class="relative flex flex-col md:flex-row mb-10 scroll-mt-24">
                             <div class="md:w-[400px] bg-gray-100 md:absolute shadow-xl hover:scale-105">
-                                <img src="{{ asset('storage/' . $profil->gambar_visi) }}" alt="Vision"
-                                    class="w-full h-full object-cover">
+                                @if($profil->gambar_visi)
+                                    <img src="{{ asset('storage/' . $profil->gambar_visi) }}" alt="Vision" class="w-full h-full object-cover">
+                                @else
+                                    <img src="{{ asset('images/default/default.jpg') }}" alt="Vision No Picture" class="w-full h-full object-cover">
+                                @endif
                             </div>
                             <div
                                 class="bg-gradient-to-br from-primary-700 via-primary-800 to-primary-700 py-16 px-8 md:px-16 md:rounded md:min-h-[400px] md:ml-[350px] md:pl-32 shadow-xl">
@@ -68,8 +71,11 @@
                                 </div>
                             </div>
                             <div class="md:w-[400px] bg-gray-100 md:absolute right-0 top-0 shadow-xl hover:scale-105">
-                                <img src="{{ asset('storage/' . $profil->gambar_misi) }}" alt="Mission"
-                                    class="w-full h-full object-cover">
+                                @if($profil->gambar_misi)
+                                    <img src="{{ asset('storage/' . $profil->gambar_misi) }}" alt="Mission" class="w-full h-full object-cover">
+                                @else
+                                    <img src="{{ asset('images/default/default.jpg') }}" alt="Mission No Picture" class="w-full h-full object-cover">
+                                @endif
                             </div>
                         </div>
 
