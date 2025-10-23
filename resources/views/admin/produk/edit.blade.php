@@ -125,13 +125,6 @@
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
                     </div>
-                                  placeholder="Tuliskan deskripsi produk yang menarik, spesifikasi, dan keunggulan produk..."
-                                  class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition font-poppins resize-none @error('deskripsi') border-red-500 @enderror">{{ old('deskripsi', $produk->deskripsi) }}</textarea>
-                        <p class="text-gray-500 text-xs mt-1.5">Maksimal 1000 karakter</p>
-                        @error('deskripsi')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
                 </div>
             </div>
 
