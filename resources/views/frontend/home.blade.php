@@ -106,7 +106,7 @@
                                     "{{ $q->quote }}"
                                 </p>
 
-                                <p class="text-sm font-semibold text-yellow-400">-{{ $q->nama }}</p>
+                                <p class="text-sm font-semibold text-yellow-400">{{ $q->nama }}</p>
                                 <p class="text-xs text-primary-200">{{ $q->peran }}</p>
                             </div>
                         </div>
