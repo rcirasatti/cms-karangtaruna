@@ -71,7 +71,7 @@
         <div class="relative">
             <!-- Quotes Container -->
             <div class="quote-carousel-wrapper overflow-hidden">
-                <div class="quote-carousel-track flex transition-transform duration-500 ease-in-out gap-8 pr-8">
+                <div class="quote-carousel-track flex {{ $quotes->count() > 2 ? 'transition-transform duration-500 ease-in-out' : '' }} gap-8 {{ $quotes->count() <= 2 ? 'justify-center' : 'pr-8' }}">
                     @foreach($quotes as $index => $q)
                     <div class="quote-item flex-shrink-0 w-full md:w-1/2" data-index="{{ $index }}">
                         <div class=" flex flex-col md:flex-row gap-6 backdrop-blur-sm rounded-lg p-6 items-center md:items-start">
@@ -393,7 +393,7 @@
             let quoteAutoPlayInterval;
             let isTransitioning = false;
 
-            if (quoteCarousel && quoteItems.length > 0) {
+            if (quoteCarousel && quoteItems.length > 2) {
                 function getItemWidth() {
                     const item = quoteItems[0];
                     const gap = 32; 
@@ -495,10 +495,7 @@
                 }
 
                 showQuoteSlide(0);
-
-                if (quoteItems.length >= 2) {
-                    startQuoteAutoPlay();
-                }
+                startQuoteAutoPlay();
 
                 let resizeTimeout;
                 window.addEventListener('resize', () => {
