@@ -40,25 +40,35 @@ php artisan db:seed --force 2>&1 || {
     echo "⚠️  Database seeding skipped"
 }
 
-# Clear all caches (but don't cache config to avoid Railway issues)
-echo "Clearing caches..."
+# Ensure storage directories exist
+echo "Creating storage directories..."
+mkdir -p storage/framework/cache/data
+mkdir -p storage/framework/sessions
+mkdir -p storage/framework/views
+mkdir -p storage/logs
+mkdir -p bootstrap/cache
+
+# Clear all caches to prevent any cached config issues
+echo "Clearing all caches..."
 php artisan config:clear 2>&1 || true
 php artisan cache:clear 2>&1 || true
 php artisan view:clear 2>&1 || true
 php artisan route:clear 2>&1 || true
+php artisan event:clear 2>&1 || true
 
 # Create storage link if it doesn't exist
 echo "Creating storage link..."
 php artisan storage:link 2>&1 || true
 
-# Optimize without config:cache (prevents Railway deployment issues)
-echo "Optimizing views and routes..."
-php artisan view:cache 2>&1 || true
-php artisan route:cache 2>&1 || true
-
 # Set proper permissions
 echo "Setting permissions..."
 chmod -R 775 storage bootstrap/cache 2>&1 || true
+
+# NOTE: We intentionally do NOT run these commands on Railway:
+# - php artisan config:cache (causes env variable issues)
+# - php artisan view:cache (can fail during build)
+# - php artisan route:cache (can fail without proper setup)
+# These optimizations are not critical for production and can cause deployment failures
 
 # Start server
 echo "==================================="

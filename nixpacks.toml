@@ -1,5 +1,6 @@
 [build]
 cmds = [
+  "mkdir -p storage/framework/views storage/framework/cache bootstrap/cache",
   "composer install --no-dev",
   "npm install",
   "npm run build || { echo 'Build failed'; exit 1; }"
