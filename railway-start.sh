@@ -40,13 +40,25 @@ php artisan db:seed --force 2>&1 || {
     echo "⚠️  Database seeding skipped"
 }
 
-# Optimize the app
-echo "Optimizing application..."
+# Clear all caches (but don't cache config to avoid Railway issues)
+echo "Clearing caches..."
 php artisan config:clear 2>&1 || true
 php artisan cache:clear 2>&1 || true
 php artisan view:clear 2>&1 || true
 php artisan route:clear 2>&1 || true
-php artisan config:cache 2>&1 || true
+
+# Create storage link if it doesn't exist
+echo "Creating storage link..."
+php artisan storage:link 2>&1 || true
+
+# Optimize without config:cache (prevents Railway deployment issues)
+echo "Optimizing views and routes..."
+php artisan view:cache 2>&1 || true
+php artisan route:cache 2>&1 || true
+
+# Set proper permissions
+echo "Setting permissions..."
+chmod -R 775 storage bootstrap/cache 2>&1 || true
 
 # Start server
 echo "==================================="
