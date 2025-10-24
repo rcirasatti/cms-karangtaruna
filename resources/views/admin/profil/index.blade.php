@@ -6,10 +6,10 @@
 @section('content')
 
     <div x-data="{
-                                                        visiMisiModalOpen: false,
-                                                        tujuanFungsiModalOpen: false,
-                                                        nilaiDasarModalOpen: false
-                                                    }" class="space-y-6">
+                                                                    visiMisiModalOpen: false,
+                                                                    tujuanFungsiModalOpen: false,
+                                                                    nilaiDasarModalOpen: false
+                                                                }" class="space-y-6">
         <!-- Header Card -->
         <div class="bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl shadow-lg p-8 text-white">
             <div class="flex items-center justify-between">
@@ -48,33 +48,41 @@
                         <div id="vision" class="relative flex flex-col md:flex-row mb-10 scroll-mt-24">
                             <div class="md:w-[400px] bg-gray-100 md:absolute shadow-xl hover:scale-105">
                                 @if($profil->gambar_visi)
-                                    <img src="{{ asset('storage/' . $profil->gambar_visi) }}" alt="Vision" class="w-full h-full object-cover">
+                                    <img src="{{ asset('storage/' . $profil->gambar_visi) }}" alt="Vision"
+                                        class="w-full h-full object-cover">
                                 @else
-                                    <img src="{{ asset('images/default/default.jpg') }}" alt="Vision No Picture" class="w-full h-full object-cover">
+                                    <img src="{{ asset('images/default/default.jpg') }}" alt="Vision No Picture"
+                                        class="w-full h-full object-cover">
                                 @endif
                             </div>
-                            <div
-                                class="bg-gradient-to-br from-primary-700 via-primary-800 to-primary-700 py-16 px-8 md:px-16 md:rounded md:min-h-[400px] md:ml-[350px] md:pl-32 shadow-xl">
-                                <h2 class="text-3xl font-bold text-secondary mb-10 uppercase tracking-wide">VISI</h2>
-                                <div class="text-gray-300 leading-relaxed text-base lg:text-lg">
-                                    <p class="whitespace-pre-line">{{ $profil->visi }}</p>
+                            <div class="w-full">
+                                <div
+                                    class="bg-gradient-to-br from-primary-700 via-primary-800 to-primary-700 py-16 px-8 md:px-16 md:rounded md:min-h-[400px] md:ml-[350px] md:pl-32 shadow-xl">
+                                    <h2 class="text-3xl font-bold text-secondary mb-10 uppercase tracking-wide">VISI</h2>
+                                    <div class="text-gray-300 leading-relaxed text-base lg:text-lg">
+                                        {!! \App\Helpers\TextHelper::formatList($profil->visi) !!}
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div id="mission" class="relative flex flex-col md:flex-row mb-20 scroll-mt-24">
-                            <div
-                                class="order-last bg-gradient-to-br from-primary-700 via-primary-800 to-primary-700 py-16 px-8 md:px-16 md:rounded md:min-h-[400px] md:mr-[350px] md:pr-32 shadow-xl">
-                                <h2 class="text-3xl font-bold text-secondary mb-10 uppercase tracking-wide">MISI</h2>
-                                <div class="text-gray-300 leading-relaxed text-base lg:text-lg">
-                                    <p class="whitespace-pre-line">{{ $profil->misi }}</p>
+                            <div class="w-full">
+                                <div
+                                    class="order-last bg-gradient-to-br from-primary-700 via-primary-800 to-primary-700 py-16 px-8 md:px-16 md:rounded md:min-h-[400px] md:mr-[350px] md:pr-32 shadow-xl">
+                                    <h2 class="text-3xl font-bold text-secondary mb-10 uppercase tracking-wide">MISI</h2>
+                                    <div class="text-gray-300 leading-relaxed text-base lg:text-lg">
+                                        {!! \App\Helpers\TextHelper::formatList($profil->misi) !!}
+                                    </div>
                                 </div>
                             </div>
                             <div class="md:w-[400px] bg-gray-100 md:absolute right-0 top-0 shadow-xl hover:scale-105">
                                 @if($profil->gambar_misi)
-                                    <img src="{{ asset('storage/' . $profil->gambar_misi) }}" alt="Mission" class="w-full h-full object-cover">
+                                    <img src="{{ asset('storage/' . $profil->gambar_misi) }}" alt="Mission"
+                                        class="w-full h-full object-cover">
                                 @else
-                                    <img src="{{ asset('images/default/default.jpg') }}" alt="Mission No Picture" class="w-full h-full object-cover">
+                                    <img src="{{ asset('images/default/default.jpg') }}" alt="Mission No Picture"
+                                        class="w-full h-full object-cover">
                                 @endif
                             </div>
                         </div>
@@ -122,8 +130,8 @@
                                             </div>
                                         </div>
                                         <div class="p-8">
-                                            <div class="text-gray-700 leading-relaxed text-base whitespace-pre-line">
-                                                {{ $profil->tujuan }}
+                                            <div class="text-gray-700 leading-relaxed text-base lg:text-lg">
+                                                {!! \App\Helpers\TextHelper::formatList($profil->tujuan) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -151,8 +159,8 @@
                                             </div>
                                         </div>
                                         <div class="p-8">
-                                            <div class="text-gray-700 leading-relaxed text-base whitespace-pre-line">
-                                                {{ $profil->fungsi }}
+                                            <div class="text-gray-700 leading-relaxed text-base lg:text-lg">
+                                                {!! \App\Helpers\TextHelper::formatList($profil->fungsi) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -194,7 +202,7 @@
                             </div>
                         @endif
 
-                        @if($profil->nilai_dasar)
+                        @if($profil->nilai_dasar && is_array($profil->nilai_dasar) && count($profil->nilai_dasar) > 0)
                             <div id="nilai-dasar" class="scroll-mt-24 relative">
                                 <!-- Edit Button for Nilai Dasar -->
                                 <button @click="nilaiDasarModalOpen = true"
@@ -234,12 +242,25 @@
                                             <div class="w-32 h-1 bg-secondary"></div>
                                         </div>
 
-                                        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 md:p-12 border border-white/20">
-                                            <div
-                                                class="text-white leading-relaxed text-base lg:text-lg whitespace-pre-line text-center max-w-5xl mx-auto">
-                                                {{ $profil->nilai_dasar }}
-                                            </div>
-                                        </div>
+                                        <div
+                                        class="text-white leading-relaxed text-base lg:text-lg text-{{ $visiMisi->nilai_dasar_align ?? 'left' }} max-w-5xl mx-auto">
+                                        <ul class="space-y-3 flex gap-4 flex-wrap justify-center">
+                                            @foreach($profil->nilai_dasar as $nilai)
+                                                <li class="flex items-start">
+                                                    <div
+                                                        class="flex bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-2 md:p-4">
+                                                        <svg class="w-6 h-6 text-secondary mr-3 mt-1 flex-shrink-0" fill="currentColor"
+                                                            viewBox="0 0 20 20">
+                                                            <path fill-rule="evenodd"
+                                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                                clip-rule="evenodd"></path>
+                                                        </svg>
+                                                        <span>{{ $nilai }}</span>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -284,6 +305,28 @@
 
                     <!-- Body -->
                     <div class="px-6 py-6 max-h-[70vh] overflow-y-auto">
+                        <!-- Info Box -->
+                        <div class="mb-4 p-4 bg-blue-50 border-l-4 border-blue-400 rounded">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <svg class="h-5 w-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm text-blue-700">
+                                        <strong>Tips:</strong> Untuk membuat list, gunakan format:
+                                    </p>
+                                    <ul class="text-xs text-blue-600 mt-1 ml-4">
+                                        <li>• Numbered list: <code>1. Item pertama</code>, <code>2. Item kedua</code></li>
+                                        <li>• Bullet list: <code>- Item</code> atau <code>* Item</code></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="grid md:grid-cols-2 gap-6">
                             <!-- Visi -->
                             <div>
@@ -314,7 +357,9 @@
                                     data-max-size="5242880">
                                 <p class="text-xs text-red-500 mt-1 font-medium">⚠️ Maksimal: 5 MB</p>
                                 @if($profil->gambar_visi)
-                                    <p class="text-xs text-gray-500 mt-1">Current: {{ basename('storage/'.$profil->gambar_visi) }}</p>
+                                    <p class="text-xs text-gray-500 mt-1">Current:
+                                        {{ basename('storage/' . $profil->gambar_visi) }}
+                                    </p>
                                 @endif
                             </div>
 
@@ -325,7 +370,9 @@
                                     data-max-size="5242880">
                                 <p class="text-xs text-red-500 mt-1 font-medium">⚠️ Maksimal: 5 MB</p>
                                 @if($profil->gambar_misi)
-                                    <p class="text-xs text-gray-500 mt-1">Current: {{ basename('storage/'.$profil->gambar_misi) }}</p>
+                                    <p class="text-xs text-gray-500 mt-1">Current:
+                                        {{ basename('storage/' . $profil->gambar_misi) }}
+                                    </p>
                                 @endif
                             </div>
                         </div>
@@ -385,6 +432,28 @@
 
                     <!-- Body -->
                     <div class="px-6 py-6 max-h-[70vh] overflow-y-auto">
+                        <!-- Info Box -->
+                        <div class="mb-4 p-4 bg-blue-50 border-l-4 border-blue-400 rounded">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <svg class="h-5 w-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm text-blue-700">
+                                        <strong>Tips:</strong> Untuk membuat list, gunakan format:
+                                    </p>
+                                    <ul class="text-xs text-blue-600 mt-1 ml-4">
+                                        <li>• Numbered list: <code>1. Item pertama</code>, <code>2. Item kedua</code></li>
+                                        <li>• Bullet list: <code>- Item</code> atau <code>* Item</code></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="grid md:grid-cols-2 gap-6">
                             <!-- Tujuan -->
                             <div>
@@ -411,7 +480,8 @@
                                     data-max-size="5242880">
                                 <p class="text-xs text-red-500 mt-1 font-medium">⚠️ Maksimal: 5 MB</p>
                                 @if($profil->gambar_tujuan)
-                                    <p class="text-xs text-gray-500 mt-1">Current: {{ basename('storage/'.$profil->gambar_tujuan) }}
+                                    <p class="text-xs text-gray-500 mt-1">Current:
+                                        {{ basename('storage/' . $profil->gambar_tujuan) }}
                                     </p>
                                 @endif
                             </div>
@@ -423,7 +493,8 @@
                                     data-max-size="5242880">
                                 <p class="text-xs text-red-500 mt-1 font-medium">⚠️ Maksimal: 5 MB</p>
                                 @if($profil->gambar_fungsi)
-                                    <p class="text-xs text-gray-500 mt-1">Current: {{ basename('storage/'.$profil->gambar_fungsi) }}
+                                    <p class="text-xs text-gray-500 mt-1">Current:
+                                        {{ basename('storage/' . $profil->gambar_fungsi) }}
                                     </p>
                                 @endif
                             </div>
@@ -456,7 +527,15 @@
                 class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-all duration-300"></div>
 
             <!-- Modal panel -->
-            <div x-show="nilaiDasarModalOpen" class="relative bg-white rounded-2xl shadow-xl max-w-3xl w-full">
+            <div x-show="nilaiDasarModalOpen" x-data="{
+                        nilaiDasarItems: {{ json_encode($profil->nilai_dasar ?? []) }},
+                        addNilaiDasar() {
+                            this.nilaiDasarItems.push('');
+                        },
+                        removeNilaiDasar(index) {
+                            this.nilaiDasarItems.splice(index, 1);
+                        }
+                    }" class="relative bg-white rounded-2xl shadow-xl max-w-3xl w-full">
                 <form action="{{ route('admin.profile.update', $profil->id ?? 1) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
@@ -483,13 +562,69 @@
                     </div>
 
                     <!-- Body -->
-                    <div class="px-6 py-6">
+                    <div class="px-6 py-6 max-h-[70vh] overflow-y-auto">
+                        <!-- Info Box -->
+                        <div class="mb-4 p-4 bg-blue-50 border-l-4 border-blue-400 rounded">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <svg class="h-5 w-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm text-blue-700">
+                                        <strong>Tips:</strong> Tambahkan nilai-nilai dasar organisasi satu per satu dengan
+                                        mengklik tombol "Tambah Nilai".
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
                         <div>
-                            <label for="nilai_dasar" class="block text-sm font-semibold text-gray-700 mb-2">Nilai
-                                Dasar</label>
-                            <textarea name="nilai_dasar" id="nilai_dasar" rows="8"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                placeholder="Masukkan nilai dasar organisasi...">{{ $profil->nilai_dasar }}</textarea>
+                            <label class="block text-sm font-semibold text-gray-700 mb-3">Nilai-Nilai Dasar</label>
+
+                            <!-- Dynamic Input Fields -->
+                            <div class="space-y-3 mb-4">
+                                <template x-for="(item, index) in nilaiDasarItems" :key="index">
+                                    <div class="flex gap-2">
+                                        <input type="text" :name="'nilai_dasar[' + index + ']'"
+                                            x-model="nilaiDasarItems[index]"
+                                            class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                            :placeholder="'Nilai dasar #' + (index + 1)">
+                                        <button type="button" @click="removeNilaiDasar(index)"
+                                            class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors flex items-center">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </template>
+
+                                <!-- Empty State -->
+                                <div x-show="nilaiDasarItems.length === 0" class="text-center py-8 text-gray-500">
+                                    <svg class="w-16 h-16 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                        </path>
+                                    </svg>
+                                    <p>Belum ada nilai dasar. Klik tombol di bawah untuk menambahkan.</p>
+                                </div>
+                            </div>
+
+                            <!-- Add Button -->
+                            <button type="button" @click="addNilaiDasar()"
+                                class="w-full px-4 py-2 bg-green-500 hover:bg-green-600 text-white font-medium rounded-lg transition-colors flex items-center justify-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                </svg>
+                                Tambah Nilai
+                            </button>
                         </div>
                     </div>
 

@@ -43,7 +43,18 @@ class DatabaseSeeder extends Seeder
             'misi' => "1. Mengembangkan potensi pemuda melalui pelatihan dan pendampingan\n2. Memberdayakan masyarakat melalui program-program sosial\n3. Membangun karakter pemuda yang berintegritas dan berprestasi\n4. Menciptakan jejaring kerjasama dengan berbagai pihak",
             'tujuan' => "1. Meningkatkan kualitas SDM pemuda\n2. Menciptakan pemuda yang mandiri dan produktif\n3. Membangun kesadaran sosial di kalangan pemuda",
             'fungsi' => "1. Wadah pembinaan dan pengembangan generasi muda\n2. Penyelenggara kesejahteraan sosial\n3. Pencegahan dan penanggulangan masalah sosial",
-            'nilai_dasar' => "1. Integritas\n2. Profesionalisme\n3. Kerjasama\n4. Inovasi\n5. Tanggung Jawab Sosial"
+            'nilai_dasar' => [
+                'Gotong Royong',
+                'Kepedulian Sosial',
+                'Tanggung Jawab',
+                'Kemandirian',
+                'Kejujuran dan Integritas',
+                'Kedisiplinan',
+                'Solidaritas dan Kebersamaan',
+                'Kreativitas dan Inovasi',
+                'Semangat Kepemudaan',
+                'Religius dan Beretika',
+            ]
         ]);
 
         // Create Kepengurusan

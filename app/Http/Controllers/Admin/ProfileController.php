@@ -20,7 +20,7 @@ class ProfileController extends Controller
             'misi' => '',
             'tujuan' => '',
             'fungsi' => '',
-            'nilai_dasar' => '',
+            'nilai_dasar' => [],
             'gambar_visi' => '',
             'gambar_misi' => '',
             'gambar_tujuan' => '',
@@ -71,7 +71,13 @@ class ProfileController extends Controller
                 'misi' => 'nullable|string',
                 'tujuan' => 'nullable|string',
                 'fungsi' => 'nullable|string',
-                'nilai_dasar' => 'nullable|string',
+                'nilai_dasar' => 'nullable|array',
+                'nilai_dasar.*' => 'nullable|string',
+                'visi_align' => 'nullable|in:left,center,right,justify',
+                'misi_align' => 'nullable|in:left,center,right,justify',
+                'tujuan_align' => 'nullable|in:left,center,right,justify',
+                'fungsi_align' => 'nullable|in:left,center,right,justify',
+                'nilai_dasar_align' => 'nullable|in:left,center,right,justify',
                 'gambar_visi' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
                 'gambar_misi' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
                 'gambar_tujuan' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
@@ -94,7 +100,28 @@ class ProfileController extends Controller
                 $profil->fungsi = $request->fungsi;
             }
             if ($request->has('nilai_dasar')) {
-                $profil->nilai_dasar = $request->nilai_dasar;
+                // Filter out empty values
+                $nilaiDasar = array_filter($request->nilai_dasar, function ($value) {
+                    return !empty(trim($value));
+                });
+                $profil->nilai_dasar = array_values($nilaiDasar);
+            }
+
+            // Update alignment fields
+            if ($request->has('visi_align')) {
+                $profil->visi_align = $request->visi_align;
+            }
+            if ($request->has('misi_align')) {
+                $profil->misi_align = $request->misi_align;
+            }
+            if ($request->has('tujuan_align')) {
+                $profil->tujuan_align = $request->tujuan_align;
+            }
+            if ($request->has('fungsi_align')) {
+                $profil->fungsi_align = $request->fungsi_align;
+            }
+            if ($request->has('nilai_dasar_align')) {
+                $profil->nilai_dasar_align = $request->nilai_dasar_align;
             }
 
             if ($request->hasFile('gambar_visi')) {
