@@ -15,6 +15,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
+        $profile = VisiMisi::first();
         $profil = VisiMisi::first() ?? VisiMisi::create([
             'visi' => '',
             'misi' => '',
@@ -27,7 +28,7 @@ class ProfileController extends Controller
             'gambar_fungsi' => '',
         ]);
 
-        return view('admin.profil.index', compact('profil'));
+        return view('admin.profil.index', compact('profil', 'profile'));
     }
 
 

@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Dashboard') - Admin CMS Karang Taruna</title>
-    <!-- Favicon (explicit) - prefer PNG then ICO fallback -->
     @php
-        $adminFaviconPath = $profil->logo_path ? (preg_match('/^https?:\/\//i', $profil->logo_path) ? $profil->logo_path : asset('storage/' . $profil->logo_path)) : asset('favicon.ico');
+        $adminFaviconPath = $profile->logo_path ? (preg_match('/^https?:\/\//i', $profile->logo_path) ? $profile->logo_path : asset('storage/' . $profile->logo_path)) : asset('favicon.ico');
     @endphp
     <link rel="icon" type="image/png" href="{{ htmlspecialchars($adminFaviconPath, ENT_QUOTES, 'UTF-8') }}" />
     <link rel="alternate icon" href="{{ asset('favicon.ico') }}" />
