@@ -1,7 +1,8 @@
 [build]
 cmds = [
-  "mkdir -p storage/framework/views storage/framework/cache bootstrap/cache",
-  "composer install --no-dev",
+  "mkdir -p storage/framework/views storage/framework/cache storage/framework/sessions storage/logs bootstrap/cache",
+  "composer install --no-dev --no-scripts",
+  "php artisan package:discover --ansi",
   "npm install",
   "npm run build || { echo 'Build failed'; exit 1; }"
 ]
