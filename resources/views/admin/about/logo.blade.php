@@ -332,8 +332,10 @@
                                     id="logo_path"
                                     name="logo_path"
                                     accept="image/*"
+                                    data-max-size="5242880"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent font-poppins @error('logo_path') border-red-500 @enderror"
                                 >
+                                <p class="text-xs text-red-500 mt-1 font-medium">⚠️ Maksimal: 5 MB</p>
                                 <p class="mt-2 text-sm text-gray-500">
                                     <svg class="w-4 h-4 inline-block text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -493,8 +495,9 @@
                                                 <input type="file"
                                                        :name="'filosofi_items[' + index + '][gambar]'"
                                                        accept="image/*"
+                                                       data-max-size="5242880"
                                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
-                                                <p class="mt-1 text-xs text-gray-500">Format: JPG, PNG, GIF. Maksimal 2MB</p>
+                                                <p class="text-xs text-red-500 mt-1 font-medium">⚠️ Maksimal: 5 MB</p>
                                                 
                                                 <!-- Show current image if exists -->
                                                 <template x-if="item.gambar">

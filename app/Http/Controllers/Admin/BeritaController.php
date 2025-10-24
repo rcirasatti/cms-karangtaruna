@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Berita;
+use App\Helpers\ImageCompressor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
@@ -44,14 +45,16 @@ class BeritaController extends Controller
             ], $this->validationMessages(), $this->validationAttributes());
 
             if ($request->hasFile('thumbnail')) {
-                $thumbnailPath = $request->file('thumbnail')->store('berita-thumbnail', 'public');
-                $validated['thumbnail'] = $thumbnailPath;
+                $validated['thumbnail'] = ImageCompressor::compressToWebp(
+                    $request->file('thumbnail'),
+                    'berita-thumbnail'
+                );
             }
 
             $mediaPaths = [];
             if ($request->hasFile('media_path')) {
                 foreach ($request->file('media_path') as $file) {
-                    $mediaPaths[] = $file->store('berita-media', 'public');
+                    $mediaPaths[] = ImageCompressor::compressToWebp($file, 'berita-media');
                 }
             }
             $validated['media_path'] = !empty($mediaPaths) ? $mediaPaths : null;
@@ -106,8 +109,10 @@ class BeritaController extends Controller
                 if ($berita->thumbnail && Storage::disk('public')->exists($berita->thumbnail)) {
                     Storage::disk('public')->delete($berita->thumbnail);
                 }
-                $thumbnailPath = $request->file('thumbnail')->store('berita-thumbnail', 'public');
-                $validated['thumbnail'] = $thumbnailPath;
+                $validated['thumbnail'] = ImageCompressor::compressToWebp(
+                    $request->file('thumbnail'),
+                    'berita-thumbnail'
+                );
             }
 
             if ($request->hasFile('media_path')) {
@@ -122,7 +127,7 @@ class BeritaController extends Controller
                 
                 $mediaPaths = [];
                 foreach ($request->file('media_path') as $file) {
-                    $mediaPaths[] = $file->store('berita-media', 'public');
+                    $mediaPaths[] = ImageCompressor::compressToWebp($file, 'berita-media');
                 }
                 $validated['media_path'] = $mediaPaths;
             }

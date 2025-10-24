@@ -157,12 +157,14 @@
                                        name="foto"
                                        accept="image/*"
                                        class="hidden"
-                                       @change="previewUrl = URL.createObjectURL($event.target.files[0]); fileName = $event.target.files[0]?.name || ''">
+                                       @change="previewUrl = URL.createObjectURL($event.target.files[0]); fileName = $event.target.files[0]?.name || ''"
+                                       data-max-size="5242880">
                                 <div class="bg-white rounded-xl border-2 border-dashed border-primary-300 hover:border-primary-500 hover:bg-primary-50 p-6 text-center cursor-pointer transition duration-200">
                                     <svg class="w-10 h-10 mx-auto text-primary-500 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                     </svg>
                                     <p class="text-sm font-semibold text-gray-700">Klik untuk ganti foto</p>
+                                    <p class="text-xs text-red-500 mt-1 font-medium">⚠️ Maksimal: 5 MB</p>
                                     <p x-show="fileName" x-cloak class="text-xs text-primary-600 mt-2 font-semibold">
                                         ✓ <span x-text="fileName"></span>
                                     </p>
@@ -216,13 +218,16 @@
                                        "
                                        multiple
                                        accept="image/*"
-                                       class="hidden">
+                                       class="hidden"
+                                       data-max-size="5242880"
+                                       data-max-total="52428800">
                                 <div class="bg-white rounded-xl border-2 border-dashed border-primary-300 hover:border-primary-500 hover:bg-primary-50 p-6 text-center cursor-pointer transition duration-200">
                                     <svg class="w-10 h-10 mx-auto text-primary-500 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                     </svg>
                                     <p class="text-sm font-semibold text-gray-700">Klik untuk upload gambar baru</p>
                                     <p class="text-xs text-gray-500 mt-1">Multiple gambar bisa</p>
+                                    <p class="text-xs text-red-500 mt-1 font-medium">⚠️ Maksimal per file: 5 MB | Total: 50 MB</p>
                                     <p x-show="galleries.length > 0" x-cloak class="text-xs text-primary-600 mt-2 font-semibold">
                                         ✓ <span x-text="galleries.length"></span> gambar
                                     </p>
@@ -255,12 +260,7 @@
                                 </svg>
                                 <span>Format: JPG, PNG, GIF</span>
                             </li>
-                            <li class="flex items-start">
-                                <svg class="w-3.5 h-3.5 mr-2 text-primary-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span>Ukuran max: 2 MB</span>
-                            </li>
+                           
                         </ul>
                     </div>
 

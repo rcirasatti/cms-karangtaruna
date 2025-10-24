@@ -310,7 +310,9 @@
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Gambar Visi</label>
                                 <input type="file" name="gambar_visi" accept="image/*"
-                                    class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                                    class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                                    data-max-size="5242880">
+                                <p class="text-xs text-red-500 mt-1 font-medium">⚠️ Maksimal: 5 MB</p>
                                 @if($profil->gambar_visi)
                                     <p class="text-xs text-gray-500 mt-1">Current: {{ basename('storage/'.$profil->gambar_visi) }}</p>
                                 @endif
@@ -319,7 +321,9 @@
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Gambar Misi</label>
                                 <input type="file" name="gambar_misi" accept="image/*"
-                                    class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                                    class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                                    data-max-size="5242880">
+                                <p class="text-xs text-red-500 mt-1 font-medium">⚠️ Maksimal: 5 MB</p>
                                 @if($profil->gambar_misi)
                                     <p class="text-xs text-gray-500 mt-1">Current: {{ basename('storage/'.$profil->gambar_misi) }}</p>
                                 @endif
@@ -403,7 +407,9 @@
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Gambar Tujuan</label>
                                 <input type="file" name="gambar_tujuan" accept="image/*"
-                                    class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                                    class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                                    data-max-size="5242880">
+                                <p class="text-xs text-red-500 mt-1 font-medium">⚠️ Maksimal: 5 MB</p>
                                 @if($profil->gambar_tujuan)
                                     <p class="text-xs text-gray-500 mt-1">Current: {{ basename('storage/'.$profil->gambar_tujuan) }}
                                     </p>
@@ -413,7 +419,9 @@
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Gambar Fungsi</label>
                                 <input type="file" name="gambar_fungsi" accept="image/*"
-                                    class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                                    class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                                    data-max-size="5242880">
+                                <p class="text-xs text-red-500 mt-1 font-medium">⚠️ Maksimal: 5 MB</p>
                                 @if($profil->gambar_fungsi)
                                     <p class="text-xs text-gray-500 mt-1">Current: {{ basename('storage/'.$profil->gambar_fungsi) }}
                                     </p>

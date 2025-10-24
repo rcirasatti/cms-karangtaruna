@@ -565,8 +565,10 @@
 
                             <div class="relative">
                                 <input type="file" id="foto" name="foto" accept="image/*"
+                                    data-max-size="5242880"
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
                                     onchange="previewQuoteImage(event)">
+                                <p class="text-xs text-red-500 mt-1 font-medium">⚠️ Maksimal: 5 MB</p>
                                 <p class="mt-2 text-xs text-gray-500">
                                     Format: JPG, PNG, JPEG. Maksimal 2MB. <span x-show="quoteModalMode === 'edit'">Kosongkan jika tidak ingin mengubah foto.</span>
                                 </p>

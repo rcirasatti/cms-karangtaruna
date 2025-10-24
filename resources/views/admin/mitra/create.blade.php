@@ -158,6 +158,7 @@
                             <input type="file"
                                    name="logo"
                                    accept="image/*"
+                                   data-max-size="5242880"
                                    class="hidden"
                                    @change="fileName = $event.target.files[0]?.name || ''">
                             <div class="bg-white rounded-xl border-2 border-dashed border-blue-300 hover:border-blue-500 hover:bg-blue-50 p-6 text-center cursor-pointer transition duration-200">
@@ -172,6 +173,9 @@
                             </div>
                         </label>
 
+                        <!-- File Size Warning -->
+                        <p class="text-xs text-red-500 mt-1 font-medium">⚠️ Maksimal: 5 MB</p>
+
                         <!-- Info Box -->
                         <div class="bg-white/70 rounded-lg p-3.5 space-y-2 border border-blue-200">
                             <p class="text-xs font-semibold text-gray-700">📋 Persyaratan File:</p>
@@ -182,12 +186,7 @@
                                     </svg>
                                     <span>Format: JPG, PNG, GIF</span>
                                 </li>
-                                <li class="flex items-start">
-                                    <svg class="w-3.5 h-3.5 mr-2 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                                    </svg>
-                                    <span>Ukuran max: 2 MB</span>
-                                </li>
+                               
                                 <li class="flex items-start">
                                     <svg class="w-3.5 h-3.5 mr-2 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>

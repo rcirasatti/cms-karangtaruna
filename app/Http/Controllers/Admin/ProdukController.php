@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Produk;
+use App\Helpers\ImageCompressor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -42,14 +43,16 @@ class ProdukController extends Controller
             ], $this->validationMessages(), $this->validationAttributes());
 
             if ($request->hasFile('foto')) {
-                $fotoPath = $request->file('foto')->store('produk-fotos', 'public');
-                $validated['foto'] = $fotoPath;
+                $validated['foto'] = ImageCompressor::compressToWebp(
+                    $request->file('foto'),
+                    'produk-fotos'
+                );
             }
 
             $galeriPaths = [];
             if ($request->hasFile('galeri')) {
                 foreach ($request->file('galeri') as $file) {
-                    $galeriPaths[] = $file->store('produk-galeri', 'public');
+                    $galeriPaths[] = ImageCompressor::compressToWebp($file, 'produk-galeri');
                 }
             }
             $validated['galeri'] = !empty($galeriPaths) ? $galeriPaths : null;
@@ -107,8 +110,10 @@ class ProdukController extends Controller
                 if ($produk->foto && Storage::disk('public')->exists($produk->foto)) {
                     Storage::disk('public')->delete($produk->foto);
                 }
-                $fotoPath = $request->file('foto')->store('produk-fotos', 'public');
-                $validated['foto'] = $fotoPath;
+                $validated['foto'] = ImageCompressor::compressToWebp(
+                    $request->file('foto'),
+                    'produk-fotos'
+                );
             }
 
             if ($request->hasFile('galeri')) {
@@ -123,7 +128,7 @@ class ProdukController extends Controller
                 
                 $galeriPaths = [];
                 foreach ($request->file('galeri') as $file) {
-                    $galeriPaths[] = $file->store('produk-galeri', 'public');
+                    $galeriPaths[] = ImageCompressor::compressToWebp($file, 'produk-galeri');
                 }
                 $validated['galeri'] = $galeriPaths;
             }

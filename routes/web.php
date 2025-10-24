@@ -9,6 +9,30 @@ use App\Http\Controllers\Frontend\ProdukController;
 use App\Http\Controllers\Frontend\KontakController;
 use App\Http\Controllers\Frontend\GaleriController;
 
+// Test GD and Intervention Image
+Route::get('/test-gd', function () {
+    $output = [];
+    
+    $output['gd_loaded'] = extension_loaded('gd') ? 'YES ✓' : 'NO ✗';
+    
+    if (extension_loaded('gd')) {
+        $info = gd_info();
+        $output['webp_support'] = isset($info['WebP Support']) && $info['WebP Support'] ? 'YES ✓' : 'NO ✗';
+        $output['gd_version'] = $info['GD Version'] ?? 'Unknown';
+    }
+    
+    try {
+        $manager = new \Intervention\Image\ImageManager(
+            new \Intervention\Image\Drivers\Gd\Driver()
+        );
+        $output['intervention_loaded'] = 'YES ✓';
+    } catch (\Exception $e) {
+        $output['intervention_error'] = $e->getMessage();
+    }
+    
+    return response()->json($output, 200, [], JSON_PRETTY_PRINT);
+});
+
 // Frontend Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 

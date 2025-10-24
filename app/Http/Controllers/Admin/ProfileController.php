@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\VisiMisi;
+use App\Helpers\ImageCompressor;
 use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
@@ -101,8 +102,10 @@ class ProfileController extends Controller
                 if ($profil->gambar_visi && Storage::disk('public')->exists($profil->gambar_visi)) {
                     Storage::disk('public')->delete($profil->gambar_visi);
                 }
-                $fotoPath = $request->file('gambar_visi')->store('profil-gambar', 'public');
-                $profil->gambar_visi = $fotoPath;
+                $profil->gambar_visi = ImageCompressor::compressToWebp(
+                    $request->file('gambar_visi'),
+                    'profil-gambar'
+                );
             }
 
             if ($request->hasFile('gambar_misi')) {
@@ -110,8 +113,10 @@ class ProfileController extends Controller
                 if ($profil->gambar_misi && Storage::disk('public')->exists($profil->gambar_misi)) {
                     Storage::disk('public')->delete($profil->gambar_misi);
                 }
-                $fotoPath = $request->file('gambar_misi')->store('profil-gambar', 'public');
-                $profil->gambar_misi = $fotoPath;
+                $profil->gambar_misi = ImageCompressor::compressToWebp(
+                    $request->file('gambar_misi'),
+                    'profil-gambar'
+                );
             }
 
             // Handle gambar_tujuan upload
@@ -120,8 +125,10 @@ class ProfileController extends Controller
                 if ($profil->gambar_tujuan && Storage::disk('public')->exists($profil->gambar_tujuan)) {
                     Storage::disk('public')->delete($profil->gambar_tujuan);
                 }
-                $fotoPath = $request->file('gambar_tujuan')->store('profil-gambar', 'public');
-                $profil->gambar_tujuan = $fotoPath;
+                $profil->gambar_tujuan = ImageCompressor::compressToWebp(
+                    $request->file('gambar_tujuan'),
+                    'profil-gambar'
+                );
             }
 
             if ($request->hasFile('gambar_fungsi')) {
@@ -129,8 +136,10 @@ class ProfileController extends Controller
                 if ($profil->gambar_fungsi && Storage::disk('public')->exists($profil->gambar_fungsi)) {
                     Storage::disk('public')->delete($profil->gambar_fungsi);
                 }
-                $fotoPath = $request->file('gambar_fungsi')->store('profil-gambar', 'public');
-                $profil->gambar_fungsi = $fotoPath;
+                $profil->gambar_fungsi = ImageCompressor::compressToWebp(
+                    $request->file('gambar_fungsi'),
+                    'profil-gambar'
+                );
             }
 
             $profil->save();

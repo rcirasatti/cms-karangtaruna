@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Mitra;
+use App\Helpers\ImageCompressor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -42,8 +43,10 @@ class MitraController extends Controller
             ], $this->validationMessages(), $this->validationAttributes());
 
             if ($request->hasFile('logo')) {
-                $logoPath = $request->file('logo')->store('mitra-logos', 'public');
-                $validated['logo'] = $logoPath;
+                $validated['logo'] = ImageCompressor::compressToWebp(
+                    $request->file('logo'),
+                    'mitra-logos'
+                );
             }
 
             Mitra::create($validated);
@@ -99,8 +102,10 @@ class MitraController extends Controller
                 if ($mitra->logo && Storage::disk('public')->exists($mitra->logo)) {
                     Storage::disk('public')->delete($mitra->logo);
                 }
-                $logoPath = $request->file('logo')->store('mitra-logos', 'public');
-                $validated['logo'] = $logoPath;
+                $validated['logo'] = ImageCompressor::compressToWebp(
+                    $request->file('logo'),
+                    'mitra-logos'
+                );
             }
 
             $mitra->update($validated);

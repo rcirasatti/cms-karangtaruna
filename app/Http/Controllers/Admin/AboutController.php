@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Profile;
 use App\Models\FilosofiLogoItem;
 use App\Models\Quote;
+use App\Helpers\ImageCompressor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -68,17 +69,17 @@ class AboutController extends Controller
         // Handle logo upload or URL
         if ($request->hasFile('logo_path')) {
             // Delete old logo if exists and it's not a URL
-            if ($profile->logo_path && !preg_match('/^https?:\/\//i', $profile->logo_path) && \Storage::disk('public')->exists($profile->logo_path)) {
-                \Storage::disk('public')->delete($profile->logo_path);
+            if ($profile->logo_path && !preg_match('/^https?:\/\//i', $profile->logo_path) && Storage::disk('public')->exists($profile->logo_path)) {
+                Storage::disk('public')->delete($profile->logo_path);
             }
 
-            // Store new logo
-            $logoPath = $request->file('logo_path')->store('logos', 'public');
+            // Store new logo as WebP
+            $logoPath = ImageCompressor::compressToWebp($request->file('logo_path'), 'logos');
             $data['logo_path'] = $logoPath;
         } elseif ($request->filled('logo_url')) {
             // Delete old logo if exists and it's not a URL
-            if ($profile->logo_path && !preg_match('/^https?:\/\//i', $profile->logo_path) && \Storage::disk('public')->exists($profile->logo_path)) {
-                \Storage::disk('public')->delete($profile->logo_path);
+            if ($profile->logo_path && !preg_match('/^https?:\/\//i', $profile->logo_path) && Storage::disk('public')->exists($profile->logo_path)) {
+                Storage::disk('public')->delete($profile->logo_path);
             }
 
             // Save URL directly
@@ -99,8 +100,8 @@ class AboutController extends Controller
             $itemsToDelete = FilosofiLogoItem::whereNotIn('id', $requestItemIds)->get();
             foreach ($itemsToDelete as $item) {
                 // Delete associated image if exists
-                if ($item->gambar && \Storage::disk('public')->exists($item->gambar)) {
-                    \Storage::disk('public')->delete($item->gambar);
+                if ($item->gambar && Storage::disk('public')->exists($item->gambar)) {
+                    Storage::disk('public')->delete($item->gambar);
                 }
                 $item->delete();
             }
@@ -127,12 +128,12 @@ class AboutController extends Controller
                         // Delete old image if updating existing item
                         if (isset($itemData['id']) && $itemData['id']) {
                             $existingItem = FilosofiLogoItem::find($itemData['id']);
-                            if ($existingItem && $existingItem->gambar && \Storage::disk('public')->exists($existingItem->gambar)) {
-                                \Storage::disk('public')->delete($existingItem->gambar);
+                            if ($existingItem && $existingItem->gambar && Storage::disk('public')->exists($existingItem->gambar)) {
+                                Storage::disk('public')->delete($existingItem->gambar);
                             }
                         }
 
-                        $imagePath = $request->file("filosofi_items.{$index}.gambar")->store('filosofi', 'public');
+                        $imagePath = ImageCompressor::compressToWebp($request->file("filosofi_items.{$index}.gambar"), 'filosofi');
                         $data['gambar'] = $imagePath;
                     }
                 }
@@ -142,8 +143,8 @@ class AboutController extends Controller
                     $item = FilosofiLogoItem::find($itemData['id']);
                     if ($item) {
                         // If changing from image to icon, delete old image
-                        if ($useIcon && $item->gambar && \Storage::disk('public')->exists($item->gambar)) {
-                            \Storage::disk('public')->delete($item->gambar);
+                        if ($useIcon && $item->gambar && Storage::disk('public')->exists($item->gambar)) {
+                            Storage::disk('public')->delete($item->gambar);
                         }
                         $item->update($data);
                     }
@@ -156,8 +157,8 @@ class AboutController extends Controller
             // If no items in request, delete all items and their images
             $allItems = FilosofiLogoItem::all();
             foreach ($allItems as $item) {
-                if ($item->gambar && \Storage::disk('public')->exists($item->gambar)) {
-                    \Storage::disk('public')->delete($item->gambar);
+                if ($item->gambar && Storage::disk('public')->exists($item->gambar)) {
+                    Storage::disk('public')->delete($item->gambar);
                 }
                 $item->delete();
             }
@@ -287,8 +288,8 @@ class AboutController extends Controller
                 Storage::disk('public')->delete($quote->foto);
             }
 
-            // Upload foto baru
-            $fotoPath = $request->file('foto')->store('quote-fotos', 'public');
+            // Upload foto baru as WebP
+            $fotoPath = ImageCompressor::compressToWebp($request->file('foto'), 'quote-fotos');
             $data['foto'] = $fotoPath;
         }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kepengurusan;
+use App\Helpers\ImageCompressor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -45,8 +46,10 @@ class KepengurusanController extends Controller
 
         // Handle foto upload
         if ($request->hasFile('foto')) {
-            $fotoPath = $request->file('foto')->store('pengurus-fotos', 'public');
-            $validated['foto'] = $fotoPath;
+            $validated['foto'] = ImageCompressor::compressToWebp(
+                $request->file('foto'),
+                'pengurus-fotos'
+            );
         }
 
         // Set default value for is_tokoh_utama if not provided
@@ -107,8 +110,10 @@ class KepengurusanController extends Controller
                 if ($pengurus->foto && Storage::disk('public')->exists($pengurus->foto)) {
                     Storage::disk('public')->delete($pengurus->foto);
                 }
-                $fotoPath = $request->file('foto')->store('pengurus-fotos', 'public');
-                $validated['foto'] = $fotoPath;
+                $validated['foto'] = ImageCompressor::compressToWebp(
+                    $request->file('foto'),
+                    'pengurus-fotos'
+                );
             }
 
             // Set value for is_tokoh_utama
