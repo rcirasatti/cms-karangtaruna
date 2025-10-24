@@ -32,9 +32,11 @@ class AppServiceProvider extends ServiceProvider
         // Share kontak and navbar data to all views (only in HTTP requests, not console commands)
         if (!app()->runningInConsole()) {
             try {
+                $profileData = Profile::first();
                 View::share('kontak', Kontak::first());
                 View::share('navbar', Hero::first());
-                View::share('profil', Profile::first());
+                View::share('profil', $profileData);
+                View::share('profile', $profileData); // Alias for consistency
             } catch (\Exception $e) {
                 // Database might not be available during deployment
                 // Silently fail and continue
