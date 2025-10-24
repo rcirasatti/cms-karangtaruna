@@ -104,7 +104,11 @@ class ProfileController extends Controller
                 $nilaiDasar = array_filter($request->nilai_dasar, function ($value) {
                     return !empty(trim($value));
                 });
+                // Always update, even if empty array (allow clearing all values)
                 $profil->nilai_dasar = array_values($nilaiDasar);
+            } elseif ($request->input('nilai_dasar') === null || $request->input('nilai_dasar') === []) {
+                // Explicitly set to empty array if nilai_dasar is null or empty
+                $profil->nilai_dasar = [];
             }
 
             // Update alignment fields

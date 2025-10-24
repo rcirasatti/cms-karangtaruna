@@ -6,10 +6,10 @@
 @section('content')
 
     <div x-data="{
-                                                                    visiMisiModalOpen: false,
-                                                                    tujuanFungsiModalOpen: false,
-                                                                    nilaiDasarModalOpen: false
-                                                                }" class="space-y-6">
+                                                                                    visiMisiModalOpen: false,
+                                                                                    tujuanFungsiModalOpen: false,
+                                                                                    nilaiDasarModalOpen: false
+                                                                                }" class="space-y-6">
         <!-- Header Card -->
         <div class="bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl shadow-lg p-8 text-white">
             <div class="flex items-center justify-between">
@@ -202,81 +202,84 @@
                             </div>
                         @endif
 
-                        @if($profil->nilai_dasar && is_array($profil->nilai_dasar) && count($profil->nilai_dasar) > 0)
-                            <div id="nilai-dasar" class="scroll-mt-24 relative">
-                                <!-- Edit Button for Nilai Dasar -->
-                                <button @click="nilaiDasarModalOpen = true"
-                                    class="absolute top-4 right-4 z-20 bg-white hover:bg-gray-100 text-primary-700 px-4 py-2 rounded-lg shadow-md transition-all duration-200 flex items-center space-x-2">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
-                                        </path>
-                                    </svg>
-                                    <span>Edit Nilai Dasar</span>
-                                </button>
+                        <div id="nilai-dasar" class="scroll-mt-24 relative">
+                            <!-- Edit Button for Nilai Dasar -->
+                            <button @click="nilaiDasarModalOpen = true"
+                                class="absolute top-4 right-4 z-20 bg-white hover:bg-gray-100 text-primary-700 px-4 py-2 rounded-lg shadow-md transition-all duration-200 flex items-center space-x-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                                    </path>
+                                </svg>
+                                <span>Edit Nilai Dasar</span>
+                            </button>
 
-                                <div
-                                    class="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 rounded-2xl shadow-2xl overflow-hidden">
-                                    <!-- Decorative Pattern -->
-                                    <div class="absolute inset-0 opacity-10">
-                                        <div class="absolute top-0 right-0 w-96 h-96 bg-white rounded-full -mr-48 -mt-48"></div>
-                                        <div class="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full -ml-48 -mb-48">
+                            <div
+                                class="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 rounded-2xl shadow-2xl overflow-hidden">
+                                <!-- Decorative Pattern -->
+                                <div class="absolute inset-0 opacity-10">
+                                    <div class="absolute top-0 right-0 w-96 h-96 bg-white rounded-full -mr-48 -mt-48"></div>
+                                    <div class="absolute bottom-0 left-0 w-96 h-96 bg-white rounded-full -ml-48 -mb-48">
+                                    </div>
+                                    <div
+                                        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 border-4 border-white rounded-full">
+                                    </div>
+                                </div>
+
+                                <div class="relative z-10 p-8 md:p-16">
+                                    <div class="flex flex-col items-center mb-12">
+                                        <div class="bg-secondary p-4 rounded-full mb-6 shadow-lg">
+                                            <svg class="w-12 h-12 text-primary-900" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                                                </path>
+                                            </svg>
                                         </div>
-                                        <div
-                                            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 border-4 border-white rounded-full">
-                                        </div>
+                                        <h2 class="text-4xl font-bold text-white mb-3 uppercase tracking-wide text-center">
+                                            Nilai-Nilai Dasar</h2>
+                                        <div class="w-32 h-1 bg-secondary"></div>
                                     </div>
 
-                                    <div class="relative z-10 p-8 md:p-16">
-                                        <div class="flex flex-col items-center mb-12">
-                                            <div class="bg-secondary p-4 rounded-full mb-6 shadow-lg">
-                                                <svg class="w-12 h-12 text-primary-900" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
+                                    <div
+                                        class="text-white leading-relaxed text-base lg:text-lg text-{{ $profil->nilai_dasar_align ?? 'left' }} max-w-5xl mx-auto">
+                                        @if($profil->nilai_dasar && is_array($profil->nilai_dasar) && count($profil->nilai_dasar) > 0)
+                                            <ul class="space-y-3 flex gap-4 flex-wrap justify-center">
+                                                @foreach($profil->nilai_dasar as $nilai)
+                                                    @if(!empty(trim($nilai)))
+                                                        <li class="flex items-start">
+                                                            <div
+                                                                class="flex bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-2 md:p-4">
+                                                                <svg class="w-6 h-6 text-secondary mr-3 mt-1 flex-shrink-0"
+                                                                    fill="currentColor" viewBox="0 0 20 20">
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                                        clip-rule="evenodd"></path>
+                                                                </svg>
+                                                                <span>{{ $nilai }}</span>
+                                                            </div>
+                                                        </li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            <div class="text-center py-8">
+                                                <svg class="w-16 h-16 mx-auto mb-3 text-white/30" fill="none"
+                                                    stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
                                                     </path>
                                                 </svg>
+                                                <p class="text-white/70 text-lg font-semibold">Belum ada nilai dasar yang
+                                                    ditambahkan.</p>
+                                                <p class="text-white/50 text-sm mt-2">Klik tombol "Edit Nilai Dasar" untuk
+                                                    menambahkan.</p>
                                             </div>
-                                            <h2 class="text-4xl font-bold text-white mb-3 uppercase tracking-wide text-center">
-                                                Nilai-Nilai Dasar</h2>
-                                            <div class="w-32 h-1 bg-secondary"></div>
-                                        </div>
-
-                                        <div class="text-white leading-relaxed text-base lg:text-lg text-{{ $profil->nilai_dasar_align ?? 'left' }} max-w-5xl mx-auto">
-                                            @if(count($profil->nilai_dasar) > 0)
-                                                <ul class="space-y-3 flex gap-4 flex-wrap justify-center">
-                                                    @foreach($profil->nilai_dasar as $nilai)
-                                                        @if(!empty(trim($nilai)))
-                                                            <li class="flex items-start">
-                                                                <div class="flex bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-2 md:p-4">
-                                                                    <svg class="w-6 h-6 text-secondary mr-3 mt-1 flex-shrink-0" fill="currentColor"
-                                                                        viewBox="0 0 20 20">
-                                                                        <path fill-rule="evenodd"
-                                                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                                            clip-rule="evenodd"></path>
-                                                                    </svg>
-                                                                    <span>{{ $nilai }}</span>
-                                                                </div>
-                                                            </li>
-                                                        @endif
-                                                    @endforeach
-                                                </ul>
-                                            @else
-                                                <div class="text-center py-8">
-                                                    <svg class="w-16 h-16 mx-auto mb-3 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                                                        </path>
-                                                    </svg>
-                                                    <p class="text-white/70">Belum ada nilai dasar yang ditambahkan.</p>
-                                                    <p class="text-white/50 text-sm mt-2">Klik tombol "Edit Nilai Dasar" untuk menambahkan.</p>
-                                                </div>
-                                            @endif
-                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
-                        @endif
+                        </div>
                     </div>
                 </div>
             </div>
@@ -531,15 +534,49 @@
                 class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-all duration-300"></div>
 
             <!-- Modal panel -->
-            <div x-show="nilaiDasarModalOpen" x-data="{
-                        nilaiDasarItems: {{ json_encode($profil->nilai_dasar ?? []) }},
-                        addNilaiDasar() {
-                            this.nilaiDasarItems.push('');
-                        },
-                        removeNilaiDasar(index) {
-                            this.nilaiDasarItems.splice(index, 1);
-                        }
-                    }" class="relative bg-white rounded-2xl shadow-xl max-w-3xl w-full">
+            <div x-show="nilaiDasarModalOpen" @modal-opened.window="if (nilaiDasarModalOpen) initNilaiDasar()" x-data="{
+                                nilaiDasarItems: [],
+                                nextId: 1,
+                                initNilaiDasar() {
+                                    // Reset and initialize from database
+                                    let dbData = @js($profil->nilai_dasar ?? []);
+                                    console.log('Initializing with data:', dbData);
+
+                                    if (Array.isArray(dbData) && dbData.length > 0) {
+                                        this.nilaiDasarItems = dbData.map((value, index) => ({
+                                            id: Date.now() + index,
+                                            value: value
+                                        }));
+                                        this.nextId = Date.now() + dbData.length;
+                                    } else {
+                                        this.nilaiDasarItems = [];
+                                        this.nextId = 1;
+                                    }
+                                    console.log('Initialized items:', this.nilaiDasarItems);
+                                },
+                                init() {
+                                    this.initNilaiDasar();
+                                },
+                                addNilaiDasar() {
+                                    const newItem = { 
+                                        id: this.nextId++, 
+                                        value: '' 
+                                    };
+                                    this.nilaiDasarItems.push(newItem);
+                                    console.log('Added item:', newItem);
+                                    console.log('Current items:', this.nilaiDasarItems);
+                                },
+                                removeNilaiDasar(id) {
+                                    console.log('Removing item with id:', id);
+                                    console.log('Before removal:', this.nilaiDasarItems);
+                                    this.nilaiDasarItems = this.nilaiDasarItems.filter(item => item.id !== id);
+                                    console.log('After removal:', this.nilaiDasarItems);
+                                    // Force Alpine to detect the change
+                                    this.$nextTick(() => {
+                                        console.log('Next tick - items:', this.nilaiDasarItems);
+                                    });
+                                }
+                            }" class="relative bg-white rounded-2xl shadow-xl max-w-3xl w-full">
                 <form action="{{ route('admin.profile.update', $profil->id ?? 1) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
@@ -591,13 +628,12 @@
 
                             <!-- Dynamic Input Fields -->
                             <div class="space-y-3 mb-4">
-                                <template x-for="(item, index) in nilaiDasarItems" :key="index">
+                                <template x-for="(item, index) in nilaiDasarItems" :key="item.id">
                                     <div class="flex gap-2">
-                                        <input type="text" :name="'nilai_dasar[' + index + ']'"
-                                            x-model="nilaiDasarItems[index]"
+                                        <input type="text" :name="'nilai_dasar[' + index + ']'" x-model="item.value"
                                             class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                             :placeholder="'Nilai dasar #' + (index + 1)">
-                                        <button type="button" @click="removeNilaiDasar(index)"
+                                        <button type="button" @click="removeNilaiDasar(item.id)"
                                             class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors flex items-center">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
