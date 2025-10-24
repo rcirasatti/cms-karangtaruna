@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Berita;
 use Illuminate\Http\Request;
+use App\Models\Profile;
 use App\Http\Controllers\Controller;
 
 class GaleriController extends Controller
@@ -13,6 +14,7 @@ class GaleriController extends Controller
      */
     public function index(Request $request)
     {
+        $profile = Profile::first();
         $search = $request->input('search', '');
         $tipe = $request->input('tipe', '');
         $kegiatan_id = $request->input('kegiatan_id', '');
@@ -41,7 +43,7 @@ class GaleriController extends Controller
 
         $kegiatanList = Berita::orderBy('tanggal_kegiatan', 'desc')->get();
 
-        return view('frontend.galeri.index', compact('galeris', 'kegiatanList', 'search', 'tipe', 'kegiatan_id'));
+        return view('frontend.galeri.index', compact('galeris', 'kegiatanList', 'search', 'tipe', 'kegiatan_id', 'profile'));
     }
 
     /**
@@ -49,6 +51,7 @@ class GaleriController extends Controller
      */
     public function foto(Request $request)
     {
+        $profile = Profile::first();
         $search = $request->input('search', '');
         $kegiatan_id = $request->input('kegiatan_id', '');
 
@@ -76,7 +79,7 @@ class GaleriController extends Controller
 
         $kegiatanList = Berita::orderBy('tanggal_kegiatan', 'desc')->get();
 
-        return view('frontend.galeri.foto', compact('galeris', 'beritaFotos', 'kegiatanList', 'search', 'kegiatan_id'));
+        return view('frontend.galeri.foto', compact('galeris', 'beritaFotos', 'kegiatanList', 'search', 'kegiatan_id', 'profile'));
     }
 
     /**
@@ -84,6 +87,7 @@ class GaleriController extends Controller
      */
     public function video(Request $request)
     {
+        $profile = Profile::first();
         $search = $request->input('search', '');
         $kegiatan_id = $request->input('kegiatan_id', '');
 
@@ -111,7 +115,7 @@ class GaleriController extends Controller
 
         $kegiatanList = Berita::orderBy('tanggal_kegiatan', 'desc')->get();
 
-        return view('frontend.galeri.video', compact('galeris', 'beritaVideos', 'kegiatanList', 'search', 'kegiatan_id'));
+        return view('frontend.galeri.video', compact('galeris', 'beritaVideos', 'kegiatanList', 'search', 'kegiatan_id', 'profile'));
     }
 
     /**
@@ -119,6 +123,7 @@ class GaleriController extends Controller
      */
     public function berita(Request $request)
     {
+        $profile = Profile::first();
         $search = $request->input('search', '');
         $sort = $request->input('sort', 'terbaru');
         $perPage = $request->input('per_page', 10);
@@ -145,7 +150,7 @@ class GaleriController extends Controller
 
         $kegiatans = $query->paginate($perPage);
 
-        return view('frontend.galeri.berita', compact('kegiatans', 'search', 'sort', 'perPage'));
+        return view('frontend.galeri.berita', compact('kegiatans', 'search', 'sort', 'perPage', 'profile'));
     }
 
     /**
@@ -154,7 +159,8 @@ class GaleriController extends Controller
     public function beritaShow($id)
     {
         $kegiatan = Berita::findOrFail($id);
+        $profile = Profile::first();
 
-        return view('frontend.galeri.berita-show', compact('kegiatan'));
+        return view('frontend.galeri.berita-show', compact('kegiatan', 'profile'));
     }
 }

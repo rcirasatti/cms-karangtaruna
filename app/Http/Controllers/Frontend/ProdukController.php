@@ -6,19 +6,23 @@ use App\Http\Controllers\Controller;
 use App\Models\Produk;
 use App\Models\Mitra;
 use App\Models\Kontak;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 
 class ProdukController extends Controller
 {
     public function index()
     {
+
         $produk = Produk::paginate(12);
         $mitra = Mitra::all();
-        return view('frontend.produk.index', compact('produk', 'mitra'));
+        $profile = Profile::first();
+        return view('frontend.produk.index', compact('produk', 'mitra', 'profile'));
     }
 
     public function produk(Request $request)
     {
+        $profile = Profile::first();
         $kategori = $request->get('kategori');
         $search = $request->get('search');
         $sort = $request->get('sort', 'nama_produk'); // default sort by nama_produk
@@ -66,18 +70,21 @@ class ProdukController extends Controller
         
         $produk = $query->paginate(9)->appends($request->query());
         $kontak = Kontak::first();
-        
-        return view('frontend.produk.produk', compact('produk', 'kontak', 'kategoris', 'kategori', 'search', 'sort'));
+        $profile = Profile::first();
+
+        return view('frontend.produk.produk', compact('produk', 'kontak', 'kategoris', 'kategori', 'search', 'sort', 'profile'));
     }
 
     public function show($id)
     {
         $produk = Produk::findOrFail($id);
-        return view('frontend.produk.show', compact('produk'));
+        $profile = Profile::first();
+        return view('frontend.produk.show', compact('produk', 'profile'));
     }
 
     public function mitra(Request $request)
     {
+        $profile = Profile::first();
         $search = $request->get('search');
         $jenis = $request->get('jenis');
 
@@ -101,12 +108,13 @@ class ProdukController extends Controller
         // Get all unique jenis for filter dropdown
         $jenisOptions = Mitra::distinct()->pluck('jenis')->filter()->values();
 
-        return view('frontend.produk.mitra', compact('mitra', 'search', 'jenis', 'jenisOptions'));
+        return view('frontend.produk.mitra', compact('mitra', 'search', 'jenis', 'jenisOptions', 'profile'));
     }
 
     public function testimoni()
     {
+        $profile = Profile::first();
         $testimoni = Mitra::whereNotNull('testimoni')->get();
-        return view('frontend.produk.testimoni', compact('testimoni'));
+        return view('frontend.produk.testimoni', compact('testimoni', 'profile'));
     }
 }

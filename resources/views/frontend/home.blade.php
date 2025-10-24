@@ -496,7 +496,7 @@
 
                 showQuoteSlide(0);
 
-                if (quoteItems.length > 1) {
+                if (quoteItems.length >= 2) {
                     startQuoteAutoPlay();
                 }
 

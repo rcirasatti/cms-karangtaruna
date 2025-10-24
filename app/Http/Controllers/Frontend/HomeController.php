@@ -44,6 +44,7 @@ class HomeController extends Controller
         })->latest('tanggal_kegiatan')->take(6)->get();
         $produkTerbaru = Produk::orderBy('created_at', 'desc')->take(4)->get();
         $kontak = Kontak::first();
+
         $quotes = Quote::latest()->get();
 
         return view('frontend.home', compact('hero', 'profile', 'heroSlides', 'galeriTerbaru', 'produkTerbaru', 'kontak', 'quotes'));
