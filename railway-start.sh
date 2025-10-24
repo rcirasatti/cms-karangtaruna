@@ -49,12 +49,11 @@ mkdir -p storage/logs
 mkdir -p bootstrap/cache
 
 # Clear all caches to prevent any cached config issues
-echo "Clearing all caches..."
+echo "Clearing all caches safely..."
 php artisan config:clear 2>&1 || true
 php artisan cache:clear 2>&1 || true
 php artisan view:clear 2>&1 || true
 php artisan route:clear 2>&1 || true
-php artisan event:clear 2>&1 || true
 
 # Create storage link if it doesn't exist
 echo "Creating storage link..."
@@ -64,11 +63,11 @@ php artisan storage:link 2>&1 || true
 echo "Setting permissions..."
 chmod -R 775 storage bootstrap/cache 2>&1 || true
 
-# NOTE: We intentionally do NOT run these commands on Railway:
-# - php artisan config:cache (causes env variable issues)
-# - php artisan view:cache (can fail during build)
-# - php artisan route:cache (can fail without proper setup)
-# These optimizations are not critical for production and can cause deployment failures
+# IMPORTANT: DO NOT run these on Railway - they cause build failures:
+# - php artisan config:cache
+# - php artisan view:cache  
+# - php artisan route:cache
+# - php artisan event:cache
 
 # Start server
 echo "==================================="
