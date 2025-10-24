@@ -259,19 +259,22 @@
                         <!-- Grid Produk - 3 Kolom dengan Cards Vertikal -->
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
                             @foreach ($produk as $item)
-                                    @php $isHighlight = request('highlight') == $item->id; @endphp
+                                    @php 
+                                        $isHighlight = request('highlight') == $item->id;
+                                        $images = [];
+                                        if ($item->foto) {
+                                            $images[] = $item->foto;
+                                        }
+                                        if ($item->galeri && is_array($item->galeri)) {
+                                            $images = array_merge($images, $item->galeri);
+                                        }
+                                    @endphp
                                     <div id="produk-{{ $item->id }}"
-                                        class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col border border-gray-100 hover:border-primary-200 transform hover:-translate-y-1 {{ $isHighlight ? 'ring-4 ring-primary-300/60 scale-105' : '' }}">
+                                        onclick="openProdukModal('{{ addslashes($item->nama_produk) }}', '{{ $item->kategori }}', {{ json_encode($images) }}, '{{ $item->harga ? 'Rp ' . number_format($item->harga, 0, ',', '.') : 'Hubungi untuk info harga' }}', '{{ addslashes($item->deskripsi ?: 'Produk berkualitas tinggi dari mitra UMKM Karang Taruna dengan harga terjangkau.') }}')"
+                                        class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col border border-gray-100 hover:border-primary-200 transform hover:-translate-y-1 cursor-pointer {{ $isHighlight ? 'ring-4 ring-primary-300/60 scale-105' : '' }}">
                                     <!-- Gambar Produk dengan Galeri -->
-                                    <div class="relative h-40 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 group/gallery">
+                                    <div class="relative h-40 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 group/gallery" onclick="event.stopPropagation()">
                                         @php
-                                            $images = [];
-                                            if ($item->foto) {
-                                                $images[] = $item->foto;
-                                            }
-                                            if ($item->galeri && is_array($item->galeri)) {
-                                                $images = array_merge($images, $item->galeri);
-                                            }
                                             $hasMultipleImages = count($images) > 1;
                                         @endphp
 
@@ -363,17 +366,31 @@
                                             {{ $item->deskripsi ?: 'Produk berkualitas tinggi dari mitra UMKM Karang Taruna dengan harga terjangkau.' }}
                                         </p>
                                     
-                                    <!-- Tombol Pesan WhatsApp -->
-                                    <button
-                                        onclick="pesanWhatsApp('{{ addslashes($item->nama_produk) }}', '{{ $item->harga ? 'Rp ' . number_format($item->harga, 0, ',', '.') : 'Hubungi untuk info harga' }}')"
-                                        aria-label="{{ 'Pesan ' . e($item->nama_produk) . ' via WhatsApp' }}"
-                                        class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white py-2.5 px-3 rounded-lg font-semibold text-sm transition-all duration-300 flex items-center justify-center space-x-2 shadow-md hover:shadow-lg mt-auto">
-                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                            <path
-                                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                                        </svg>
-                                        <span>Pesan WhatsApp</span>
-                                    </button>
+                                    <!-- Action Buttons -->
+                                    <div class="grid grid-cols-2 gap-2 mt-auto" onclick="event.stopPropagation()">
+                                        <!-- Tombol Lihat Detail -->
+                                        <button
+                                            onclick="openProdukModal('{{ addslashes($item->nama_produk) }}', '{{ $item->kategori }}', {{ json_encode($images) }}, '{{ $item->harga ? 'Rp ' . number_format($item->harga, 0, ',', '.') : 'Hubungi untuk info harga' }}', '{{ addslashes($item->deskripsi ?: 'Produk berkualitas tinggi dari mitra UMKM Karang Taruna dengan harga terjangkau.') }}')"
+                                            class="bg-primary-600 hover:bg-primary-700 text-white py-2.5 px-3 rounded-lg font-semibold text-sm transition-all duration-300 flex items-center justify-center space-x-2 shadow-md hover:shadow-lg">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                            </svg>
+                                            <span>Detail</span>
+                                        </button>
+
+                                        <!-- Tombol Pesan WhatsApp -->
+                                        <button
+                                            onclick="pesanWhatsApp('{{ addslashes($item->nama_produk) }}', '{{ $item->harga ? 'Rp ' . number_format($item->harga, 0, ',', '.') : 'Hubungi untuk info harga' }}'); event.stopPropagation();"
+                                            aria-label="{{ 'Pesan ' . e($item->nama_produk) . ' via WhatsApp' }}"
+                                            class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white py-2.5 px-3 rounded-lg font-semibold text-sm transition-all duration-300 flex items-center justify-center space-x-2 shadow-md hover:shadow-lg">
+                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                                            </svg>
+                                            <span>Pesan</span>
+                                        </button>
+                                    </div>
                                 </div>
                                 </div>
                     @endforeach
@@ -382,6 +399,96 @@
             <!-- Pagination -->
             <div class="justify-center mt-8 pagination-wrapper">
                 {{ $produk->appends(['kategori' => request('kategori')])->links() }}
+            </div>
+
+            <!-- Modal Detail Produk -->
+            <div id="produkModal"
+                class="hidden fixed inset-0 bg-transparent bg-opacity-75 z-50 flex items-center justify-center p-4"
+                onclick="closeProdukModal(event)">
+                <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+                    onclick="event.stopPropagation()">
+
+                    <div class="relative bg-gradient-to-r from-primary-600 to-primary-800 text-white p-6 rounded-t-2xl">
+                        <button onclick="closeProdukModal()"
+                            class="absolute top-4 right-4 text-white hover:text-gray-200 transition-colors">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                                </path>
+                            </svg>
+                        </button>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0">
+                                <h3 id="modalNamaProduk" class="text-3xl font-bold text-yellow-400 uppercase mb-1"></h3>
+                                <p id="modalKategoriProduk" class="text-blue-100 text-sm font-medium"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6">
+                        <!-- Galeri Gambar Produk -->
+                        <div id="modalGaleriSection" class="mb-6">
+                            <div class="relative bg-gray-100 rounded-xl overflow-hidden">
+                                <!-- Main Image -->
+                                <div id="modalMainImageContainer" class="relative h-96 bg-gradient-to-br from-gray-200 to-gray-300">
+                                    <img id="modalMainImage" src="" alt="" class="w-full h-full object-contain">
+                                    
+                                    <!-- Navigation Arrows for Modal Gallery -->
+                                    <button id="modalPrevImage" class="hidden absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                        </svg>
+                                    </button>
+                                    <button id="modalNextImage" class="hidden absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <!-- Thumbnail Gallery -->
+                                <div id="modalThumbnails" class="hidden flex gap-2 mt-4 overflow-x-auto pb-2">
+                                    <!-- Thumbnails will be inserted here dynamically -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Harga Produk -->
+                        <div class="mb-6 bg-primary-50 rounded-xl p-4 border border-primary-100">
+                            <h4 class="text-lg font-bold text-gray-800 mb-2 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-primary-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/>
+                                </svg>
+                                Harga Produk
+                            </h4>
+                            <p id="modalHargaProduk" class="text-3xl font-bold text-primary-600"></p>
+                        </div>
+
+                        <!-- Deskripsi Produk -->
+                        <div class="mb-6">
+                            <h4 class="text-lg font-bold text-gray-800 mb-3 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-primary-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 15.5h8v1H8v-1zm0-2.5h8v1H8v-1zm0-2.5h5v1H8V10z"/>
+                                </svg>
+                                Deskripsi Produk
+                            </h4>
+                            <p id="modalDeskripsiProduk" class="text-gray-700 leading-relaxed whitespace-pre-line"></p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 px-6 py-4 rounded-b-2xl flex justify-between items-center gap-4">
+                        <button onclick="closeProdukModal()"
+                            class="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors font-medium">
+                            Tutup
+                        </button>
+                        <button id="modalPesanWhatsApp"
+                            class="px-6 py-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-lg transition-colors font-medium flex items-center space-x-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                            </svg>
+                            <span>Pesan via WhatsApp</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         @else
             <!-- Empty State -->
@@ -432,6 +539,136 @@
 
 @push('scripts')
     <script>
+        // Modal state
+        let currentModalImages = [];
+        let currentModalImageIndex = 0;
+        let currentModalNama = '';
+        let currentModalHarga = '';
+
+        // Open Product Modal
+        function openProdukModal(nama, kategori, images, harga, deskripsi) {
+            const modal = document.getElementById('produkModal');
+            const modalNamaProduk = document.getElementById('modalNamaProduk');
+            const modalKategoriProduk = document.getElementById('modalKategoriProduk');
+            const modalHargaProduk = document.getElementById('modalHargaProduk');
+            const modalDeskripsiProduk = document.getElementById('modalDeskripsiProduk');
+            const modalMainImage = document.getElementById('modalMainImage');
+            const modalThumbnails = document.getElementById('modalThumbnails');
+            const modalPrevBtn = document.getElementById('modalPrevImage');
+            const modalNextBtn = document.getElementById('modalNextImage');
+            const modalPesanBtn = document.getElementById('modalPesanWhatsApp');
+
+            // Set modal content
+            modalNamaProduk.textContent = nama;
+            modalKategoriProduk.textContent = kategori || 'Produk UMKM';
+            modalHargaProduk.textContent = harga;
+            modalDeskripsiProduk.textContent = deskripsi;
+
+            // Store current product info
+            currentModalNama = nama;
+            currentModalHarga = harga;
+            currentModalImages = images || [];
+            currentModalImageIndex = 0;
+
+            // Setup image gallery
+            if (currentModalImages.length > 0) {
+                // Show first image
+                modalMainImage.src = "{{ asset('storage') }}/" + currentModalImages[0];
+                modalMainImage.alt = nama;
+
+                // Show/hide navigation buttons
+                if (currentModalImages.length > 1) {
+                    modalPrevBtn.classList.remove('hidden');
+                    modalNextBtn.classList.remove('hidden');
+                    modalThumbnails.classList.remove('hidden');
+
+                    // Create thumbnails
+                    modalThumbnails.innerHTML = '';
+                    currentModalImages.forEach((img, index) => {
+                        const thumb = document.createElement('button');
+                        thumb.className = 'flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ' + 
+                            (index === 0 ? 'border-primary-600' : 'border-gray-300 hover:border-primary-400');
+                        thumb.innerHTML = `<img src="{{ asset('storage') }}/${img}" alt="${nama} - ${index + 1}" class="w-full h-full object-cover">`;
+                        thumb.onclick = () => showModalImage(index);
+                        modalThumbnails.appendChild(thumb);
+                    });
+                } else {
+                    modalPrevBtn.classList.add('hidden');
+                    modalNextBtn.classList.add('hidden');
+                    modalThumbnails.classList.add('hidden');
+                }
+            } else {
+                modalMainImage.src = "{{ asset('images/default-product.png') }}";
+                modalMainImage.alt = "No image";
+                modalPrevBtn.classList.add('hidden');
+                modalNextBtn.classList.add('hidden');
+                modalThumbnails.classList.add('hidden');
+            }
+
+            // Setup WhatsApp button
+            modalPesanBtn.onclick = () => pesanWhatsApp(currentModalNama, currentModalHarga);
+
+            // Show modal
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close Product Modal
+        function closeProdukModal(event) {
+            if (event && event.target !== event.currentTarget) return;
+            
+            const modal = document.getElementById('produkModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // Show specific image in modal
+        function showModalImage(index) {
+            if (index < 0 || index >= currentModalImages.length) return;
+            
+            currentModalImageIndex = index;
+            const modalMainImage = document.getElementById('modalMainImage');
+            modalMainImage.src = "{{ asset('storage') }}/" + currentModalImages[index];
+
+            // Update thumbnail borders
+            const thumbnails = document.getElementById('modalThumbnails').children;
+            Array.from(thumbnails).forEach((thumb, i) => {
+                if (i === index) {
+                    thumb.classList.remove('border-gray-300');
+                    thumb.classList.add('border-primary-600');
+                } else {
+                    thumb.classList.remove('border-primary-600');
+                    thumb.classList.add('border-gray-300');
+                }
+            });
+        }
+
+        // Navigate modal images
+        document.getElementById('modalPrevImage').onclick = () => {
+            const newIndex = (currentModalImageIndex - 1 + currentModalImages.length) % currentModalImages.length;
+            showModalImage(newIndex);
+        };
+
+        document.getElementById('modalNextImage').onclick = () => {
+            const newIndex = (currentModalImageIndex + 1) % currentModalImages.length;
+            showModalImage(newIndex);
+        };
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('produkModal');
+            if (!modal.classList.contains('hidden')) {
+                if (e.key === 'Escape') {
+                    closeProdukModal();
+                } else if (e.key === 'ArrowLeft' && currentModalImages.length > 1) {
+                    document.getElementById('modalPrevImage').click();
+                } else if (e.key === 'ArrowRight' && currentModalImages.length > 1) {
+                    document.getElementById('modalNextImage').click();
+                }
+            }
+        });
+
+        // Highlight product on page load
         (function () {
             const params = new URLSearchParams(window.location.search);
             const highlight = params.get('highlight');
