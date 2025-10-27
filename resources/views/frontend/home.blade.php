@@ -71,10 +71,10 @@
         <div class="relative">
             <!-- Quotes Container -->
             <div class="quote-carousel-wrapper overflow-hidden">
-                <div class="quote-carousel-track flex {{ $quotes->count() > 2 ? 'transition-transform duration-500 ease-in-out' : '' }} gap-8 {{ $quotes->count() <= 2 ? 'justify-center' : 'pr-8' }}">
+                <div class="quote-carousel-track flex {{ $quotes->count() > 1 ? 'transition-transform duration-500 ease-in-out' : '' }} gap-8 {{ $quotes->count() <= 1 ? 'justify-center' : 'pr-8' }}">
                     @foreach($quotes as $index => $q)
                     <div class="quote-item flex-shrink-0 w-full md:w-1/2" data-index="{{ $index }}">
-                        <div class=" flex flex-col md:flex-row gap-6 backdrop-blur-sm rounded-lg p-6 items-center md:items-start">
+                        <div class="flex flex-col gap-6 backdrop-blur-sm rounded-lg p-6 items-center md:flex-row md:items-start">
                             <div class="flex-shrink-0">
                                 @if($q->foto && file_exists(public_path('storage/' . $q->foto)))
                                     <div class="w-32 h-32 md:w-40 md:h-40 overflow-hidden shadow-lg rounded-lg">
@@ -142,7 +142,7 @@
                                     @endif
                                 </div>
 
-                                <div class="flex-1 text-primary-100">
+                                <div class="flex-1 text-primary-100 text-center md:text-left">
                                     <p class="italic font-rajdhani text-sm md:text-base leading-relaxed mb-4">
                                         "{{ $firstQuote->quote }}"
                                     </p>
