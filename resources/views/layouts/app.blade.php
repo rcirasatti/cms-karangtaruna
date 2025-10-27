@@ -379,12 +379,12 @@
                             <img src="{{ asset('assets/logo.png') }}" alt="Logo Karang Taruna" class="h-10 mr-3">
                         @endif
                         <div>
-                            <h3 class="text-lg font-bold font-montserrat">Karang Taruna</h3>
-                            <p class="text-xs text-secondary">Tembalang</p>
+                            <h3 class="text-lg font-bold font-montserrat">{{ $navbar->title_navbar }}</h3>
+                            <p class="text-xs text-secondary">{{ $navbar->subtitle_navbar}}</p>
                         </div>
                     </div>
                     <p class="text-gray-100 text-sm leading-relaxed mb-4">
-                        Organisasi sosial yang berdedikasi untuk pengembangan generasi muda dan pemberdayaan masyarakat.
+                        {{ $navbar->subtitle }}
                     </p>
                     <!-- Social Media -->
                     <div class="flex space-x-4">

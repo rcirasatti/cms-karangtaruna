@@ -15,8 +15,9 @@ class MitraController extends Controller
      */
     public function index()
     {
+        $profile = \App\Models\Profile::first();
         $mitra = Mitra::orderBy('created_at', 'desc')->paginate(10);
-        return view('admin.mitra.index', compact('mitra'));
+        return view('admin.mitra.index', compact('mitra', 'profile'));
     }
 
     /**
@@ -24,7 +25,8 @@ class MitraController extends Controller
      */
     public function create()
     {
-        return view('admin.mitra.create');
+        $profile = \App\Models\Profile::first();
+        return view('admin.mitra.create', compact('profile'));
     }
 
     /**
@@ -76,8 +78,9 @@ class MitraController extends Controller
      */
     public function edit(string $id)
     {
+        $profile = \App\Models\Profile::first();
         $mitra = Mitra::findOrFail($id);
-        return view('admin.mitra.edit', compact('mitra'));
+        return view('admin.mitra.edit', compact('mitra', 'profile'));
     }
 
     /**

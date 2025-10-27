@@ -16,8 +16,9 @@ class BeritaController extends Controller
      */
     public function index()
     {
+        $profile = \App\Models\Profile::first();
         $berita = Berita::orderBy('created_at', 'desc')->paginate(10);
-        return view('admin.berita.index', compact('berita'));
+        return view('admin.berita.index', compact('berita', 'profile'));
     }
 
     /**
@@ -25,7 +26,8 @@ class BeritaController extends Controller
      */
     public function create()
     {
-        return view('admin.berita.create');
+        $profile = \App\Models\Profile::first();
+        return view('admin.berita.create', compact('profile'));
     }
 
     /**
@@ -82,8 +84,9 @@ class BeritaController extends Controller
      */
     public function edit(string $id)
     {
+        $profile = \App\Models\Profile::first();
         $berita = Berita::findOrFail($id);
-        return view('admin.berita.edit', compact('berita'));
+        return view('admin.berita.edit', compact('berita', 'profile'));
     }
 
     /**

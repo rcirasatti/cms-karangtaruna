@@ -15,10 +15,11 @@ class KepengurusanController extends Controller
      */
     public function index()
     {
+        $profile = \App\Models\Profile::first();
         $pengurus = Kepengurusan::orderBy('urutan', 'asc')
             ->orderBy('created_at', 'desc')
             ->paginate(10);
-        return view('admin.organisasi.index', compact('pengurus'));
+        return view('admin.organisasi.index', compact('pengurus', 'profile'));
     }
 
     /**
@@ -26,7 +27,8 @@ class KepengurusanController extends Controller
      */
     public function create()
     {
-        return view('admin.organisasi.create');
+        $profile = \App\Models\Profile::first();
+        return view('admin.organisasi.create', compact('profile'));
     }
 
     /**
@@ -82,8 +84,9 @@ class KepengurusanController extends Controller
      */
     public function edit(string $id)
     {
+        $profile = \App\Models\Profile::first();
         $pengurus = Kepengurusan::findOrFail($id);
-        return view('admin.organisasi.edit', compact('pengurus'));
+        return view('admin.organisasi.edit', compact('pengurus', 'profile'));
     }
 
     /**

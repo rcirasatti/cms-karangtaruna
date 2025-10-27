@@ -15,6 +15,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $profile = \App\Models\Profile::first();
         $data = [
             'total_berita' => Berita::count(),
             'total_produk' => Produk::count(),
@@ -24,6 +25,6 @@ class DashboardController extends Controller
             'produk_terbaru' => Produk::orderBy('created_at', 'desc')->take(5)->get(),
         ];
 
-        return view('admin.dashboard.index', $data);
+        return view('admin.dashboard.index', $data, compact('profile'));
     }
 }
