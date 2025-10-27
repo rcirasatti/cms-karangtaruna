@@ -21,13 +21,16 @@
         </div>
 
         <!-- Navigation Dots -->
+        @if($heroSlides->count() > 1)
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex space-x-2">
             @foreach($heroSlides as $index => $slide)
             <button class="slider-dot w-10 md:w-14 h-1 rounded-full {{ $index === 0 ? 'bg-white' : 'bg-white/50' }} transition-all hover:bg-white" data-slide="{{ $index }}"></button>
             @endforeach
         </div>
+        @endif
 
         <!-- Navigation Arrows -->
+        @if($heroSlides->count() > 1)
         <button class="slider-prev absolute left-4 top-1/2 transform -translate-y-1/2 z-30 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full transition">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -38,6 +41,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
             </svg>
         </button>
+        @endif
     @else
         <!-- Fallback jika tidak ada gambar -->
         <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-primary-600 to-primary-800"></div>
