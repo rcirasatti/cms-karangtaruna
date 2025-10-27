@@ -67,10 +67,10 @@
 
                     <!-- Tentang Dropdown -->
                     <div class="relative group">
-                        <button
+                        <button type="button" aria-haspopup="true" aria-expanded="false"
                             class="px-4 py-2 rounded-lg {{ $hoverLink }} transition flex items-center {{ request()->routeIs('tentang.*') ? $activeClass : 'text-white' }}">
                             About
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 ml-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M19 9l-7 7-7-7"></path>
                             </svg>
@@ -90,10 +90,10 @@
 
                     <!-- Visi & Nilai Dropdown -->
                     <div class="relative group">
-                        <button
+                        <button type="button" aria-haspopup="true" aria-expanded="false"
                             class="px-4 py-2 rounded-lg {{ $hoverLink }} transition flex items-center {{ request()->routeIs('profil.*') ? $activeClass : 'text-white' }}">
                             Profile
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 ml-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M19 9l-7 7-7-7"></path>
                             </svg>
@@ -116,10 +116,10 @@
 
                     <!-- Kepengurusan Dropdown -->
                     <div class="relative group">
-                        <button
+                        <button type="button" aria-haspopup="true" aria-expanded="false"
                             class="px-4 py-2 rounded-lg {{ $hoverLink }} transition flex items-center {{ request()->routeIs('kepengurusan.*') ? $activeClass : 'text-white' }}">
                             Organization
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 ml-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M19 9l-7 7-7-7"></path>
                             </svg>
@@ -139,10 +139,10 @@
 
                     <!-- Gallery Dropdown (Foto, Video & Arsip Berita) -->
                     <div class="relative group">
-                        <button
+                        <button type="button" aria-haspopup="true" aria-expanded="false"
                             class="px-4 py-2 rounded-lg {{ $hoverLink }} transition flex items-center {{ request()->routeIs('galeri.*') ? $activeClass : 'text-white' }}">
                             Gallery
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 ml-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M19 9l-7 7-7-7"></path>
                             </svg>
@@ -163,10 +163,10 @@
 
                     <!-- Produk & Mitra Dropdown -->
                     <div class="relative group">
-                        <button
+                        <button type="button" aria-haspopup="true" aria-expanded="false"
                             class="px-4 py-2 rounded-lg {{ $hoverLink }} transition flex items-center {{ request()->routeIs('produk.*') ? $activeClass : 'text-white' }}">
                             Product & Partners
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 ml-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M19 9l-7 7-7-7"></path>
                             </svg>
@@ -716,6 +716,100 @@
                     svg.style.transform = 'rotate(0deg)';
                 });
             }
+        });
+
+        // Desktop/Tablet Dropdown Toggle (for touch devices and keyboard navigation)
+        document.querySelectorAll('.lg\\:flex .group button').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const dropdown = this.closest('.group');
+                const dropdownContent = dropdown.querySelector('div[class*="absolute"]');
+                const arrow = this.querySelector('svg');
+                
+                // Close other dropdowns
+                document.querySelectorAll('.lg\\:flex .group').forEach(otherGroup => {
+                    if (otherGroup !== dropdown) {
+                        const otherContent = otherGroup.querySelector('div[class*="absolute"]');
+                        const otherButton = otherGroup.querySelector('button');
+                        const otherArrow = otherButton?.querySelector('svg');
+                        if (otherContent) {
+                            otherContent.classList.remove('opacity-100', 'visible');
+                            otherContent.classList.add('opacity-0', 'invisible');
+                            if (otherButton) otherButton.setAttribute('aria-expanded', 'false');
+                            if (otherArrow) otherArrow.style.transform = 'rotate(0deg)';
+                        }
+                    }
+                });
+                
+                // Toggle current dropdown
+                if (dropdownContent) {
+                    const isVisible = dropdownContent.classList.contains('opacity-100');
+                    if (isVisible) {
+                        dropdownContent.classList.remove('opacity-100', 'visible');
+                        dropdownContent.classList.add('opacity-0', 'invisible');
+                        this.setAttribute('aria-expanded', 'false');
+                        if (arrow) arrow.style.transform = 'rotate(0deg)';
+                    } else {
+                        dropdownContent.classList.remove('opacity-0', 'invisible');
+                        dropdownContent.classList.add('opacity-100', 'visible');
+                        this.setAttribute('aria-expanded', 'true');
+                        if (arrow) arrow.style.transform = 'rotate(180deg)';
+                    }
+                }
+            });
+
+            // Keep dropdown open on hover for mouse users
+            const dropdown = button.closest('.group');
+            dropdown.addEventListener('mouseenter', function() {
+                const dropdownContent = this.querySelector('div[class*="absolute"]');
+                const dropdownButton = this.querySelector('button');
+                const arrow = dropdownButton?.querySelector('svg');
+                if (dropdownContent && window.innerWidth >= 1024) {
+                    dropdownContent.classList.remove('opacity-0', 'invisible');
+                    dropdownContent.classList.add('opacity-100', 'visible');
+                    if (dropdownButton) dropdownButton.setAttribute('aria-expanded', 'true');
+                    if (arrow) arrow.style.transform = 'rotate(180deg)';
+                }
+            });
+
+            dropdown.addEventListener('mouseleave', function() {
+                const dropdownContent = this.querySelector('div[class*="absolute"]');
+                const dropdownButton = this.querySelector('button');
+                const arrow = dropdownButton?.querySelector('svg');
+                if (dropdownContent && window.innerWidth >= 1024) {
+                    dropdownContent.classList.remove('opacity-100', 'visible');
+                    dropdownContent.classList.add('opacity-0', 'invisible');
+                    if (dropdownButton) dropdownButton.setAttribute('aria-expanded', 'false');
+                    if (arrow) arrow.style.transform = 'rotate(0deg)';
+                }
+            });
+        });
+
+        // Close desktop dropdowns when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.group')) {
+                document.querySelectorAll('.lg\\:flex .group div[class*="absolute"]').forEach(content => {
+                    const group = content.closest('.group');
+                    const button = group?.querySelector('button');
+                    const arrow = button?.querySelector('svg');
+                    content.classList.remove('opacity-100', 'visible');
+                    content.classList.add('opacity-0', 'invisible');
+                    if (button) button.setAttribute('aria-expanded', 'false');
+                    if (arrow) arrow.style.transform = 'rotate(0deg)';
+                });
+            }
+        });
+
+        // Keyboard navigation support for dropdowns
+        document.querySelectorAll('.lg\\:flex .group button').forEach(button => {
+            button.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
         });
     </script>
 </body>
