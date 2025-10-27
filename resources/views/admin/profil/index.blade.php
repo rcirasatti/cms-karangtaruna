@@ -30,7 +30,7 @@
         <div class="bg-white shadow-2xl rounded-2xl">
             <div class="bg-color_bg py-16">
                 <div class="container mx-auto px-4">
-                    <div class="text-center mb-12 relative">
+                    <div class="text-center mb-12 relative sm:pt-10">
                         <h2 class="text-4xl font-bold text-gray-800 mb-3 uppercase tracking-wide">Visi & Misi</h2>
                         <div class="w-24 h-1 bg-secondary mx-auto"></div>
 
@@ -89,7 +89,7 @@
 
                         @if($profil->tujuan && $profil->fungsi)
                             <div id="tujuan" class="scroll-mt-24 mb-10">
-                                <div class="text-center mb-12 relative">
+                                <div class="text-center mb-12 relative sm:pt-10">
                                     <h2 class="text-4xl font-bold text-gray-800 mb-3 uppercase tracking-wide">Tujuan & Fungsi
                                     </h2>
                                     <div class="w-24 h-1 bg-secondary mx-auto"></div>

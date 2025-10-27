@@ -40,7 +40,7 @@
     </div>
 
     <!-- Stats Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+    <div class="grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
         <!-- Berita Card -->
         <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-primary-600 hover:shadow-xl transition duration-200">
             <div class="flex items-center justify-between">

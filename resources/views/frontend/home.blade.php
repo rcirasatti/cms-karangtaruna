@@ -7,7 +7,7 @@
 
 @section('content')
 <!-- Hero Section with Slider -->
-<section class="relative h-[580px] flex items-center justify-center overflow-hidden">
+<section class="relative h-[450px] md:h-[580px] flex items-center justify-center overflow-hidden">
     @if($heroSlides && $heroSlides->count() > 0)
         <!-- Slider Container -->
         <div class="hero-slider absolute inset-0 w-full h-full">
@@ -21,13 +21,16 @@
         </div>
 
         <!-- Navigation Dots -->
+        @if($heroSlides->count() > 1)
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex space-x-2">
             @foreach($heroSlides as $index => $slide)
             <button class="slider-dot w-10 md:w-14 h-1 rounded-full {{ $index === 0 ? 'bg-white' : 'bg-white/50' }} transition-all hover:bg-white" data-slide="{{ $index }}"></button>
             @endforeach
         </div>
+        @endif
 
         <!-- Navigation Arrows -->
+        @if($heroSlides->count() > 1)
         <button class="slider-prev absolute left-4 top-1/2 transform -translate-y-1/2 z-30 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full transition">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -38,6 +41,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
             </svg>
         </button>
+        @endif
     @else
         <!-- Fallback jika tidak ada gambar -->
         <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-primary-600 to-primary-800"></div>
@@ -45,18 +49,18 @@
 
     <div class="absolute inset-0 bg-black/50 z-10"></div> <!-- Overlay Gelap -->
 
-    <div class="relative z-20 flex flex-col items-center justify-center text-center px-6 py-28 w-full">
-        <h1 class="text-4xl md:text-5xl font-bold text-white drop-shadow-lg mb-4">
+    <div class="relative z-20 flex flex-col items-center justify-center text-center px-4 md:px-6 py-20 md:py-28 w-full">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-lg mb-3 md:mb-4">
             {{ $hero->title ?? 'Tanpa Judul' }}
         </h1>
-        <p class="text-lg md:text-xl text-white drop-shadow mb-8 max-w-2xl">
+        <p class="text-base md:text-lg lg:text-xl text-white drop-shadow mb-6 md:mb-8 max-w-2xl">
             {{ $hero->subtitle ?? 'Null' }}
         </p>
-        <div class="flex space-x-4">
-            <a href="{{ route('tentang.profil') }}" class="inline-block bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition">
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0">
+            <a href="{{ route('tentang.profil') }}" class="inline-block bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition text-center">
                 Tentang Kami
             </a>
-            <a href="{{ route('kontak.index') }}" class="inline-block bg-white text-primary-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+            <a href="{{ route('kontak.index') }}" class="inline-block bg-white text-primary-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition text-center">
                 Hubungi Kami
             </a>
         </div>
@@ -65,7 +69,7 @@
 
 <!-- Quote Section -->
 @if($quotes && $quotes->count() > 0)
-<div class="bg-gradient-to-r from-primary-700 to-primary-900 py-20 relative">
+<div class="bg-gradient-to-r from-primary-700 to-primary-900 py-12 md:py-16 lg:py-20 relative">
     <div class="container mx-auto px-4">
         <!-- Quote Carousel -->
         <div class="relative">
@@ -73,11 +77,11 @@
             <div class="quote-carousel-wrapper overflow-hidden">
                 <div class="quote-carousel-track flex {{ $quotes->count() > 1 ? 'transition-transform duration-500 ease-in-out' : '' }} gap-8 {{ $quotes->count() <= 1 ? 'justify-center' : 'pr-8' }}">
                     @foreach($quotes as $index => $q)
-                    <div class="quote-item flex-shrink-0 w-full md:w-1/2" data-index="{{ $index }}">
-                        <div class="flex flex-col gap-6 backdrop-blur-sm rounded-lg p-6 items-center lg:flex-row lg:items-start">
+                    <div class="quote-item flex-shrink-0 w-full md:w-1/2 lg:w-1/2" data-index="{{ $index }}">
+                        <div class="flex flex-col gap-4 md:gap-6 backdrop-blur-sm rounded-lg p-4 md:p-6 items-center md:flex-row md:items-start">
                             <div class="flex-shrink-0">
                                 @if($q->foto && file_exists(public_path('storage/' . $q->foto)))
-                                    <div class="w-32 h-32 lg:w-40 lg:h-40 overflow-hidden shadow-lg rounded-lg">
+                                    <div class="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 overflow-hidden shadow-lg rounded-lg">
                                         <img src="{{ asset('storage/' . $q->foto) }}" 
                                             alt="{{ $q->nama }}" 
                                             class="w-full h-full object-cover">
@@ -94,15 +98,15 @@
                                         }
                                         if ($initials === '') $initials = strtoupper(mb_substr($q->nama, 0, 1));
                                     @endphp
-                                    <div class="w-32 h-32 lg:w-40 lg:h-40 bg-secondary flex items-center justify-center shadow-lg rounded-lg">
-                                        <p class="text-7xl font-bold text-white">{{ $initials }}</p>
+                                    <div class="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 bg-secondary flex items-center justify-center shadow-lg rounded-lg">
+                                        <p class="text-4xl md:text-5xl lg:text-7xl font-bold text-white">{{ $initials }}</p>
                                     </div>
                                 @endif
                             </div>
 
-                            <div class="flex-1 text-primary-100 text-center lg:text-left">
+                            <div class="flex-1 text-primary-100 text-center md:text-left">
                                 
-                                <p class="italic font-rajdhani text-sm lg:text-base leading-relaxed mb-4">
+                                <p class="italic font-rajdhani text-sm md:text-base lg:text-base leading-relaxed mb-3 md:mb-4">
                                     "{{ $q->quote }}"
                                 </p>
 
@@ -191,27 +195,27 @@
 @endif
 
 <!-- Produk UMKM -->
-<div class="container mx-auto px-4 py-24">
-    <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-800 mb-4">Produk UMKM</h2>
-        <p class="text-gray-600">Produk unggulan dari mitra Karang Taruna</p>
+<div class="container mx-auto px-4 py-12 md:py-16 lg:py-24">
+    <div class="text-center mb-8 md:mb-12">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-3 md:mb-4">Produk UMKM</h2>
+        <p class="text-sm md:text-base text-gray-600">Produk unggulan dari mitra Karang Taruna</p>
     </div>
 
     @if($produkTerbaru->count() > 0)
-    <div class="grid md:grid-cols-4 gap-6 mb-8">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
     @foreach($produkTerbaru->take(4) as $produk)
     <a href="{{ route('produk.list') }}?highlight={{ $produk->id }}" class="block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition relative group">
             @if($produk->foto)
-                <img src="{{ asset('storage/' . $produk->foto) }}" alt="{{ $produk->nama_produk }}" class="w-full h-48 object-cover">
+                <img src="{{ asset('storage/' . $produk->foto) }}" alt="{{ $produk->nama_produk }}" class="w-full h-40 md:h-48 object-cover">
             @else
-                <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
-                    <span class="text-gray-400">No Image</span>
+                <div class="w-full h-40 md:h-48 bg-gray-200 flex items-center justify-center">
+                    <span class="text-gray-400 text-sm">No Image</span>
                 </div>
             @endif
-            <div class="p-4 text-center">
-                <h3 class="font-bold mb-2">{{ $produk->nama_produk }}</h3>
+            <div class="p-3 md:p-4 text-center">
+                <h3 class="font-bold text-sm md:text-base mb-1 md:mb-2 line-clamp-2">{{ $produk->nama_produk }}</h3>
                 @if($produk->harga)
-                <p class="text-primary-600 font-bold text-lg mb-3">Rp {{ number_format($produk->harga, 0, ',', '.') }}</p>
+                <p class="text-primary-600 font-bold text-base md:text-lg mb-2 md:mb-3">Rp {{ number_format($produk->harga, 0, ',', '.') }}</p>
                 @endif
 
                 
@@ -231,15 +235,15 @@
 </div>
 
 <!-- Galeri Terbaru -->
-<div class="bg-gray-100 py-16">
+<div class="bg-gray-100 py-12 md:py-16">
     <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4">Galeri Terbaru</h2>
-            <p class="text-gray-600">Koleksi foto dan video terbaru dari kegiatan Karang Taruna</p>
+        <div class="text-center mb-8 md:mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-3 md:mb-4">Galeri Terbaru</h2>
+            <p class="text-sm md:text-base text-gray-600">Koleksi foto dan video terbaru dari kegiatan Karang Taruna</p>
         </div>
 
         @if($galeriTerbaru->count() > 0)
-        <div class="grid md:grid-cols-3 gap-6 mb-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-8">
             @foreach($galeriTerbaru as $galeri)
             <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group">
                 @php
@@ -248,32 +252,32 @@
                     $url = $isVideo ? ($galeri->thumbnail ?: '') : (is_array($galeri->media_path) ? $galeri->media_path[0] : $galeri->media_path);
                 @endphp
                 @if($tipe === 'foto')
-                    <div class="w-full h-48 bg-gray-200 overflow-hidden">
+                    <div class="w-full h-40 md:h-48 bg-gray-200 overflow-hidden">
                         <img src="{{ asset('storage/' . $url) }}" alt="{{ $galeri->judul }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                     </div>
                 @else
-                    <div class="w-full h-48 bg-black/20 flex items-center justify-center relative">
+                    <div class="w-full h-40 md:h-48 bg-black/20 flex items-center justify-center relative">
                         @if($galeri->thumbnail)
                             <img src="{{ asset('storage/' . $galeri->thumbnail) }}" alt="{{ $galeri->judul }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                         @else
-                            <svg class="w-12 h-12 text-white/50" fill="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-10 h-10 md:w-12 md:h-12 text-white/50" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
                             </svg>
                         @endif
                         <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors flex items-center justify-center">
-                            <svg class="w-16 h-16 text-white opacity-0 group-hover:opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-12 h-12 md:w-16 md:h-16 text-white opacity-0 group-hover:opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
                             </svg>
                         </div>
                     </div>
                 @endif
-                <div class="p-6">
+                <div class="p-4 md:p-6">
                     <div class="flex items-center justify-between mb-2">
                         <span class="text-xs bg-primary-100 text-primary-600 font-semibold px-2 py-1 rounded">{{ ucfirst($tipe) }}</span>
                         <span class="text-xs text-gray-500">{{ $galeri->tanggal_kegiatan->format('d M Y') }}</span>
                     </div>
-                    <h3 class="text-lg font-bold mt-2 mb-2 line-clamp-2">{{ $galeri->judul }}</h3>
-                    <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ $galeri->deskripsi ?? 'Tidak ada deskripsi' }}</p>
+                    <h3 class="text-base md:text-lg font-bold mt-2 mb-2 line-clamp-2">{{ $galeri->judul }}</h3>
+                    <p class="text-gray-600 text-sm mb-3 md:mb-4 line-clamp-2">{{ $galeri->deskripsi ?? 'Tidak ada deskripsi' }}</p>
                     <a href="{{ route('galeri.berita.show', $galeri->id) }}" class="text-primary-600 text-sm font-semibold hover:text-primary-700">
                         Lihat Detail →
                     </a>
@@ -285,8 +289,8 @@
         <p class="text-center text-gray-500">Belum ada galeri tersedia.</p>
         @endif
 
-        <div class="text-center">
-            <a href="{{ route('galeri.berita') }}" class="inline-block bg-primary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition">
+        <div class="text-center mt-6 md:mt-0">
+            <a href="{{ route('galeri.berita') }}" class="inline-block bg-primary-600 text-white px-6 md:px-8 py-3 rounded-lg font-semibold hover:bg-primary-700 transition">
                 Lihat Semua Galeri
             </a>
         </div>
@@ -294,10 +298,10 @@
 </div>
 
 <!-- Call to Action -->
-<div class="bg-primary-600 text-white py-16">
+<div class="bg-primary-600 text-white py-12 md:py-16">
     <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold mb-4">Bergabung Bersama Kami</h2>
-        <p class="text-xl mb-8">Mari berkontribusi untuk membangun generasi muda yang lebih baik</p>
+        <h2 class="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Bergabung Bersama Kami</h2>
+        <p class="text-base md:text-xl mb-6 md:mb-8">Mari berkontribusi untuk membangun generasi muda yang lebih baik</p>
         <a href="{{ route('kontak.index') }}" class="inline-block bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
             Hubungi Kami
         </a>

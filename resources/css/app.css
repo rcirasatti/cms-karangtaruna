@@ -252,3 +252,79 @@ footer .flex.items-center:hover {
     padding-left: 4px;
 }
 
+/* Tablet Landscape Optimizations */
+@media screen and (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
+    /* Navbar spacing adjustments for tablet landscape */
+    nav .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    /* Tighter spacing for navbar items */
+    nav .md\:flex {
+        gap: 0.25rem;
+    }
+    
+    /* Adjust dropdown positioning for tablet */
+    nav .group div[class*="absolute"] {
+        min-width: 12rem;
+    }
+    
+    /* Ensure touch targets are adequate */
+    nav button,
+    nav a {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+    
+    /* Optimize hero section height for landscape */
+    section.relative {
+        min-height: 450px;
+    }
+    
+    /* Better grid layouts for tablet landscape */
+    .grid.md\:grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    
+    .grid.md\:grid-cols-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    
+    /* Admin panel optimizations for tablet landscape */
+    /* Sidebar remains in overlay mode (fixed) on tablet landscape */
+    aside {
+        position: fixed !important;
+    }
+    
+    /* Ensure main content takes full width when sidebar is closed on tablet */
+    main {
+        width: 100%;
+        margin-left: 0;
+    }
+    
+    /* Admin header adjustments */
+    header .hidden.md\:block,
+    header .hidden.md\:flex {
+        display: flex !important;
+    }
+}
+
+/* Touch device improvements */
+@media (hover: none) and (pointer: coarse) {
+    /* Larger touch targets */
+    nav button,
+    nav a {
+        min-height: 48px;
+        min-width: 48px;
+        padding: 0.625rem;
+    }
+    
+    /* Ensure dropdowns are accessible on touch */
+    nav .group:focus-within div[class*="absolute"] {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+}
+

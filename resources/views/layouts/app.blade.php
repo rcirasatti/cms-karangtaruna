@@ -40,37 +40,37 @@
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
                 <!-- Logo (use local asset) -->
-                <div class="flex items-center space-x-3">
+                <div class="flex items-center space-x-2 md:space-x-3">
                     @if($profile->logo_path)
                         @php
                             $logoSrc = preg_match('/^https?:\/\//i', $profile->logo_path) ? $profile->logo_path : asset('storage/' . $profile->logo_path);
                         @endphp
                         <img src="{{ htmlspecialchars($logoSrc, ENT_QUOTES, 'UTF-8') }}" alt="Logo Karang Taruna"
-                            class="h-12">
+                            class="h-10 md:h-12">
                     @else
-                        <img src="{{ asset('assets/logo.png') }}" alt="Logo Karang Taruna" class="h-12">
+                        <img src="{{ asset('assets/logo.png') }}" alt="Logo Karang Taruna" class="h-10 md:h-12">
                     @endif
                     <div class="text-left">
-                        <span class="text-xl font-Montserrat font-bold text-white">{{ $navbar->title_navbar }}</span>
+                        <span class="text-base md:text-xl font-Montserrat font-bold text-white">{{ $navbar->title_navbar }}</span>
                         <br>
                         <span
-                            class="font-rajdhani font-italic text-md text-[#EBCB90]">{{ $navbar->subtitle_navbar }}</span>
+                            class="text-xs md:text-md font-rajdhani font-italic text-[#EBCB90]">{{ $navbar->subtitle_navbar }}</span>
                     </div>
                 </div>
 
-                <!-- Desktop & Tablet Menu -->
-                <div class="hidden lg:flex space-x-1">
+                <!-- Desktop & Tablet Landscape Menu -->
+                <div class="hidden md:flex md:space-x-0.5 lg:space-x-1">
                     <a href="{{ route('home') }}"
-                        class="px-4 py-2 rounded-lg {{ $hoverLink }} transition {{ request()->routeIs('home') ? $activeClass : 'text-white' }}">
+                        class="px-2 md:px-3 lg:px-4 py-2 rounded-lg text-sm lg:text-base {{ $hoverLink }} transition {{ request()->routeIs('home') ? $activeClass : 'text-white' }}">
                         Home
                     </a>
 
                     <!-- Tentang Dropdown -->
                     <div class="relative group">
-                        <button
-                            class="px-4 py-2 rounded-lg {{ $hoverLink }} transition flex items-center {{ request()->routeIs('tentang.*') ? $activeClass : 'text-white' }}">
+                        <button type="button" aria-haspopup="true" aria-expanded="false"
+                            class="px-2 md:px-3 lg:px-4 py-2 rounded-lg text-sm lg:text-base {{ $hoverLink }} transition flex items-center {{ request()->routeIs('tentang.*') ? $activeClass : 'text-white' }}">
                             About
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-3 h-3 md:w-4 md:h-4 ml-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M19 9l-7 7-7-7"></path>
                             </svg>
@@ -90,10 +90,10 @@
 
                     <!-- Visi & Nilai Dropdown -->
                     <div class="relative group">
-                        <button
-                            class="px-4 py-2 rounded-lg {{ $hoverLink }} transition flex items-center {{ request()->routeIs('profil.*') ? $activeClass : 'text-white' }}">
+                        <button type="button" aria-haspopup="true" aria-expanded="false"
+                            class="px-2 md:px-3 lg:px-4 py-2 rounded-lg text-sm lg:text-base {{ $hoverLink }} transition flex items-center {{ request()->routeIs('profil.*') ? $activeClass : 'text-white' }}">
                             Profile
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-3 h-3 md:w-4 md:h-4 ml-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M19 9l-7 7-7-7"></path>
                             </svg>
@@ -116,10 +116,10 @@
 
                     <!-- Kepengurusan Dropdown -->
                     <div class="relative group">
-                        <button
-                            class="px-4 py-2 rounded-lg {{ $hoverLink }} transition flex items-center {{ request()->routeIs('kepengurusan.*') ? $activeClass : 'text-white' }}">
+                        <button type="button" aria-haspopup="true" aria-expanded="false"
+                            class="px-2 md:px-3 lg:px-4 py-2 rounded-lg text-sm lg:text-base {{ $hoverLink }} transition flex items-center {{ request()->routeIs('kepengurusan.*') ? $activeClass : 'text-white' }}">
                             Organization
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-3 h-3 md:w-4 md:h-4 ml-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M19 9l-7 7-7-7"></path>
                             </svg>
@@ -139,10 +139,10 @@
 
                     <!-- Gallery Dropdown (Foto, Video & Arsip Berita) -->
                     <div class="relative group">
-                        <button
-                            class="px-4 py-2 rounded-lg {{ $hoverLink }} transition flex items-center {{ request()->routeIs('galeri.*') ? $activeClass : 'text-white' }}">
+                        <button type="button" aria-haspopup="true" aria-expanded="false"
+                            class="px-2 md:px-3 lg:px-4 py-2 rounded-lg text-sm lg:text-base {{ $hoverLink }} transition flex items-center {{ request()->routeIs('galeri.*') ? $activeClass : 'text-white' }}">
                             Gallery
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-3 h-3 md:w-4 md:h-4 ml-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M19 9l-7 7-7-7"></path>
                             </svg>
@@ -163,10 +163,10 @@
 
                     <!-- Produk & Mitra Dropdown -->
                     <div class="relative group">
-                        <button
-                            class="px-4 py-2 rounded-lg {{ $hoverLink }} transition flex items-center {{ request()->routeIs('produk.*') ? $activeClass : 'text-white' }}">
+                        <button type="button" aria-haspopup="true" aria-expanded="false"
+                            class="px-2 md:px-3 lg:px-4 py-2 rounded-lg text-sm lg:text-base whitespace-nowrap {{ $hoverLink }} transition flex items-center {{ request()->routeIs('produk.*') ? $activeClass : 'text-white' }}">
                             Product & Partners
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-3 h-3 md:w-4 md:h-4 ml-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M19 9l-7 7-7-7"></path>
                             </svg>
@@ -184,14 +184,14 @@
                     </div>
 
                     <a href="{{ route('kontak.index') }}"
-                        class="px-4 py-2 rounded-lg {{ $hoverLink }} transition {{ request()->routeIs('kontak.*') ? $activeClass : 'text-white' }}">
+                        class="px-2 md:px-3 lg:px-4 py-2 rounded-lg text-sm lg:text-base {{ $hoverLink }} transition {{ request()->routeIs('kontak.*') ? $activeClass : 'text-white' }}">
                         Contact
                     </a>
 
                     <!-- Admin Login Button -->
                     <a href="{{ route('admin.login') }}"
-                        class="ml-2 px-4 py-2 rounded-lg bg-white/20 text-white hover:bg-white/30 transition font-semibold border border-white/30">
-                        <svg class="w-4 h-4 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        class="ml-1 md:ml-2 px-2 md:px-3 lg:px-4 py-2 rounded-lg text-sm lg:text-base bg-white/20 text-white hover:bg-white/30 transition font-semibold border border-white/30 whitespace-nowrap">
+                        <svg class="w-3 h-3 md:w-4 md:h-4 inline-block mr-1 md:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
                             </path>
@@ -200,8 +200,8 @@
                     </a>
                 </div>
 
-                <!-- Mobile & Tablet Menu Button -->
-                <button id="mobile-menu-button" class="lg:hidden text-white p-2 focus:outline-none"
+                <!-- Mobile & Tablet Portrait Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-white p-2 focus:outline-none"
                     aria-label="Toggle menu">
                     <svg class="w-6 h-6 transition-transform duration-300" id="menu-icon" fill="none"
                         stroke="currentColor" viewBox="0 0 24 24">
@@ -215,7 +215,7 @@
 
     <!-- Mobile & Tablet Menu (full-screen overlay) -->
     <div id="mobile-menu"
-        class="hidden lg:hidden fixed inset-0 z-40 pt-16 bg-primary-900/95 backdrop-blur-md overflow-y-auto">
+        class="hidden md:hidden fixed inset-0 z-40 pt-16 bg-primary-900/95 backdrop-blur-md overflow-y-auto">
         <div class="w-full h-full">
             <!-- Close button at top -->
             <div class="flex justify-end p-4 border-b border-white/10">
@@ -716,6 +716,100 @@
                     svg.style.transform = 'rotate(0deg)';
                 });
             }
+        });
+
+        // Desktop/Tablet Dropdown Toggle (for touch devices and keyboard navigation)
+        document.querySelectorAll('.md\\:flex .group button').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const dropdown = this.closest('.group');
+                const dropdownContent = dropdown.querySelector('div[class*="absolute"]');
+                const arrow = this.querySelector('svg');
+                
+                // Close other dropdowns
+                document.querySelectorAll('.md\\:flex .group').forEach(otherGroup => {
+                    if (otherGroup !== dropdown) {
+                        const otherContent = otherGroup.querySelector('div[class*="absolute"]');
+                        const otherButton = otherGroup.querySelector('button');
+                        const otherArrow = otherButton?.querySelector('svg');
+                        if (otherContent) {
+                            otherContent.classList.remove('opacity-100', 'visible');
+                            otherContent.classList.add('opacity-0', 'invisible');
+                            if (otherButton) otherButton.setAttribute('aria-expanded', 'false');
+                            if (otherArrow) otherArrow.style.transform = 'rotate(0deg)';
+                        }
+                    }
+                });
+                
+                // Toggle current dropdown
+                if (dropdownContent) {
+                    const isVisible = dropdownContent.classList.contains('opacity-100');
+                    if (isVisible) {
+                        dropdownContent.classList.remove('opacity-100', 'visible');
+                        dropdownContent.classList.add('opacity-0', 'invisible');
+                        this.setAttribute('aria-expanded', 'false');
+                        if (arrow) arrow.style.transform = 'rotate(0deg)';
+                    } else {
+                        dropdownContent.classList.remove('opacity-0', 'invisible');
+                        dropdownContent.classList.add('opacity-100', 'visible');
+                        this.setAttribute('aria-expanded', 'true');
+                        if (arrow) arrow.style.transform = 'rotate(180deg)';
+                    }
+                }
+            });
+
+            // Keep dropdown open on hover for mouse users (desktop & tablet landscape)
+            const dropdown = button.closest('.group');
+            dropdown.addEventListener('mouseenter', function() {
+                const dropdownContent = this.querySelector('div[class*="absolute"]');
+                const dropdownButton = this.querySelector('button');
+                const arrow = dropdownButton?.querySelector('svg');
+                if (dropdownContent && window.innerWidth >= 768) {
+                    dropdownContent.classList.remove('opacity-0', 'invisible');
+                    dropdownContent.classList.add('opacity-100', 'visible');
+                    if (dropdownButton) dropdownButton.setAttribute('aria-expanded', 'true');
+                    if (arrow) arrow.style.transform = 'rotate(180deg)';
+                }
+            });
+
+            dropdown.addEventListener('mouseleave', function() {
+                const dropdownContent = this.querySelector('div[class*="absolute"]');
+                const dropdownButton = this.querySelector('button');
+                const arrow = dropdownButton?.querySelector('svg');
+                if (dropdownContent && window.innerWidth >= 768) {
+                    dropdownContent.classList.remove('opacity-100', 'visible');
+                    dropdownContent.classList.add('opacity-0', 'invisible');
+                    if (dropdownButton) dropdownButton.setAttribute('aria-expanded', 'false');
+                    if (arrow) arrow.style.transform = 'rotate(0deg)';
+                }
+            });
+        });
+
+        // Close desktop dropdowns when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.group')) {
+                document.querySelectorAll('.md\\:flex .group div[class*="absolute"]').forEach(content => {
+                    const group = content.closest('.group');
+                    const button = group?.querySelector('button');
+                    const arrow = button?.querySelector('svg');
+                    content.classList.remove('opacity-100', 'visible');
+                    content.classList.add('opacity-0', 'invisible');
+                    if (button) button.setAttribute('aria-expanded', 'false');
+                    if (arrow) arrow.style.transform = 'rotate(0deg)';
+                });
+            }
+        });
+
+        // Keyboard navigation support for dropdowns
+        document.querySelectorAll('.md\\:flex .group button').forEach(button => {
+            button.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
         });
     </script>
 </body>

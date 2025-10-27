@@ -14,8 +14,9 @@ class UserProfileController extends Controller
      */
     public function show()
     {
+        $profile = \App\Models\Profile::first();
         $user = Auth::user();
-        return view('admin.user.profile', compact('user'));
+        return view('admin.user.profile', compact('user', 'profile'));
     }
 
     /**
@@ -23,8 +24,9 @@ class UserProfileController extends Controller
      */
     public function edit()
     {
+        $profile = \App\Models\Profile::first();
         $user = Auth::user();
-        return view('admin.user.edit-profile', compact('user'));
+        return view('admin.user.edit-profile', compact('user', 'profile'));
     }
 
     /**
