@@ -74,10 +74,10 @@
                 <div class="quote-carousel-track flex {{ $quotes->count() > 1 ? 'transition-transform duration-500 ease-in-out' : '' }} gap-8 {{ $quotes->count() <= 1 ? 'justify-center' : 'pr-8' }}">
                     @foreach($quotes as $index => $q)
                     <div class="quote-item flex-shrink-0 w-full md:w-1/2" data-index="{{ $index }}">
-                        <div class="flex flex-col gap-6 backdrop-blur-sm rounded-lg p-6 items-center md:flex-row md:items-start">
+                        <div class="flex flex-col gap-6 backdrop-blur-sm rounded-lg p-6 items-center lg:flex-row lg:items-start">
                             <div class="flex-shrink-0">
                                 @if($q->foto && file_exists(public_path('storage/' . $q->foto)))
-                                    <div class="w-32 h-32 md:w-40 md:h-40 overflow-hidden shadow-lg rounded-lg">
+                                    <div class="w-32 h-32 lg:w-40 lg:h-40 overflow-hidden shadow-lg rounded-lg">
                                         <img src="{{ asset('storage/' . $q->foto) }}" 
                                             alt="{{ $q->nama }}" 
                                             class="w-full h-full object-cover">
@@ -94,15 +94,15 @@
                                         }
                                         if ($initials === '') $initials = strtoupper(mb_substr($q->nama, 0, 1));
                                     @endphp
-                                    <div class="w-32 h-32 md:w-40 md:h-40 bg-secondary flex items-center justify-center shadow-lg rounded-lg">
+                                    <div class="w-32 h-32 lg:w-40 lg:h-40 bg-secondary flex items-center justify-center shadow-lg rounded-lg">
                                         <p class="text-7xl font-bold text-white">{{ $initials }}</p>
                                     </div>
                                 @endif
                             </div>
 
-                            <div class="flex-1 text-primary-100">
+                            <div class="flex-1 text-primary-100 text-center lg:text-left">
                                 
-                                <p class="italic font-rajdhani text-sm md:text-base leading-relaxed mb-4">
+                                <p class="italic font-rajdhani text-sm lg:text-base leading-relaxed mb-4">
                                     "{{ $q->quote }}"
                                 </p>
 
@@ -157,7 +157,7 @@
 
             <!-- Left Arrow -->
             @if($quotes->count() > 2)
-            <button class="quote-prev absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition hidden md:block">
+            <button class="quote-prev absolute left-4 top-1/2 -translate-y-1/2 z-10 hover:bg-white/20 text-white p-3 rounded-full transition hidden md:block">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
@@ -166,7 +166,7 @@
 
             <!-- Right Arrow -->
             @if($quotes->count() > 2)
-            <button class="quote-next absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full transition hidden md:block">
+            <button class="quote-next absolute right-4 top-1/2 -translate-y-1/2 z-10 hover:bg-white/20 text-white p-3 rounded-full transition hidden md:block">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
