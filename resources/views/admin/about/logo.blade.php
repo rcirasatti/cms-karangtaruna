@@ -86,7 +86,7 @@
                     <div class="absolute bottom-0 left-0 w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 bg-white opacity-5 rounded-full -ml-24 md:-ml-36 lg:-ml-48 -mb-24 md:-mb-36 lg:-mb-48"></div>
 
                     <div class="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center mt-8 md:mt-12 lg:mt-16 relative z-10">
-                        <div class="relative">
+                        <div class="relative justify-items-center">
                             <div class="absolute"></div>
 
                             @if($profile->logo_path)
@@ -136,7 +136,7 @@
                             <!-- Content Card -->
                             <div class="relative group">
                                 <div class="absolute -inset-1 bg-gradient-to-r from-primary-500 to-primary-700 rounded-2xl opacity-20 group-hover:opacity-30 blur transition duration-300"></div>
-                                <div class="relative bg-white rounded-2xl shadow-xl p-8 border border-gray-100 ">
+                                <div class="relative bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
                                     @if($profile->filosofi_logo)
                                         <div class="prose prose-lg max-w-none">
                                             <p class="text-gray-700 leading-relaxed text-lg text-justify">

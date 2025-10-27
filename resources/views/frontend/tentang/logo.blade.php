@@ -10,7 +10,7 @@
             <div class="absolute top-0 right-0 w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 bg-white opacity-5 rounded-full -mr-16 md:-mr-24 lg:-mr-32 -mt-16 md:-mt-24 lg:-mt-32"></div>
             <div class="absolute bottom-0 left-0 w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96 bg-white opacity-5 rounded-full -ml-24 md:-ml-36 lg:-ml-48 -mb-24 md:-mb-36 lg:-mb-48"></div>
             <div class="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center mt-8 md:mt-12 lg:mt-16 relative z-10">
-                <div class="relative">
+                <div class="relative justify-items-center">
                     <div class="absolute">
                     </div>
                     
