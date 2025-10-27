@@ -16,10 +16,10 @@
 </head>
 
 <body class="bg-color_bg font-poppins" x-data="{
-    sidebarOpen: window.innerWidth >= 1024,
+    sidebarOpen: window.innerWidth >= 1366,
     init() {
         window.addEventListener('resize', () => {
-            if (window.innerWidth >= 1024) {
+            if (window.innerWidth >= 1366) {
                 this.sidebarOpen = true;
             } else {
                 this.sidebarOpen = false;
