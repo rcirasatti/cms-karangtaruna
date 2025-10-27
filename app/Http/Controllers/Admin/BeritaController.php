@@ -42,8 +42,8 @@ class BeritaController extends Controller
                 'tanggal_kegiatan' => 'required|date',
                 'kategori' => 'required|string|max:100',
                 'link_video' => 'nullable|string|max:500',
-                'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'media_path.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+                'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+                'media_path.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120'
             ], $this->validationMessages(), $this->validationAttributes());
 
             if ($request->hasFile('thumbnail')) {
@@ -103,8 +103,8 @@ class BeritaController extends Controller
                 'tanggal_kegiatan' => 'required|date',
                 'kategori' => 'required|string|max:100',
                 'link_video' => 'nullable|string|max:500',
-                'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'media_path.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+                'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+                'media_path.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120'
             ], $this->validationMessages(), $this->validationAttributes());
 
             if ($request->hasFile('thumbnail')) {

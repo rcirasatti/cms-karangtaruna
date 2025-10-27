@@ -39,7 +39,7 @@ class MitraController extends Controller
                 'nama_mitra' => 'required|string|max:100|unique:mitra,nama_mitra',
                 'jenis' => 'required|string|max:100',
                 'deskripsi' => 'nullable|string|max:1000',
-                'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
                 'kontak' => 'nullable|string|max:100',
                 'testimoni' => 'nullable|string|max:1000'
             ], $this->validationMessages(), $this->validationAttributes());
@@ -95,7 +95,7 @@ class MitraController extends Controller
                 'nama_mitra' => 'required|string|max:100|unique:mitra,nama_mitra,' . $id,
                 'jenis' => 'required|string|max:100',
                 'deskripsi' => 'nullable|string|max:1000',
-                'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
                 'kontak' => 'nullable|string|max:100',
                 'testimoni' => 'nullable|string|max:1000'
             ], $this->validationMessages(), $this->validationAttributes());

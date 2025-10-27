@@ -38,14 +38,14 @@ class AboutController extends Controller
     public function update_logo(Request $request)
     {
         $request->validate([
-            'logo_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'logo_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
             'logo_url' => 'nullable|url',
             'filosofi_logo' => 'required|string',
             'filosofi_items' => 'nullable|array',
             'filosofi_items.*.title' => 'required|string|max:255',
             'filosofi_items.*.description' => 'required|string',
             'filosofi_items.*.icon' => 'nullable|string',
-            'filosofi_items.*.gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'filosofi_items.*.gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
             'filosofi_items.*.use_icon' => 'required|boolean',
             'filosofi_items.*.urutan' => 'required|integer',
         ]);
@@ -249,7 +249,7 @@ class AboutController extends Controller
             'quote' => 'required|string',
             'nama' => 'required|string|max:255',
             'peran' => 'required|string|max:255',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
             'is_tampil' => 'nullable|boolean'
         ]);
 

@@ -76,16 +76,14 @@ class ProfileController extends Controller
                 'nilai_dasar.*' => 'nullable|string',
                 'visi_align' => 'nullable|in:left,center,right,justify',
                 'misi_align' => 'nullable|in:left,center,right,justify',
-                'tujuan_align' => 'nullable|in:left,center,right,justify',
-                'fungsi_align' => 'nullable|in:left,center,right,justify',
-                'nilai_dasar_align' => 'nullable|in:left,center,right,justify',
-                'gambar_visi' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-                'gambar_misi' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-                'gambar_tujuan' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-                'gambar_fungsi' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            ]);
-
-            $profil = VisiMisi::findOrFail($id);
+            'tujuan_align' => 'nullable|in:left,center,right,justify',
+            'fungsi_align' => 'nullable|in:left,center,right,justify',
+            'nilai_dasar_align' => 'nullable|in:left,center,right,justify',
+            'gambar_visi' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'gambar_misi' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'gambar_tujuan' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'gambar_fungsi' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+        ]);            $profil = VisiMisi::findOrFail($id);
 
             // Update text fields only if they are present in request
             if ($request->has('visi')) {

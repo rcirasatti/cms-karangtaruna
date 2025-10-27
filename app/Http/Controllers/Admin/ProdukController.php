@@ -40,8 +40,8 @@ class ProdukController extends Controller
                 'deskripsi' => 'required|string|max:1000',
                 'harga' => 'nullable|numeric|min:0',
                 'kategori' => 'nullable|string|max:100',
-                'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'galeri.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+                'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+                'galeri.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120'
             ], $this->validationMessages(), $this->validationAttributes());
 
             if ($request->hasFile('foto')) {
@@ -104,8 +104,8 @@ class ProdukController extends Controller
                 'deskripsi' => 'required|string|max:1000',
                 'harga' => 'nullable|numeric|min:0',
                 'kategori' => 'nullable|string|max:100',
-                'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'galeri.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+                'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+                'galeri.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120'
             ], $this->validationMessages(), $this->validationAttributes());
 
             if ($request->hasFile('foto')) {

@@ -41,7 +41,7 @@ class KepengurusanController extends Controller
             'jabatan' => 'required|string|max:255',
             'tugas' => 'nullable|string|max:500',
             'profil_singkat' => 'nullable|string|max:500',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
             'is_tokoh_utama' => 'sometimes|boolean',
             'urutan' => 'nullable|integer|min:0|max:1000',
         ]);
@@ -102,7 +102,7 @@ class KepengurusanController extends Controller
                 'jabatan' => 'required|string|max:255',
                 'tugas' => 'nullable|string|max:500',
                 'profil_singkat' => 'nullable|string|max:500',
-                'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+                'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
                 'is_tokoh_utama' => 'sometimes|boolean',
                 'urutan' => 'nullable|integer|min:0|max:1000',
             ]);
