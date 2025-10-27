@@ -54,7 +54,7 @@
                         <span class="text-base md:text-xl font-Montserrat font-bold text-white">{{ $navbar->title_navbar }}</span>
                         <br>
                         <span
-                            class="text-xs md:text-md font-rajdhani font-italic text-[#EBCB90]">{{ $navbar->subtitle_navbar }}</span>
+                            class="text-md md:text-md font-rajdhani font-italic text-[#EBCB90]">{{ $navbar->subtitle_navbar }}</span>
                     </div>
                 </div>
 
