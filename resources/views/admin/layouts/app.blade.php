@@ -18,13 +18,22 @@
 <body class="bg-color_bg font-poppins" x-data="{
     sidebarOpen: window.innerWidth >= 1024,
     init() {
+        // Set initial state based on screen size
+        this.updateSidebarState();
+        
+        // Listen for window resize
         window.addEventListener('resize', () => {
-            if (window.innerWidth >= 1024) {
-                this.sidebarOpen = true;
-            } else {
-                this.sidebarOpen = false;
-            }
+            this.updateSidebarState();
         });
+    },
+    updateSidebarState() {
+        // Sidebar only opens automatically on desktop (≥1024px)
+        // Tablet landscape (768-1023px) and mobile (<768px): sidebar closed by default
+        if (window.innerWidth >= 1024) {
+            this.sidebarOpen = true;
+        } else {
+            this.sidebarOpen = false;
+        }
     }
 }">
     <!-- Global Alert Component -->
