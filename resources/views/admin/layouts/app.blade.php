@@ -12,11 +12,22 @@
     <link rel="icon" type="image/png" href="{{ htmlspecialchars($adminFaviconPath, ENT_QUOTES, 'UTF-8') }}" />
     <link rel="alternate icon" href="{{ asset('favicon.ico') }}" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        /* Prevent sidebar flash before Alpine.js loads */
+        [x-cloak] { display: none !important; }
+        
+        /* Initial sidebar state for tablet landscape and mobile */
+        @media (max-width: 1023px) {
+            aside {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
     @stack('styles')
 </head>
 
 <body class="bg-color_bg font-poppins" x-data="{
-    sidebarOpen: window.innerWidth >= 1024,
+    sidebarOpen: false,
     init() {
         // Set initial state based on screen size
         this.updateSidebarState();
@@ -35,7 +46,7 @@
             this.sidebarOpen = false;
         }
     }
-}">
+}" x-init="updateSidebarState()">
     <!-- Global Alert Component -->
     @include('admin.layouts.alert')
 

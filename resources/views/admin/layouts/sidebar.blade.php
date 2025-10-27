@@ -1,18 +1,32 @@
 <!-- Sidebar Overlay (Mobile & Tablet Landscape) -->
-<div x-show="sidebarOpen" @click="sidebarOpen = false" x-transition:enter="transition-opacity ease-linear duration-300"
-    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-    x-transition:leave="transition-opacity ease-linear duration-300" x-transition:leave-start="opacity-100"
-    x-transition:leave-end="opacity-0" class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity z-40 lg:hidden"
-    style="display: none;">
+<div 
+    @click="sidebarOpen = false" 
+    class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity z-40 lg:hidden"
+    :class="{
+        'opacity-100 visible': sidebarOpen,
+        'opacity-0 invisible': !sidebarOpen
+    }"
+    x-transition:enter="transition-opacity ease-linear duration-300"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition-opacity ease-linear duration-300"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0">
 </div>
 
 <!-- Sidebar (Fixed on Mobile & Tablet, Static on Desktop) -->
-<aside x-show="sidebarOpen" x-transition:enter="transition ease-in-out duration-300 transform"
-    x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
-    x-transition:leave="transition ease-in-out duration-300 transform" x-transition:leave-start="translate-x-0"
-    x-transition:leave-end="-translate-x-full" :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
+<aside 
     class="fixed lg:static inset-y-0 left-0 bg-gradient-to-br from-[#134686] via-[#1a5fa0] to-[#1a5fa0] text-gray-50 w-64 flex-shrink-0 overflow-y-auto shadow-2xl z-50 lg:shadow-none transition-transform duration-300 ease-in-out"
-    style="display: none;">
+    :class="{
+        'translate-x-0': sidebarOpen,
+        '-translate-x-full lg:translate-x-0': !sidebarOpen
+    }"
+    x-transition:enter="transition ease-in-out duration-300 transform"
+    x-transition:enter-start="-translate-x-full"
+    x-transition:enter-end="translate-x-0"
+    x-transition:leave="transition ease-in-out duration-300 transform"
+    x-transition:leave-start="translate-x-0"
+    x-transition:leave-end="-translate-x-full">
 
     <!-- Navigation -->
     <nav class="p-4">
