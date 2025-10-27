@@ -23,7 +23,7 @@
         <!-- Navigation Dots -->
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex space-x-2">
             @foreach($heroSlides as $index => $slide)
-            <button class="slider-dot w-3 h-3 rounded-full {{ $index === 0 ? 'bg-white' : 'bg-white/50' }} transition-all hover:bg-white" data-slide="{{ $index }}"></button>
+            <button class="slider-dot w-10 md:w-14 h-1 rounded-full {{ $index === 0 ? 'bg-white' : 'bg-white/50' }} transition-all hover:bg-white" data-slide="{{ $index }}"></button>
             @endforeach
         </div>
 
