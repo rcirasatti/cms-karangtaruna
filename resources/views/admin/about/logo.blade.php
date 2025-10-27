@@ -31,6 +31,15 @@
                 use_icon: true,
                 urutan: this.filosofiItems.length + 1
             })
+            setTimeout(() => {
+                const container = document.getElementById('filosofi-items-container');
+                if (container) {
+                    container.scrollTo({
+                        top: container.scrollHeight,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 100);
         },
         removeFilosofiItem(index) {
             this.filosofiItems.splice(index, 1)
@@ -414,7 +423,7 @@
                                 </div>
                                 <button type="button"
                                         @click="addFilosofiItem()"
-                                        class="px-4 py-2 bg-secondary hover:bg-secondary/90 hover:shadow-lg text-white font-semibold rounded-lg transition duration-300 flex items-center space-x-2">
+                                        class="px-4 py-2 bg-secondary hover:bg-secondary-900 hover:shadow-lg hover:scale-105 text-white font-semibold rounded-lg transition duration-300 flex items-center space-x-2">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                                     </svg>
@@ -422,7 +431,7 @@
                                 </button>
                             </div>
 
-                            <div class="space-y-4 max-h-96 overflow-y-auto pr-2">
+                            <div id="filosofi-items-container" class="space-y-4 max-h-96 overflow-y-auto pr-2">
                                 <template x-for="(item, index) in filosofiItems" :key="index">
                                     <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 hover:border-primary-300 transition-colors">
                                         <!-- Hidden ID field -->

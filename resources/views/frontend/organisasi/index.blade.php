@@ -52,7 +52,7 @@
                             <div class="w-24 h-1 bg-secondary mx-auto"></div>
                         </div>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 max-w-7xl mx-auto px-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 max-w-7xl mx-auto px-4 justify-items-center">
                             @foreach($tokohUtama as $tokoh)
                                 <div class="text-center w-40 sm:w-44 md:w-48 lg:w-52 cursor-pointer pengurus-card"
                                     data-nama="{{ $tokoh->nama }}" data-jabatan="{{ $tokoh->jabatan }}" data-foto="{{ $tokoh->foto }}"
@@ -94,7 +94,7 @@
                             <div class="w-24 h-1 bg-secondary mx-auto"></div>
                         </div>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 max-w-7xl mx-auto px-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 max-w-7xl mx-auto px-4 justify-items-center">
                             @foreach($strukturPengurus as $anggota)
                                 <div class="text-center w-40 sm:w-44 md:w-48 lg:w-52 cursor-pointer pengurus-card"
                                     data-nama="{{ $anggota->nama }}" data-jabatan="{{ $anggota->jabatan }}"

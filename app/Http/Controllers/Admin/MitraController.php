@@ -15,8 +15,9 @@ class MitraController extends Controller
      */
     public function index()
     {
+        $profile = \App\Models\Profile::first();
         $mitra = Mitra::orderBy('created_at', 'desc')->paginate(10);
-        return view('admin.mitra.index', compact('mitra'));
+        return view('admin.mitra.index', compact('mitra', 'profile'));
     }
 
     /**
@@ -24,7 +25,8 @@ class MitraController extends Controller
      */
     public function create()
     {
-        return view('admin.mitra.create');
+        $profile = \App\Models\Profile::first();
+        return view('admin.mitra.create', compact('profile'));
     }
 
     /**
@@ -37,7 +39,7 @@ class MitraController extends Controller
                 'nama_mitra' => 'required|string|max:100|unique:mitra,nama_mitra',
                 'jenis' => 'required|string|max:100',
                 'deskripsi' => 'nullable|string|max:1000',
-                'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
                 'kontak' => 'nullable|string|max:100',
                 'testimoni' => 'nullable|string|max:1000'
             ], $this->validationMessages(), $this->validationAttributes());
@@ -76,8 +78,9 @@ class MitraController extends Controller
      */
     public function edit(string $id)
     {
+        $profile = \App\Models\Profile::first();
         $mitra = Mitra::findOrFail($id);
-        return view('admin.mitra.edit', compact('mitra'));
+        return view('admin.mitra.edit', compact('mitra', 'profile'));
     }
 
     /**
@@ -92,7 +95,7 @@ class MitraController extends Controller
                 'nama_mitra' => 'required|string|max:100|unique:mitra,nama_mitra,' . $id,
                 'jenis' => 'required|string|max:100',
                 'deskripsi' => 'nullable|string|max:1000',
-                'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
                 'kontak' => 'nullable|string|max:100',
                 'testimoni' => 'nullable|string|max:1000'
             ], $this->validationMessages(), $this->validationAttributes());

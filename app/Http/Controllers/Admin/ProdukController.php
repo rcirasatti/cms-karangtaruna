@@ -15,8 +15,9 @@ class ProdukController extends Controller
      */
     public function index()
     {
+        $profile = \App\Models\Profile::first();
         $produk = Produk::orderBy('created_at', 'desc')->paginate(10);
-        return view('admin.produk.index', compact('produk'));
+        return view('admin.produk.index', compact('produk', 'profile'));
     }
 
     /**
@@ -24,7 +25,8 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        return view('admin.produk.create');
+        $profile = \App\Models\Profile::first();
+        return view('admin.produk.create', compact('profile'));
     }
 
     /**
@@ -38,8 +40,8 @@ class ProdukController extends Controller
                 'deskripsi' => 'required|string|max:1000',
                 'harga' => 'nullable|numeric|min:0',
                 'kategori' => 'nullable|string|max:100',
-                'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'galeri.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+                'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+                'galeri.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120'
             ], $this->validationMessages(), $this->validationAttributes());
 
             if ($request->hasFile('foto')) {
@@ -85,7 +87,8 @@ class ProdukController extends Controller
     public function edit(string $id)
     {
         $produk = Produk::findOrFail($id);
-        return view('admin.produk.edit', compact('produk'));
+        $profile = \App\Models\Profile::first();
+        return view('admin.produk.edit', compact('produk', 'profile'));
     }
 
     /**
@@ -101,8 +104,8 @@ class ProdukController extends Controller
                 'deskripsi' => 'required|string|max:1000',
                 'harga' => 'nullable|numeric|min:0',
                 'kategori' => 'nullable|string|max:100',
-                'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'galeri.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+                'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+                'galeri.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120'
             ], $this->validationMessages(), $this->validationAttributes());
 
             if ($request->hasFile('foto')) {

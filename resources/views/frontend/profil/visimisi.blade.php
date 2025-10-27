@@ -45,33 +45,41 @@
                     <div id="vision" class="relative flex flex-col md:flex-row mb-10 scroll-mt-24">
                         <div class="md:w-[400px] bg-gray-100 md:absolute shadow-xl hover:scale-105">
                             @if($visiMisi->gambar_visi)
-                                <img src="{{ asset('storage/' . $visiMisi->gambar_visi) }}" alt="Vision" class="w-full h-full object-cover">
+                                <img src="{{ asset('storage/' . $visiMisi->gambar_visi) }}" alt="Vision"
+                                    class="w-full h-full object-cover">
                             @else
-                                <img src="{{ asset('images/default/default.jpg') }}" alt="Vision No Picture" class="w-full h-full object-cover">
+                                <img src="{{ asset('images/default/default.jpg') }}" alt="Vision No Picture"
+                                    class="w-full h-full object-cover">
                             @endif
                         </div>
-                        <div
-                            class="bg-gradient-to-br from-primary-700 via-primary-800 to-primary-700 py-16 px-8 md:px-16 md:rounded md:min-h-[400px] md:ml-[350px] md:pl-32 shadow-xl">
-                            <h2 class="text-3xl font-bold text-secondary mb-10 uppercase tracking-wide">VISI</h2>
-                            <div class="text-gray-300 leading-relaxed text-base lg:text-lg">
-                                <p class="whitespace-pre-line">{{ $visiMisi->visi }}</p>
+                        <div class="w-full">
+                            <div
+                                class="bg-gradient-to-br from-primary-700 via-primary-800 to-primary-700 py-16 px-8 md:px-16 md:rounded md:min-h-[400px] md:ml-[350px] md:pl-32 shadow-xl">
+                                <h2 class="text-3xl font-bold text-secondary mb-10 uppercase tracking-wide">VISI</h2>
+                                <div class="text-gray-300 leading-relaxed text-base lg:text-lg">
+                                    {!! \App\Helpers\TextHelper::formatList($visiMisi->visi) !!}
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div id="mission" class="relative flex flex-col md:flex-row mb-20 scroll-mt-24">
-                        <div
-                            class="order-last bg-gradient-to-br from-primary-700 via-primary-800 to-primary-700 py-16 px-8 md:px-16 md:rounded md:min-h-[400px] md:mr-[350px] md:pr-32 shadow-xl">
-                            <h2 class="text-3xl font-bold text-secondary mb-10 uppercase tracking-wide">MISI</h2>
-                            <div class="text-gray-300 leading-relaxed text-base lg:text-lg">
-                                <p class="whitespace-pre-line">{{ $visiMisi->misi }}</p>
+                        <div class="w-full">
+                            <div
+                                class="order-last bg-gradient-to-br from-primary-700 via-primary-800 to-primary-700 py-16 px-8 md:px-16 md:rounded md:min-h-[400px] md:mr-[350px] md:pr-32 shadow-xl">
+                                <h2 class="text-3xl font-bold text-secondary mb-10 uppercase tracking-wide">MISI</h2>
+                                <div class="text-gray-300 leading-relaxed text-base lg:text-lg">
+                                    {!! \App\Helpers\TextHelper::formatList($visiMisi->misi) !!}
+                                </div>
                             </div>
                         </div>
                         <div class="md:w-[400px] bg-gray-100 md:absolute right-0 top-0 shadow-xl hover:scale-105">
                             @if($visiMisi->gambar_misi)
-                                <img src="{{ asset('storage/' . $visiMisi->gambar_misi) }}" alt="Mission" class="w-full h-full object-cover">
+                                <img src="{{ asset('storage/' . $visiMisi->gambar_misi) }}" alt="Mission"
+                                    class="w-full h-full object-cover">
                             @else
-                                <img src="{{ asset('images/default/default.jpg') }}" alt="Mission No Picture" class="w-full h-full object-cover">
+                                <img src="{{ asset('images/default/default.jpg') }}" alt="Mission No Picture"
+                                    class="w-full h-full object-cover">
                             @endif
                         </div>
                     </div>
@@ -105,8 +113,8 @@
                                         </div>
                                     </div>
                                     <div class="p-8">
-                                        <div class="text-gray-700 leading-relaxed text-base whitespace-pre-line">
-                                            {{ $visiMisi->tujuan }}
+                                        <div class="text-gray-700 leading-relaxed text-base ">
+                                            {!! \App\Helpers\TextHelper::formatList($visiMisi->tujuan) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -131,8 +139,8 @@
                                         </div>
                                     </div>
                                     <div class="p-8">
-                                        <div class="text-gray-700 leading-relaxed text-base whitespace-pre-line">
-                                            {{ $visiMisi->fungsi }}
+                                        <div class="text-gray-700 leading-relaxed text-base">
+                                            {!! \App\Helpers\TextHelper::formatList($visiMisi->fungsi) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -175,7 +183,7 @@
                         </div>
                     @endif
 
-                    @if($visiMisi->nilai_dasar)
+                    @if($visiMisi->nilai_dasar && is_array($visiMisi->nilai_dasar) && count($visiMisi->nilai_dasar) > 0)
                         <div id="nilai-dasar" class="scroll-mt-24">
                             <div
                                 class="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 rounded-2xl shadow-2xl overflow-hidden">
@@ -203,11 +211,24 @@
                                         <div class="w-32 h-1 bg-secondary"></div>
                                     </div>
 
-                                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 md:p-12 border border-white/20">
-                                        <div
-                                            class="text-white leading-relaxed text-base lg:text-lg whitespace-pre-line text-center max-w-5xl mx-auto">
-                                            {{ $visiMisi->nilai_dasar }}
-                                        </div>
+                                    <div
+                                        class="text-white leading-relaxed text-base lg:text-lg text-{{ $visiMisi->nilai_dasar_align ?? 'left' }} max-w-5xl mx-auto">
+                                        <ul class="space-y-3 flex gap-4 flex-wrap justify-center">
+                                            @foreach($visiMisi->nilai_dasar as $nilai)
+                                                <li class="flex items-start">
+                                                    <div
+                                                        class="flex bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 p-2 md:p-4 hover:scale-105 transition-transform">
+                                                        <svg class="w-6 h-6 text-secondary mr-3 mt-1 flex-shrink-0" fill="currentColor"
+                                                            viewBox="0 0 20 20">
+                                                            <path fill-rule="evenodd"
+                                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                                clip-rule="evenodd"></path>
+                                                        </svg>
+                                                        <span>{{ $nilai }}</span>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
