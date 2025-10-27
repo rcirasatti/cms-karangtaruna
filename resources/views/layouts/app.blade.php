@@ -58,8 +58,8 @@
                     </div>
                 </div>
 
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-1">
+                <!-- Desktop & Tablet Menu -->
+                <div class="hidden lg:flex space-x-1">
                     <a href="{{ route('home') }}"
                         class="px-4 py-2 rounded-lg {{ $hoverLink }} transition {{ request()->routeIs('home') ? $activeClass : 'text-white' }}">
                         Home
@@ -200,8 +200,8 @@
                     </a>
                 </div>
 
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" class="md:hidden text-white p-2 focus:outline-none"
+                <!-- Mobile & Tablet Menu Button -->
+                <button id="mobile-menu-button" class="lg:hidden text-white p-2 focus:outline-none"
                     aria-label="Toggle menu">
                     <svg class="w-6 h-6 transition-transform duration-300" id="menu-icon" fill="none"
                         stroke="currentColor" viewBox="0 0 24 24">
@@ -213,9 +213,9 @@
         </div>
     </nav>
 
-    <!-- Mobile Menu (full-screen overlay) -->
+    <!-- Mobile & Tablet Menu (full-screen overlay) -->
     <div id="mobile-menu"
-        class="hidden md:hidden fixed inset-0 z-40 pt-16 bg-primary-900/95 backdrop-blur-md overflow-y-auto">
+        class="hidden lg:hidden fixed inset-0 z-40 pt-16 bg-primary-900/95 backdrop-blur-md overflow-y-auto">
         <div class="w-full h-full">
             <!-- Close button at top -->
             <div class="flex justify-end p-4 border-b border-white/10">
@@ -627,7 +627,7 @@
             });
         });
 
-        // Mobile Dropdown Toggle with smooth animation
+        // Mobile & Tablet Dropdown Toggle with smooth animation
         document.querySelectorAll('.mobile-dropdown-button').forEach(button => {
             button.addEventListener('click', function (e) {
                 e.stopPropagation();
@@ -652,6 +652,58 @@
                 content.classList.toggle('hidden');
                 svg.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
             });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.mobile-dropdown')) {
+                document.querySelectorAll('.mobile-dropdown-content').forEach(content => {
+                    content.classList.add('hidden');
+                });
+                document.querySelectorAll('.mobile-dropdown-button svg').forEach(svg => {
+                    svg.style.transform = 'rotate(0deg)';
+                });
+            }
+        });
+
+        // Tablet Dropdown Toggle (untuk tampilan tablet)
+        document.querySelectorAll('.tablet-dropdown-btn').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.stopPropagation();
+                const dropdown = this.closest('.tablet-dropdown');
+                const content = dropdown.querySelector('.tablet-dropdown-content');
+                const icon = dropdown.querySelector('.tablet-dropdown-icon');
+                const isHidden = content.classList.contains('hidden');
+
+                // Close other tablet dropdowns
+                document.querySelectorAll('.tablet-dropdown-content').forEach(el => {
+                    if (el !== content) {
+                        el.classList.add('hidden');
+                    }
+                });
+
+                document.querySelectorAll('.tablet-dropdown-icon').forEach(svg => {
+                    if (svg !== icon) {
+                        svg.style.transform = 'rotate(0deg)';
+                    }
+                });
+
+                // Toggle current dropdown
+                content.classList.toggle('hidden');
+                icon.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+            });
+        });
+
+        // Close tablet dropdown when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.tablet-dropdown')) {
+                document.querySelectorAll('.tablet-dropdown-content').forEach(el => {
+                    el.classList.add('hidden');
+                });
+                document.querySelectorAll('.tablet-dropdown-icon').forEach(svg => {
+                    svg.style.transform = 'rotate(0deg)';
+                });
+            }
         });
 
         // Close dropdown when clicking outside
