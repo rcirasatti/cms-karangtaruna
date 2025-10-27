@@ -13,6 +13,7 @@ class KontakController extends Controller
      */
     public function index()
     {
+        $profile = \App\Models\Profile::first();
         $kontak = Kontak::first() ?? Kontak::create([
             'alamat_sekretariat' => '',
             'telepon' => '',
@@ -23,8 +24,8 @@ class KontakController extends Controller
             'twitter' => '',
             'youtube' => ''
         ]);
-        
-        return view('admin.kontak.index', compact('kontak'));
+
+        return view('admin.kontak.index', compact('kontak', 'profile'));
     }
 
     /**
