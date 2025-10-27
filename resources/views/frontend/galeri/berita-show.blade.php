@@ -29,8 +29,7 @@
 
 
     <!-- Hero Section dengan Breadcrumb -->
-    <div
-        class="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 text-white py-20 md:py-32 md:h-[420px] h-auto overflow-hidden">
+    <div class="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 text-white py-20 md:py-32 md:h-[420px] h-auto overflow-hidden">
         <!-- Decorative Elements -->
         <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -mr-32 -mt-32"></div>
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-white opacity-5 rounded-full -ml-48 -mb-48"></div>
@@ -136,91 +135,82 @@
                             </div>
                             <span class="hidden md:block">·</span>
                             <time class="text-gray-600">
-                                {{ $kegiatan->tanggal_kegiatan->format('d F Y') }}
+                                {{ $kegiatan->created_at->format('d/m/Y, H:i') }} WIB
                             </time>
                         </div>
-
-                        <!-- Action Buttons -->
-                        <div class="flex items-center gap-3 pb-6 border-b border-gray-200">
-
-
-                            <!-- Share Menu Dropdown -->
-                            <div id="shareMenu"
-                                class="hidden absolute mt-2 right-4 bg-white border border-gray-200 rounded-lg shadow-lg p-2 z-10">
+                        
+                        <!-- Share Section -->
+                        <div class="mt-4">
+                            <h3 class="text-sm font-semibold text-gray-600 mb-3">Bagikan</h3>
+                            <div class="flex flex-wrap gap-2 pb-4">
                                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->url()) }}"
-                                    target="_blank"
-                                    class="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 rounded-lg transition-colors">
-                                    <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="inline-flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 min-h-[44px] min-w-[44px]"
+                                    aria-label="Bagikan ke Facebook">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                        <path d="M8 1h4v3H8V1z" />
                                     </svg>
-                                    <span class="text-sm font-medium">Facebook</span>
+                                    <span>Facebook</span>
                                 </a>
                                 <a href="https://twitter.com/intent/tweet?text={{ urlencode($kegiatan->judul . ' - ' . request()->url()) }}"
-                                    target="_blank"
-                                    class="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 rounded-lg transition-colors">
-                                    <svg class="w-5 h-5 text-sky-500" fill="currentColor" viewBox="0 0 24 24">
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="inline-flex items-center space-x-2 px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-400 min-h-[44px] min-w-[44px]"
+                                    aria-label="Bagikan ke Twitter">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                                         <path
-                                            d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                                            d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-7.556 3.769 11.986 11.986 0 01-8.702-4.413 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.95 11.95 0 006.29 1.84" />
                                     </svg>
-                                    <span class="text-sm font-medium">Twitter</span>
+                                    <span>Twitter</span>
                                 </a>
                                 <a href="https://api.whatsapp.com/send?text={{ urlencode($kegiatan->judul . ' - ' . request()->url()) }}"
-                                    target="_blank"
-                                    class="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 rounded-lg transition-colors">
-                                    <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                                    target="_blank" rel="noopener noreferrer"
+                                    class="inline-flex items-center space-x-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 min-h-[44px] min-w-[44px]"
+                                    aria-label="Bagikan ke WhatsApp">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                        <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z" />
                                     </svg>
-                                    <span class="text-sm font-medium">WhatsApp</span>
+                                    <span>WhatsApp</span>
                                 </a>
                                 <button onclick="copyToClipboard()"
-                                    class="w-full flex items-center gap-3 px-4 py-2 hover:bg-gray-50 rounded-lg transition-colors">
-                                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
+                                    class="inline-flex items-center space-x-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 min-h-[44px] min-w-[44px]"
+                                    aria-label="Salin link">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        aria-hidden="true">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
                                         </path>
                                     </svg>
-                                    <span class="text-sm font-medium">Salin Link</span>
+                                    <span>Salin Link</span>
                                 </button>
                             </div>
+                            <div class="border-t border-gray-200"></div>
                         </div>
+
                     </header>
 
                     <!-- Featured Image -->
                     @if ($kegiatan->thumbnail)
                         <figure class="mb-6">
                             <img src="{{ asset('storage/' . $kegiatan->thumbnail) }}" alt="{{ $kegiatan->judul }}"
-                                loading="lazy" class="w-full rounded-lg shadow-lg">
-
+                                loading="lazy" class="w-full rounded-lg">
                             <!-- Gallery Photos -->
                             @if ($kegiatan->media_path && is_array($kegiatan->media_path) && count($kegiatan->media_path) > 0)
-                                <div class="mb-4 mt-6">
-                                    <h3
-                                        class="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
-                                        <svg class="w-5 h-5 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        Galeri Foto ({{ count($kegiatan->media_path) }})
-                                    </h3>
-                                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3">
+                                <div class="mb-4 mt-4">
+                                    <div class="flex flex-wrap justify-center items-center gap-3 py-3">
                                         @foreach ($kegiatan->media_path as $index => $media)
-                                            @if ($index < 8)
-                                                <div class="relative aspect-square overflow-hidden rounded-lg cursor-pointer group shadow-md hover:shadow-xl transition-shadow {{ $index === 7 && count($kegiatan->media_path) > 8 ? 'relative' : '' }}"
+                                            @if ($index < 4)
+                                                <div class="relative aspect-[4/3] overflow-hidden rounded-lg cursor-pointer group {{ $index === 3 && count($kegiatan->media_path) > 4 ? 'relative' : '' }}"
                                                     onclick="openLightbox({{ $index }})">
                                                     <img src="{{ asset('storage/' . $media) }}"
                                                         alt="Foto {{ $index + 1 }}"
-                                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                                        class="w-[100px] h-[100px] object-cover group-hover:scale-110 transition-transform duration-300"
                                                         loading="lazy">
 
-                                                    @if ($index === 7 && count($kegiatan->media_path) > 8)
+                                                    @if ($index === 3 && count($kegiatan->media_path) > 4)
                                                         <div
-                                                            class="absolute inset-0 bg-black/70 flex items-center justify-center backdrop-blur-sm">
+                                                            class="absolute inset-0 bg-black/70 flex items-center justify-center">
                                                             <span
-                                                                class="text-white text-2xl sm:text-3xl font-bold">+{{ count($kegiatan->media_path) - 8 }}</span>
+                                                                class="text-white text-3xl font-bold">+{{ count($kegiatan->media_path) - 4 }}</span>
                                                         </div>
                                                     @endif
                                                 </div>
@@ -231,48 +221,44 @@
 
                                 <!-- Lightbox Modal -->
                                 <div id="lightbox"
-                                    class="flex fixed inset-0 bg-black/95 backdrop-blur-sm z-50 hidden items-center justify-center p-2 sm:p-4"
+                                    class="fixed inset-0 bg-black/95 backdrop-blur-sm z-50 hidden items-center justify-center p-4"
                                     onclick="closeLightbox(event)">
                                     <button onclick="closeLightbox(event)"
-                                        class="absolute top-2 right-2 sm:top-4 sm:right-4 z-50 bg-white/10 hover:bg-white/20 text-white p-2 sm:p-3 rounded-lg transition-all">
-                                        <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
+                                        class="absolute top-4 right-4 z-50 bg-white/10 hover:bg-white/20 text-white p-2 rounded-lg transition-all">
+                                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M6 18L18 6M6 6l12 12"></path>
                                         </svg>
                                     </button>
 
                                     <button onclick="previousImage(event)"
-                                        class="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 z-50 bg-white/10 hover:bg-white/20 text-white p-2 sm:p-3 rounded-lg transition-all">
-                                        <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
+                                        class="absolute left-4 top-1/2 transform -translate-y-1/2 z-50 bg-white/10 hover:bg-white/20 text-white p-3 rounded-lg transition-all">
+                                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M15 19l-7-7 7-7">
                                             </path>
                                         </svg>
                                     </button>
 
-                                    <div class="flex flex-col items-center justify-center max-w-5xl w-full px-2 sm:px-4">
+                                    <div class="flex flex-col items-center justify-center max-w-4xl w-full">
                                         <img id="lightbox-image" src="" alt="Preview"
-                                            class="max-w-full max-h-[calc(100vh-120px)] sm:max-h-[calc(100vh-150px)] object-contain rounded-lg shadow-2xl">
-
-                                        <!-- Image Counter -->
-                                        <div class="mt-4 text-center">
-                                            <p id="lightbox-caption"
-                                                class="text-sm sm:text-base lg:text-lg font-semibold text-white bg-black/50 backdrop-blur-sm py-2 px-4 sm:px-6 rounded-full inline-block">
-                                            </p>
-                                        </div>
+                                            class="max-w-full max-h-[70vh] object-contain rounded-lg">
                                     </div>
 
                                     <button onclick="nextImage(event)"
-                                        class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 z-50 bg-white/10 hover:bg-white/20 text-white p-2 sm:p-3 rounded-lg transition-all">
-                                        <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
+                                        class="absolute right-4 top-1/2 transform -translate-y-1/2 z-50 bg-white/10 hover:bg-white/20 text-white p-3 rounded-lg transition-all">
+                                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M9 5l7 7-7 7">
                                             </path>
                                         </svg>
                                     </button>
+
+                                    <div class="absolute bottom-4 left-0 right-0 text-center">
+                                        <p id="lightbox-caption"
+                                            class="text-lg font-semibold text-white bg-black/50 backdrop-blur-sm py-2 px-4 rounded-full inline-block">
+                                        </p>
+                                    </div>
                                 </div>
                             @endif
                             <figcaption class="mt-3 text-sm text-gray-500 text-center">
@@ -282,7 +268,7 @@
                     @endif
 
                     <!-- Article Content -->
-                    <div class="prose prose-lg max-w-none mb-8">
+                    <div class="prose prose-lg max-w-none mb-8 border-b border-gray-200">
                         <p class="text-lg text-gray-800 font-sm text-justify whitespace-pre-line leading-relaxed mb-6">
                             {{ $kegiatan->deskripsi }}
                         </p>
@@ -297,14 +283,8 @@
                     <!-- Video Section -->
                     @if ($kegiatan->link_video)
                         <div class="mb-8">
-                            <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
-                                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z" />
-                                </svg>
-                                Video Kegiatan
-                            </h3>
-                            <div class="relative aspect-video bg-gray-900 rounded-lg overflow-hidden shadow-xl">
+                            <h3 class="text-lg font-bold text-gray-900 mb-4">Video Kegiatan</h3>
+                            <div class="relative aspect-video bg-black rounded-lg overflow-hidden">
                                 @php
                                     $videoUrl = $kegiatan->link_video;
                                     $embedUrl = '';
@@ -319,14 +299,11 @@
                                     }
                                 @endphp
                                 <iframe src="{{ $embedUrl }}" title="Video {{ $kegiatan->judul }}"
-                                    class="absolute inset-0 w-full h-full" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowfullscreen loading="lazy">
+                                    class="w-full h-full" frameborder="0" loading="lazy"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen>
                                 </iframe>
                             </div>
-                            <p class="mt-2 text-xs sm:text-sm text-gray-500 text-center">
-                                Tonton video kegiatan {{ $kegiatan->judul }}
-                            </p>
                         </div>
                     @endif
                 </article>
@@ -426,8 +403,32 @@
             </div>
         </div>
     </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-4 right-4 bg-gray-900 text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 ease-in-out z-50 flex items-center space-x-3">
+        <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <span id="toast-message">Link berhasil disalin!</span>
+    </div>
+
     <!-- Keyboard Navigation Script -->
     <script>
+        // Toast notification function
+        function showToast(message, duration = 3000) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            
+            toastMessage.textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, duration);
+        }
+
         // Toggle share menu
         function toggleShareMenu() {
             const menu = document.getElementById('shareMenu');
@@ -451,15 +452,17 @@
         function openLightbox(index) {
             currentImageIndex = index;
             showImage();
-            document.getElementById('lightbox').classList.remove('hidden');
-            document.getElementById('lightbox').classList.add('flex');
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
             document.body.style.overflow = 'hidden';
         }
 
         function closeLightbox(event) {
             if (event.target.id === 'lightbox' || event.target.closest('button')) {
-                document.getElementById('lightbox').classList.add('hidden');
-                document.getElementById('lightbox').classList.remove('flex');
+                const lightbox = document.getElementById('lightbox');
+                lightbox.classList.add('hidden');
+                lightbox.classList.remove('flex');
                 document.body.style.overflow = 'auto';
             }
         }
@@ -501,61 +504,42 @@
             }
         });
 
-        // Touch swipe for mobile lightbox navigation
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        const lightboxImage = document.getElementById('lightbox-image');
-
-        if (lightboxImage) {
-            lightboxImage.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-            }, {
-                passive: true
-            });
-
-            lightboxImage.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleLightboxSwipe();
-            }, {
-                passive: true
-            });
-        }
-
-        function handleLightboxSwipe() {
-            const lightbox = document.getElementById('lightbox');
-            if (lightbox.classList.contains('hidden') || images.length <= 1) return;
-
-            const swipeThreshold = 50;
-            const diff = touchStartX - touchEndX;
-
-            if (Math.abs(diff) > swipeThreshold) {
-                if (diff > 0) {
-                    // Swipe left - next image
-                    const event = new Event('click');
-                    nextImage(event);
-                } else {
-                    // Swipe right - previous image
-                    const event = new Event('click');
-                    previousImage(event);
-                }
+        // Copy to clipboard function with toast notification
+        function copyToClipboard() {
+            const url = window.location.href;
+            
+            // Try modern clipboard API first
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url)
+                    .then(() => {
+                        showToast('Link berhasil disalin!');
+                    })
+                    .catch(() => {
+                        // Fallback to old method
+                        fallbackCopyToClipboard(url);
+                    });
+            } else {
+                // Fallback for older browsers
+                fallbackCopyToClipboard(url);
             }
         }
 
-        // Copy to clipboard function
-        function copyToClipboard() {
-            const url = window.location.href;
-            navigator.clipboard.writeText(url).then(() => {
-                alert('Link berhasil disalin!');
-            }).catch(() => {
-                const textarea = document.createElement('textarea');
-                textarea.value = url;
-                document.body.appendChild(textarea);
-                textarea.select();
+        function fallbackCopyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
                 document.execCommand('copy');
-                document.body.removeChild(textarea);
-                alert('Link berhasil disalin!');
-            });
+                showToast('Link berhasil disalin!');
+            } catch (err) {
+                showToast('Gagal menyalin link', 3000);
+            }
+            
+            document.body.removeChild(textarea);
         }
     </script>
 
