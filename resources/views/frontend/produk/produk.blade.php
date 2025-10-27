@@ -270,7 +270,7 @@
                                         }
                                     @endphp
                                     <div id="produk-{{ $item->id }}"
-                                        onclick="openProdukModal('{{ addslashes($item->nama_produk) }}', '{{ $item->kategori }}', {{ json_encode($images) }}, '{{ $item->harga ? 'Rp ' . number_format($item->harga, 0, ',', '.') : 'Hubungi untuk info harga' }}', '{{ addslashes($item->deskripsi ?: 'Produk berkualitas tinggi dari mitra UMKM Karang Taruna dengan harga terjangkau.') }}')"
+                                        onclick="openProdukModal('{{ addslashes($item->nama_produk) }}', '{{ $item->kategori }}', {{ json_encode($images) }}, '{{ $item->harga ? 'Rp ' . number_format($item->harga, 0, ',', '.') : 'Hubungi untuk info harga' }}', '{{ addslashes($item->deskripsi ?: 'Produk berkualitas tinggi dari mitra UMKM Karang Taruna dengan harga terjangkau.') }}', {{ $item->id }})"
                                         class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col border border-gray-100 hover:border-primary-200 transform hover:-translate-y-1 cursor-pointer {{ $isHighlight ? 'ring-4 ring-primary-300/60 scale-105' : '' }}">
                                     <!-- Gambar Produk dengan Galeri -->
                                     <div class="relative h-40 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 group/gallery" onclick="event.stopPropagation()">
@@ -370,18 +370,16 @@
                                     <div class="grid grid-cols-2 gap-2 mt-auto" onclick="event.stopPropagation()">
                                         <!-- Tombol Lihat Detail -->
                                         <button
-                                            onclick="openProdukModal('{{ addslashes($item->nama_produk) }}', '{{ $item->kategori }}', {{ json_encode($images) }}, '{{ $item->harga ? 'Rp ' . number_format($item->harga, 0, ',', '.') : 'Hubungi untuk info harga' }}', '{{ addslashes($item->deskripsi ?: 'Produk berkualitas tinggi dari mitra UMKM Karang Taruna dengan harga terjangkau.') }}')"
+                                            onclick="openProdukModal('{{ addslashes($item->nama_produk) }}', '{{ $item->kategori }}', {{ json_encode($images) }}, '{{ $item->harga ? 'Rp ' . number_format($item->harga, 0, ',', '.') : 'Hubungi untuk info harga' }}', '{{ addslashes($item->deskripsi ?: 'Produk berkualitas tinggi dari mitra UMKM Karang Taruna dengan harga terjangkau.') }}', {{ $item->id }})"
                                             class="bg-primary-600 hover:bg-primary-700 text-white py-2.5 px-3 rounded-lg font-semibold text-sm transition-all duration-300 flex items-center justify-center space-x-2 shadow-md hover:shadow-lg">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                                             </svg>
                                             <span>Detail</span>
-                                        </button>
-
-                                        <!-- Tombol Pesan WhatsApp -->
+                                        </button>                                        <!-- Tombol Pesan WhatsApp -->
                                         <button
-                                            onclick="pesanWhatsApp('{{ addslashes($item->nama_produk) }}', '{{ $item->harga ? 'Rp ' . number_format($item->harga, 0, ',', '.') : 'Hubungi untuk info harga' }}'); event.stopPropagation();"
+                                            onclick="pesanWhatsApp('{{ addslashes($item->nama_produk) }}', '{{ $item->harga ? 'Rp ' . number_format($item->harga, 0, ',', '.') : 'Hubungi untuk info harga' }}', {{ $item->id }}); event.stopPropagation();"
                                             aria-label="{{ 'Pesan ' . e($item->nama_produk) . ' via WhatsApp' }}"
                                             class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white py-2.5 px-3 rounded-lg font-semibold text-sm transition-all duration-300 flex items-center justify-center space-x-2 shadow-md hover:shadow-lg">
                                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -544,9 +542,10 @@
         let currentModalImageIndex = 0;
         let currentModalNama = '';
         let currentModalHarga = '';
+        let currentModalProdukId = null;
 
         // Open Product Modal
-        function openProdukModal(nama, kategori, images, harga, deskripsi) {
+        function openProdukModal(nama, kategori, images, harga, deskripsi, produkId) {
             const modal = document.getElementById('produkModal');
             const modalNamaProduk = document.getElementById('modalNamaProduk');
             const modalKategoriProduk = document.getElementById('modalKategoriProduk');
@@ -567,6 +566,7 @@
             // Store current product info
             currentModalNama = nama;
             currentModalHarga = harga;
+            currentModalProdukId = produkId;
             currentModalImages = images || [];
             currentModalImageIndex = 0;
 
@@ -606,7 +606,7 @@
             }
 
             // Setup WhatsApp button
-            modalPesanBtn.onclick = () => pesanWhatsApp(currentModalNama, currentModalHarga);
+            modalPesanBtn.onclick = () => pesanWhatsApp(currentModalNama, currentModalHarga, currentModalProdukId);
 
             // Show modal
             modal.classList.remove('hidden');
@@ -700,6 +700,11 @@
             el.classList.add('transition-transform', 'duration-300');
             el.classList.add('scale-105');
             setTimeout(() => el.classList.remove('scale-105'), 800);
+
+            // Auto-open modal after a short delay
+            setTimeout(() => {
+                el.click(); // This will trigger the modal
+            }, 1000);
 
             // Remove highlight after 5 seconds (5000 ms)
             const removeHighlight = () => {
@@ -881,12 +886,16 @@
 
     <!-- WhatsApp Script -->
     <script>
-        function pesanWhatsApp(namaProduk, harga) {
+        function pesanWhatsApp(namaProduk, harga, produkId) {
             // Nomor WhatsApp Admin dari database
             let nomorAdmin = '{{ isset($kontak) && $kontak && $kontak->whatsapp ? $kontak->whatsapp : "6285725040030" }}';
             
+            console.log('Nomor WhatsApp dari database:', nomorAdmin);
+            
             // Hapus format yang tidak diperlukan dari nomor WhatsApp
             nomorAdmin = nomorAdmin.replace(/\D/g, '');
+            
+            console.log('Nomor setelah remove non-digit:', nomorAdmin);
             
             // Pastikan format +62
             if (!nomorAdmin.startsWith('62')) {
@@ -897,13 +906,21 @@
                 }
             }
 
-            // Template pesan
+            console.log('Nomor final yang akan digunakan:', nomorAdmin);
+
+            // Buat URL produk dengan parameter highlight untuk auto-open modal
+            const produkUrl = `${window.location.origin}/produk-mitra/produk?highlight=${produkId}`;
+
+            // Template pesan dengan link produk (tanpa emoji sebelum link agar WhatsApp detect sebagai link)
             const pesan = `Halo Admin Karang Taruna,
 
 Saya tertarik dengan produk berikut:
 
 📦 Produk: ${namaProduk}
 💰 Harga: ${harga}
+
+Link Produk:
+${produkUrl}
 
 Mohon informasi lebih lanjut mengenai produk ini.
 
@@ -915,6 +932,7 @@ Terima kasih!`;
             // Buat URL WhatsApp
             const urlWhatsApp = `https://wa.me/${nomorAdmin}?text=${pesanEncoded}`;
 
+            console.log('URL WhatsApp lengkap:', urlWhatsApp);
             console.log('Mengirim pesan WhatsApp ke:', nomorAdmin);
             
             // Buka WhatsApp di tab baru
