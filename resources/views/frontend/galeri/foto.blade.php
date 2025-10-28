@@ -112,43 +112,56 @@
                                         <a href="{{ route('galeri.berita.show', $item->id) }}" class="group" id="foto-{{ $item->id }}">
                                             <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-primary-200 transform hover:-translate-y-1 flex flex-col h-full group/gallery">
                                                 <!-- Carousel Container -->
-                                                <div class="relative aspect-square bg-gradient-to-br from-gray-200 to-gray-300 overflow-hidden {{ count($item->media_path) > 1 ? 'carousel' : '' }}" data-images="{{ json_encode($item->media_path) }}">
+                                                <div class="relative aspect-square bg-gradient-to-br from-gray-200 to-gray-300 overflow-hidden {{ count($item->media_path) > 1 ? 'carousel' : '' }} select-none touch-pan-y" data-images="{{ json_encode($item->media_path) }}" style="cursor: grab;">
                                                     @foreach($item->media_path as $index => $media)
                                                         <img src="{{ asset('storage/' . $media) }}" 
                                                              alt="{{ $item->judul }} - {{ $index + 1 }}" 
-                                                             class="w-full h-full object-cover transition-transform duration-300 {{ $index === 0 ? 'block' : 'hidden' }} gallery-image"
+                                                             class="w-full h-full object-cover transition-transform duration-300 {{ $index === 0 ? 'block' : 'hidden' }} gallery-image pointer-events-none"
                                                              data-index="{{ $index }}"
                                                              loading="lazy">
                                                     @endforeach
 
                                                     @if(count($item->media_path) > 1)
                                                         <!-- Navigation Arrows -->
-                                                        <button class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-1.5 rounded-full transition-all opacity-0 group-hover/gallery:opacity-100 prev-image" data-target="foto-{{ $item->id }}">
+                                                        <button class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-1.5 rounded-full transition-all opacity-0 md:group-hover/gallery:opacity-100 prev-image z-10" data-target="foto-{{ $item->id }}">
                                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                                                             </svg>
                                                         </button>
-                                                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-1.5 rounded-full transition-all opacity-0 group-hover/gallery:opacity-100 next-image" data-target="foto-{{ $item->id }}">
+                                                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-1.5 rounded-full transition-all opacity-0 md:group-hover/gallery:opacity-100 next-image z-10" data-target="foto-{{ $item->id }}">
                                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                                             </svg>
                                                         </button>
 
                                                         <!-- Image Indicators -->
-                                                        <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-1">
+                                                        <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-1 z-10">
                                                             @for ($i = 0; $i < count($item->media_path); $i++)
                                                                 <button class="w-2 h-2 rounded-full transition-all {{ $i === 0 ? 'bg-white' : 'bg-white/50' }} indicator" data-target="foto-{{ $item->id }}" data-index="{{ $i }}"></button>
                                                             @endfor
                                                         </div>
 
                                                         <!-- Multiple Images Badge -->
-                                                        <div class="absolute top-3 left-3">
+                                                        <div class="absolute top-3 left-3 z-10">
                                                             <span class="bg-black/70 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs font-medium flex items-center">
                                                                 <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                                                 </svg>
                                                                 {{ count($item->media_path) }}
                                                             </span>
+                                                        </div>
+
+                                                        <!-- Swipe Hint (Mobile Only) -->
+                                                        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 md:hidden swipe-hint opacity-0 animate-pulse">
+                                                            <div class="bg-black/70 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-xs font-medium flex items-center">
+                                                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
+                                                                </svg>
+                                                                Geser
+                                                                <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                                                </svg>
+                                                            </div>
                                                         </div>
                                                     @endif
                                                 </div>
@@ -210,7 +223,31 @@
                 const indicators = carousel.querySelectorAll('.indicator');
                 const prevBtn = container.querySelector(`.prev-image[data-target="${targetId}"]`);
                 const nextBtn = container.querySelector(`.next-image[data-target="${targetId}"]`);
+                const swipeHint = carousel.querySelector('.swipe-hint');
                 let currentIndex = 0;
+
+                // Touch/Swipe variables
+                let touchStartX = 0;
+                let touchEndX = 0;
+                let touchStartY = 0;
+                let touchEndY = 0;
+                let isDragging = false;
+
+                // Show swipe hint on mobile for first carousel only (once)
+                if (swipeHint && window.innerWidth < 768) {
+                    const hasSeenHint = localStorage.getItem('gallerySwipeHintSeen');
+                    if (!hasSeenHint) {
+                        setTimeout(() => {
+                            swipeHint.classList.remove('opacity-0');
+                            swipeHint.classList.add('opacity-100');
+                            setTimeout(() => {
+                                swipeHint.classList.remove('opacity-100');
+                                swipeHint.classList.add('opacity-0');
+                                localStorage.setItem('gallerySwipeHintSeen', 'true');
+                            }, 3000);
+                        }, 500);
+                    }
+                }
 
                 function showImage(index) {
                     images.forEach((img, i) => {
@@ -233,7 +270,77 @@
                     showImage(prevIndex);
                 }
 
-                // Event listeners
+                function handleSwipe() {
+                    const diffX = touchEndX - touchStartX;
+                    const diffY = touchEndY - touchStartY;
+                    const minSwipeDistance = 50;
+                    
+                    // Check if horizontal swipe is more dominant than vertical
+                    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > minSwipeDistance) {
+                        if (diffX > 0) {
+                            // Swiped right - show previous image
+                            prevImage();
+                        } else {
+                            // Swiped left - show next image
+                            nextImage();
+                        }
+                    }
+                }
+
+                // Touch Event Listeners for Mobile/Tablet
+                carousel.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                    touchStartY = e.changedTouches[0].screenY;
+                    isDragging = true;
+                    stopAutoplay();
+                }, { passive: true });
+
+                carousel.addEventListener('touchmove', (e) => {
+                    if (!isDragging) return;
+                    touchEndX = e.changedTouches[0].screenX;
+                    touchEndY = e.changedTouches[0].screenY;
+                }, { passive: true });
+
+                carousel.addEventListener('touchend', (e) => {
+                    if (!isDragging) return;
+                    touchEndX = e.changedTouches[0].screenX;
+                    touchEndY = e.changedTouches[0].screenY;
+                    handleSwipe();
+                    isDragging = false;
+                }, { passive: true });
+
+                // Mouse Event Listeners for Desktop (drag support)
+                carousel.addEventListener('mousedown', (e) => {
+                    touchStartX = e.screenX;
+                    touchStartY = e.screenY;
+                    isDragging = true;
+                    carousel.style.cursor = 'grabbing';
+                    e.preventDefault();
+                });
+
+                carousel.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    touchEndX = e.screenX;
+                    touchEndY = e.screenY;
+                });
+
+                carousel.addEventListener('mouseup', (e) => {
+                    if (!isDragging) return;
+                    touchEndX = e.screenX;
+                    touchEndY = e.screenY;
+                    handleSwipe();
+                    isDragging = false;
+                    carousel.style.cursor = 'grab';
+                });
+
+                carousel.addEventListener('mouseleave', (e) => {
+                    if (isDragging) {
+                        isDragging = false;
+                        carousel.style.cursor = 'grab';
+                    }
+                });
+
+                // Button Event listeners
                 if (nextBtn) {
                     nextBtn.addEventListener('click', (e) => {
                         e.preventDefault();
@@ -268,9 +375,11 @@
                     clearInterval(autoplayInterval);
                 }
 
-                // Start autoplay on hover, stop on mouse leave
-                carousel.addEventListener('mouseenter', startAutoplay);
-                carousel.addEventListener('mouseleave', stopAutoplay);
+                // Start autoplay on hover, stop on mouse leave (desktop only)
+                if (window.innerWidth > 768) {
+                    carousel.addEventListener('mouseenter', startAutoplay);
+                    carousel.addEventListener('mouseleave', stopAutoplay);
+                }
             });
         })();
     </script>
