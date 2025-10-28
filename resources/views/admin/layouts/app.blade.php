@@ -27,26 +27,16 @@
 </head>
 
 <body class="bg-color_bg font-poppins" x-data="{
-    sidebarOpen: false,
-    init() {
-        // Set initial state based on screen size
-        this.updateSidebarState();
-        
-        // Listen for window resize
-        window.addEventListener('resize', () => {
-            this.updateSidebarState();
-        });
+    sidebarOpen: window.innerWidth >= 1366,
+    toggleSidebar() {
+        this.sidebarOpen = !this.sidebarOpen;
     },
-    updateSidebarState() {
-        // Sidebar only opens automatically on desktop (≥1024px)
-        // Tablet landscape (768-1023px) and mobile (<768px): sidebar closed by default
-        if (window.innerWidth >= 1024) {
-            this.sidebarOpen = true;
-        } else {
-            this.sidebarOpen = false;
-        }
+    closeSidebar() {
+        this.sidebarOpen = false;
+    },
+    init() {
     }
-}" x-init="updateSidebarState()">
+}">
     <!-- Global Alert Component -->
     @include('admin.layouts.alert')
 
