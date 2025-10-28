@@ -248,32 +248,23 @@
             <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition group">
                 @php
                     $isVideo = !empty($galeri->link_video);
-                    $tipe = $isVideo ? 'video' : 'foto';
                     $url = $isVideo ? ($galeri->thumbnail ?: '') : (is_array($galeri->media_path) ? $galeri->media_path[0] : $galeri->media_path);
                 @endphp
-                @if($tipe === 'foto')
-                    <div class="w-full h-40 md:h-48 bg-gray-200 overflow-hidden">
+                <!-- Tampilan Foto Sampul -->
+                <div class="w-full h-40 md:h-48 bg-gray-200 overflow-hidden">
+                    @if($url)
                         <img src="{{ asset('storage/' . $url) }}" alt="{{ $galeri->judul }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                    </div>
-                @else
-                    <div class="w-full h-40 md:h-48 bg-black/20 flex items-center justify-center relative">
-                        @if($galeri->thumbnail)
-                            <img src="{{ asset('storage/' . $galeri->thumbnail) }}" alt="{{ $galeri->judul }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                        @else
-                            <svg class="w-10 h-10 md:w-12 md:h-12 text-white/50" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
-                            </svg>
-                        @endif
-                        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors flex items-center justify-center">
-                            <svg class="w-12 h-12 md:w-16 md:h-16 text-white opacity-0 group-hover:opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
+                    @else
+                        <div class="w-full h-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center">
+                            <svg class="w-10 h-10 md:w-12 md:h-12 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
                         </div>
-                    </div>
-                @endif
+                    @endif
+                </div>
                 <div class="p-4 md:p-6">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="text-xs bg-primary-100 text-primary-600 font-semibold px-2 py-1 rounded">{{ ucfirst($tipe) }}</span>
+                        <span class="text-xs bg-primary-100 text-primary-600 font-semibold px-2 py-1 rounded">{{ ucfirst($galeri->kategori) }}</span>
                         <span class="text-xs text-gray-500">{{ $galeri->tanggal_kegiatan->format('d M Y') }}</span>
                     </div>
                     <h3 class="text-base md:text-lg font-bold mt-2 mb-2 line-clamp-2">{{ $galeri->judul }}</h3>

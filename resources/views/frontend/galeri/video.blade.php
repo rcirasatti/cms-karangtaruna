@@ -106,26 +106,33 @@
                             </h2>
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 @foreach($galeris as $item)
-                                    <a href="{{ route('galeri.berita.show', $item->id) }}" class="group">
-                                        <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 h-full flex flex-col border border-gray-100 hover:border-primary-200">
+                                    @php
+                                        $videoUrl = $item->link_video;
+                                        $videoId = '';
+                                        
+                                        // Extract YouTube video ID
+                                        if (preg_match('/youtube\.com\/watch\?v=([^\&\?\/]+)/', $videoUrl, $matches)) {
+                                            $videoId = $matches[1];
+                                        } elseif (preg_match('/youtu\.be\/([^\&\?\/]+)/', $videoUrl, $matches)) {
+                                            $videoId = $matches[1];
+                                        } elseif (preg_match('/youtube\.com\/embed\/([^\&\?\/]+)/', $videoUrl, $matches)) {
+                                            $videoId = $matches[1];
+                                        }
+                                        
+                                        $thumbnail = $videoId ? "https://img.youtube.com/vi/{$videoId}/maxresdefault.jpg" : ($item->thumbnail ? asset('storage/' . $item->thumbnail) : '');
+                                        $embedUrl = $videoId ? "https://www.youtube.com/embed/{$videoId}?autoplay=1&rel=0" : $videoUrl;
+                                    @endphp
+                                    
+                                    <a href="{{ route('galeri.berita.show', $item->id) }}" class="group block" 
+                                       data-video-id="{{ $item->id }}"
+                                       data-video-url="{{ $embedUrl }}"
+                                       data-video-title="{{ $item->judul }}"
+                                       data-video-description="{{ $item->deskripsi ?? 'Tidak ada deskripsi' }}"
+                                       data-video-date="{{ $item->tanggal_kegiatan->format('d M Y') }}"
+                                       data-video-category="{{ $item->kategori }}">
+                                        <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 h-full flex flex-col border border-gray-100 hover:border-primary-200 transform hover:-translate-y-1">
                                             <!-- Video Thumbnail -->
                                             <div class="relative w-full aspect-video bg-black overflow-hidden">
-                                                @php
-                                                    $videoUrl = $item->link_video;
-                                                    $videoId = '';
-                                                    
-                                                    // Extract YouTube video ID
-                                                    if (preg_match('/youtube\.com\/watch\?v=([^\&\?\/]+)/', $videoUrl, $matches)) {
-                                                        $videoId = $matches[1];
-                                                    } elseif (preg_match('/youtu\.be\/([^\&\?\/]+)/', $videoUrl, $matches)) {
-                                                        $videoId = $matches[1];
-                                                    } elseif (preg_match('/youtube\.com\/embed\/([^\&\?\/]+)/', $videoUrl, $matches)) {
-                                                        $videoId = $matches[1];
-                                                    }
-                                                    
-                                                    $thumbnail = $videoId ? "https://img.youtube.com/vi/{$videoId}/maxresdefault.jpg" : ($item->thumbnail ? asset('storage/' . $item->thumbnail) : '');
-                                                @endphp
-                                                
                                                 @if($thumbnail)
                                                     <img src="{{ $thumbnail }}" alt="{{ $item->judul }}" 
                                                          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
@@ -138,12 +145,18 @@
                                                     </div>
                                                 @endif
                                                 
-                                                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
-                                                    <svg class="w-20 h-20 text-accent opacity-80 group-hover:opacity-100 transition-opacity duration-300" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
-                                                    </svg>
+                                                <!-- Play Button Overlay -->
+                                                <div class="absolute inset-0 transition-all duration-300 flex items-center justify-center">
+                                                    <button class="play-video-btn relative z-20 bg-accent hover:bg-yellow-400 text-primary-800 rounded-full w-16 h-16 flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-2xl" 
+                                                            onclick="event.preventDefault(); event.stopPropagation();"
+                                                            title="Putar Video">
+                                                        <svg class="w-7 h-7 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                                            <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
+                                                        </svg>
+                                                    </button>
                                                 </div>
-                                                <div class="absolute top-3 right-3 bg-accent text-primary-800 px-3 py-1 rounded-lg text-xs font-semibold flex items-center space-x-1">
+                                                
+                                                <div class="absolute top-3 right-3 bg-accent text-primary-800 px-3 py-1 rounded-lg text-xs font-semibold flex items-center space-x-1 z-10">
                                                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                                                         <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"></path>
                                                     </svg>
@@ -156,19 +169,33 @@
                                                 <h3 class="text-lg font-semibold text-gray-800 group-hover:text-primary-600 transition-colors line-clamp-2">
                                                     {{ $item->judul }}
                                                 </h3>
-                                                <p class="text-sm text-gray-600 mt-2 line-clamp-2">
+                                                <p class="text-sm text-gray-600 mt-2 line-clamp-2 flex-grow">
                                                     {{ $item->deskripsi ?? 'Tidak ada deskripsi' }}
                                                 </p>
                                                 <div class="mt-auto pt-4 border-t border-gray-100">
-                                                    <div class="flex items-center justify-between text-xs text-gray-500">
+                                                    <div class="flex items-center justify-between text-xs">
                                                         <span class="font-medium text-primary-600">{{ $item->kategori }}</span>
-                                                        <span>{{ $item->tanggal_kegiatan->format('d M Y') }}</span>
+                                                        <span class="text-gray-500">{{ $item->tanggal_kegiatan->format('d M Y') }}</span>
+                                                    </div>
+                                                    <!-- Hint text -->
+                                                    <div class="mt-3 pt-3 border-t border-gray-50">
+                                                        <p class="text-xs text-gray-400 italic">
+                                                            <svg class="w-3 h-3 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                            </svg>
+                                                            Klik tombol play untuk menonton, atau klik card untuk detail
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </a>
                                 @endforeach
+                            </div>
+
+                            <!-- Pagination -->
+                            <div class="mt-12">
+                                {{ $galeris->links() }}
                             </div>
                         </div>
                     @endif
@@ -190,4 +217,136 @@
             @endif
         </div>
     </div>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-white/20 backdrop-blur-sm transition-all duration-300">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="relative w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden animate-fade-in">
+                <!-- Close Button -->
+                <button id="closeVideoModal" class="absolute top-4 right-4 z-50 bg-black/70 hover:bg-black/90 text-white p-2 rounded-full transition-all duration-300 group backdrop-blur-sm">
+                    <svg class="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+
+                <!-- Video Container -->
+                <div class="relative w-full bg-black" style="padding-bottom: 56.25%;">
+                    <iframe id="videoPlayer" 
+                            class="absolute inset-0 w-full h-full"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+
+                <!-- Video Info -->
+                <div class="p-6 bg-white">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <h3 id="modalVideoTitle" class="text-2xl font-bold text-gray-800 mb-2"></h3>
+                            <p id="modalVideoDescription" class="text-gray-600 mb-4"></p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between text-sm border-t pt-4">
+                        <span id="modalVideoCategory" class="inline-flex items-center px-3 py-1 rounded-full bg-primary-100 text-primary-700 font-medium">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                            </svg>
+                        </span>
+                        <span id="modalVideoDate" class="text-gray-500 flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Modal Scripts -->
+    <script>
+        (function() {
+            const modal = document.getElementById('videoModal');
+            const videoPlayer = document.getElementById('videoPlayer');
+            const closeBtn = document.getElementById('closeVideoModal');
+            const playButtons = document.querySelectorAll('.play-video-btn');
+            
+            // Modal title and info elements
+            const modalTitle = document.getElementById('modalVideoTitle');
+            const modalDescription = document.getElementById('modalVideoDescription');
+            const modalCategory = document.getElementById('modalVideoCategory');
+            const modalDate = document.getElementById('modalVideoDate');
+
+            // Open video modal when play button clicked
+            playButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Get parent link element with data attributes
+                    const card = this.closest('a');
+                    const videoUrl = card.dataset.videoUrl;
+                    const videoTitle = card.dataset.videoTitle;
+                    const videoDescription = card.dataset.videoDescription;
+                    const videoCategory = card.dataset.videoCategory;
+                    const videoDate = card.dataset.videoDate;
+                    
+                    // Set video source
+                    videoPlayer.src = videoUrl;
+                    
+                    // Set video info
+                    modalTitle.textContent = videoTitle;
+                    modalDescription.textContent = videoDescription;
+                    modalCategory.textContent = videoCategory;
+                    modalDate.textContent = videoDate;
+                    
+                    // Show modal
+                    modal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            // Close video modal
+            function closeModal() {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+                // Stop video by clearing src
+                videoPlayer.src = '';
+            }
+
+            closeBtn.addEventListener('click', closeModal);
+
+            // Close on backdrop click
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Close on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+        })();
+    </script>
+
+    <style>
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fade-in 0.3s ease-out;
+        }
+    </style>
 @endsection

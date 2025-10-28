@@ -112,10 +112,13 @@
                         </label>
                         <textarea id="deskripsi"
                                   name="deskripsi"
-                                  rows="4"
+                                  rows="10"
                                   placeholder="Tuliskan deskripsi berita secara lengkap dan detail..."
-                                  class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition font-poppins resize-none @error('deskripsi') border-red-500 @enderror">{{ old('deskripsi') }}</textarea>
-                        <p class="text-gray-500 text-xs mt-1.5">Maksimal 2000 karakter</p>
+                                  class="w-full px-4 py-2.5 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 transition font-poppins resize-y @error('deskripsi') border-red-500 @enderror">{{ old('deskripsi') }}</textarea>
+                        <div class="flex justify-between items-center mt-1.5">
+                            <p class="text-gray-500 text-xs">Maksimal 10000 karakter</p>
+                            <p class="text-gray-500 text-xs"><span id="charCount">0</span> / 10000</p>
+                        </div>
                         @error('deskripsi')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
@@ -282,3 +285,38 @@
     </form>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    // Character counter for deskripsi
+    const deskripsiTextarea = document.getElementById('deskripsi');
+    const charCountDisplay = document.getElementById('charCount');
+    const maxChars = 10000;
+
+    if (deskripsiTextarea && charCountDisplay) {
+        // Update counter on page load
+        charCountDisplay.textContent = deskripsiTextarea.value.length;
+
+        // Update counter on input
+        deskripsiTextarea.addEventListener('input', function() {
+            const currentLength = this.value.length;
+            charCountDisplay.textContent = currentLength;
+
+            // Change color if approaching or exceeding limit
+            if (currentLength > maxChars) {
+                charCountDisplay.parentElement.classList.add('text-red-500', 'font-semibold');
+                charCountDisplay.parentElement.classList.remove('text-gray-500');
+                // Trim the text to max length
+                this.value = this.value.substring(0, maxChars);
+                charCountDisplay.textContent = maxChars;
+            } else if (currentLength > maxChars * 0.9) {
+                charCountDisplay.parentElement.classList.add('text-orange-500');
+                charCountDisplay.parentElement.classList.remove('text-gray-500', 'text-red-500');
+            } else {
+                charCountDisplay.parentElement.classList.add('text-gray-500');
+                charCountDisplay.parentElement.classList.remove('text-red-500', 'text-orange-500');
+            }
+        });
+    }
+</script>
+@endpush

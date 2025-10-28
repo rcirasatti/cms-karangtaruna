@@ -38,7 +38,7 @@ class BeritaController extends Controller
         try {
             $validated = $request->validate([
                 'judul' => 'required|string|max:150|unique:berita,judul',
-                'deskripsi' => 'nullable|string|max:2000',
+                'deskripsi' => 'nullable|string|max:10000',
                 'tanggal_kegiatan' => 'required|date',
                 'kategori' => 'required|string|max:100',
                 'link_video' => 'nullable|string|max:500',
@@ -99,7 +99,7 @@ class BeritaController extends Controller
 
             $validated = $request->validate([
                 'judul' => 'required|string|max:150|unique:berita,judul,' . $id,
-                'deskripsi' => 'nullable|string|max:2000',
+                'deskripsi' => 'nullable|string|max:10000',
                 'tanggal_kegiatan' => 'required|date',
                 'kategori' => 'required|string|max:100',
                 'link_video' => 'nullable|string|max:500',
