@@ -13,10 +13,11 @@ class AuthController extends Controller
      */
     public function showLoginForm()
     {
+        $profile = $profile = \App\Models\Profile::first();
         if (Auth::check()) {
             return redirect()->route('admin.dashboard');
         }
-        return view('admin.auth.login');
+        return view('admin.auth.login', compact('profile'));
     }
 
     /**

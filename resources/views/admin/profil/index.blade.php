@@ -30,7 +30,7 @@
         <div class="bg-white shadow-2xl rounded-2xl">
             <div class="bg-color_bg py-16">
                 <div class="container mx-auto px-4">
-                    <div class="text-center mb-12 relative sm:pt-10">
+                    <div class="text-center mb-12 relative pt-15">
                         <h2 class="text-4xl font-bold text-gray-800 mb-3 uppercase tracking-wide">Visi & Misi</h2>
                         <div class="w-24 h-1 bg-secondary mx-auto"></div>
 
@@ -89,7 +89,7 @@
 
                         @if($profil->tujuan && $profil->fungsi)
                             <div id="tujuan" class="scroll-mt-24 mb-10">
-                                <div class="text-center mb-12 relative sm:pt-10">
+                                <div class="text-center mb-12 relative pt-15">
                                     <h2 class="text-4xl font-bold text-gray-800 mb-3 uppercase tracking-wide">Tujuan & Fungsi
                                     </h2>
                                     <div class="w-24 h-1 bg-secondary mx-auto"></div>
@@ -215,7 +215,7 @@
                             </button>
 
                             <div
-                                class="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 rounded-2xl shadow-2xl overflow-hidden">
+                                class="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 rounded-2xl shadow-2xl overflow-hidden pt-10">
                                 <!-- Decorative Pattern -->
                                 <div class="absolute inset-0 opacity-10">
                                     <div class="absolute top-0 right-0 w-96 h-96 bg-white rounded-full -mr-48 -mt-48"></div>
