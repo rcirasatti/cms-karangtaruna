@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\hero;
+use App\Models\Hero;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 
@@ -15,10 +15,10 @@ class HeroController extends Controller
     public function index()
     {
         // Ambil data hero pertama atau buat baru jika belum ada
-        $hero = hero::first();
+        $hero = Hero::first();
 
         if (!$hero) {
-            $hero = new hero();
+            $hero = new Hero();
         }
 
         // Ambil data profile untuk logo
@@ -47,7 +47,7 @@ class HeroController extends Controller
         ]);
 
         // Cek apakah sudah ada data hero
-        $hero = hero::first();
+        $hero = Hero::first();
 
         if ($hero) {
             // Update data yang sudah ada
@@ -55,7 +55,7 @@ class HeroController extends Controller
             $message = 'Hero section berhasil diperbarui!';
         } else {
             // Buat data baru
-            hero::create($validated);
+            Hero::create($validated);
             $message = 'Hero section berhasil dibuat!';
         }
 
